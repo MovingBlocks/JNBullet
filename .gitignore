@@ -1,0 +1,97 @@
+# Ignore general
+*~
+._*
+*.bak
+/.*
+
+# Except this stuff
+!.gitattributes
+!.gitignore
+!.github
+
+# Ignore subdirs with their own Git roots. PC Facade and Core module are bundled with the main repo.
+extensions
+/facades/*
+!/facades/PC
+!/facades/TeraEd
+!/facades/subprojects.gradle
+/modules/*
+!/modules/Core
+!/modules/CoreSampleGameplay
+!/modules/BuilderSampleGameplay
+!/modules/subprojects.gradle
+/meta/*
+!/meta/subprojects.gradle
+/libs/*
+!/libs/subprojects.gradle
+
+# Ignore Gradle and some transient project config files (template versions available under /templates)
+build/
+/gradle.properties
+/override.cfg
+
+# Ignore IntelliJ - could use "/**/*.iml" to catch all .iml files, but that requires a somewhat recent Git version
+/out/
+modules/Core/Core.iml
+modules/CoreSampleGameplay/CoreSampleGameplay.iml
+modules/BuilderSampleGameplay/BuilderSampleGameplay.iml
+facades/PC/PC.iml
+facades/TeraEd/TeraEd.iml
+engine/engine.iml
+engine-tests/engine-tests.iml
+/*.iml
+/*.ipr
+/*.iws
+/projectFilesBackup*
+
+# Ignore Eclipse
+.checkstyle
+.project
+.classpath
+.settings/
+bin/
+facades/PC/Terasology.launch
+
+# Ignore Linux
+*.directory
+
+#Ignore OSX
+Icon
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.DocumentRevisions-V100
+.TemporaryItems
+.Trashes
+.dbfseventsd
+.fseventsd
+.VolumeIcon.icns
+
+#Ignore Windows
+ehthumbs.db
+Thumbs.db
+
+# Ignore Terasology output
+*.log
+/saves/
+/screenshots/
+/logs/
+/terasology-server/
+/terasology-2ndclient/
+/terasology-3rdclient/
+config.cfg
+entityDump.txt
+nuiEditorAutosave.json
+
+# Historical Output
+/SAVED_WORLDS/
+/worlds/
+/screens/
+/unittesthome/
+
+# Ignore stuff we extract for use with Terasology
+/natives/
+config/metrics/
+
+
+# Ignore weird stuff that might be obsolete
