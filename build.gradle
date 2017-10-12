@@ -20,13 +20,7 @@ plugins {
  ******************************************************************************/
 
 apply plugin: 'java'
-//apply plugin: 'project-report'
-//apply plugin: 'idea'
-//apply plugin: 'eclipse'
 apply plugin: 'maven'
-//apply plugin: 'checkstyle'
-//apply plugin: 'pmd'
-//apply plugin: 'findbugs'
 
 
 sourceCompatibility = 1.7
@@ -90,6 +84,12 @@ task sourceJar(type: Jar, dependsOn: jni_pack_natives) {
     classifier = 'sources'
 }
 
+task nativeJar(type: Jar, dependsOn: jni_pack_natives) {
+    description = "Create a JAR with all sources"
+    from files("libs/gdx-bullet-native")
+    classifier = 'natives'
+}
+
 task javadocJar(type: Jar, dependsOn: javadoc) {
     description = "Create a JAR with the JavaDoc for the java sources"
     from javadoc.destinationDir
@@ -99,6 +99,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 // Define the artifacts we want to publish (the .pom will also be included since the Maven plugin is active)
 artifacts {
     archives sourceJar
+    archives nativeJar
     archives javadocJar
 }
 
@@ -109,6 +110,7 @@ dependencies {
     compile group: 'org.terasology', name: 'TeraMath', version: '1.4.0'
     compile "com.badlogicgames.gdx:gdx-jnigen:1.9.7-SNAPSHOT"
     compile "com.badlogicgames.gdx:gdx:1.9.7-SNAPSHOT"
+    compile files("libs/gdx-bullet-native")
 
 }
 
