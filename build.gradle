@@ -96,11 +96,17 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
 }
 
+task nativeJar(type: Jar,dependsOn: jni_pack_natives){
+    description = "Create a JAR with all sources"
+    from fileTree('libs')
+    classifier = 'natives'
+}
+
 
 // Define the artifacts we want to publish (the .pom will also be included since the Maven plugin is active)
 artifacts {
     archives sourceJar
-    archives(file('libs/gdx-bullet-natives.jar'))
+    archives nativeJar
     archives javadocJar
 }
 
