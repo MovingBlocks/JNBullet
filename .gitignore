@@ -4,7 +4,7 @@
 *.bak
 /.*
 
-/target/*
+target/
 
 # Except this stuff
 !.gitattributes
