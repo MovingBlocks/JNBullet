@@ -2,6 +2,7 @@ plugins {
     id "org.standardout.versioneye" version "1.0.1"
 }
 
+
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
  *
@@ -18,49 +19,44 @@ plugins {
  * limitations under the License.
  ******************************************************************************/
 
-
 apply plugin: 'java'
+//apply plugin: 'project-report'
+//apply plugin: 'idea'
+//apply plugin: 'eclipse'
+apply plugin: 'maven'
+//apply plugin: 'checkstyle'
+//apply plugin: 'pmd'
+//apply plugin: 'findbugs'
 
 
 sourceCompatibility = 1.7
 version = '1.0'
 
 // gradle wrapper version
-wrapper {
-    gradleVersion '2.6'
-}
+//wrapper {
+//    gradleVersion '2.6'
+//}
 
 ext {
-//    generatorClassName = 'org.terasology.math.generator.MathGeneratorRunner'
-    generatedSrcDir = 'src/generated/java'
-
-    gdxVersion = "1.9.3"
+    generatedSrcDir = "jni/swig-src/collision:jni/swig-src/dynamics:jni/swig-src/extras:jni/swig-src/linearmath:jni/swig-src/softbody:src"
 
     // Read environment variables, including variables passed by jenkins continuous integration server
     env = System.getenv()
 }
-
-sourceSets {
-    main {
-        java {
-            srcDirs = [
-                "jni/swig-src/collision",
-                "jni/swig-src/dynamics",
-                "jni/swig-src/extras",
-                "jni/swig-src/linearmath",
-                "jni/swig-src/softbody",
-                'src'
-            ]
-        }
-    }
-}
-
 
 
 repositories {
     mavenCentral()
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     maven {url "http://artifactory.terasology.org/artifactory/virtual-repo-live"}
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir generatedSrcDir
+        }
+    }
 }
 
 ant.importBuild('jni/swig/build.xml') { antTaskName ->
@@ -78,19 +74,36 @@ tasks.matching { task ->
 }*.group = 'Ant'
 
 
-build.doFirst {
-    swig_all.execute()
-}
-
-assemble.dependsOn('jni_pack_natives')
+//assemble.dependsOn('jni_pack_natives')
 jni_pack_natives.dependsOn('jni_compile_natives')
-jni_compile_natives.dependsOn('swig_all')
-//jni_pack-natives.dependsOn('jni_compile-natives')
+assemble.dependsOn swig_all
 
 
 // Library and distribution config
 group = 'org.terasology'
-description = 'A math / geometry library'
+description = 'A Physics library'
+
+
+task sourceJar(type: Jar, dependsOn: jni_pack_natives) {
+    description = "Create a JAR with all sources"
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    description = "Create a JAR with the JavaDoc for the java sources"
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+// Define the artifacts we want to publish (the .pom will also be included since the Maven plugin is active)
+artifacts {
+    archives sourceJar
+    archives javadocJar
+}
+
+
+
 
 dependencies {
     compile group: 'org.terasology', name: 'TeraMath', version: '1.4.0'
