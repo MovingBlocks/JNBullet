@@ -75,52 +75,52 @@ public class CollisionObjectWrapper extends BulletBase {
 		super.dispose();
 	}
 
-  public CollisionObjectWrapper(btCollisionObjectWrapper parent, btCollisionShape shape, btCollisionObject collisionObject, Matrix4f worldTransform, int partId, int index) {
-    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_0(btCollisionObjectWrapper.getCPtr(parent), parent, btCollisionShape.getCPtr(shape), shape, btCollisionObject.getCPtr(collisionObject), collisionObject, worldTransform, partId, index), true);
+  public CollisionObjectWrapper(btCollisionObjectWrapper parent, btCollisionShape shape, btCollisionObject collisionObject, Matrix4f worldTransform, btVoxelInfo voxelInfo, int partId, int index) {
+    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_0(btCollisionObjectWrapper.getCPtr(parent), parent, btCollisionShape.getCPtr(shape), shape, btCollisionObject.getCPtr(collisionObject), collisionObject, worldTransform, btVoxelInfo.getCPtr(voxelInfo), voxelInfo, partId, index), true);
   }
 
-  public CollisionObjectWrapper(btCollisionObjectWrapper parent, btCollisionShape shape, btCollisionObject collisionObject, Matrix4f worldTransform, int partId) {
-    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_1(btCollisionObjectWrapper.getCPtr(parent), parent, btCollisionShape.getCPtr(shape), shape, btCollisionObject.getCPtr(collisionObject), collisionObject, worldTransform, partId), true);
+  public CollisionObjectWrapper(btCollisionObjectWrapper parent, btCollisionShape shape, btCollisionObject collisionObject, Matrix4f worldTransform, btVoxelInfo voxelInfo, int partId) {
+    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_1(btCollisionObjectWrapper.getCPtr(parent), parent, btCollisionShape.getCPtr(shape), shape, btCollisionObject.getCPtr(collisionObject), collisionObject, worldTransform, btVoxelInfo.getCPtr(voxelInfo), voxelInfo, partId), true);
   }
 
-  public CollisionObjectWrapper(btCollisionObjectWrapper parent, btCollisionShape shape, btCollisionObject collisionObject, Matrix4f worldTransform) {
-    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_2(btCollisionObjectWrapper.getCPtr(parent), parent, btCollisionShape.getCPtr(shape), shape, btCollisionObject.getCPtr(collisionObject), collisionObject, worldTransform), true);
+  public CollisionObjectWrapper(btCollisionObjectWrapper parent, btCollisionShape shape, btCollisionObject collisionObject, Matrix4f worldTransform, btVoxelInfo voxelInfo) {
+    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_2(btCollisionObjectWrapper.getCPtr(parent), parent, btCollisionShape.getCPtr(shape), shape, btCollisionObject.getCPtr(collisionObject), collisionObject, worldTransform, btVoxelInfo.getCPtr(voxelInfo), voxelInfo), true);
   }
 
-  public CollisionObjectWrapper(btCollisionShape shape, btCollisionObject collisionObject, Matrix4f worldTransform, int partId, int index) {
-    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_3(btCollisionShape.getCPtr(shape), shape, btCollisionObject.getCPtr(collisionObject), collisionObject, worldTransform, partId, index), true);
+  public CollisionObjectWrapper(btCollisionShape shape, btCollisionObject collisionObject, Matrix4f worldTransform, btVoxelInfo voxelInfo, int partId, int index) {
+    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_3(btCollisionShape.getCPtr(shape), shape, btCollisionObject.getCPtr(collisionObject), collisionObject, worldTransform, btVoxelInfo.getCPtr(voxelInfo), voxelInfo, partId, index), true);
   }
 
-  public CollisionObjectWrapper(btCollisionShape shape, btCollisionObject collisionObject, Matrix4f worldTransform, int partId) {
-    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_4(btCollisionShape.getCPtr(shape), shape, btCollisionObject.getCPtr(collisionObject), collisionObject, worldTransform, partId), true);
+  public CollisionObjectWrapper(btCollisionShape shape, btCollisionObject collisionObject, Matrix4f worldTransform, btVoxelInfo voxelInfo, int partId) {
+    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_4(btCollisionShape.getCPtr(shape), shape, btCollisionObject.getCPtr(collisionObject), collisionObject, worldTransform, btVoxelInfo.getCPtr(voxelInfo), voxelInfo, partId), true);
   }
 
-  public CollisionObjectWrapper(btCollisionShape shape, btCollisionObject collisionObject, Matrix4f worldTransform) {
-    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_5(btCollisionShape.getCPtr(shape), shape, btCollisionObject.getCPtr(collisionObject), collisionObject, worldTransform), true);
+  public CollisionObjectWrapper(btCollisionShape shape, btCollisionObject collisionObject, Matrix4f worldTransform, btVoxelInfo voxelInfo) {
+    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_5(btCollisionShape.getCPtr(shape), shape, btCollisionObject.getCPtr(collisionObject), collisionObject, worldTransform, btVoxelInfo.getCPtr(voxelInfo), voxelInfo), true);
   }
 
-  public CollisionObjectWrapper(btCollisionObjectWrapper parent, btCollisionObject collisionObject, int partId, int index) {
-    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_6(btCollisionObjectWrapper.getCPtr(parent), parent, btCollisionObject.getCPtr(collisionObject), collisionObject, partId, index), true);
+  public CollisionObjectWrapper(btCollisionObjectWrapper parent, btCollisionObject collisionObject, btVoxelInfo voxelInfo, int partId, int index) {
+    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_6(btCollisionObjectWrapper.getCPtr(parent), parent, btCollisionObject.getCPtr(collisionObject), collisionObject, btVoxelInfo.getCPtr(voxelInfo), voxelInfo, partId, index), true);
   }
 
-  public CollisionObjectWrapper(btCollisionObjectWrapper parent, btCollisionObject collisionObject, int partId) {
-    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_7(btCollisionObjectWrapper.getCPtr(parent), parent, btCollisionObject.getCPtr(collisionObject), collisionObject, partId), true);
+  public CollisionObjectWrapper(btCollisionObjectWrapper parent, btCollisionObject collisionObject, btVoxelInfo voxelInfo, int partId) {
+    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_7(btCollisionObjectWrapper.getCPtr(parent), parent, btCollisionObject.getCPtr(collisionObject), collisionObject, btVoxelInfo.getCPtr(voxelInfo), voxelInfo, partId), true);
   }
 
-  public CollisionObjectWrapper(btCollisionObjectWrapper parent, btCollisionObject collisionObject) {
-    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_8(btCollisionObjectWrapper.getCPtr(parent), parent, btCollisionObject.getCPtr(collisionObject), collisionObject), true);
+  public CollisionObjectWrapper(btCollisionObjectWrapper parent, btCollisionObject collisionObject, btVoxelInfo voxelInfo) {
+    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_8(btCollisionObjectWrapper.getCPtr(parent), parent, btCollisionObject.getCPtr(collisionObject), collisionObject, btVoxelInfo.getCPtr(voxelInfo), voxelInfo), true);
   }
 
-  public CollisionObjectWrapper(btCollisionObject collisionObject, int partId, int index) {
-    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_9(btCollisionObject.getCPtr(collisionObject), collisionObject, partId, index), true);
+  public CollisionObjectWrapper(btCollisionObject collisionObject, btVoxelInfo voxelInfo, int partId, int index) {
+    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_9(btCollisionObject.getCPtr(collisionObject), collisionObject, btVoxelInfo.getCPtr(voxelInfo), voxelInfo, partId, index), true);
   }
 
-  public CollisionObjectWrapper(btCollisionObject collisionObject, int partId) {
-    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_10(btCollisionObject.getCPtr(collisionObject), collisionObject, partId), true);
+  public CollisionObjectWrapper(btCollisionObject collisionObject, btVoxelInfo voxelInfo, int partId) {
+    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_10(btCollisionObject.getCPtr(collisionObject), collisionObject, btVoxelInfo.getCPtr(voxelInfo), voxelInfo, partId), true);
   }
 
-  public CollisionObjectWrapper(btCollisionObject collisionObject) {
-    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_11(btCollisionObject.getCPtr(collisionObject), collisionObject), true);
+  public CollisionObjectWrapper(btCollisionObject collisionObject, btVoxelInfo voxelInfo) {
+    this(CollisionJNI.new_CollisionObjectWrapper__SWIG_11(btCollisionObject.getCPtr(collisionObject), collisionObject, btVoxelInfo.getCPtr(voxelInfo), voxelInfo), true);
   }
 
   private btCollisionObjectWrapper getWrapper() {

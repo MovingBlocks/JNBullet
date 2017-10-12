@@ -82,6 +82,9 @@ protected:
 	btCollisionAlgorithmCreateFunc*	m_triangleSphereCF;
 	btCollisionAlgorithmCreateFunc*	m_planeConvexCF;
 	btCollisionAlgorithmCreateFunc*	m_convexPlaneCF;
+
+	btCollisionAlgorithmCreateFunc*	m_voxelCreateFunc;
+	btCollisionAlgorithmCreateFunc*	m_swappedVoxelCreateFunc;
 	
 public:
 

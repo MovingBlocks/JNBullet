@@ -82,6 +82,8 @@
       break;
     case BroadphaseNativeTypes.COMPOUND_SHAPE_PROXYTYPE:
       return new btCompoundShape(swigCPtr, owner);
+    case BroadphaseNativeTypes.VOXEL_SHAPE_PROXYTYPE:
+      return new btVoxelShape(swigCPtr, owner);
 /*
     case BroadphaseNativeTypes.SOFTBODY_SHAPE_PROXYTYPE:
       return new btSoftBodyShape(swigCPtr, owner);

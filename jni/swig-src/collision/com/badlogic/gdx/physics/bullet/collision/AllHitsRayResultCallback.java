@@ -114,6 +114,15 @@ public class AllHitsRayResultCallback extends RayResultCallback {
     return (cPtr == 0) ? null : new btScalarArray(cPtr, false);
   }
 
+  public void setVoxelInfo(SWIGTYPE_p_btAlignedObjectArrayT_btVoxelInfo_t value) {
+    CollisionJNI.AllHitsRayResultCallback_voxelInfo_set(swigCPtr, this, SWIGTYPE_p_btAlignedObjectArrayT_btVoxelInfo_t.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_btAlignedObjectArrayT_btVoxelInfo_t getVoxelInfo() {
+    long cPtr = CollisionJNI.AllHitsRayResultCallback_voxelInfo_get(swigCPtr, this);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_btAlignedObjectArrayT_btVoxelInfo_t(cPtr, false);
+  }
+
   public float addSingleResult(LocalRayResult rayResult, boolean normalInWorldSpace) {
     return (getClass() == AllHitsRayResultCallback.class) ? CollisionJNI.AllHitsRayResultCallback_addSingleResult(swigCPtr, this, LocalRayResult.getCPtr(rayResult), rayResult, normalInWorldSpace) : CollisionJNI.AllHitsRayResultCallback_addSingleResultSwigExplicitAllHitsRayResultCallback(swigCPtr, this, LocalRayResult.getCPtr(rayResult), rayResult, normalInWorldSpace);
   }

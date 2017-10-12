@@ -78,6 +78,15 @@ public class ClosestRayResultCallback extends RayResultCallback {
     CollisionJNI.ClosestRayResultCallback_director_connect(this, swigCPtr, swigCMemOwn, true);
   }
 
+  public void setVoxelInfo(btVoxelInfo value) {
+    CollisionJNI.ClosestRayResultCallback_voxelInfo_set(swigCPtr, this, btVoxelInfo.getCPtr(value), value);
+  }
+
+  public btVoxelInfo getVoxelInfo() {
+    long cPtr = CollisionJNI.ClosestRayResultCallback_voxelInfo_get(swigCPtr, this);
+    return (cPtr == 0) ? null : new btVoxelInfo(cPtr, false);
+  }
+
   public float addSingleResult(LocalRayResult rayResult, boolean normalInWorldSpace) {
     return (getClass() == ClosestRayResultCallback.class) ? CollisionJNI.ClosestRayResultCallback_addSingleResult(swigCPtr, this, LocalRayResult.getCPtr(rayResult), rayResult, normalInWorldSpace) : CollisionJNI.ClosestRayResultCallback_addSingleResultSwigExplicitClosestRayResultCallback(swigCPtr, this, LocalRayResult.getCPtr(rayResult), rayResult, normalInWorldSpace);
   }

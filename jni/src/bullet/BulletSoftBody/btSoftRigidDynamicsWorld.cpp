@@ -24,7 +24,7 @@ subject to the following restrictions:
 #include "btDefaultSoftBodySolver.h"
 #include "LinearMath/btSerializer.h"
 
-
+class btVoxelInfo;
 btSoftRigidDynamicsWorld::btSoftRigidDynamicsWorld(
 	btDispatcher* dispatcher,
 	btBroadphaseInterface* pairCache,
@@ -312,12 +312,13 @@ void	btSoftRigidDynamicsWorld::rayTestSingle(const btTransform& rayFromTrans,con
 							normal = -normal;
 						}
 					}
-	
+
 					btCollisionWorld::LocalRayResult rayResult
 						(collisionObject,
 						 &shapeInfo,
 						 normal,
-						 softResult.fraction);
+						 softResult.fraction,
+						 btVoxelInfo());
 					bool	normalInWorldSpace = true;
 					resultCallback.addSingleResult(rayResult,normalInWorldSpace);
 				}

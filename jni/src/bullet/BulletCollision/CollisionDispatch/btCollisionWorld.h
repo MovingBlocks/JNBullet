@@ -77,6 +77,7 @@ class btConvexShape;
 class btBroadphaseInterface;
 class btSerializer;
 
+#include "BulletCollision/CollisionShapes/btVoxelShape.h"
 #include "LinearMath/btVector3.h"
 #include "LinearMath/btTransform.h"
 #include "btCollisionObject.h"
@@ -185,11 +186,13 @@ public:
 		LocalRayResult(const btCollisionObject*	collisionObject, 
 			LocalShapeInfo*	localShapeInfo,
 			const btVector3&		hitNormalLocal,
-			btScalar hitFraction)
+			btScalar hitFraction,
+			const btVoxelInfo& voxelInfo)
 		:m_collisionObject(collisionObject),
 		m_localShapeInfo(localShapeInfo),
 		m_hitNormalLocal(hitNormalLocal),
-		m_hitFraction(hitFraction)
+		m_hitFraction(hitFraction),
+	    m_voxelInfo(voxelInfo)
 		{
 		}
 
@@ -197,6 +200,7 @@ public:
 		LocalShapeInfo*			m_localShapeInfo;
 		btVector3				m_hitNormalLocal;
 		btScalar				m_hitFraction;
+        btVoxelInfo      m_voxelInfo;
 
 	};
 
@@ -252,12 +256,15 @@ public:
 
 		btVector3	m_hitNormalWorld;
 		btVector3	m_hitPointWorld;
+
+        btVoxelInfo m_voxelInfo;
 			
 		virtual	btScalar	addSingleResult(LocalRayResult& rayResult,bool normalInWorldSpace)
 		{
 			//caller already does the filter on the m_closestHitFraction
 			btAssert(rayResult.m_hitFraction <= m_closestHitFraction);
-			
+
+            m_voxelInfo = rayResult.m_voxelInfo;
 			m_closestHitFraction = rayResult.m_hitFraction;
 			m_collisionObject = rayResult.m_collisionObject;
 			if (normalInWorldSpace)
@@ -289,6 +296,7 @@ public:
 		btAlignedObjectArray<btVector3>	m_hitNormalWorld;
 		btAlignedObjectArray<btVector3>	m_hitPointWorld;
 		btAlignedObjectArray<btScalar> m_hitFractions;
+        btAlignedObjectArray<btVoxelInfo> m_voxelInfo;
 			
 		virtual	btScalar	addSingleResult(LocalRayResult& rayResult,bool normalInWorldSpace)
 		{
@@ -308,6 +316,7 @@ public:
 			hitPointWorld.setInterpolate3(m_rayFromWorld,m_rayToWorld,rayResult.m_hitFraction);
 			m_hitPointWorld.push_back(hitPointWorld);
 			m_hitFractions.push_back(rayResult.m_hitFraction);
+            m_voxelInfo.push_back(rayResult.m_voxelInfo);
 			return m_closestHitFraction;
 		}
 	};
@@ -319,13 +328,15 @@ public:
 			LocalShapeInfo*	localShapeInfo,
 			const btVector3&		hitNormalLocal,
 			const btVector3&		hitPointLocal,
-			btScalar hitFraction
+			btScalar hitFraction,
+            const btVoxelInfo& voxelInfo
 			)
 		:m_hitCollisionObject(hitCollisionObject),
 		m_localShapeInfo(localShapeInfo),
 		m_hitNormalLocal(hitNormalLocal),
 		m_hitPointLocal(hitPointLocal),
-		m_hitFraction(hitFraction)
+		m_hitFraction(hitFraction),
+        m_voxelInfo(voxelInfo)
 		{
 		}
 
@@ -334,6 +345,7 @@ public:
 		btVector3				m_hitNormalLocal;
 		btVector3				m_hitPointLocal;
 		btScalar				m_hitFraction;
+        btVoxelInfo             m_voxelInfo;
 	};
 
 	///RayResultCallback is used to report new raycast results
@@ -385,13 +397,16 @@ public:
 
 		btVector3	m_hitNormalWorld;
 		btVector3	m_hitPointWorld;
+        btVoxelInfo m_voxelInfo;
+
 		const btCollisionObject*	m_hitCollisionObject;
 		
 		virtual	btScalar	addSingleResult(LocalConvexResult& convexResult,bool normalInWorldSpace)
 		{
 //caller already does the filter on the m_closestHitFraction
 			btAssert(convexResult.m_hitFraction <= m_closestHitFraction);
-						
+
+            m_voxelInfo = convexResult.m_voxelInfo;
 			m_closestHitFraction = convexResult.m_hitFraction;
 			m_hitCollisionObject = convexResult.m_hitCollisionObject;
 			if (normalInWorldSpace)

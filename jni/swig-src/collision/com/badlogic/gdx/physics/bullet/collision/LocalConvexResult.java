@@ -58,8 +58,8 @@ public class LocalConvexResult extends BulletBase {
 		super.delete();
 	}
 
-  public LocalConvexResult(btCollisionObject hitCollisionObject, LocalShapeInfo localShapeInfo, Vector3f hitNormalLocal, Vector3f hitPointLocal, float hitFraction) {
-    this(CollisionJNI.new_LocalConvexResult(btCollisionObject.getCPtr(hitCollisionObject), hitCollisionObject, LocalShapeInfo.getCPtr(localShapeInfo), localShapeInfo, hitNormalLocal, hitPointLocal, hitFraction), true);
+  public LocalConvexResult(btCollisionObject hitCollisionObject, LocalShapeInfo localShapeInfo, Vector3f hitNormalLocal, Vector3f hitPointLocal, float hitFraction, btVoxelInfo voxelInfo) {
+    this(CollisionJNI.new_LocalConvexResult(btCollisionObject.getCPtr(hitCollisionObject), hitCollisionObject, LocalShapeInfo.getCPtr(localShapeInfo), localShapeInfo, hitNormalLocal, hitPointLocal, hitFraction, btVoxelInfo.getCPtr(voxelInfo), voxelInfo), true);
   }
 
   public void setHitCollisionObject(btCollisionObject value) {
@@ -85,6 +85,15 @@ public class LocalConvexResult extends BulletBase {
 
   public float getHitFraction() {
     return CollisionJNI.LocalConvexResult_hitFraction_get(swigCPtr, this);
+  }
+
+  public void setVoxelInfo(btVoxelInfo value) {
+    CollisionJNI.LocalConvexResult_voxelInfo_set(swigCPtr, this, btVoxelInfo.getCPtr(value), value);
+  }
+
+  public btVoxelInfo getVoxelInfo() {
+    long cPtr = CollisionJNI.LocalConvexResult_voxelInfo_get(swigCPtr, this);
+    return (cPtr == 0) ? null : new btVoxelInfo(cPtr, false);
   }
 
   public void getHitNormalLocal(Vector3f out) {

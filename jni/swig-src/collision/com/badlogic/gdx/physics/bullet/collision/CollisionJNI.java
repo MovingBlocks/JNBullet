@@ -62,6 +62,7 @@ public class CollisionJNI {
   public final static native boolean btBroadphaseProxy_isNonMoving(int jarg1);
   public final static native boolean btBroadphaseProxy_isConcave(int jarg1);
   public final static native boolean btBroadphaseProxy_isCompound(int jarg1);
+  public final static native boolean btBroadphaseProxy_isVoxel(int jarg1);
   public final static native boolean btBroadphaseProxy_isSoftBody(int jarg1);
   public final static native boolean btBroadphaseProxy_isInfinite(int jarg1);
   public final static native boolean btBroadphaseProxy_isConvex2d(int jarg1);
@@ -511,6 +512,7 @@ public class CollisionJNI {
   public final static native boolean btCollisionShape_isConvex(long jarg1, btCollisionShape jarg1_);
   public final static native boolean btCollisionShape_isNonMoving(long jarg1, btCollisionShape jarg1_);
   public final static native boolean btCollisionShape_isConcave(long jarg1, btCollisionShape jarg1_);
+  public final static native boolean btCollisionShape_isVoxel(long jarg1, btCollisionShape jarg1_);
   public final static native boolean btCollisionShape_isCompound(long jarg1, btCollisionShape jarg1_);
   public final static native boolean btCollisionShape_isSoftBody(long jarg1, btCollisionShape jarg1_);
   public final static native boolean btCollisionShape_isInfinite(long jarg1, btCollisionShape jarg1_);
@@ -735,6 +737,41 @@ public class CollisionJNI {
   public final static native long new_btBoxShape(Vector3f jarg1);
   public final static native void btBoxShape_getPlaneEquation(long jarg1, btBoxShape jarg1_, long jarg2, btVector4 jarg2_, int jarg3);
   public final static native void delete_btBoxShape(long jarg1);
+  public final static native void btVoxelInfo_tracable_set(long jarg1, btVoxelInfo jarg1_, boolean jarg2);
+  public final static native boolean btVoxelInfo_tracable_get(long jarg1, btVoxelInfo jarg1_);
+  public final static native void btVoxelInfo_blocking_set(long jarg1, btVoxelInfo jarg1_, boolean jarg2);
+  public final static native boolean btVoxelInfo_blocking_get(long jarg1, btVoxelInfo jarg1_);
+  public final static native void btVoxelInfo_voxelTypeId_set(long jarg1, btVoxelInfo jarg1_, int jarg2);
+  public final static native int btVoxelInfo_voxelTypeId_get(long jarg1, btVoxelInfo jarg1_);
+  public final static native void btVoxelInfo_x_set(long jarg1, btVoxelInfo jarg1_, int jarg2);
+  public final static native int btVoxelInfo_x_get(long jarg1, btVoxelInfo jarg1_);
+  public final static native void btVoxelInfo_y_set(long jarg1, btVoxelInfo jarg1_, int jarg2);
+  public final static native int btVoxelInfo_y_get(long jarg1, btVoxelInfo jarg1_);
+  public final static native void btVoxelInfo_z_set(long jarg1, btVoxelInfo jarg1_, int jarg2);
+  public final static native int btVoxelInfo_z_get(long jarg1, btVoxelInfo jarg1_);
+  public final static native void btVoxelInfo_collisionShape_set(long jarg1, btVoxelInfo jarg1_, long jarg2, btCollisionShape jarg2_);
+  public final static native long btVoxelInfo_collisionShape_get(long jarg1, btVoxelInfo jarg1_);
+  public final static native void btVoxelInfo_collisionOffset_set(long jarg1, btVoxelInfo jarg1_, long jarg2, btVector3 jarg2_);
+  public final static native long btVoxelInfo_collisionOffset_get(long jarg1, btVoxelInfo jarg1_);
+  public final static native void btVoxelInfo_friction_set(long jarg1, btVoxelInfo jarg1_, float jarg2);
+  public final static native float btVoxelInfo_friction_get(long jarg1, btVoxelInfo jarg1_);
+  public final static native void btVoxelInfo_restitution_set(long jarg1, btVoxelInfo jarg1_, float jarg2);
+  public final static native float btVoxelInfo_restitution_get(long jarg1, btVoxelInfo jarg1_);
+  public final static native void btVoxelInfo_rollingFriction_set(long jarg1, btVoxelInfo jarg1_, float jarg2);
+  public final static native float btVoxelInfo_rollingFriction_get(long jarg1, btVoxelInfo jarg1_);
+  public final static native long new_btVoxelInfo__SWIG_0();
+  public final static native long new_btVoxelInfo__SWIG_1(long jarg1, btVoxelInfo jarg1_);
+  public final static native long new_btVoxelInfo__SWIG_2(boolean jarg1, boolean jarg2, int jarg3, int jarg4, int jarg5, int jarg6, long jarg7, btCollisionShape jarg7_, Vector3f jarg8, float jarg9, float jarg10, float jarg11);
+  public final static native boolean btVoxelInfo_isEmpty(long jarg1, btVoxelInfo jarg1_);
+  public final static native void delete_btVoxelInfo(long jarg1);
+  public final static native void btVoxelContentProvider_getVoxel(long jarg1, btVoxelContentProvider jarg1_, int jarg2, int jarg3, int jarg4, long jarg5, btVoxelInfo jarg5_);
+  public final static native void delete_btVoxelContentProvider(long jarg1);
+  public final static native long new_btVoxelContentProvider();
+  public final static native void btVoxelContentProvider_director_connect(btVoxelContentProvider obj, long cptr, boolean mem_own, boolean weak_global);
+  public final static native void btVoxelContentProvider_change_ownership(btVoxelContentProvider obj, long cptr, boolean take_or_release);
+  public final static native long new_btVoxelShape(long jarg1, btVoxelContentProvider jarg1_, Vector3f jarg2, Vector3f jarg3);
+  public final static native void delete_btVoxelShape(long jarg1);
+  public final static native long btVoxelShape_getContentProvider(long jarg1, btVoxelShape jarg1_);
   public final static native long new_btCapsuleShape__SWIG_1(float jarg1, float jarg2);
   public final static native int btCapsuleShape_getUpAxis(long jarg1, btCapsuleShape jarg1_);
   public final static native float btCapsuleShape_getRadius(long jarg1, btCapsuleShape jarg1_);
@@ -1620,23 +1657,24 @@ public class CollisionJNI {
   public final static native void btCollisionObjectWrapper_collisionObject_set(long jarg1, btCollisionObjectWrapper jarg1_, long jarg2, btCollisionObject jarg2_);
   public final static native long btCollisionObjectWrapper_collisionObject_get(long jarg1, btCollisionObjectWrapper jarg1_);
   public final static native Matrix4f btCollisionObjectWrapper_worldTransform_get(long jarg1, btCollisionObjectWrapper jarg1_);
+  public final static native long btCollisionObjectWrapper_voxelInfo_get(long jarg1, btCollisionObjectWrapper jarg1_);
   public final static native void btCollisionObjectWrapper_partId_set(long jarg1, btCollisionObjectWrapper jarg1_, int jarg2);
   public final static native int btCollisionObjectWrapper_partId_get(long jarg1, btCollisionObjectWrapper jarg1_);
   public final static native void btCollisionObjectWrapper_index_set(long jarg1, btCollisionObjectWrapper jarg1_, int jarg2);
   public final static native int btCollisionObjectWrapper_index_get(long jarg1, btCollisionObjectWrapper jarg1_);
   public final static native long btCollisionObjectWrapper_getCollisionShape(long jarg1, btCollisionObjectWrapper jarg1_);
-  public final static native long new_CollisionObjectWrapper__SWIG_0(long jarg1, btCollisionObjectWrapper jarg1_, long jarg2, btCollisionShape jarg2_, long jarg3, btCollisionObject jarg3_, Matrix4f jarg4, int jarg5, int jarg6);
-  public final static native long new_CollisionObjectWrapper__SWIG_1(long jarg1, btCollisionObjectWrapper jarg1_, long jarg2, btCollisionShape jarg2_, long jarg3, btCollisionObject jarg3_, Matrix4f jarg4, int jarg5);
-  public final static native long new_CollisionObjectWrapper__SWIG_2(long jarg1, btCollisionObjectWrapper jarg1_, long jarg2, btCollisionShape jarg2_, long jarg3, btCollisionObject jarg3_, Matrix4f jarg4);
-  public final static native long new_CollisionObjectWrapper__SWIG_3(long jarg1, btCollisionShape jarg1_, long jarg2, btCollisionObject jarg2_, Matrix4f jarg3, int jarg4, int jarg5);
-  public final static native long new_CollisionObjectWrapper__SWIG_4(long jarg1, btCollisionShape jarg1_, long jarg2, btCollisionObject jarg2_, Matrix4f jarg3, int jarg4);
-  public final static native long new_CollisionObjectWrapper__SWIG_5(long jarg1, btCollisionShape jarg1_, long jarg2, btCollisionObject jarg2_, Matrix4f jarg3);
-  public final static native long new_CollisionObjectWrapper__SWIG_6(long jarg1, btCollisionObjectWrapper jarg1_, long jarg2, btCollisionObject jarg2_, int jarg3, int jarg4);
-  public final static native long new_CollisionObjectWrapper__SWIG_7(long jarg1, btCollisionObjectWrapper jarg1_, long jarg2, btCollisionObject jarg2_, int jarg3);
-  public final static native long new_CollisionObjectWrapper__SWIG_8(long jarg1, btCollisionObjectWrapper jarg1_, long jarg2, btCollisionObject jarg2_);
-  public final static native long new_CollisionObjectWrapper__SWIG_9(long jarg1, btCollisionObject jarg1_, int jarg2, int jarg3);
-  public final static native long new_CollisionObjectWrapper__SWIG_10(long jarg1, btCollisionObject jarg1_, int jarg2);
-  public final static native long new_CollisionObjectWrapper__SWIG_11(long jarg1, btCollisionObject jarg1_);
+  public final static native long new_CollisionObjectWrapper__SWIG_0(long jarg1, btCollisionObjectWrapper jarg1_, long jarg2, btCollisionShape jarg2_, long jarg3, btCollisionObject jarg3_, Matrix4f jarg4, long jarg5, btVoxelInfo jarg5_, int jarg6, int jarg7);
+  public final static native long new_CollisionObjectWrapper__SWIG_1(long jarg1, btCollisionObjectWrapper jarg1_, long jarg2, btCollisionShape jarg2_, long jarg3, btCollisionObject jarg3_, Matrix4f jarg4, long jarg5, btVoxelInfo jarg5_, int jarg6);
+  public final static native long new_CollisionObjectWrapper__SWIG_2(long jarg1, btCollisionObjectWrapper jarg1_, long jarg2, btCollisionShape jarg2_, long jarg3, btCollisionObject jarg3_, Matrix4f jarg4, long jarg5, btVoxelInfo jarg5_);
+  public final static native long new_CollisionObjectWrapper__SWIG_3(long jarg1, btCollisionShape jarg1_, long jarg2, btCollisionObject jarg2_, Matrix4f jarg3, long jarg4, btVoxelInfo jarg4_, int jarg5, int jarg6);
+  public final static native long new_CollisionObjectWrapper__SWIG_4(long jarg1, btCollisionShape jarg1_, long jarg2, btCollisionObject jarg2_, Matrix4f jarg3, long jarg4, btVoxelInfo jarg4_, int jarg5);
+  public final static native long new_CollisionObjectWrapper__SWIG_5(long jarg1, btCollisionShape jarg1_, long jarg2, btCollisionObject jarg2_, Matrix4f jarg3, long jarg4, btVoxelInfo jarg4_);
+  public final static native long new_CollisionObjectWrapper__SWIG_6(long jarg1, btCollisionObjectWrapper jarg1_, long jarg2, btCollisionObject jarg2_, long jarg3, btVoxelInfo jarg3_, int jarg4, int jarg5);
+  public final static native long new_CollisionObjectWrapper__SWIG_7(long jarg1, btCollisionObjectWrapper jarg1_, long jarg2, btCollisionObject jarg2_, long jarg3, btVoxelInfo jarg3_, int jarg4);
+  public final static native long new_CollisionObjectWrapper__SWIG_8(long jarg1, btCollisionObjectWrapper jarg1_, long jarg2, btCollisionObject jarg2_, long jarg3, btVoxelInfo jarg3_);
+  public final static native long new_CollisionObjectWrapper__SWIG_9(long jarg1, btCollisionObject jarg1_, long jarg2, btVoxelInfo jarg2_, int jarg3, int jarg4);
+  public final static native long new_CollisionObjectWrapper__SWIG_10(long jarg1, btCollisionObject jarg1_, long jarg2, btVoxelInfo jarg2_, int jarg3);
+  public final static native long new_CollisionObjectWrapper__SWIG_11(long jarg1, btCollisionObject jarg1_, long jarg2, btVoxelInfo jarg2_);
   public final static native long CollisionObjectWrapper_getWrapper(long jarg1, CollisionObjectWrapper jarg1_);
   public final static native void delete_CollisionObjectWrapper(long jarg1);
   public final static native long new_btEmptyAlgorithm(long jarg1, btCollisionAlgorithmConstructionInfo jarg1_);
@@ -1896,7 +1934,7 @@ public class CollisionJNI {
   public final static native int LocalShapeInfo_triangleIndex_get(long jarg1, LocalShapeInfo jarg1_);
   public final static native long new_LocalShapeInfo();
   public final static native void delete_LocalShapeInfo(long jarg1);
-  public final static native long new_LocalRayResult(long jarg1, btCollisionObject jarg1_, long jarg2, LocalShapeInfo jarg2_, Vector3f jarg3, float jarg4);
+  public final static native long new_LocalRayResult(long jarg1, btCollisionObject jarg1_, long jarg2, LocalShapeInfo jarg2_, Vector3f jarg3, float jarg4, long jarg5, btVoxelInfo jarg5_);
   public final static native void LocalRayResult_collisionObject_set(long jarg1, LocalRayResult jarg1_, long jarg2, btCollisionObject jarg2_);
   public final static native long LocalRayResult_collisionObject_get(long jarg1, LocalRayResult jarg1_);
   public final static native void LocalRayResult_localShapeInfo_set(long jarg1, LocalRayResult jarg1_, long jarg2, LocalShapeInfo jarg2_);
@@ -1905,6 +1943,8 @@ public class CollisionJNI {
   public final static native long LocalRayResult_hitNormalLocal_get(long jarg1, LocalRayResult jarg1_);
   public final static native void LocalRayResult_hitFraction_set(long jarg1, LocalRayResult jarg1_, float jarg2);
   public final static native float LocalRayResult_hitFraction_get(long jarg1, LocalRayResult jarg1_);
+  public final static native void LocalRayResult_voxelInfo_set(long jarg1, LocalRayResult jarg1_, long jarg2, btVoxelInfo jarg2_);
+  public final static native long LocalRayResult_voxelInfo_get(long jarg1, LocalRayResult jarg1_);
   public final static native void delete_LocalRayResult(long jarg1);
   public final static native void RayResultCallback_closestHitFraction_set(long jarg1, RayResultCallback jarg1_, float jarg2);
   public final static native float RayResultCallback_closestHitFraction_get(long jarg1, RayResultCallback jarg1_);
@@ -1925,6 +1965,8 @@ public class CollisionJNI {
   public final static native void RayResultCallback_director_connect(RayResultCallback obj, long cptr, boolean mem_own, boolean weak_global);
   public final static native void RayResultCallback_change_ownership(RayResultCallback obj, long cptr, boolean take_or_release);
   public final static native long new_ClosestRayResultCallback(Vector3f jarg1, Vector3f jarg2);
+  public final static native void ClosestRayResultCallback_voxelInfo_set(long jarg1, ClosestRayResultCallback jarg1_, long jarg2, btVoxelInfo jarg2_);
+  public final static native long ClosestRayResultCallback_voxelInfo_get(long jarg1, ClosestRayResultCallback jarg1_);
   public final static native float ClosestRayResultCallback_addSingleResult(long jarg1, ClosestRayResultCallback jarg1_, long jarg2, LocalRayResult jarg2_, boolean jarg3);
   public final static native float ClosestRayResultCallback_addSingleResultSwigExplicitClosestRayResultCallback(long jarg1, ClosestRayResultCallback jarg1_, long jarg2, LocalRayResult jarg2_, boolean jarg3);
   public final static native void ClosestRayResultCallback_getRayFromWorld(long jarg1, ClosestRayResultCallback jarg1_, Vector3f jarg2);
@@ -1947,6 +1989,8 @@ public class CollisionJNI {
   public final static native long AllHitsRayResultCallback_hitPointWorld_get(long jarg1, AllHitsRayResultCallback jarg1_);
   public final static native void AllHitsRayResultCallback_hitFractions_set(long jarg1, AllHitsRayResultCallback jarg1_, long jarg2, btScalarArray jarg2_);
   public final static native long AllHitsRayResultCallback_hitFractions_get(long jarg1, AllHitsRayResultCallback jarg1_);
+  public final static native void AllHitsRayResultCallback_voxelInfo_set(long jarg1, AllHitsRayResultCallback jarg1_, long jarg2);
+  public final static native long AllHitsRayResultCallback_voxelInfo_get(long jarg1, AllHitsRayResultCallback jarg1_);
   public final static native float AllHitsRayResultCallback_addSingleResult(long jarg1, AllHitsRayResultCallback jarg1_, long jarg2, LocalRayResult jarg2_, boolean jarg3);
   public final static native float AllHitsRayResultCallback_addSingleResultSwigExplicitAllHitsRayResultCallback(long jarg1, AllHitsRayResultCallback jarg1_, long jarg2, LocalRayResult jarg2_, boolean jarg3);
   public final static native void AllHitsRayResultCallback_getRayFromWorld(long jarg1, AllHitsRayResultCallback jarg1_, Vector3f jarg2);
@@ -1956,13 +2000,15 @@ public class CollisionJNI {
   public final static native void delete_AllHitsRayResultCallback(long jarg1);
   public final static native void AllHitsRayResultCallback_director_connect(AllHitsRayResultCallback obj, long cptr, boolean mem_own, boolean weak_global);
   public final static native void AllHitsRayResultCallback_change_ownership(AllHitsRayResultCallback obj, long cptr, boolean take_or_release);
-  public final static native long new_LocalConvexResult(long jarg1, btCollisionObject jarg1_, long jarg2, LocalShapeInfo jarg2_, Vector3f jarg3, Vector3f jarg4, float jarg5);
+  public final static native long new_LocalConvexResult(long jarg1, btCollisionObject jarg1_, long jarg2, LocalShapeInfo jarg2_, Vector3f jarg3, Vector3f jarg4, float jarg5, long jarg6, btVoxelInfo jarg6_);
   public final static native void LocalConvexResult_hitCollisionObject_set(long jarg1, LocalConvexResult jarg1_, long jarg2, btCollisionObject jarg2_);
   public final static native long LocalConvexResult_hitCollisionObject_get(long jarg1, LocalConvexResult jarg1_);
   public final static native void LocalConvexResult_localShapeInfo_set(long jarg1, LocalConvexResult jarg1_, long jarg2, LocalShapeInfo jarg2_);
   public final static native long LocalConvexResult_localShapeInfo_get(long jarg1, LocalConvexResult jarg1_);
   public final static native void LocalConvexResult_hitFraction_set(long jarg1, LocalConvexResult jarg1_, float jarg2);
   public final static native float LocalConvexResult_hitFraction_get(long jarg1, LocalConvexResult jarg1_);
+  public final static native void LocalConvexResult_voxelInfo_set(long jarg1, LocalConvexResult jarg1_, long jarg2, btVoxelInfo jarg2_);
+  public final static native long LocalConvexResult_voxelInfo_get(long jarg1, LocalConvexResult jarg1_);
   public final static native void LocalConvexResult_getHitNormalLocal(long jarg1, LocalConvexResult jarg1_, Vector3f jarg2);
   public final static native void LocalConvexResult_setHitNormalLocal(long jarg1, LocalConvexResult jarg1_, Vector3f jarg2);
   public final static native void LocalConvexResult_getHitPointLocal(long jarg1, LocalConvexResult jarg1_, Vector3f jarg2);
@@ -1987,6 +2033,8 @@ public class CollisionJNI {
   public final static native long ClosestConvexResultCallback_convexFromWorld_get(long jarg1, ClosestConvexResultCallback jarg1_);
   public final static native void ClosestConvexResultCallback_convexToWorld_set(long jarg1, ClosestConvexResultCallback jarg1_, long jarg2, btVector3 jarg2_);
   public final static native long ClosestConvexResultCallback_convexToWorld_get(long jarg1, ClosestConvexResultCallback jarg1_);
+  public final static native void ClosestConvexResultCallback_voxelInfo_set(long jarg1, ClosestConvexResultCallback jarg1_, long jarg2, btVoxelInfo jarg2_);
+  public final static native long ClosestConvexResultCallback_voxelInfo_get(long jarg1, ClosestConvexResultCallback jarg1_);
   public final static native void ClosestConvexResultCallback_hitCollisionObject_set(long jarg1, ClosestConvexResultCallback jarg1_, long jarg2, btCollisionObject jarg2_);
   public final static native long ClosestConvexResultCallback_hitCollisionObject_get(long jarg1, ClosestConvexResultCallback jarg1_);
   public final static native float ClosestConvexResultCallback_addSingleResult(long jarg1, ClosestConvexResultCallback jarg1_, long jarg2, LocalConvexResult jarg2_, boolean jarg3);
@@ -2966,6 +3014,7 @@ public class CollisionJNI {
   public final static native long btTriangleMeshShape_SWIGUpcast(long jarg1);
   public final static native long btBvhTriangleMeshShape_SWIGUpcast(long jarg1);
   public final static native long btBoxShape_SWIGUpcast(long jarg1);
+  public final static native long btVoxelShape_SWIGUpcast(long jarg1);
   public final static native long btCapsuleShape_SWIGUpcast(long jarg1);
   public final static native long btCapsuleShapeX_SWIGUpcast(long jarg1);
   public final static native long btCapsuleShapeZ_SWIGUpcast(long jarg1);
@@ -3081,6 +3130,9 @@ public class CollisionJNI {
   }
   public static void SwigDirector_btInternalTriangleIndexCallback_internalProcessTriangleIndex(btInternalTriangleIndexCallback jself, long triangle, int partId, int triangleIndex) {
     jself.internalProcessTriangleIndex((triangle == 0) ? null : new btVector3(triangle, false), partId, triangleIndex);
+  }
+  public static void SwigDirector_btVoxelContentProvider_getVoxel(btVoxelContentProvider jself, int x, int y, int z, long voxelInfo) {
+    jself.getVoxel(x, y, z, new btVoxelInfo(voxelInfo, false));
   }
   public static void SwigDirector_ICollide_Process__SWIG_0(ICollide jself, long arg0, long arg1) {
     jself.Process(btDbvtNode.obtainForArgument(arg0, false), btDbvtNode.obtainForArgument(arg1, false));

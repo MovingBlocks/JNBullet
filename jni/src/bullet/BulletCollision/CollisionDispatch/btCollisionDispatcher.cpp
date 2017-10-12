@@ -26,6 +26,7 @@ subject to the following restrictions:
 #include "LinearMath/btPoolAllocator.h"
 #include "BulletCollision/CollisionDispatch/btCollisionConfiguration.h"
 #include "BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
+#include "BulletCollision/CollisionShapes/btVoxelShape.h"
 
 int gNumManifold = 0;
 
@@ -259,8 +260,8 @@ void btCollisionDispatcher::defaultNearCallback(btBroadphasePair& collisionPair,
 
 		if (dispatcher.needsCollision(colObj0,colObj1))
 		{
-			btCollisionObjectWrapper obj0Wrap(0,colObj0->getCollisionShape(),colObj0,colObj0->getWorldTransform(),-1,-1);
-			btCollisionObjectWrapper obj1Wrap(0,colObj1->getCollisionShape(),colObj1,colObj1->getWorldTransform(),-1,-1);
+			btCollisionObjectWrapper obj0Wrap(0,colObj0->getCollisionShape(),colObj0,colObj0->getWorldTransform(),-1,-1,btVoxelInfo());
+			btCollisionObjectWrapper obj1Wrap(0,colObj1->getCollisionShape(),colObj1,colObj1->getWorldTransform(),-1,-1,btVoxelInfo());
 
 
 			//dispatcher will keep algorithms persistent in the collision pair

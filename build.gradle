@@ -121,6 +121,4 @@ dependencies {
     compile group: 'org.terasology', name: 'TeraMath', version: '1.4.0'
     compile "com.badlogicgames.gdx:gdx-jnigen:1.9.7-SNAPSHOT"
     compile "com.badlogicgames.gdx:gdx:1.9.7-SNAPSHOT"
-}
-
-
+} 

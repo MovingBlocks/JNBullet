@@ -37,6 +37,7 @@ SET(BulletCollision_SRCS
 	CollisionDispatch/btSphereSphereCollisionAlgorithm.cpp
 	CollisionDispatch/btSphereTriangleCollisionAlgorithm.cpp
 	CollisionDispatch/btUnionFind.cpp
+	CollisionDispatch/btVoxelCollisionAlgorithm.cpp
 	CollisionDispatch/SphereTriangleDetector.cpp
 	CollisionShapes/btBoxShape.cpp
 	CollisionShapes/btBox2dShape.cpp
@@ -74,6 +75,7 @@ SET(BulletCollision_SRCS
 	CollisionShapes/btTriangleMesh.cpp
 	CollisionShapes/btTriangleMeshShape.cpp
 	CollisionShapes/btUniformScalingShape.cpp
+	CollisionShapes/btVoxelShape.cpp
 	Gimpact/btContactProcessing.cpp
 	Gimpact/btGenericPoolAllocator.cpp
 	Gimpact/btGImpactBvh.cpp
@@ -144,6 +146,7 @@ SET(CollisionDispatch_HDRS
 	CollisionDispatch/btSphereSphereCollisionAlgorithm.h
 	CollisionDispatch/btSphereTriangleCollisionAlgorithm.h
 	CollisionDispatch/btUnionFind.h
+	CollisionDispatch/btVoxelCollisionAlgorithm.h
 	CollisionDispatch/SphereTriangleDetector.h
 )
 SET(CollisionShapes_HDRS
@@ -187,6 +190,7 @@ SET(CollisionShapes_HDRS
 	CollisionShapes/btTriangleMeshShape.h
 	CollisionShapes/btTriangleShape.h
 	CollisionShapes/btUniformScalingShape.h
+	CollisionShapes/btVoxelShape.h
 )
 SET(Gimpact_HDRS
 	Gimpact/btBoxCollision.h

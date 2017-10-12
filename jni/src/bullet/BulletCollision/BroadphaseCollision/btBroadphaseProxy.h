@@ -69,6 +69,7 @@ CONCAVE_SHAPES_START_HERE,
 CONCAVE_SHAPES_END_HERE,
 
 	COMPOUND_SHAPE_PROXYTYPE,
+	VOXEL_SHAPE_PROXYTYPE,
 
 	SOFTBODY_SHAPE_PROXYTYPE,
 	HFFLUID_SHAPE_PROXYTYPE,
@@ -156,6 +157,11 @@ BT_DECLARE_ALIGNED_ALLOCATOR();
 		return (proxyType == COMPOUND_SHAPE_PROXYTYPE);
 	}
 
+	static SIMD_FORCE_INLINE bool	isVoxel(int proxyType)
+	{
+		return (proxyType == VOXEL_SHAPE_PROXYTYPE);
+	}
+
 	static SIMD_FORCE_INLINE bool	isSoftBody(int proxyType)
 	{
 		return (proxyType == SOFTBODY_SHAPE_PROXYTYPE);
@@ -163,7 +169,7 @@ BT_DECLARE_ALIGNED_ALLOCATOR();
 
 	static SIMD_FORCE_INLINE bool isInfinite(int proxyType)
 	{
-		return (proxyType == STATIC_PLANE_PROXYTYPE);
+		return (proxyType == STATIC_PLANE_PROXYTYPE) || (proxyType == VOXEL_SHAPE_PROXYTYPE);
 	}
 
 	static SIMD_FORCE_INLINE bool isConvex2d(int proxyType)

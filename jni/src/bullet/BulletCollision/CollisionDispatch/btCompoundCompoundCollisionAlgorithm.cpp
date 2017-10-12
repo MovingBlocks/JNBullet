@@ -169,8 +169,8 @@ struct	btCompoundCompoundLeafCallback : btDbvt::ICollide
 
 		if (TestAabbAgainstAabb2(aabbMin0,aabbMax0,aabbMin1,aabbMax1))
 		{
-			btCollisionObjectWrapper compoundWrap0(this->m_compound0ColObjWrap,childShape0, m_compound0ColObjWrap->getCollisionObject(),newChildWorldTrans0,-1,childIndex0);
-			btCollisionObjectWrapper compoundWrap1(this->m_compound1ColObjWrap,childShape1,m_compound1ColObjWrap->getCollisionObject(),newChildWorldTrans1,-1,childIndex1);
+			btCollisionObjectWrapper compoundWrap0(this->m_compound0ColObjWrap,childShape0, m_compound0ColObjWrap->getCollisionObject(),newChildWorldTrans0,-1,childIndex0,m_compound0ColObjWrap->getVoxelInfo());
+			btCollisionObjectWrapper compoundWrap1(this->m_compound1ColObjWrap,childShape1,m_compound1ColObjWrap->getCollisionObject(),newChildWorldTrans1,-1,childIndex1,m_compound1ColObjWrap->getVoxelInfo());
 			
 
 			btSimplePair* pair = m_childCollisionAlgorithmCache->findPair(childIndex0,childIndex1);

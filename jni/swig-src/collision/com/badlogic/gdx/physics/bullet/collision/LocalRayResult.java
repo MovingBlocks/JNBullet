@@ -58,8 +58,8 @@ public class LocalRayResult extends BulletBase {
 		super.delete();
 	}
 
-  public LocalRayResult(btCollisionObject collisionObject, LocalShapeInfo localShapeInfo, Vector3f hitNormalLocal, float hitFraction) {
-    this(CollisionJNI.new_LocalRayResult(btCollisionObject.getCPtr(collisionObject), collisionObject, LocalShapeInfo.getCPtr(localShapeInfo), localShapeInfo, hitNormalLocal, hitFraction), true);
+  public LocalRayResult(btCollisionObject collisionObject, LocalShapeInfo localShapeInfo, Vector3f hitNormalLocal, float hitFraction, btVoxelInfo voxelInfo) {
+    this(CollisionJNI.new_LocalRayResult(btCollisionObject.getCPtr(collisionObject), collisionObject, LocalShapeInfo.getCPtr(localShapeInfo), localShapeInfo, hitNormalLocal, hitFraction, btVoxelInfo.getCPtr(voxelInfo), voxelInfo), true);
   }
 
   public void setCollisionObject(btCollisionObject value) {
@@ -94,6 +94,15 @@ public class LocalRayResult extends BulletBase {
 
   public float getHitFraction() {
     return CollisionJNI.LocalRayResult_hitFraction_get(swigCPtr, this);
+  }
+
+  public void setVoxelInfo(btVoxelInfo value) {
+    CollisionJNI.LocalRayResult_voxelInfo_set(swigCPtr, this, btVoxelInfo.getCPtr(value), value);
+  }
+
+  public btVoxelInfo getVoxelInfo() {
+    long cPtr = CollisionJNI.LocalRayResult_voxelInfo_get(swigCPtr, this);
+    return (cPtr == 0) ? null : new btVoxelInfo(cPtr, false);
   }
 
 }

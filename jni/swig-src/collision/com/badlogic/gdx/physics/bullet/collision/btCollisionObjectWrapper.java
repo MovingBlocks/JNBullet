@@ -104,6 +104,10 @@ public class btCollisionObjectWrapper extends BulletBase {
 	return CollisionJNI.btCollisionObjectWrapper_worldTransform_get(swigCPtr, this);
 }
 
+  public btVoxelInfo getVoxelInfo() {
+    return new btVoxelInfo(CollisionJNI.btCollisionObjectWrapper_voxelInfo_get(swigCPtr, this), false);
+  }
+
   public void setPartId(int value) {
     CollisionJNI.btCollisionObjectWrapper_partId_set(swigCPtr, this, value);
   }

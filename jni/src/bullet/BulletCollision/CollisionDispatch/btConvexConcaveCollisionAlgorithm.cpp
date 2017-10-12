@@ -117,7 +117,7 @@ partId, int triangleIndex)
 		tm.setMargin(m_collisionMarginTriangle);
 		
 		
-		btCollisionObjectWrapper triObWrap(m_triBodyWrap,&tm,m_triBodyWrap->getCollisionObject(),m_triBodyWrap->getWorldTransform(),partId,triangleIndex);//correct transform?
+		btCollisionObjectWrapper triObWrap(m_triBodyWrap,&tm,m_triBodyWrap->getCollisionObject(),m_triBodyWrap->getWorldTransform(),partId,triangleIndex,m_triBodyWrap->getVoxelInfo());//correct transform?
 		btCollisionAlgorithm* colAlgo = ci.m_dispatcher1->findAlgorithm(m_convexBodyWrap,&triObWrap,m_manifoldPtr);
 
 		const btCollisionObjectWrapper* tmpWrap = 0;

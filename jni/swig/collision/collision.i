@@ -12,6 +12,8 @@
 %feature("director") btTriangleCallback;
 %feature("director") btTriangleConvexcastCallback;
 %feature("director") btTriangleRaycastCallback;
+%feature("director") btVoxelContentProvider;
+%feature("director") btVoxelInfo;
 // FIXME reuse btDispatcher and fix ptr/array typemap/pool
 
 %include "arrays_java.i"
@@ -169,6 +171,11 @@ void btMultiSapBroadphase::quicksort(btBroadphasePairArray& a, int lo, int hi)
 #include <BulletCollision/CollisionShapes/btBoxShape.h>
 %}
 %include "BulletCollision/CollisionShapes/btBoxShape.h"
+
+%{
+#include <BulletCollision/CollisionShapes/btVoxelShape.h>
+%}
+%include "BulletCollision/CollisionShapes/btVoxelShape.h"
 
 %{
 #include <BulletCollision/CollisionShapes/btCapsuleShape.h>

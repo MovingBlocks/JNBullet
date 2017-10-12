@@ -18,6 +18,7 @@
 #define CollisionObjectWrapper_H
 
 #include "../../../bullet/BulletCollision/CollisionDispatch/btCollisionObject.h"
+#include "../../../bullet/BulletCollision/CollisionShapes/btVoxelShape.h"
 #include "../../../bullet/BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
 
 /** @author Xoppa */
@@ -25,17 +26,17 @@ class CollisionObjectWrapper {
 	btCollisionObjectWrapper wrapper;
 
 public:
-	CollisionObjectWrapper(btCollisionObjectWrapper* parent, btCollisionShape* shape, btCollisionObject* collisionObject, btTransform& worldTransform, int partId=-1, int index=-1) :
-		wrapper(parent, shape, collisionObject, worldTransform, partId, index) {}
+	CollisionObjectWrapper(btCollisionObjectWrapper* parent, btCollisionShape* shape, btCollisionObject* collisionObject, btTransform& worldTransform,btVoxelInfo& voxelInfo, int partId=-1, int index=-1) :
+		wrapper(parent, shape, collisionObject, worldTransform, partId, index, voxelInfo) {}
 
-	CollisionObjectWrapper(btCollisionShape* shape, btCollisionObject* collisionObject, btTransform& worldTransform, int partId=-1, int index=-1) :
-		wrapper(0, shape, collisionObject, worldTransform, partId, index) {}
+	CollisionObjectWrapper(btCollisionShape* shape, btCollisionObject* collisionObject, btTransform& worldTransform,btVoxelInfo& voxelInfo, int partId=-1, int index=-1) :
+		wrapper(0, shape, collisionObject, worldTransform, partId, index, voxelInfo) {}
 
-	CollisionObjectWrapper(btCollisionObjectWrapper* parent, btCollisionObject* collisionObject, int partId=-1, int index=-1) :
-		wrapper(parent, collisionObject->getCollisionShape(),collisionObject, collisionObject->getWorldTransform(), partId, index) {}
+	CollisionObjectWrapper(btCollisionObjectWrapper* parent, btCollisionObject* collisionObject,btVoxelInfo& voxelInfo, int partId=-1, int index=-1) :
+		wrapper(parent, collisionObject->getCollisionShape(),collisionObject, collisionObject->getWorldTransform(), partId, index, voxelInfo) {}
 
-	CollisionObjectWrapper(btCollisionObject* collisionObject, int partId=-1, int index=-1) :
-		wrapper(0, collisionObject->getCollisionShape(),collisionObject, collisionObject->getWorldTransform(), partId, index) {}
+	CollisionObjectWrapper(btCollisionObject* collisionObject,btVoxelInfo& voxelInfo, int partId=-1, int index=-1) :
+		wrapper(0, collisionObject->getCollisionShape(),collisionObject, collisionObject->getWorldTransform(), partId, index, voxelInfo) {}
 
 	btCollisionObjectWrapper *getWrapper() { return &wrapper; }
 };

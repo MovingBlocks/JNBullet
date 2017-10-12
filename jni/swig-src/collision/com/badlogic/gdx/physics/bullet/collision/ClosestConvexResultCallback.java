@@ -96,6 +96,15 @@ public class ClosestConvexResultCallback extends ConvexResultCallback {
     return (cPtr == 0) ? null : new btVector3(cPtr, false);
   }
 
+  public void setVoxelInfo(btVoxelInfo value) {
+    CollisionJNI.ClosestConvexResultCallback_voxelInfo_set(swigCPtr, this, btVoxelInfo.getCPtr(value), value);
+  }
+
+  public btVoxelInfo getVoxelInfo() {
+    long cPtr = CollisionJNI.ClosestConvexResultCallback_voxelInfo_get(swigCPtr, this);
+    return (cPtr == 0) ? null : new btVoxelInfo(cPtr, false);
+  }
+
   public void setHitCollisionObject(btCollisionObject value) {
     CollisionJNI.ClosestConvexResultCallback_hitCollisionObject_set(swigCPtr, this, btCollisionObject.getCPtr(value), value);
   }

@@ -63,6 +63,7 @@
 
 %ignore btCollisionObjectWrapper::getWorldTransform;
 %ignore btCollisionObjectWrapper::getCollisionObject;
+%ignore btCollisionObjectWrapper::getVoxelInfo;
 
 %include "BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
 %include "gdx/collision/CollisionObjectWrapper.h"

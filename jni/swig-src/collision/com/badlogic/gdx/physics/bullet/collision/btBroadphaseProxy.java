@@ -177,6 +177,10 @@ public class btBroadphaseProxy extends BulletBase {
     return CollisionJNI.btBroadphaseProxy_isCompound(proxyType);
   }
 
+  public static boolean isVoxel(int proxyType) {
+    return CollisionJNI.btBroadphaseProxy_isVoxel(proxyType);
+  }
+
   public static boolean isSoftBody(int proxyType) {
     return CollisionJNI.btBroadphaseProxy_isSoftBody(proxyType);
   }
