@@ -4,6 +4,8 @@
 *.bak
 /.*
 
+/target/*
+
 # Except this stuff
 !.gitattributes
 !.gitignore

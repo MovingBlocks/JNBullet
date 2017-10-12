@@ -76,14 +76,14 @@ void btQuaternion_to_Quaternion(JNIEnv * const &jenv, jobject &target, const btQ
 //////// btMatrix3x3    ////////
 ////////////////////////////////
 static jfieldID matrix3_m00 = NULL,
-       jfieldID matrix3_m01 = NULL,
-       jfieldID matrix3_m02 = NULL,
-       jfieldID matrix3_m10 = NULL,
-       jfieldID matrix3_m11 = NULL,
-       jfieldID matrix3_m12 = NULL,
-       jfieldID matrix3_m20 = NULL,
-       jfieldID matrix3_m21 = NULL,
-       jfieldID matrix3_m22 = NULL;
+        matrix3_m01 = NULL,
+        matrix3_m02 = NULL,
+        matrix3_m10 = NULL,
+        matrix3_m11 = NULL,
+        matrix3_m12 = NULL,
+        matrix3_m20 = NULL,
+        matrix3_m21 = NULL,
+        matrix3_m22 = NULL;
 
 
 void matrix3_getFields(JNIEnv * const &jenv, jobject &m3) {
@@ -139,17 +139,24 @@ void btMatrix3_to_Matrix3(JNIEnv * const &jenv, jobject &target, const btMatrix3
 //////// btTransform    ////////
 ////////////////////////////////
 static jfieldID matrix4_m00 = NULL,
-       jfieldID matrix4_m01 = NULL,
-       jfieldID matrix4_m02 = NULL,
-       jfieldID matrix4_m03 = NULL,
-       jfieldID matrix4_m10 = NULL,
-       jfieldID matrix4_m11 = NULL,
-       jfieldID matrix4_m12 = NULL,
-       jfieldID matrix4_m13 = NULL,
-       jfieldID matrix4_m20 = NULL,
-       jfieldID matrix4_m21 = NULL,
-       jfieldID matrix4_m22 = NULL,
-       jfieldID matrix4_m23 = NULL;
+                matrix4_m01 = NULL,
+                matrix4_m02 = NULL,
+                matrix4_m03 = NULL,
+
+                matrix4_m10 = NULL,
+                matrix4_m11 = NULL,
+                matrix4_m12 = NULL,
+                matrix4_m13 = NULL,
+
+                matrix4_m20 = NULL,
+                matrix4_m21 = NULL,
+                matrix4_m22 = NULL,
+                matrix4_m23 = NULL,
+
+                matrix4_m30 = NULL,
+                matrix4_m31 = NULL,
+                matrix4_m32 = NULL,
+                matrix4_m33 = NULL;
 
 void matrix4_getFields(JNIEnv * const &jenv, jobject &m4) {
 	jclass cls = jenv->GetObjectClass(m4);
@@ -195,15 +202,27 @@ void Matrix4_to_btTransform(JNIEnv * const &jenv, btTransform &target, jobject &
 void btTransform_to_Matrix4(JNIEnv * const &jenv, jobject &target, const btTransform &source)
 {
 	matrix4_ensurefields(jenv, target);
-	
-	jfloatArray valArray = (jfloatArray) jenv->GetObjectField(target, matrix4_val);
-	jfloat * elements = jenv->GetFloatArrayElements(valArray, NULL);
 
     ATTRIBUTE_ALIGNED16(btScalar dst[16]);
 	source.getOpenGLMatrix(dst);
-    
-    memcpy(elements, dst, sizeof(btScalar)*16);
-	
-	jenv->ReleaseFloatArrayElements(valArray, elements, 0);
-	jenv->DeleteLocalRef(valArray);
+
+	jenv->SetFloatField(target, matrix4_m00, dst[0]);
+	jenv->SetFloatField(target, matrix4_m01, dst[1]);
+	jenv->SetFloatField(target, matrix4_m02, dst[2]);
+	jenv->SetFloatField(target, matrix4_m03, dst[3]);
+
+	jenv->SetFloatField(target, matrix4_m10, dst[4]);
+	jenv->SetFloatField(target, matrix4_m11, dst[5]);
+	jenv->SetFloatField(target, matrix4_m12, dst[6]);
+	jenv->SetFloatField(target, matrix4_m13, dst[7]);
+
+	jenv->SetFloatField(target, matrix4_m20, dst[8]);
+	jenv->SetFloatField(target, matrix4_m21, dst[9]);
+	jenv->SetFloatField(target, matrix4_m22, dst[10]);
+	jenv->SetFloatField(target, matrix4_m23, dst[11]);
+
+	jenv->SetFloatField(target, matrix4_m30, dst[12]);
+	jenv->SetFloatField(target, matrix4_m31, dst[13]);
+	jenv->SetFloatField(target, matrix4_m32, dst[14]);
+	jenv->SetFloatField(target, matrix4_m33, dst[15]);
 }
