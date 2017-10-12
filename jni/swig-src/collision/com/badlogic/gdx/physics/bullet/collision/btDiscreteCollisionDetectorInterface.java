@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btDiscreteCollisionDetectorInterface extends BulletBase {
 	private long swigCPtr;
@@ -109,7 +109,7 @@ public class btDiscreteCollisionDetectorInterface extends BulletBase {
       CollisionJNI.btDiscreteCollisionDetectorInterface_Result_setShapeIdentifiersB(swigCPtr, this, partId1, index1);
     }
   
-    public void addContactPoint(Vector3 normalOnBInWorld, Vector3 pointInWorld, float depth) {
+    public void addContactPoint(Vector3f normalOnBInWorld, Vector3f pointInWorld, float depth) {
       CollisionJNI.btDiscreteCollisionDetectorInterface_Result_addContactPoint(swigCPtr, this, normalOnBInWorld, pointInWorld, depth);
     }
   

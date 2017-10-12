@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btContactArray extends BulletBase {
 	private long swigCPtr;
@@ -62,7 +62,7 @@ public class btContactArray extends BulletBase {
     this(CollisionJNI.new_btContactArray(), true);
   }
 
-  public void push_contact(Vector3 point, Vector3 normal, float depth, int feature1, int feature2) {
+  public void push_contact(Vector3f point, Vector3f normal, float depth, int feature1, int feature2) {
     CollisionJNI.btContactArray_push_contact(swigCPtr, this, point, normal, depth, feature1, feature2);
   }
 

@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btQuantizedBvhTree extends BulletBase {
 	private long swigCPtr;
@@ -66,7 +66,7 @@ public class btQuantizedBvhTree extends BulletBase {
     CollisionJNI.btQuantizedBvhTree_build_tree(swigCPtr, this, GIM_BVH_DATA_ARRAY.getCPtr(primitive_boxes), primitive_boxes);
   }
 
-  public void quantizePoint(java.nio.IntBuffer quantizedpoint, Vector3 point) {
+  public void quantizePoint(java.nio.IntBuffer quantizedpoint, Vector3f point) {
     assert quantizedpoint.isDirect() : "Buffer must be allocated direct.";
     {
       CollisionJNI.btQuantizedBvhTree_quantizePoint(swigCPtr, this, quantizedpoint, point);

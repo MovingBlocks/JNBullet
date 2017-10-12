@@ -9,53 +9,53 @@
 package com.badlogic.gdx.physics.bullet.linearmath;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class LinearMath implements LinearMathConstants {
 
-	/** Temporary Vector3 instance, used by native methods that return a Vector3 instance */
-	public final static Vector3 staticVector3 = new Vector3();
-	/** Pool of Vector3, used by native (callback) method for the arguments */
-	public final static com.badlogic.gdx.utils.Pool<Vector3> poolVector3 = new com.badlogic.gdx.utils.Pool<Vector3>() {
+	/** Temporary Vector3f instance, used by native methods that return a Vector3f instance */
+	public final static Vector3f staticVector3f = new Vector3f();
+	/** Pool of Vector3f, used by native (callback) method for the arguments */
+	public final static com.badlogic.gdx.utils.Pool<Vector3f> poolVector3f = new com.badlogic.gdx.utils.Pool<Vector3f>() {
 		@Override
-		protected Vector3 newObject() {
-			return new Vector3();
+		protected Vector3f newObject() {
+			return new Vector3f();
 		}
 	};
 
 
-	/** Temporary Quaternion instance, used by native methods that return a Quaternion instance */
-	public final static Quaternion staticQuaternion = new Quaternion();
-	/** Pool of Quaternion, used by native (callback) method for the arguments */
-	public final static com.badlogic.gdx.utils.Pool<Quaternion> poolQuaternion = new com.badlogic.gdx.utils.Pool<Quaternion>() {
+	/** Temporary Quat4f instance, used by native methods that return a Quat4f instance */
+	public final static Quat4f staticQuat4f = new Quat4f();
+	/** Pool of Quat4f, used by native (callback) method for the arguments */
+	public final static com.badlogic.gdx.utils.Pool<Quat4f> poolQuat4f = new com.badlogic.gdx.utils.Pool<Quat4f>() {
 		@Override
-		protected Quaternion newObject() {
-			return new Quaternion();
+		protected Quat4f newObject() {
+			return new Quat4f();
 		}
 	};
 
 
-	/** Temporary Matrix3 instance, used by native methods that return a Matrix3 instance */
-	public final static Matrix3 staticMatrix3 = new Matrix3();
-	/** Pool of Matrix3, used by native (callback) method for the arguments */
-	public final static com.badlogic.gdx.utils.Pool<Matrix3> poolMatrix3 = new com.badlogic.gdx.utils.Pool<Matrix3>() {
+	/** Temporary Matrix3f instance, used by native methods that return a Matrix3f instance */
+	public final static Matrix3f staticMatrix3f = new Matrix3f();
+	/** Pool of Matrix3f, used by native (callback) method for the arguments */
+	public final static com.badlogic.gdx.utils.Pool<Matrix3f> poolMatrix3f = new com.badlogic.gdx.utils.Pool<Matrix3f>() {
 		@Override
-		protected Matrix3 newObject() {
-			return new Matrix3();
+		protected Matrix3f newObject() {
+			return new Matrix3f();
 		}
 	};
 
 
-	/** Temporary Matrix4 instance, used by native methods that return a Matrix4 instance */
-	public final static Matrix4 staticMatrix4 = new Matrix4();
-	/** Pool of Matrix4, used by native (callback) method for the arguments */
-	public final static com.badlogic.gdx.utils.Pool<Matrix4> poolMatrix4 = new com.badlogic.gdx.utils.Pool<Matrix4>() {
+	/** Temporary Matrix4f instance, used by native methods that return a Matrix4f instance */
+	public final static Matrix4f staticMatrix4f = new Matrix4f();
+	/** Pool of Matrix4f, used by native (callback) method for the arguments */
+	public final static com.badlogic.gdx.utils.Pool<Matrix4f> poolMatrix4f = new com.badlogic.gdx.utils.Pool<Matrix4f>() {
 		@Override
-		protected Matrix4 newObject() {
-			return new Matrix4();
+		protected Matrix4f newObject() {
+			return new Matrix4f();
 		}
 	};
 
@@ -209,31 +209,31 @@ public class LinearMath implements LinearMathConstants {
     return LinearMathJNI.btNormalizeAngle(angleInRadians);
   }
 
-  public static float btDot(Vector3 v1, Vector3 v2) {
+  public static float btDot(Vector3f v1, Vector3f v2) {
     return LinearMathJNI.btDot(v1, v2);
   }
 
-  public static float btDistance2(Vector3 v1, Vector3 v2) {
+  public static float btDistance2(Vector3f v1, Vector3f v2) {
     return LinearMathJNI.btDistance2(v1, v2);
   }
 
-  public static float btDistance(Vector3 v1, Vector3 v2) {
+  public static float btDistance(Vector3f v1, Vector3f v2) {
     return LinearMathJNI.btDistance(v1, v2);
   }
 
-  public static float btAngle(Vector3 v1, Vector3 v2) {
+  public static float btAngle(Vector3f v1, Vector3f v2) {
     return LinearMathJNI.btAngle__SWIG_0(v1, v2);
   }
 
-  public static Vector3 btCross(Vector3 v1, Vector3 v2) {
+  public static Vector3f btCross(Vector3f v1, Vector3f v2) {
 	return LinearMathJNI.btCross(v1, v2);
 }
 
-  public static float btTriple(Vector3 v1, Vector3 v2, Vector3 v3) {
+  public static float btTriple(Vector3f v1, Vector3f v2, Vector3f v3) {
     return LinearMathJNI.btTriple(v1, v2, v3);
   }
 
-  public static Vector3 lerp(Vector3 v1, Vector3 v2, float t) {
+  public static Vector3f lerp(Vector3f v1, Vector3f v2, float t) {
 	return LinearMathJNI.lerp(v1, v2, t);
 }
 
@@ -241,79 +241,79 @@ public class LinearMath implements LinearMathConstants {
     LinearMathJNI.btSwapScalarEndian(sourceVal, SWIGTYPE_p_float.getCPtr(destVal));
   }
 
-  public static void btSwapVector3Endian(Vector3 sourceVec, Vector3 destVec) {
+  public static void btSwapVector3Endian(Vector3f sourceVec, Vector3f destVec) {
     LinearMathJNI.btSwapVector3Endian(sourceVec, destVec);
   }
 
-  public static void btUnSwapVector3Endian(Vector3 vector) {
+  public static void btUnSwapVector3Endian(Vector3f vector) {
     LinearMathJNI.btUnSwapVector3Endian(vector);
   }
 
-  public static float dot(Quaternion q1, Quaternion q2) {
+  public static float dot(Quat4f q1, Quat4f q2) {
     return LinearMathJNI.dot(q1, q2);
   }
 
-  public static float length(Quaternion q) {
+  public static float length(Quat4f q) {
     return LinearMathJNI.length(q);
   }
 
-  public static float btAngle(Quaternion q1, Quaternion q2) {
+  public static float btAngle(Quat4f q1, Quat4f q2) {
     return LinearMathJNI.btAngle__SWIG_1(q1, q2);
   }
 
-  public static Quaternion inverse(Quaternion q) {
+  public static Quat4f inverse(Quat4f q) {
 	return LinearMathJNI.inverse(q);
 }
 
-  public static Quaternion slerp(Quaternion q1, Quaternion q2, float t) {
+  public static Quat4f slerp(Quat4f q1, Quat4f q2, float t) {
 	return LinearMathJNI.slerp(q1, q2, t);
 }
 
-  public static Vector3 quatRotate(Quaternion rotation, Vector3 v) {
+  public static Vector3f quatRotate(Quat4f rotation, Vector3f v) {
 	return LinearMathJNI.quatRotate(rotation, v);
 }
 
-  public static Quaternion shortestArcQuat(Vector3 v0, Vector3 v1) {
+  public static Quat4f shortestArcQuat(Vector3f v0, Vector3f v1) {
 	return LinearMathJNI.shortestArcQuat(v0, v1);
 }
 
-  public static Quaternion shortestArcQuatNormalize2(Vector3 v0, Vector3 v1) {
+  public static Quat4f shortestArcQuatNormalize2(Vector3f v0, Vector3f v1) {
 	return LinearMathJNI.shortestArcQuatNormalize2(v0, v1);
 }
 
-  public static void AabbExpand(Vector3 aabbMin, Vector3 aabbMax, Vector3 expansionMin, Vector3 expansionMax) {
+  public static void AabbExpand(Vector3f aabbMin, Vector3f aabbMax, Vector3f expansionMin, Vector3f expansionMax) {
     LinearMathJNI.AabbExpand(aabbMin, aabbMax, expansionMin, expansionMax);
   }
 
-  public static boolean TestPointAgainstAabb2(Vector3 aabbMin1, Vector3 aabbMax1, Vector3 point) {
+  public static boolean TestPointAgainstAabb2(Vector3f aabbMin1, Vector3f aabbMax1, Vector3f point) {
     return LinearMathJNI.TestPointAgainstAabb2(aabbMin1, aabbMax1, point);
   }
 
-  public static boolean TestAabbAgainstAabb2(Vector3 aabbMin1, Vector3 aabbMax1, Vector3 aabbMin2, Vector3 aabbMax2) {
+  public static boolean TestAabbAgainstAabb2(Vector3f aabbMin1, Vector3f aabbMax1, Vector3f aabbMin2, Vector3f aabbMax2) {
     return LinearMathJNI.TestAabbAgainstAabb2(aabbMin1, aabbMax1, aabbMin2, aabbMax2);
   }
 
-  public static boolean TestTriangleAgainstAabb2(btVector3 vertices, Vector3 aabbMin, Vector3 aabbMax) {
+  public static boolean TestTriangleAgainstAabb2(btVector3 vertices, Vector3f aabbMin, Vector3f aabbMax) {
     return LinearMathJNI.TestTriangleAgainstAabb2(btVector3.getCPtr(vertices), vertices, aabbMin, aabbMax);
   }
 
-  public static int btOutcode(Vector3 p, Vector3 halfExtent) {
+  public static int btOutcode(Vector3f p, Vector3f halfExtent) {
     return LinearMathJNI.btOutcode(p, halfExtent);
   }
 
-  public static boolean btRayAabb2(Vector3 rayFrom, Vector3 rayInvDirection, long[] raySign, btVector3 bounds, SWIGTYPE_p_float tmin, float lambda_min, float lambda_max) {
+  public static boolean btRayAabb2(Vector3f rayFrom, Vector3f rayInvDirection, long[] raySign, btVector3 bounds, SWIGTYPE_p_float tmin, float lambda_min, float lambda_max) {
     return LinearMathJNI.btRayAabb2(rayFrom, rayInvDirection, raySign, btVector3.getCPtr(bounds), bounds, SWIGTYPE_p_float.getCPtr(tmin), lambda_min, lambda_max);
   }
 
-  public static boolean btRayAabb(Vector3 rayFrom, Vector3 rayTo, Vector3 aabbMin, Vector3 aabbMax, SWIGTYPE_p_float param, Vector3 normal) {
+  public static boolean btRayAabb(Vector3f rayFrom, Vector3f rayTo, Vector3f aabbMin, Vector3f aabbMax, SWIGTYPE_p_float param, Vector3f normal) {
     return LinearMathJNI.btRayAabb(rayFrom, rayTo, aabbMin, aabbMax, SWIGTYPE_p_float.getCPtr(param), normal);
   }
 
-  public static void btTransformAabb(Vector3 halfExtents, float margin, Matrix4 t, Vector3 aabbMinOut, Vector3 aabbMaxOut) {
+  public static void btTransformAabb(Vector3f halfExtents, float margin, Matrix4f t, Vector3f aabbMinOut, Vector3f aabbMaxOut) {
     LinearMathJNI.btTransformAabb__SWIG_0(halfExtents, margin, t, aabbMinOut, aabbMaxOut);
   }
 
-  public static void btTransformAabb(Vector3 localAabbMin, Vector3 localAabbMax, float margin, Matrix4 trans, Vector3 aabbMinOut, Vector3 aabbMaxOut) {
+  public static void btTransformAabb(Vector3f localAabbMin, Vector3f localAabbMax, float margin, Matrix4f trans, Vector3f aabbMinOut, Vector3f aabbMaxOut) {
     LinearMathJNI.btTransformAabb__SWIG_1(localAabbMin, localAabbMax, margin, trans, aabbMinOut, aabbMaxOut);
   }
 
@@ -335,11 +335,11 @@ public class LinearMath implements LinearMathConstants {
     return LinearMathJNI.GEN_rand();
   }
 
-  public static Vector3 btAabbSupport(Vector3 halfExtents, Vector3 supportDir) {
+  public static Vector3f btAabbSupport(Vector3f halfExtents, Vector3f supportDir) {
 	return LinearMathJNI.btAabbSupport(halfExtents, supportDir);
 }
 
-  public static void GrahamScanConvexHull2D(SWIGTYPE_p_btAlignedObjectArrayT_GrahamVector3_t originalPoints, SWIGTYPE_p_btAlignedObjectArrayT_GrahamVector3_t hull, Vector3 normalAxis) {
+  public static void GrahamScanConvexHull2D(SWIGTYPE_p_btAlignedObjectArrayT_GrahamVector3_t originalPoints, SWIGTYPE_p_btAlignedObjectArrayT_GrahamVector3_t hull, Vector3f normalAxis) {
     LinearMathJNI.GrahamScanConvexHull2D(SWIGTYPE_p_btAlignedObjectArrayT_GrahamVector3_t.getCPtr(originalPoints), SWIGTYPE_p_btAlignedObjectArrayT_GrahamVector3_t.getCPtr(hull), normalAxis);
   }
 

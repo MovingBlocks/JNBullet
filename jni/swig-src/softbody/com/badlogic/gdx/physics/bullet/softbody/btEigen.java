@@ -12,10 +12,10 @@ import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
 import com.badlogic.gdx.physics.bullet.dynamics.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btEigen extends BulletBase {
 	private long swigCPtr;
@@ -60,11 +60,11 @@ public class btEigen extends BulletBase {
 		super.delete();
 	}
 
-  public static int system(Matrix3 a, SWIGTYPE_p_btMatrix3x3 vectors, btVector3 values) {
+  public static int system(Matrix3f a, SWIGTYPE_p_btMatrix3x3 vectors, btVector3 values) {
     return SoftbodyJNI.btEigen_system__SWIG_0(a, SWIGTYPE_p_btMatrix3x3.getCPtr(vectors), btVector3.getCPtr(values), values);
   }
 
-  public static int system(Matrix3 a, SWIGTYPE_p_btMatrix3x3 vectors) {
+  public static int system(Matrix3f a, SWIGTYPE_p_btMatrix3x3 vectors) {
     return SoftbodyJNI.btEigen_system__SWIG_1(a, SWIGTYPE_p_btMatrix3x3.getCPtr(vectors));
   }
 

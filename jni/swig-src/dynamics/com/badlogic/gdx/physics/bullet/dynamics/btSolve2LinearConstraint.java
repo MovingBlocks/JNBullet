@@ -11,10 +11,10 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btSolve2LinearConstraint extends BulletBase {
 	private long swigCPtr;
@@ -63,11 +63,11 @@ public class btSolve2LinearConstraint extends BulletBase {
     this(DynamicsJNI.new_btSolve2LinearConstraint(tau, damping), true);
   }
 
-  public void resolveUnilateralPairConstraint(btRigidBody body0, btRigidBody body1, Matrix3 world2A, Matrix3 world2B, Vector3 invInertiaADiag, float invMassA, Vector3 linvelA, Vector3 angvelA, Vector3 rel_posA1, Vector3 invInertiaBDiag, float invMassB, Vector3 linvelB, Vector3 angvelB, Vector3 rel_posA2, float depthA, Vector3 normalA, Vector3 rel_posB1, Vector3 rel_posB2, float depthB, Vector3 normalB, SWIGTYPE_p_float imp0, SWIGTYPE_p_float imp1) {
+  public void resolveUnilateralPairConstraint(btRigidBody body0, btRigidBody body1, Matrix3f world2A, Matrix3f world2B, Vector3f invInertiaADiag, float invMassA, Vector3f linvelA, Vector3f angvelA, Vector3f rel_posA1, Vector3f invInertiaBDiag, float invMassB, Vector3f linvelB, Vector3f angvelB, Vector3f rel_posA2, float depthA, Vector3f normalA, Vector3f rel_posB1, Vector3f rel_posB2, float depthB, Vector3f normalB, SWIGTYPE_p_float imp0, SWIGTYPE_p_float imp1) {
     DynamicsJNI.btSolve2LinearConstraint_resolveUnilateralPairConstraint(swigCPtr, this, btRigidBody.getCPtr(body0), body0, btRigidBody.getCPtr(body1), body1, world2A, world2B, invInertiaADiag, invMassA, linvelA, angvelA, rel_posA1, invInertiaBDiag, invMassB, linvelB, angvelB, rel_posA2, depthA, normalA, rel_posB1, rel_posB2, depthB, normalB, SWIGTYPE_p_float.getCPtr(imp0), SWIGTYPE_p_float.getCPtr(imp1));
   }
 
-  public void resolveBilateralPairConstraint(btRigidBody body0, btRigidBody body1, Matrix3 world2A, Matrix3 world2B, Vector3 invInertiaADiag, float invMassA, Vector3 linvelA, Vector3 angvelA, Vector3 rel_posA1, Vector3 invInertiaBDiag, float invMassB, Vector3 linvelB, Vector3 angvelB, Vector3 rel_posA2, float depthA, Vector3 normalA, Vector3 rel_posB1, Vector3 rel_posB2, float depthB, Vector3 normalB, SWIGTYPE_p_float imp0, SWIGTYPE_p_float imp1) {
+  public void resolveBilateralPairConstraint(btRigidBody body0, btRigidBody body1, Matrix3f world2A, Matrix3f world2B, Vector3f invInertiaADiag, float invMassA, Vector3f linvelA, Vector3f angvelA, Vector3f rel_posA1, Vector3f invInertiaBDiag, float invMassB, Vector3f linvelB, Vector3f angvelB, Vector3f rel_posA2, float depthA, Vector3f normalA, Vector3f rel_posB1, Vector3f rel_posB2, float depthB, Vector3f normalB, SWIGTYPE_p_float imp0, SWIGTYPE_p_float imp1) {
     DynamicsJNI.btSolve2LinearConstraint_resolveBilateralPairConstraint(swigCPtr, this, btRigidBody.getCPtr(body0), body0, btRigidBody.getCPtr(body1), body1, world2A, world2B, invInertiaADiag, invMassA, linvelA, angvelA, rel_posA1, invInertiaBDiag, invMassB, linvelB, angvelB, rel_posA2, depthA, normalA, rel_posB1, rel_posB2, depthB, normalB, SWIGTYPE_p_float.getCPtr(imp0), SWIGTYPE_p_float.getCPtr(imp1));
   }
 

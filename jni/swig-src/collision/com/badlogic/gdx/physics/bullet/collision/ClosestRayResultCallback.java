@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class ClosestRayResultCallback extends RayResultCallback {
 	private long swigCPtr;
@@ -73,7 +73,7 @@ public class ClosestRayResultCallback extends RayResultCallback {
     CollisionJNI.ClosestRayResultCallback_change_ownership(this, swigCPtr, true);
   }
 
-  public ClosestRayResultCallback(Vector3 rayFromWorld, Vector3 rayToWorld) {
+  public ClosestRayResultCallback(Vector3f rayFromWorld, Vector3f rayToWorld) {
     this(CollisionJNI.new_ClosestRayResultCallback(rayFromWorld, rayToWorld), true);
     CollisionJNI.ClosestRayResultCallback_director_connect(this, swigCPtr, swigCMemOwn, true);
   }
@@ -82,35 +82,35 @@ public class ClosestRayResultCallback extends RayResultCallback {
     return (getClass() == ClosestRayResultCallback.class) ? CollisionJNI.ClosestRayResultCallback_addSingleResult(swigCPtr, this, LocalRayResult.getCPtr(rayResult), rayResult, normalInWorldSpace) : CollisionJNI.ClosestRayResultCallback_addSingleResultSwigExplicitClosestRayResultCallback(swigCPtr, this, LocalRayResult.getCPtr(rayResult), rayResult, normalInWorldSpace);
   }
 
-  public void getRayFromWorld(Vector3 out) {
+  public void getRayFromWorld(Vector3f out) {
     CollisionJNI.ClosestRayResultCallback_getRayFromWorld(swigCPtr, this, out);
   }
 
-  public void setRayFromWorld(Vector3 value) {
+  public void setRayFromWorld(Vector3f value) {
     CollisionJNI.ClosestRayResultCallback_setRayFromWorld(swigCPtr, this, value);
   }
 
-  public void getRayToWorld(Vector3 out) {
+  public void getRayToWorld(Vector3f out) {
     CollisionJNI.ClosestRayResultCallback_getRayToWorld(swigCPtr, this, out);
   }
 
-  public void setRayToWorld(Vector3 value) {
+  public void setRayToWorld(Vector3f value) {
     CollisionJNI.ClosestRayResultCallback_setRayToWorld(swigCPtr, this, value);
   }
 
-  public void getHitNormalWorld(Vector3 out) {
+  public void getHitNormalWorld(Vector3f out) {
     CollisionJNI.ClosestRayResultCallback_getHitNormalWorld(swigCPtr, this, out);
   }
 
-  public void setHitNormalWorld(Vector3 value) {
+  public void setHitNormalWorld(Vector3f value) {
     CollisionJNI.ClosestRayResultCallback_setHitNormalWorld(swigCPtr, this, value);
   }
 
-  public void getHitPointWorld(Vector3 out) {
+  public void getHitPointWorld(Vector3f out) {
     CollisionJNI.ClosestRayResultCallback_getHitPointWorld(swigCPtr, this, out);
   }
 
-  public void setHitPointWorld(Vector3 value) {
+  public void setHitPointWorld(Vector3f value) {
     CollisionJNI.ClosestRayResultCallback_setHitPointWorld(swigCPtr, this, value);
   }
 

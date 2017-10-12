@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btConvexTriangleCallback extends btTriangleCallback {
 	private long swigCPtr;
@@ -111,11 +111,11 @@ public class btConvexTriangleCallback extends btTriangleCallback {
     CollisionJNI.btConvexTriangleCallback_clearCache(swigCPtr, this);
   }
 
-  public Vector3 getAabbMin() {
+  public Vector3f getAabbMin() {
 	return CollisionJNI.btConvexTriangleCallback_getAabbMin(swigCPtr, this);
 }
 
-  public Vector3 getAabbMax() {
+  public Vector3f getAabbMax() {
 	return CollisionJNI.btConvexTriangleCallback_getAabbMax(swigCPtr, this);
 }
 

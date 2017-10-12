@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btAABB extends BulletBase {
 	private long swigCPtr;
@@ -80,11 +80,11 @@ public class btAABB extends BulletBase {
     this(CollisionJNI.new_btAABB__SWIG_0(), true);
   }
 
-  public btAABB(Vector3 V1, Vector3 V2, Vector3 V3) {
+  public btAABB(Vector3f V1, Vector3f V2, Vector3f V3) {
     this(CollisionJNI.new_btAABB__SWIG_1(V1, V2, V3), true);
   }
 
-  public btAABB(Vector3 V1, Vector3 V2, Vector3 V3, float margin) {
+  public btAABB(Vector3f V1, Vector3f V2, Vector3f V3, float margin) {
     this(CollisionJNI.new_btAABB__SWIG_2(V1, V2, V3, margin), true);
   }
 
@@ -108,7 +108,7 @@ public class btAABB extends BulletBase {
     CollisionJNI.btAABB_copy_with_margin(swigCPtr, this, btAABB.getCPtr(other), other, margin);
   }
 
-  public void appy_transform(Matrix4 trans) {
+  public void appy_transform(Matrix4f trans) {
     CollisionJNI.btAABB_appy_transform(swigCPtr, this, trans);
   }
 
@@ -120,7 +120,7 @@ public class btAABB extends BulletBase {
     CollisionJNI.btAABB_merge(swigCPtr, this, btAABB.getCPtr(box), box);
   }
 
-  public void get_center_extend(Vector3 center, Vector3 extend) {
+  public void get_center_extend(Vector3f center, Vector3f extend) {
     CollisionJNI.btAABB_get_center_extend(swigCPtr, this, center, extend);
   }
 
@@ -132,11 +132,11 @@ public class btAABB extends BulletBase {
     return CollisionJNI.btAABB_has_collision(swigCPtr, this, btAABB.getCPtr(other), other);
   }
 
-  public boolean collide_ray(Vector3 vorigin, Vector3 vdir) {
+  public boolean collide_ray(Vector3f vorigin, Vector3f vdir) {
     return CollisionJNI.btAABB_collide_ray(swigCPtr, this, vorigin, vdir);
   }
 
-  public void projection_interval(Vector3 direction, SWIGTYPE_p_float vmin, SWIGTYPE_p_float vmax) {
+  public void projection_interval(Vector3f direction, SWIGTYPE_p_float vmin, SWIGTYPE_p_float vmax) {
     CollisionJNI.btAABB_projection_interval(swigCPtr, this, direction, SWIGTYPE_p_float.getCPtr(vmin), SWIGTYPE_p_float.getCPtr(vmax));
   }
 
@@ -144,7 +144,7 @@ public class btAABB extends BulletBase {
     return CollisionJNI.btAABB_plane_classify(swigCPtr, this, btVector4.getCPtr(plane), plane);
   }
 
-  public boolean overlapping_trans_conservative(btAABB box, Matrix4 trans1_to_0) {
+  public boolean overlapping_trans_conservative(btAABB box, Matrix4f trans1_to_0) {
     return CollisionJNI.btAABB_overlapping_trans_conservative(swigCPtr, this, btAABB.getCPtr(box), box, trans1_to_0);
   }
 
@@ -160,7 +160,7 @@ public class btAABB extends BulletBase {
     return CollisionJNI.btAABB_collide_plane(swigCPtr, this, btVector4.getCPtr(plane), plane);
   }
 
-  public boolean collide_triangle_exact(Vector3 p1, Vector3 p2, Vector3 p3, btVector4 triangle_plane) {
+  public boolean collide_triangle_exact(Vector3f p1, Vector3f p2, Vector3f p3, btVector4 triangle_plane) {
     return CollisionJNI.btAABB_collide_triangle_exact(swigCPtr, this, p1, p2, p3, btVector4.getCPtr(triangle_plane), triangle_plane);
   }
 

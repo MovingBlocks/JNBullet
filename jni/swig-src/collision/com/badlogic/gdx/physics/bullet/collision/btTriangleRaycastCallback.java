@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btTriangleRaycastCallback extends btTriangleCallback {
 	private long swigCPtr;
@@ -107,12 +107,12 @@ public class btTriangleRaycastCallback extends btTriangleCallback {
     return CollisionJNI.btTriangleRaycastCallback_hitFraction_get(swigCPtr, this);
   }
 
-  public btTriangleRaycastCallback(Vector3 from, Vector3 to, long flags) {
+  public btTriangleRaycastCallback(Vector3f from, Vector3f to, long flags) {
     this(CollisionJNI.new_btTriangleRaycastCallback__SWIG_0(from, to, flags), true);
     CollisionJNI.btTriangleRaycastCallback_director_connect(this, swigCPtr, swigCMemOwn, true);
   }
 
-  public btTriangleRaycastCallback(Vector3 from, Vector3 to) {
+  public btTriangleRaycastCallback(Vector3f from, Vector3f to) {
     this(CollisionJNI.new_btTriangleRaycastCallback__SWIG_1(from, to), true);
     CollisionJNI.btTriangleRaycastCallback_director_connect(this, swigCPtr, swigCMemOwn, true);
   }
@@ -121,7 +121,7 @@ public class btTriangleRaycastCallback extends btTriangleCallback {
     if (getClass() == btTriangleRaycastCallback.class) CollisionJNI.btTriangleRaycastCallback_processTriangle(swigCPtr, this, btVector3.getCPtr(triangle), triangle, partId, triangleIndex); else CollisionJNI.btTriangleRaycastCallback_processTriangleSwigExplicitbtTriangleRaycastCallback(swigCPtr, this, btVector3.getCPtr(triangle), triangle, partId, triangleIndex);
   }
 
-  public float reportHit(Vector3 hitNormalLocal, float hitFraction, int partId, int triangleIndex) {
+  public float reportHit(Vector3f hitNormalLocal, float hitFraction, int partId, int triangleIndex) {
     return CollisionJNI.btTriangleRaycastCallback_reportHit(swigCPtr, this, hitNormalLocal, hitFraction, partId, triangleIndex);
   }
 

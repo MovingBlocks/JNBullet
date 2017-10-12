@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class LocalConvexResult extends BulletBase {
 	private long swigCPtr;
@@ -58,7 +58,7 @@ public class LocalConvexResult extends BulletBase {
 		super.delete();
 	}
 
-  public LocalConvexResult(btCollisionObject hitCollisionObject, LocalShapeInfo localShapeInfo, Vector3 hitNormalLocal, Vector3 hitPointLocal, float hitFraction) {
+  public LocalConvexResult(btCollisionObject hitCollisionObject, LocalShapeInfo localShapeInfo, Vector3f hitNormalLocal, Vector3f hitPointLocal, float hitFraction) {
     this(CollisionJNI.new_LocalConvexResult(btCollisionObject.getCPtr(hitCollisionObject), hitCollisionObject, LocalShapeInfo.getCPtr(localShapeInfo), localShapeInfo, hitNormalLocal, hitPointLocal, hitFraction), true);
   }
 
@@ -87,19 +87,19 @@ public class LocalConvexResult extends BulletBase {
     return CollisionJNI.LocalConvexResult_hitFraction_get(swigCPtr, this);
   }
 
-  public void getHitNormalLocal(Vector3 out) {
+  public void getHitNormalLocal(Vector3f out) {
     CollisionJNI.LocalConvexResult_getHitNormalLocal(swigCPtr, this, out);
   }
 
-  public void setHitNormalLocal(Vector3 value) {
+  public void setHitNormalLocal(Vector3f value) {
     CollisionJNI.LocalConvexResult_setHitNormalLocal(swigCPtr, this, value);
   }
 
-  public void getHitPointLocal(Vector3 out) {
+  public void getHitPointLocal(Vector3f out) {
     CollisionJNI.LocalConvexResult_getHitPointLocal(swigCPtr, this, out);
   }
 
-  public void setHitPointLocal(Vector3 value) {
+  public void setHitPointLocal(Vector3f value) {
     CollisionJNI.LocalConvexResult_setHitPointLocal(swigCPtr, this, value);
   }
 

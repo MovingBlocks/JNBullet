@@ -11,10 +11,10 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btKinematicCharacterController extends btCharacterControllerInterface {
 	private long swigCPtr;
@@ -59,7 +59,7 @@ public class btKinematicCharacterController extends btCharacterControllerInterfa
 		super.delete();
 	}
 
-  public btKinematicCharacterController(btPairCachingGhostObject ghostObject, btConvexShape convexShape, float stepHeight, Vector3 up) {
+  public btKinematicCharacterController(btPairCachingGhostObject ghostObject, btConvexShape convexShape, float stepHeight, Vector3f up) {
     this(DynamicsJNI.new_btKinematicCharacterController__SWIG_0(btPairCachingGhostObject.getCPtr(ghostObject), ghostObject, btConvexShape.getCPtr(convexShape), convexShape, stepHeight, up), true);
   }
 
@@ -67,27 +67,27 @@ public class btKinematicCharacterController extends btCharacterControllerInterfa
     this(DynamicsJNI.new_btKinematicCharacterController__SWIG_1(btPairCachingGhostObject.getCPtr(ghostObject), ghostObject, btConvexShape.getCPtr(convexShape), convexShape, stepHeight), true);
   }
 
-  public void setUp(Vector3 up) {
+  public void setUp(Vector3f up) {
     DynamicsJNI.btKinematicCharacterController_setUp(swigCPtr, this, up);
   }
 
-  public Vector3 getUp() {
+  public Vector3f getUp() {
 	return DynamicsJNI.btKinematicCharacterController_getUp(swigCPtr, this);
 }
 
-  public void setAngularVelocity(Vector3 velocity) {
+  public void setAngularVelocity(Vector3f velocity) {
     DynamicsJNI.btKinematicCharacterController_setAngularVelocity(swigCPtr, this, velocity);
   }
 
-  public Vector3 getAngularVelocity() {
+  public Vector3f getAngularVelocity() {
 	return DynamicsJNI.btKinematicCharacterController_getAngularVelocity(swigCPtr, this);
 }
 
-  public void setLinearVelocity(Vector3 velocity) {
+  public void setLinearVelocity(Vector3f velocity) {
     DynamicsJNI.btKinematicCharacterController_setLinearVelocity(swigCPtr, this, velocity);
   }
 
-  public Vector3 getLinearVelocity() {
+  public Vector3f getLinearVelocity() {
 	return DynamicsJNI.btKinematicCharacterController_getLinearVelocity(swigCPtr, this);
 }
 
@@ -135,7 +135,7 @@ public class btKinematicCharacterController extends btCharacterControllerInterfa
     DynamicsJNI.btKinematicCharacterController_setMaxJumpHeight(swigCPtr, this, maxJumpHeight);
   }
 
-  public void jump(Vector3 v) {
+  public void jump(Vector3f v) {
     DynamicsJNI.btKinematicCharacterController_jump__SWIG_0(swigCPtr, this, v);
   }
 
@@ -143,15 +143,15 @@ public class btKinematicCharacterController extends btCharacterControllerInterfa
     DynamicsJNI.btKinematicCharacterController_jump__SWIG_1(swigCPtr, this);
   }
 
-  public void applyImpulse(Vector3 v) {
+  public void applyImpulse(Vector3f v) {
     DynamicsJNI.btKinematicCharacterController_applyImpulse(swigCPtr, this, v);
   }
 
-  public void setGravity(Vector3 gravity) {
+  public void setGravity(Vector3f gravity) {
     DynamicsJNI.btKinematicCharacterController_setGravity(swigCPtr, this, gravity);
   }
 
-  public Vector3 getGravity() {
+  public Vector3f getGravity() {
 	return DynamicsJNI.btKinematicCharacterController_getGravity(swigCPtr, this);
 }
 

@@ -41,8 +41,8 @@
 	};
 }
 
-%typemap(jstype) 			btVector3* 	"Vector3[]"
-%typemap(jtype) 			btVector3* 	"Vector3[]"
+%typemap(jstype) 			btVector3* 	"Vector3f[]"
+%typemap(jtype) 			btVector3* 	"Vector3f[]"
 %typemap(javain)			btVector3*	"$javainput"
 %typemap(jni) 				btVector3* 	"jobjectArray"
 

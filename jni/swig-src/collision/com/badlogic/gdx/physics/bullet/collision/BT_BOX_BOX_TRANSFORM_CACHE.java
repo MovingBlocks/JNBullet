@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class BT_BOX_BOX_TRANSFORM_CACHE extends BulletBase {
 	private long swigCPtr;
@@ -67,19 +67,19 @@ public class BT_BOX_BOX_TRANSFORM_CACHE extends BulletBase {
     return (cPtr == 0) ? null : new btVector3(cPtr, false);
   }
 
-  public void setR1to0(Matrix3 value) {
+  public void setR1to0(Matrix3f value) {
     CollisionJNI.BT_BOX_BOX_TRANSFORM_CACHE_R1to0_set(swigCPtr, this, value);
   }
 
-  public Matrix3 getR1to0() {
+  public Matrix3f getR1to0() {
 	return CollisionJNI.BT_BOX_BOX_TRANSFORM_CACHE_R1to0_get(swigCPtr, this);
 }
 
-  public void setAR(Matrix3 value) {
+  public void setAR(Matrix3f value) {
     CollisionJNI.BT_BOX_BOX_TRANSFORM_CACHE_AR_set(swigCPtr, this, value);
   }
 
-  public Matrix3 getAR() {
+  public Matrix3f getAR() {
 	return CollisionJNI.BT_BOX_BOX_TRANSFORM_CACHE_AR_get(swigCPtr, this);
 }
 
@@ -91,15 +91,15 @@ public class BT_BOX_BOX_TRANSFORM_CACHE extends BulletBase {
     this(CollisionJNI.new_BT_BOX_BOX_TRANSFORM_CACHE(), true);
   }
 
-  public void calc_from_homogenic(Matrix4 trans0, Matrix4 trans1) {
+  public void calc_from_homogenic(Matrix4f trans0, Matrix4f trans1) {
     CollisionJNI.BT_BOX_BOX_TRANSFORM_CACHE_calc_from_homogenic(swigCPtr, this, trans0, trans1);
   }
 
-  public void calc_from_full_invert(Matrix4 trans0, Matrix4 trans1) {
+  public void calc_from_full_invert(Matrix4f trans0, Matrix4f trans1) {
     CollisionJNI.BT_BOX_BOX_TRANSFORM_CACHE_calc_from_full_invert(swigCPtr, this, trans0, trans1);
   }
 
-  public Vector3 transform(Vector3 point) {
+  public Vector3f transform(Vector3f point) {
 	return CollisionJNI.BT_BOX_BOX_TRANSFORM_CACHE_transform(swigCPtr, this, point);
 }
 

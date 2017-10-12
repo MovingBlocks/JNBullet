@@ -1308,7 +1308,7 @@ typedef btCollisionWorld::RayResultCallback RayResultCallback;
 
 
 	/* Gets a global ref to the temp class.  Do not release this. */
-	SWIGINTERN inline jclass gdx_getTempClassVector3(JNIEnv * jenv) {
+	SWIGINTERN inline jclass gdx_getTempClassVector3f(JNIEnv * jenv) {
 	  static jclass cls = NULL;
 	  if (cls == NULL) {
 		cls = (jclass) jenv->NewGlobalRef(jenv->FindClass("com/badlogic/gdx/physics/bullet/linearmath/LinearMath"));
@@ -1316,8 +1316,8 @@ typedef btCollisionWorld::RayResultCallback RayResultCallback;
 	  return cls;
 	}
 	
-	SWIGINTERN inline jobject gdx_takePoolObjectVector3(JNIEnv * jenv, const char * poolName) {
-	  jclass tempClass = gdx_getTempClassVector3(jenv);
+	SWIGINTERN inline jobject gdx_takePoolObjectVector3f(JNIEnv * jenv, const char * poolName) {
+	  jclass tempClass = gdx_getTempClassVector3f(jenv);
 	  
 	  static jfieldID poolField = NULL;
 	  if (poolField == NULL) {
@@ -1340,8 +1340,8 @@ typedef btCollisionWorld::RayResultCallback RayResultCallback;
 	  return ret;
 	}
 	
-	SWIGINTERN inline void gdx_releasePoolObjectVector3(JNIEnv * jenv, const char * poolName, jobject obj) {
-	  jclass tempClass = gdx_getTempClassVector3(jenv);
+	SWIGINTERN inline void gdx_releasePoolObjectVector3f(JNIEnv * jenv, const char * poolName, jobject obj) {
+	  jclass tempClass = gdx_getTempClassVector3f(jenv);
 	  
 	  static jfieldID poolField = NULL;
 	  if (poolField == NULL) {
@@ -1368,16 +1368,16 @@ typedef btCollisionWorld::RayResultCallback RayResultCallback;
 	 * directorin typemaps.  SWIG doesn't have hooks to release them after
 	 * they're used. 
 	 */
-	class gdxPoolAutoReleaseVector3 {
+	class gdxPoolAutoReleaseVector3f {
 	private:
 	  JNIEnv * jenv;
 	  const char * poolName;
 	  jobject obj;
 	public:
-	  gdxPoolAutoReleaseVector3(JNIEnv * jenv, const char * poolName, jobject obj) : 
+	  gdxPoolAutoReleaseVector3f(JNIEnv * jenv, const char * poolName, jobject obj) : 
 		jenv(jenv), poolName(poolName), obj(obj) { };
-	  virtual ~gdxPoolAutoReleaseVector3() {
-		gdx_releasePoolObjectVector3(this->jenv, this->poolName, this->obj);
+	  virtual ~gdxPoolAutoReleaseVector3f() {
+		gdx_releasePoolObjectVector3f(this->jenv, this->poolName, this->obj);
 	  };
 	};
 
@@ -1386,67 +1386,67 @@ typedef btCollisionWorld::RayResultCallback RayResultCallback;
 // Workaround for some strange swig behaviour
 
 
-	/* Gets a global ref to the temp class's Return Vector3.  Do not release this. */ 
-	SWIGINTERN inline jobject gdx_getReturnVector3(JNIEnv * jenv) {
+	/* Gets a global ref to the temp class's Return Vector3f.  Do not release this. */ 
+	SWIGINTERN inline jobject gdx_getReturnVector3f(JNIEnv * jenv) {
 	  static jobject ret = NULL;
 	  if (ret == NULL) {
-	    jclass tempClass = gdx_getTempClassVector3(jenv);
-	    jfieldID field = jenv->GetStaticFieldID(tempClass, "staticVector3", "Lcom/badlogic/gdx/math/Vector3;");
+	    jclass tempClass = gdx_getTempClassVector3f(jenv);
+	    jfieldID field = jenv->GetStaticFieldID(tempClass, "staticVector3f", "Lorg/terasology/math/geom/Vector3f;");
 	    ret = jenv->NewGlobalRef(jenv->GetStaticObjectField(tempClass, field));
 	  }
 	  return ret;
 	}
 	
 	/* Sets the data in the Bullet type from the Gdx type. */
-	SWIGINTERN inline void gdx_setbtVector3FromVector3(JNIEnv * jenv, btVector3 & target, jobject source) {
+	SWIGINTERN inline void gdx_setbtVector3FromVector3f(JNIEnv * jenv, btVector3 & target, jobject source) {
 		Vector3_to_btVector3(jenv, target, source);
 	}
 
-	SWIGINTERN inline void gdx_setbtVector3FromVector3(JNIEnv * jenv, btVector3 * target, jobject source) {
-		gdx_setbtVector3FromVector3(jenv, *target, source);
+	SWIGINTERN inline void gdx_setbtVector3FromVector3f(JNIEnv * jenv, btVector3 * target, jobject source) {
+		gdx_setbtVector3FromVector3f(jenv, *target, source);
 	}
 
 	/* Sets the data in the Gdx type from the Bullet type. */
-	SWIGINTERN inline void gdx_setVector3FrombtVector3(JNIEnv * jenv, jobject target, const btVector3 & source) {
+	SWIGINTERN inline void gdx_setVector3fFrombtVector3(JNIEnv * jenv, jobject target, const btVector3 & source) {
 		btVector3_to_Vector3(jenv, target, source);
 	}
 
-	SWIGINTERN inline void gdx_setVector3FrombtVector3(JNIEnv * jenv, jobject target, const btVector3 * source) {
-		gdx_setVector3FrombtVector3(jenv, target, *source);
+	SWIGINTERN inline void gdx_setVector3fFrombtVector3(JNIEnv * jenv, jobject target, const btVector3 * source) {
+		gdx_setVector3fFrombtVector3(jenv, target, *source);
 	}
 
 	/*
-	 * RAII wrapper to commit changes made to a local btVector3 back to Vector3
+	 * RAII wrapper to commit changes made to a local btVector3 back to Vector3f
 	 */
-	class gdxAutoCommitVector3 {
+	class gdxAutoCommitVector3f {
 	private:
 	  JNIEnv * jenv;
-	  jobject jVector3;
+	  jobject jVector3f;
 	  btVector3 & cbtVector3;
 	public:
-	  gdxAutoCommitVector3(JNIEnv * jenv, jobject jVector3, btVector3 & cbtVector3) : 
-	    jenv(jenv), jVector3(jVector3), cbtVector3(cbtVector3) { };
-	  gdxAutoCommitVector3(JNIEnv * jenv, jobject jVector3, btVector3 * cbtVector3) : 
-	    jenv(jenv), jVector3(jVector3), cbtVector3(*cbtVector3) { };
-	  virtual ~gdxAutoCommitVector3() {
-	    gdx_setVector3FrombtVector3(this->jenv, this->jVector3, this->cbtVector3);
+	  gdxAutoCommitVector3f(JNIEnv * jenv, jobject jVector3f, btVector3 & cbtVector3) : 
+	    jenv(jenv), jVector3f(jVector3f), cbtVector3(cbtVector3) { };
+	  gdxAutoCommitVector3f(JNIEnv * jenv, jobject jVector3f, btVector3 * cbtVector3) : 
+	    jenv(jenv), jVector3f(jVector3f), cbtVector3(*cbtVector3) { };
+	  virtual ~gdxAutoCommitVector3f() {
+	    gdx_setVector3fFrombtVector3(this->jenv, this->jVector3f, this->cbtVector3);
 	  };
 	};
 
-	class gdxAutoCommitbtVector3AndReleaseVector3 {
+	class gdxAutoCommitbtVector3AndReleaseVector3f {
 	private:
 	  JNIEnv * jenv;
-	  jobject jVector3;
+	  jobject jVector3f;
 	  btVector3 & cbtVector3;
 	  const char * poolName;
 	public:
-	  gdxAutoCommitbtVector3AndReleaseVector3(JNIEnv * jenv, jobject jVector3, btVector3 & cbtVector3, const char *poolName) : 
-	    jenv(jenv), jVector3(jVector3), cbtVector3(cbtVector3), poolName(poolName) { };
-	  gdxAutoCommitbtVector3AndReleaseVector3(JNIEnv * jenv, jobject jVector3, btVector3 * cbtVector3, const char *poolName) : 
-	    jenv(jenv), jVector3(jVector3), cbtVector3(*cbtVector3), poolName(poolName) { };
-	  virtual ~gdxAutoCommitbtVector3AndReleaseVector3() {
-	    gdx_setbtVector3FromVector3(this->jenv, this->cbtVector3, this->jVector3);
-	    gdx_releasePoolObjectVector3(this->jenv, this->poolName, this->jVector3);
+	  gdxAutoCommitbtVector3AndReleaseVector3f(JNIEnv * jenv, jobject jVector3f, btVector3 & cbtVector3, const char *poolName) : 
+	    jenv(jenv), jVector3f(jVector3f), cbtVector3(cbtVector3), poolName(poolName) { };
+	  gdxAutoCommitbtVector3AndReleaseVector3f(JNIEnv * jenv, jobject jVector3f, btVector3 * cbtVector3, const char *poolName) : 
+	    jenv(jenv), jVector3f(jVector3f), cbtVector3(*cbtVector3), poolName(poolName) { };
+	  virtual ~gdxAutoCommitbtVector3AndReleaseVector3f() {
+	    gdx_setbtVector3FromVector3f(this->jenv, this->cbtVector3, this->jVector3f);
+	    gdx_releasePoolObjectVector3f(this->jenv, this->poolName, this->jVector3f);
 	  };
 	};
 
@@ -1456,7 +1456,7 @@ typedef btCollisionWorld::RayResultCallback RayResultCallback;
 
 
 	/* Gets a global ref to the temp class.  Do not release this. */
-	SWIGINTERN inline jclass gdx_getTempClassMatrix3(JNIEnv * jenv) {
+	SWIGINTERN inline jclass gdx_getTempClassMatrix3f(JNIEnv * jenv) {
 	  static jclass cls = NULL;
 	  if (cls == NULL) {
 		cls = (jclass) jenv->NewGlobalRef(jenv->FindClass("com/badlogic/gdx/physics/bullet/linearmath/LinearMath"));
@@ -1464,8 +1464,8 @@ typedef btCollisionWorld::RayResultCallback RayResultCallback;
 	  return cls;
 	}
 	
-	SWIGINTERN inline jobject gdx_takePoolObjectMatrix3(JNIEnv * jenv, const char * poolName) {
-	  jclass tempClass = gdx_getTempClassMatrix3(jenv);
+	SWIGINTERN inline jobject gdx_takePoolObjectMatrix3f(JNIEnv * jenv, const char * poolName) {
+	  jclass tempClass = gdx_getTempClassMatrix3f(jenv);
 	  
 	  static jfieldID poolField = NULL;
 	  if (poolField == NULL) {
@@ -1488,8 +1488,8 @@ typedef btCollisionWorld::RayResultCallback RayResultCallback;
 	  return ret;
 	}
 	
-	SWIGINTERN inline void gdx_releasePoolObjectMatrix3(JNIEnv * jenv, const char * poolName, jobject obj) {
-	  jclass tempClass = gdx_getTempClassMatrix3(jenv);
+	SWIGINTERN inline void gdx_releasePoolObjectMatrix3f(JNIEnv * jenv, const char * poolName, jobject obj) {
+	  jclass tempClass = gdx_getTempClassMatrix3f(jenv);
 	  
 	  static jfieldID poolField = NULL;
 	  if (poolField == NULL) {
@@ -1516,16 +1516,16 @@ typedef btCollisionWorld::RayResultCallback RayResultCallback;
 	 * directorin typemaps.  SWIG doesn't have hooks to release them after
 	 * they're used. 
 	 */
-	class gdxPoolAutoReleaseMatrix3 {
+	class gdxPoolAutoReleaseMatrix3f {
 	private:
 	  JNIEnv * jenv;
 	  const char * poolName;
 	  jobject obj;
 	public:
-	  gdxPoolAutoReleaseMatrix3(JNIEnv * jenv, const char * poolName, jobject obj) : 
+	  gdxPoolAutoReleaseMatrix3f(JNIEnv * jenv, const char * poolName, jobject obj) : 
 		jenv(jenv), poolName(poolName), obj(obj) { };
-	  virtual ~gdxPoolAutoReleaseMatrix3() {
-		gdx_releasePoolObjectMatrix3(this->jenv, this->poolName, this->obj);
+	  virtual ~gdxPoolAutoReleaseMatrix3f() {
+		gdx_releasePoolObjectMatrix3f(this->jenv, this->poolName, this->obj);
 	  };
 	};
 
@@ -1534,74 +1534,74 @@ typedef btCollisionWorld::RayResultCallback RayResultCallback;
 // Workaround for some strange swig behaviour
 
 
-	/* Gets a global ref to the temp class's Return Matrix3.  Do not release this. */ 
-	SWIGINTERN inline jobject gdx_getReturnMatrix3(JNIEnv * jenv) {
+	/* Gets a global ref to the temp class's Return Matrix3f.  Do not release this. */ 
+	SWIGINTERN inline jobject gdx_getReturnMatrix3f(JNIEnv * jenv) {
 	  static jobject ret = NULL;
 	  if (ret == NULL) {
-	    jclass tempClass = gdx_getTempClassMatrix3(jenv);
-	    jfieldID field = jenv->GetStaticFieldID(tempClass, "staticMatrix3", "Lcom/badlogic/gdx/math/Matrix3;");
+	    jclass tempClass = gdx_getTempClassMatrix3f(jenv);
+	    jfieldID field = jenv->GetStaticFieldID(tempClass, "staticMatrix3f", "Lorg/terasology/math/geom/Matrix3f;");
 	    ret = jenv->NewGlobalRef(jenv->GetStaticObjectField(tempClass, field));
 	  }
 	  return ret;
 	}
 	
 	/* Sets the data in the Bullet type from the Gdx type. */
-	SWIGINTERN inline void gdx_setbtMatrix3x3FromMatrix3(JNIEnv * jenv, btMatrix3x3 & target, jobject source) {
+	SWIGINTERN inline void gdx_setbtMatrix3x3FromMatrix3f(JNIEnv * jenv, btMatrix3x3 & target, jobject source) {
 		Matrix3_to_btMatrix3(jenv, target, source);
 	}
 
-	SWIGINTERN inline void gdx_setbtMatrix3x3FromMatrix3(JNIEnv * jenv, btMatrix3x3 * target, jobject source) {
-		gdx_setbtMatrix3x3FromMatrix3(jenv, *target, source);
+	SWIGINTERN inline void gdx_setbtMatrix3x3FromMatrix3f(JNIEnv * jenv, btMatrix3x3 * target, jobject source) {
+		gdx_setbtMatrix3x3FromMatrix3f(jenv, *target, source);
 	}
 
 	/* Sets the data in the Gdx type from the Bullet type. */
-	SWIGINTERN inline void gdx_setMatrix3FrombtMatrix3x3(JNIEnv * jenv, jobject target, const btMatrix3x3 & source) {
+	SWIGINTERN inline void gdx_setMatrix3fFrombtMatrix3x3(JNIEnv * jenv, jobject target, const btMatrix3x3 & source) {
 		btMatrix3_to_Matrix3(jenv, target, source);
 	}
 
-	SWIGINTERN inline void gdx_setMatrix3FrombtMatrix3x3(JNIEnv * jenv, jobject target, const btMatrix3x3 * source) {
-		gdx_setMatrix3FrombtMatrix3x3(jenv, target, *source);
+	SWIGINTERN inline void gdx_setMatrix3fFrombtMatrix3x3(JNIEnv * jenv, jobject target, const btMatrix3x3 * source) {
+		gdx_setMatrix3fFrombtMatrix3x3(jenv, target, *source);
 	}
 
 	/*
-	 * RAII wrapper to commit changes made to a local btMatrix3x3 back to Matrix3
+	 * RAII wrapper to commit changes made to a local btMatrix3x3 back to Matrix3f
 	 */
-	class gdxAutoCommitMatrix3 {
+	class gdxAutoCommitMatrix3f {
 	private:
 	  JNIEnv * jenv;
-	  jobject jMatrix3;
+	  jobject jMatrix3f;
 	  btMatrix3x3 & cbtMatrix3x3;
 	public:
-	  gdxAutoCommitMatrix3(JNIEnv * jenv, jobject jMatrix3, btMatrix3x3 & cbtMatrix3x3) : 
-	    jenv(jenv), jMatrix3(jMatrix3), cbtMatrix3x3(cbtMatrix3x3) { };
-	  gdxAutoCommitMatrix3(JNIEnv * jenv, jobject jMatrix3, btMatrix3x3 * cbtMatrix3x3) : 
-	    jenv(jenv), jMatrix3(jMatrix3), cbtMatrix3x3(*cbtMatrix3x3) { };
-	  virtual ~gdxAutoCommitMatrix3() {
-	    gdx_setMatrix3FrombtMatrix3x3(this->jenv, this->jMatrix3, this->cbtMatrix3x3);
+	  gdxAutoCommitMatrix3f(JNIEnv * jenv, jobject jMatrix3f, btMatrix3x3 & cbtMatrix3x3) : 
+	    jenv(jenv), jMatrix3f(jMatrix3f), cbtMatrix3x3(cbtMatrix3x3) { };
+	  gdxAutoCommitMatrix3f(JNIEnv * jenv, jobject jMatrix3f, btMatrix3x3 * cbtMatrix3x3) : 
+	    jenv(jenv), jMatrix3f(jMatrix3f), cbtMatrix3x3(*cbtMatrix3x3) { };
+	  virtual ~gdxAutoCommitMatrix3f() {
+	    gdx_setMatrix3fFrombtMatrix3x3(this->jenv, this->jMatrix3f, this->cbtMatrix3x3);
 	  };
 	};
 
-	class gdxAutoCommitbtMatrix3x3AndReleaseMatrix3 {
+	class gdxAutoCommitbtMatrix3x3AndReleaseMatrix3f {
 	private:
 	  JNIEnv * jenv;
-	  jobject jMatrix3;
+	  jobject jMatrix3f;
 	  btMatrix3x3 & cbtMatrix3x3;
 	  const char * poolName;
 	public:
-	  gdxAutoCommitbtMatrix3x3AndReleaseMatrix3(JNIEnv * jenv, jobject jMatrix3, btMatrix3x3 & cbtMatrix3x3, const char *poolName) : 
-	    jenv(jenv), jMatrix3(jMatrix3), cbtMatrix3x3(cbtMatrix3x3), poolName(poolName) { };
-	  gdxAutoCommitbtMatrix3x3AndReleaseMatrix3(JNIEnv * jenv, jobject jMatrix3, btMatrix3x3 * cbtMatrix3x3, const char *poolName) : 
-	    jenv(jenv), jMatrix3(jMatrix3), cbtMatrix3x3(*cbtMatrix3x3), poolName(poolName) { };
-	  virtual ~gdxAutoCommitbtMatrix3x3AndReleaseMatrix3() {
-	    gdx_setbtMatrix3x3FromMatrix3(this->jenv, this->cbtMatrix3x3, this->jMatrix3);
-	    gdx_releasePoolObjectMatrix3(this->jenv, this->poolName, this->jMatrix3);
+	  gdxAutoCommitbtMatrix3x3AndReleaseMatrix3f(JNIEnv * jenv, jobject jMatrix3f, btMatrix3x3 & cbtMatrix3x3, const char *poolName) : 
+	    jenv(jenv), jMatrix3f(jMatrix3f), cbtMatrix3x3(cbtMatrix3x3), poolName(poolName) { };
+	  gdxAutoCommitbtMatrix3x3AndReleaseMatrix3f(JNIEnv * jenv, jobject jMatrix3f, btMatrix3x3 * cbtMatrix3x3, const char *poolName) : 
+	    jenv(jenv), jMatrix3f(jMatrix3f), cbtMatrix3x3(*cbtMatrix3x3), poolName(poolName) { };
+	  virtual ~gdxAutoCommitbtMatrix3x3AndReleaseMatrix3f() {
+	    gdx_setbtMatrix3x3FromMatrix3f(this->jenv, this->cbtMatrix3x3, this->jMatrix3f);
+	    gdx_releasePoolObjectMatrix3f(this->jenv, this->poolName, this->jMatrix3f);
 	  };
 	};
 
 
 
 	/* Gets a global ref to the temp class.  Do not release this. */
-	SWIGINTERN inline jclass gdx_getTempClassMatrix4(JNIEnv * jenv) {
+	SWIGINTERN inline jclass gdx_getTempClassMatrix4f(JNIEnv * jenv) {
 	  static jclass cls = NULL;
 	  if (cls == NULL) {
 		cls = (jclass) jenv->NewGlobalRef(jenv->FindClass("com/badlogic/gdx/physics/bullet/linearmath/LinearMath"));
@@ -1609,8 +1609,8 @@ typedef btCollisionWorld::RayResultCallback RayResultCallback;
 	  return cls;
 	}
 	
-	SWIGINTERN inline jobject gdx_takePoolObjectMatrix4(JNIEnv * jenv, const char * poolName) {
-	  jclass tempClass = gdx_getTempClassMatrix4(jenv);
+	SWIGINTERN inline jobject gdx_takePoolObjectMatrix4f(JNIEnv * jenv, const char * poolName) {
+	  jclass tempClass = gdx_getTempClassMatrix4f(jenv);
 	  
 	  static jfieldID poolField = NULL;
 	  if (poolField == NULL) {
@@ -1633,8 +1633,8 @@ typedef btCollisionWorld::RayResultCallback RayResultCallback;
 	  return ret;
 	}
 	
-	SWIGINTERN inline void gdx_releasePoolObjectMatrix4(JNIEnv * jenv, const char * poolName, jobject obj) {
-	  jclass tempClass = gdx_getTempClassMatrix4(jenv);
+	SWIGINTERN inline void gdx_releasePoolObjectMatrix4f(JNIEnv * jenv, const char * poolName, jobject obj) {
+	  jclass tempClass = gdx_getTempClassMatrix4f(jenv);
 	  
 	  static jfieldID poolField = NULL;
 	  if (poolField == NULL) {
@@ -1661,16 +1661,16 @@ typedef btCollisionWorld::RayResultCallback RayResultCallback;
 	 * directorin typemaps.  SWIG doesn't have hooks to release them after
 	 * they're used. 
 	 */
-	class gdxPoolAutoReleaseMatrix4 {
+	class gdxPoolAutoReleaseMatrix4f {
 	private:
 	  JNIEnv * jenv;
 	  const char * poolName;
 	  jobject obj;
 	public:
-	  gdxPoolAutoReleaseMatrix4(JNIEnv * jenv, const char * poolName, jobject obj) : 
+	  gdxPoolAutoReleaseMatrix4f(JNIEnv * jenv, const char * poolName, jobject obj) : 
 		jenv(jenv), poolName(poolName), obj(obj) { };
-	  virtual ~gdxPoolAutoReleaseMatrix4() {
-		gdx_releasePoolObjectMatrix4(this->jenv, this->poolName, this->obj);
+	  virtual ~gdxPoolAutoReleaseMatrix4f() {
+		gdx_releasePoolObjectMatrix4f(this->jenv, this->poolName, this->obj);
 	  };
 	};
 
@@ -1679,74 +1679,74 @@ typedef btCollisionWorld::RayResultCallback RayResultCallback;
 // Workaround for some strange swig behaviour
 
 
-	/* Gets a global ref to the temp class's Return Matrix4.  Do not release this. */ 
-	SWIGINTERN inline jobject gdx_getReturnMatrix4(JNIEnv * jenv) {
+	/* Gets a global ref to the temp class's Return Matrix4f.  Do not release this. */ 
+	SWIGINTERN inline jobject gdx_getReturnMatrix4f(JNIEnv * jenv) {
 	  static jobject ret = NULL;
 	  if (ret == NULL) {
-	    jclass tempClass = gdx_getTempClassMatrix4(jenv);
-	    jfieldID field = jenv->GetStaticFieldID(tempClass, "staticMatrix4", "Lcom/badlogic/gdx/math/Matrix4;");
+	    jclass tempClass = gdx_getTempClassMatrix4f(jenv);
+	    jfieldID field = jenv->GetStaticFieldID(tempClass, "staticMatrix4f", "Lorg/terasology/math/geom/Matrix4f;");
 	    ret = jenv->NewGlobalRef(jenv->GetStaticObjectField(tempClass, field));
 	  }
 	  return ret;
 	}
 	
 	/* Sets the data in the Bullet type from the Gdx type. */
-	SWIGINTERN inline void gdx_setbtTransformFromMatrix4(JNIEnv * jenv, btTransform & target, jobject source) {
+	SWIGINTERN inline void gdx_setbtTransformFromMatrix4f(JNIEnv * jenv, btTransform & target, jobject source) {
 		Matrix4_to_btTransform(jenv, target, source);
 	}
 
-	SWIGINTERN inline void gdx_setbtTransformFromMatrix4(JNIEnv * jenv, btTransform * target, jobject source) {
-		gdx_setbtTransformFromMatrix4(jenv, *target, source);
+	SWIGINTERN inline void gdx_setbtTransformFromMatrix4f(JNIEnv * jenv, btTransform * target, jobject source) {
+		gdx_setbtTransformFromMatrix4f(jenv, *target, source);
 	}
 
 	/* Sets the data in the Gdx type from the Bullet type. */
-	SWIGINTERN inline void gdx_setMatrix4FrombtTransform(JNIEnv * jenv, jobject target, const btTransform & source) {
+	SWIGINTERN inline void gdx_setMatrix4fFrombtTransform(JNIEnv * jenv, jobject target, const btTransform & source) {
 		btTransform_to_Matrix4(jenv, target, source);
 	}
 
-	SWIGINTERN inline void gdx_setMatrix4FrombtTransform(JNIEnv * jenv, jobject target, const btTransform * source) {
-		gdx_setMatrix4FrombtTransform(jenv, target, *source);
+	SWIGINTERN inline void gdx_setMatrix4fFrombtTransform(JNIEnv * jenv, jobject target, const btTransform * source) {
+		gdx_setMatrix4fFrombtTransform(jenv, target, *source);
 	}
 
 	/*
-	 * RAII wrapper to commit changes made to a local btTransform back to Matrix4
+	 * RAII wrapper to commit changes made to a local btTransform back to Matrix4f
 	 */
-	class gdxAutoCommitMatrix4 {
+	class gdxAutoCommitMatrix4f {
 	private:
 	  JNIEnv * jenv;
-	  jobject jMatrix4;
+	  jobject jMatrix4f;
 	  btTransform & cbtTransform;
 	public:
-	  gdxAutoCommitMatrix4(JNIEnv * jenv, jobject jMatrix4, btTransform & cbtTransform) : 
-	    jenv(jenv), jMatrix4(jMatrix4), cbtTransform(cbtTransform) { };
-	  gdxAutoCommitMatrix4(JNIEnv * jenv, jobject jMatrix4, btTransform * cbtTransform) : 
-	    jenv(jenv), jMatrix4(jMatrix4), cbtTransform(*cbtTransform) { };
-	  virtual ~gdxAutoCommitMatrix4() {
-	    gdx_setMatrix4FrombtTransform(this->jenv, this->jMatrix4, this->cbtTransform);
+	  gdxAutoCommitMatrix4f(JNIEnv * jenv, jobject jMatrix4f, btTransform & cbtTransform) : 
+	    jenv(jenv), jMatrix4f(jMatrix4f), cbtTransform(cbtTransform) { };
+	  gdxAutoCommitMatrix4f(JNIEnv * jenv, jobject jMatrix4f, btTransform * cbtTransform) : 
+	    jenv(jenv), jMatrix4f(jMatrix4f), cbtTransform(*cbtTransform) { };
+	  virtual ~gdxAutoCommitMatrix4f() {
+	    gdx_setMatrix4fFrombtTransform(this->jenv, this->jMatrix4f, this->cbtTransform);
 	  };
 	};
 
-	class gdxAutoCommitbtTransformAndReleaseMatrix4 {
+	class gdxAutoCommitbtTransformAndReleaseMatrix4f {
 	private:
 	  JNIEnv * jenv;
-	  jobject jMatrix4;
+	  jobject jMatrix4f;
 	  btTransform & cbtTransform;
 	  const char * poolName;
 	public:
-	  gdxAutoCommitbtTransformAndReleaseMatrix4(JNIEnv * jenv, jobject jMatrix4, btTransform & cbtTransform, const char *poolName) : 
-	    jenv(jenv), jMatrix4(jMatrix4), cbtTransform(cbtTransform), poolName(poolName) { };
-	  gdxAutoCommitbtTransformAndReleaseMatrix4(JNIEnv * jenv, jobject jMatrix4, btTransform * cbtTransform, const char *poolName) : 
-	    jenv(jenv), jMatrix4(jMatrix4), cbtTransform(*cbtTransform), poolName(poolName) { };
-	  virtual ~gdxAutoCommitbtTransformAndReleaseMatrix4() {
-	    gdx_setbtTransformFromMatrix4(this->jenv, this->cbtTransform, this->jMatrix4);
-	    gdx_releasePoolObjectMatrix4(this->jenv, this->poolName, this->jMatrix4);
+	  gdxAutoCommitbtTransformAndReleaseMatrix4f(JNIEnv * jenv, jobject jMatrix4f, btTransform & cbtTransform, const char *poolName) : 
+	    jenv(jenv), jMatrix4f(jMatrix4f), cbtTransform(cbtTransform), poolName(poolName) { };
+	  gdxAutoCommitbtTransformAndReleaseMatrix4f(JNIEnv * jenv, jobject jMatrix4f, btTransform * cbtTransform, const char *poolName) : 
+	    jenv(jenv), jMatrix4f(jMatrix4f), cbtTransform(*cbtTransform), poolName(poolName) { };
+	  virtual ~gdxAutoCommitbtTransformAndReleaseMatrix4f() {
+	    gdx_setbtTransformFromMatrix4f(this->jenv, this->cbtTransform, this->jMatrix4f);
+	    gdx_releasePoolObjectMatrix4f(this->jenv, this->poolName, this->jMatrix4f);
 	  };
 	};
 
 
 
 	/* Gets a global ref to the temp class.  Do not release this. */
-	SWIGINTERN inline jclass gdx_getTempClassQuaternion(JNIEnv * jenv) {
+	SWIGINTERN inline jclass gdx_getTempClassQuat4f(JNIEnv * jenv) {
 	  static jclass cls = NULL;
 	  if (cls == NULL) {
 		cls = (jclass) jenv->NewGlobalRef(jenv->FindClass("com/badlogic/gdx/physics/bullet/linearmath/LinearMath"));
@@ -1754,8 +1754,8 @@ typedef btCollisionWorld::RayResultCallback RayResultCallback;
 	  return cls;
 	}
 	
-	SWIGINTERN inline jobject gdx_takePoolObjectQuaternion(JNIEnv * jenv, const char * poolName) {
-	  jclass tempClass = gdx_getTempClassQuaternion(jenv);
+	SWIGINTERN inline jobject gdx_takePoolObjectQuat4f(JNIEnv * jenv, const char * poolName) {
+	  jclass tempClass = gdx_getTempClassQuat4f(jenv);
 	  
 	  static jfieldID poolField = NULL;
 	  if (poolField == NULL) {
@@ -1778,8 +1778,8 @@ typedef btCollisionWorld::RayResultCallback RayResultCallback;
 	  return ret;
 	}
 	
-	SWIGINTERN inline void gdx_releasePoolObjectQuaternion(JNIEnv * jenv, const char * poolName, jobject obj) {
-	  jclass tempClass = gdx_getTempClassQuaternion(jenv);
+	SWIGINTERN inline void gdx_releasePoolObjectQuat4f(JNIEnv * jenv, const char * poolName, jobject obj) {
+	  jclass tempClass = gdx_getTempClassQuat4f(jenv);
 	  
 	  static jfieldID poolField = NULL;
 	  if (poolField == NULL) {
@@ -1806,16 +1806,16 @@ typedef btCollisionWorld::RayResultCallback RayResultCallback;
 	 * directorin typemaps.  SWIG doesn't have hooks to release them after
 	 * they're used. 
 	 */
-	class gdxPoolAutoReleaseQuaternion {
+	class gdxPoolAutoReleaseQuat4f {
 	private:
 	  JNIEnv * jenv;
 	  const char * poolName;
 	  jobject obj;
 	public:
-	  gdxPoolAutoReleaseQuaternion(JNIEnv * jenv, const char * poolName, jobject obj) : 
+	  gdxPoolAutoReleaseQuat4f(JNIEnv * jenv, const char * poolName, jobject obj) : 
 		jenv(jenv), poolName(poolName), obj(obj) { };
-	  virtual ~gdxPoolAutoReleaseQuaternion() {
-		gdx_releasePoolObjectQuaternion(this->jenv, this->poolName, this->obj);
+	  virtual ~gdxPoolAutoReleaseQuat4f() {
+		gdx_releasePoolObjectQuat4f(this->jenv, this->poolName, this->obj);
 	  };
 	};
 
@@ -1824,67 +1824,67 @@ typedef btCollisionWorld::RayResultCallback RayResultCallback;
 // Workaround for some strange swig behaviour
 
 
-	/* Gets a global ref to the temp class's Return Quaternion.  Do not release this. */ 
-	SWIGINTERN inline jobject gdx_getReturnQuaternion(JNIEnv * jenv) {
+	/* Gets a global ref to the temp class's Return Quat4f.  Do not release this. */ 
+	SWIGINTERN inline jobject gdx_getReturnQuat4f(JNIEnv * jenv) {
 	  static jobject ret = NULL;
 	  if (ret == NULL) {
-	    jclass tempClass = gdx_getTempClassQuaternion(jenv);
-	    jfieldID field = jenv->GetStaticFieldID(tempClass, "staticQuaternion", "Lcom/badlogic/gdx/math/Quaternion;");
+	    jclass tempClass = gdx_getTempClassQuat4f(jenv);
+	    jfieldID field = jenv->GetStaticFieldID(tempClass, "staticQuat4f", "Lorg/terasology/math/geom/Quat4f;");
 	    ret = jenv->NewGlobalRef(jenv->GetStaticObjectField(tempClass, field));
 	  }
 	  return ret;
 	}
 	
 	/* Sets the data in the Bullet type from the Gdx type. */
-	SWIGINTERN inline void gdx_setbtQuaternionFromQuaternion(JNIEnv * jenv, btQuaternion & target, jobject source) {
+	SWIGINTERN inline void gdx_setbtQuaternionFromQuat4f(JNIEnv * jenv, btQuaternion & target, jobject source) {
 		Quaternion_to_btQuaternion(jenv, target, source);
 	}
 
-	SWIGINTERN inline void gdx_setbtQuaternionFromQuaternion(JNIEnv * jenv, btQuaternion * target, jobject source) {
-		gdx_setbtQuaternionFromQuaternion(jenv, *target, source);
+	SWIGINTERN inline void gdx_setbtQuaternionFromQuat4f(JNIEnv * jenv, btQuaternion * target, jobject source) {
+		gdx_setbtQuaternionFromQuat4f(jenv, *target, source);
 	}
 
 	/* Sets the data in the Gdx type from the Bullet type. */
-	SWIGINTERN inline void gdx_setQuaternionFrombtQuaternion(JNIEnv * jenv, jobject target, const btQuaternion & source) {
+	SWIGINTERN inline void gdx_setQuat4fFrombtQuaternion(JNIEnv * jenv, jobject target, const btQuaternion & source) {
 		btQuaternion_to_Quaternion(jenv, target, source);
 	}
 
-	SWIGINTERN inline void gdx_setQuaternionFrombtQuaternion(JNIEnv * jenv, jobject target, const btQuaternion * source) {
-		gdx_setQuaternionFrombtQuaternion(jenv, target, *source);
+	SWIGINTERN inline void gdx_setQuat4fFrombtQuaternion(JNIEnv * jenv, jobject target, const btQuaternion * source) {
+		gdx_setQuat4fFrombtQuaternion(jenv, target, *source);
 	}
 
 	/*
-	 * RAII wrapper to commit changes made to a local btQuaternion back to Quaternion
+	 * RAII wrapper to commit changes made to a local btQuaternion back to Quat4f
 	 */
-	class gdxAutoCommitQuaternion {
+	class gdxAutoCommitQuat4f {
 	private:
 	  JNIEnv * jenv;
-	  jobject jQuaternion;
+	  jobject jQuat4f;
 	  btQuaternion & cbtQuaternion;
 	public:
-	  gdxAutoCommitQuaternion(JNIEnv * jenv, jobject jQuaternion, btQuaternion & cbtQuaternion) : 
-	    jenv(jenv), jQuaternion(jQuaternion), cbtQuaternion(cbtQuaternion) { };
-	  gdxAutoCommitQuaternion(JNIEnv * jenv, jobject jQuaternion, btQuaternion * cbtQuaternion) : 
-	    jenv(jenv), jQuaternion(jQuaternion), cbtQuaternion(*cbtQuaternion) { };
-	  virtual ~gdxAutoCommitQuaternion() {
-	    gdx_setQuaternionFrombtQuaternion(this->jenv, this->jQuaternion, this->cbtQuaternion);
+	  gdxAutoCommitQuat4f(JNIEnv * jenv, jobject jQuat4f, btQuaternion & cbtQuaternion) : 
+	    jenv(jenv), jQuat4f(jQuat4f), cbtQuaternion(cbtQuaternion) { };
+	  gdxAutoCommitQuat4f(JNIEnv * jenv, jobject jQuat4f, btQuaternion * cbtQuaternion) : 
+	    jenv(jenv), jQuat4f(jQuat4f), cbtQuaternion(*cbtQuaternion) { };
+	  virtual ~gdxAutoCommitQuat4f() {
+	    gdx_setQuat4fFrombtQuaternion(this->jenv, this->jQuat4f, this->cbtQuaternion);
 	  };
 	};
 
-	class gdxAutoCommitbtQuaternionAndReleaseQuaternion {
+	class gdxAutoCommitbtQuaternionAndReleaseQuat4f {
 	private:
 	  JNIEnv * jenv;
-	  jobject jQuaternion;
+	  jobject jQuat4f;
 	  btQuaternion & cbtQuaternion;
 	  const char * poolName;
 	public:
-	  gdxAutoCommitbtQuaternionAndReleaseQuaternion(JNIEnv * jenv, jobject jQuaternion, btQuaternion & cbtQuaternion, const char *poolName) : 
-	    jenv(jenv), jQuaternion(jQuaternion), cbtQuaternion(cbtQuaternion), poolName(poolName) { };
-	  gdxAutoCommitbtQuaternionAndReleaseQuaternion(JNIEnv * jenv, jobject jQuaternion, btQuaternion * cbtQuaternion, const char *poolName) : 
-	    jenv(jenv), jQuaternion(jQuaternion), cbtQuaternion(*cbtQuaternion), poolName(poolName) { };
-	  virtual ~gdxAutoCommitbtQuaternionAndReleaseQuaternion() {
-	    gdx_setbtQuaternionFromQuaternion(this->jenv, this->cbtQuaternion, this->jQuaternion);
-	    gdx_releasePoolObjectQuaternion(this->jenv, this->poolName, this->jQuaternion);
+	  gdxAutoCommitbtQuaternionAndReleaseQuat4f(JNIEnv * jenv, jobject jQuat4f, btQuaternion & cbtQuaternion, const char *poolName) : 
+	    jenv(jenv), jQuat4f(jQuat4f), cbtQuaternion(cbtQuaternion), poolName(poolName) { };
+	  gdxAutoCommitbtQuaternionAndReleaseQuat4f(JNIEnv * jenv, jobject jQuat4f, btQuaternion * cbtQuaternion, const char *poolName) : 
+	    jenv(jenv), jQuat4f(jQuat4f), cbtQuaternion(*cbtQuaternion), poolName(poolName) { };
+	  virtual ~gdxAutoCommitbtQuaternionAndReleaseQuat4f() {
+	    gdx_setbtQuaternionFromQuat4f(this->jenv, this->cbtQuaternion, this->jQuat4f);
+	    gdx_releasePoolObjectQuat4f(this->jenv, this->poolName, this->jQuat4f);
 	  };
 	};
 
@@ -3117,14 +3117,14 @@ SWIGEXPORT jfloat JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbody
   (void)jarg3_;
   arg1 = *(btSparseSdf< 3 > **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   arg3 = *(btCollisionShape **)&jarg3; 
   btVector3 local_arg4;
-  gdx_setbtVector3FromVector3(jenv, local_arg4, jarg4);
+  gdx_setbtVector3FromVector3f(jenv, local_arg4, jarg4);
   arg4 = &local_arg4;
-  gdxAutoCommitVector3 auto_commit_arg4(jenv, jarg4, &local_arg4);
+  gdxAutoCommitVector3f auto_commit_arg4(jenv, jarg4, &local_arg4);
   arg5 = (btScalar)jarg5; 
   result = (btScalar)(arg1)->Evaluate((btVector3 const &)*arg2,(btCollisionShape const *)arg3,*arg4,arg5);
   jresult = (jfloat)result; 
@@ -3160,9 +3160,9 @@ SWIGEXPORT jfloat JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbody
   (void)jcls;
   (void)jarg2_;
   btVector3 local_arg1;
-  gdx_setbtVector3FromVector3(jenv, local_arg1, jarg1);
+  gdx_setbtVector3FromVector3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitVector3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitVector3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   arg2 = *(btCollisionShape **)&jarg2; 
   result = (btScalar)btSparseSdf< 3 >::SWIGTEMPLATEDISAMBIGUATOR DistanceToShape((btVector3 const &)*arg1,(btCollisionShape const *)arg2);
   jresult = (jfloat)result; 
@@ -3892,9 +3892,9 @@ SWIGEXPORT jfloat JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbody
   (void)jarg1_;
   arg1 = *(btSoftBody::ImplicitFn **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   result = (btScalar)(arg1)->Eval((btVector3 const &)*arg2);
   jresult = (jfloat)result; 
   return jresult;
@@ -5264,7 +5264,7 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jcls;
   (void)jarg1_;
   arg1 = *(btSoftBody::RContact **)&jarg1; 
-  gdx_setbtMatrix3x3FromMatrix3(jenv, arg2, jarg2);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, arg2, jarg2);
   if (arg1) (arg1)->m_c0 = arg2;
 }
 
@@ -5279,8 +5279,8 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jarg1_;
   arg1 = *(btSoftBody::RContact **)&jarg1; 
   result =  ((arg1)->m_c0);
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -5774,7 +5774,7 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jcls;
   (void)jarg1_;
   arg1 = *(btSoftBody::Anchor **)&jarg1; 
-  gdx_setbtMatrix3x3FromMatrix3(jenv, arg2, jarg2);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, arg2, jarg2);
   if (arg1) (arg1)->m_c0 = arg2;
 }
 
@@ -5789,8 +5789,8 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jarg1_;
   arg1 = *(btSoftBody::Anchor **)&jarg1; 
   result =  ((arg1)->m_c0);
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -6242,7 +6242,7 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jcls;
   (void)jarg1_;
   arg1 = *(btSoftBody::Pose **)&jarg1; 
-  gdx_setbtMatrix3x3FromMatrix3(jenv, arg2, jarg2);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, arg2, jarg2);
   if (arg1) (arg1)->m_rot = arg2;
 }
 
@@ -6257,8 +6257,8 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jarg1_;
   arg1 = *(btSoftBody::Pose **)&jarg1; 
   result =  ((arg1)->m_rot);
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -6271,7 +6271,7 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jcls;
   (void)jarg1_;
   arg1 = *(btSoftBody::Pose **)&jarg1; 
-  gdx_setbtMatrix3x3FromMatrix3(jenv, arg2, jarg2);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, arg2, jarg2);
   if (arg1) (arg1)->m_scl = arg2;
 }
 
@@ -6286,8 +6286,8 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jarg1_;
   arg1 = *(btSoftBody::Pose **)&jarg1; 
   result =  ((arg1)->m_scl);
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -6300,7 +6300,7 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jcls;
   (void)jarg1_;
   arg1 = *(btSoftBody::Pose **)&jarg1; 
-  gdx_setbtMatrix3x3FromMatrix3(jenv, arg2, jarg2);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, arg2, jarg2);
   if (arg1) (arg1)->m_aqq = arg2;
 }
 
@@ -6315,8 +6315,8 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jarg1_;
   arg1 = *(btSoftBody::Pose **)&jarg1; 
   result =  ((arg1)->m_aqq);
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -6522,7 +6522,7 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jcls;
   (void)jarg1_;
   arg1 = *(btSoftBody::Cluster **)&jarg1; 
-  gdx_setbtMatrix3x3FromMatrix3(jenv, arg2, jarg2);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, arg2, jarg2);
   if (arg1) (arg1)->m_locii = arg2;
 }
 
@@ -6537,8 +6537,8 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jarg1_;
   arg1 = *(btSoftBody::Cluster **)&jarg1; 
   result =  ((arg1)->m_locii);
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -6551,7 +6551,7 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jcls;
   (void)jarg1_;
   arg1 = *(btSoftBody::Cluster **)&jarg1; 
-  gdx_setbtMatrix3x3FromMatrix3(jenv, arg2, jarg2);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, arg2, jarg2);
   if (arg1) (arg1)->m_invwi = arg2;
 }
 
@@ -6566,8 +6566,8 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jarg1_;
   arg1 = *(btSoftBody::Cluster **)&jarg1; 
   result =  ((arg1)->m_invwi);
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -7372,8 +7372,8 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jarg1_;
   arg1 = *(btSoftBody::Body **)&jarg1; 
   result = (btMatrix3x3 *) &((btSoftBody::Body const *)arg1)->invWorldInertia();
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -7403,8 +7403,8 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jarg1_;
   arg1 = *(btSoftBody::Body **)&jarg1; 
   result = (btTransform *) &((btSoftBody::Body const *)arg1)->xform();
-  jresult = gdx_getReturnMatrix4(jenv);
-  gdx_setMatrix4FrombtTransform(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix4f(jenv);
+  gdx_setMatrix4fFrombtTransform(jenv, jresult, result);
   return jresult;
 }
 
@@ -7419,8 +7419,8 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jarg1_;
   arg1 = *(btSoftBody::Body **)&jarg1; 
   result = ((btSoftBody::Body const *)arg1)->linearVelocity();
-  jresult = gdx_getReturnVector3(jenv);
-  gdx_setVector3FrombtVector3(jenv, jresult, result);
+  jresult = gdx_getReturnVector3f(jenv);
+  gdx_setVector3fFrombtVector3(jenv, jresult, result);
   return jresult;
 }
 
@@ -7436,12 +7436,12 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jarg1_;
   arg1 = *(btSoftBody::Body **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   result = ((btSoftBody::Body const *)arg1)->angularVelocity((btVector3 const &)*arg2);
-  jresult = gdx_getReturnVector3(jenv);
-  gdx_setVector3FrombtVector3(jenv, jresult, result);
+  jresult = gdx_getReturnVector3f(jenv);
+  gdx_setVector3fFrombtVector3(jenv, jresult, result);
   return jresult;
 }
 
@@ -7456,8 +7456,8 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jarg1_;
   arg1 = *(btSoftBody::Body **)&jarg1; 
   result = ((btSoftBody::Body const *)arg1)->angularVelocity();
-  jresult = gdx_getReturnVector3(jenv);
-  gdx_setVector3FrombtVector3(jenv, jresult, result);
+  jresult = gdx_getReturnVector3f(jenv);
+  gdx_setVector3fFrombtVector3(jenv, jresult, result);
   return jresult;
 }
 
@@ -7473,12 +7473,12 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jarg1_;
   arg1 = *(btSoftBody::Body **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   result = ((btSoftBody::Body const *)arg1)->velocity((btVector3 const &)*arg2);
-  jresult = gdx_getReturnVector3(jenv);
-  gdx_setVector3FrombtVector3(jenv, jresult, result);
+  jresult = gdx_getReturnVector3f(jenv);
+  gdx_setVector3fFrombtVector3(jenv, jresult, result);
   return jresult;
 }
 
@@ -7493,13 +7493,13 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody::Body **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   ((btSoftBody::Body const *)arg1)->applyVImpulse((btVector3 const &)*arg2,(btVector3 const &)*arg3);
 }
 
@@ -7514,13 +7514,13 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody::Body **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   ((btSoftBody::Body const *)arg1)->applyDImpulse((btVector3 const &)*arg2,(btVector3 const &)*arg3);
 }
 
@@ -7541,9 +7541,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
     return ;
   } 
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   ((btSoftBody::Body const *)arg1)->applyImpulse((btSoftBody::Impulse const &)*arg2,(btVector3 const &)*arg3);
 }
 
@@ -7557,9 +7557,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody::Body **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   ((btSoftBody::Body const *)arg1)->applyVAImpulse((btVector3 const &)*arg2);
 }
 
@@ -7573,9 +7573,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody::Body **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   ((btSoftBody::Body const *)arg1)->applyDAImpulse((btVector3 const &)*arg2);
 }
 
@@ -7607,9 +7607,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody::Body **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   ((btSoftBody::Body const *)arg1)->applyDCImpulse((btVector3 const &)*arg2);
 }
 
@@ -7970,7 +7970,7 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jcls;
   (void)jarg1_;
   arg1 = *(btSoftBody::Joint **)&jarg1; 
-  gdx_setbtMatrix3x3FromMatrix3(jenv, arg2, jarg2);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, arg2, jarg2);
   if (arg1) (arg1)->m_massmatrix = arg2;
 }
 
@@ -7985,8 +7985,8 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jarg1_;
   arg1 = *(btSoftBody::Joint **)&jarg1; 
   result =  ((arg1)->m_massmatrix);
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -9774,13 +9774,13 @@ SWIGEXPORT jlong JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJ
   (void)jenv;
   (void)jcls;
   btVector3 local_arg1;
-  gdx_setbtVector3FromVector3(jenv, local_arg1, jarg1);
+  gdx_setbtVector3FromVector3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitVector3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitVector3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   arg3 = (btScalar)jarg3; 
   result = (btSoftBody::RayFromToCaster *)new btSoftBody::RayFromToCaster((btVector3 const &)*arg1,(btVector3 const &)*arg2,arg3);
   *(btSoftBody::RayFromToCaster **)&jresult = result; 
@@ -9802,29 +9802,29 @@ SWIGEXPORT jfloat JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbody
   (void)jenv;
   (void)jcls;
   btVector3 local_arg1;
-  gdx_setbtVector3FromVector3(jenv, local_arg1, jarg1);
+  gdx_setbtVector3FromVector3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitVector3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitVector3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   btVector3 local_arg4;
-  gdx_setbtVector3FromVector3(jenv, local_arg4, jarg4);
+  gdx_setbtVector3FromVector3f(jenv, local_arg4, jarg4);
   arg4 = &local_arg4;
-  gdxAutoCommitVector3 auto_commit_arg4(jenv, jarg4, &local_arg4);
+  gdxAutoCommitVector3f auto_commit_arg4(jenv, jarg4, &local_arg4);
   btVector3 local_arg5;
-  gdx_setbtVector3FromVector3(jenv, local_arg5, jarg5);
+  gdx_setbtVector3FromVector3f(jenv, local_arg5, jarg5);
   arg5 = &local_arg5;
-  gdxAutoCommitVector3 auto_commit_arg5(jenv, jarg5, &local_arg5);
+  gdxAutoCommitVector3f auto_commit_arg5(jenv, jarg5, &local_arg5);
   btVector3 local_arg6;
-  gdx_setbtVector3FromVector3(jenv, local_arg6, jarg6);
+  gdx_setbtVector3FromVector3f(jenv, local_arg6, jarg6);
   arg6 = &local_arg6;
-  gdxAutoCommitVector3 auto_commit_arg6(jenv, jarg6, &local_arg6);
+  gdxAutoCommitVector3f auto_commit_arg6(jenv, jarg6, &local_arg6);
   arg7 = (btScalar)jarg7; 
   result = (btScalar)btSoftBody::RayFromToCaster::rayFromToTriangle((btVector3 const &)*arg1,(btVector3 const &)*arg2,(btVector3 const &)*arg3,(btVector3 const &)*arg4,(btVector3 const &)*arg5,(btVector3 const &)*arg6,arg7);
   jresult = (jfloat)result; 
@@ -9845,29 +9845,29 @@ SWIGEXPORT jfloat JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbody
   (void)jenv;
   (void)jcls;
   btVector3 local_arg1;
-  gdx_setbtVector3FromVector3(jenv, local_arg1, jarg1);
+  gdx_setbtVector3FromVector3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitVector3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitVector3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   btVector3 local_arg4;
-  gdx_setbtVector3FromVector3(jenv, local_arg4, jarg4);
+  gdx_setbtVector3FromVector3f(jenv, local_arg4, jarg4);
   arg4 = &local_arg4;
-  gdxAutoCommitVector3 auto_commit_arg4(jenv, jarg4, &local_arg4);
+  gdxAutoCommitVector3f auto_commit_arg4(jenv, jarg4, &local_arg4);
   btVector3 local_arg5;
-  gdx_setbtVector3FromVector3(jenv, local_arg5, jarg5);
+  gdx_setbtVector3FromVector3f(jenv, local_arg5, jarg5);
   arg5 = &local_arg5;
-  gdxAutoCommitVector3 auto_commit_arg5(jenv, jarg5, &local_arg5);
+  gdxAutoCommitVector3f auto_commit_arg5(jenv, jarg5, &local_arg5);
   btVector3 local_arg6;
-  gdx_setbtVector3FromVector3(jenv, local_arg6, jarg6);
+  gdx_setbtVector3FromVector3f(jenv, local_arg6, jarg6);
   arg6 = &local_arg6;
-  gdxAutoCommitVector3 auto_commit_arg6(jenv, jarg6, &local_arg6);
+  gdxAutoCommitVector3f auto_commit_arg6(jenv, jarg6, &local_arg6);
   result = (btScalar)btSoftBody::RayFromToCaster::rayFromToTriangle((btVector3 const &)*arg1,(btVector3 const &)*arg2,(btVector3 const &)*arg3,(btVector3 const &)*arg4,(btVector3 const &)*arg5,(btVector3 const &)*arg6);
   jresult = (jfloat)result; 
   return jresult;
@@ -10820,9 +10820,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
     if (!arg2) return ;
   }
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   arg4 = *(btVector4 **)&jarg4;
   if (!arg4) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "btVector4 const & reference is null");
@@ -10860,9 +10860,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
     if (!arg2) return ;
   }
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   arg4 = *(btVector4 **)&jarg4;
   if (!arg4) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "btVector4 const & reference is null");
@@ -10897,9 +10897,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
     if (!arg2) return ;
   }
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   arg4 = *(btVector4 **)&jarg4;
   if (!arg4) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "btVector4 const & reference is null");
@@ -10931,9 +10931,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
     if (!arg2) return ;
   }
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   arg4 = *(btVector4 **)&jarg4;
   if (!arg4) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "btVector4 const & reference is null");
@@ -10962,9 +10962,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
     if (!arg2) return ;
   }
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   arg4 = *(btVector4 **)&jarg4;
   if (!arg4) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "btVector4 const & reference is null");
@@ -10990,9 +10990,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
     if (!arg2) return ;
   }
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   (arg1)->appendNote((char const *)arg2,(btVector3 const &)*arg3);
   if (arg2) jenv->ReleaseStringUTFChars(jarg2, (const char *)arg2);
 }
@@ -11015,9 +11015,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
     if (!arg2) return ;
   }
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   arg4 = *(btSoftBody::Node **)&jarg4; 
   (arg1)->appendNote((char const *)arg2,(btVector3 const &)*arg3,arg4);
   if (arg2) jenv->ReleaseStringUTFChars(jarg2, (const char *)arg2);
@@ -11041,9 +11041,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
     if (!arg2) return ;
   }
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   arg4 = *(btSoftBody::Link **)&jarg4; 
   (arg1)->appendNote((char const *)arg2,(btVector3 const &)*arg3,arg4);
   if (arg2) jenv->ReleaseStringUTFChars(jarg2, (const char *)arg2);
@@ -11067,9 +11067,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
     if (!arg2) return ;
   }
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   arg4 = *(btSoftBody::Face **)&jarg4; 
   (arg1)->appendNote((char const *)arg2,(btVector3 const &)*arg3,arg4);
   if (arg2) jenv->ReleaseStringUTFChars(jarg2, (const char *)arg2);
@@ -11086,9 +11086,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   arg3 = (btScalar)jarg3; 
   (arg1)->appendNode((btVector3 const &)*arg2,arg3);
 }
@@ -11450,9 +11450,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   arg2 = (int)jarg2; 
   arg3 = *(btRigidBody **)&jarg3; 
   btVector3 local_arg4;
-  gdx_setbtVector3FromVector3(jenv, local_arg4, jarg4);
+  gdx_setbtVector3FromVector3f(jenv, local_arg4, jarg4);
   arg4 = &local_arg4;
-  gdxAutoCommitVector3 auto_commit_arg4(jenv, jarg4, &local_arg4);
+  gdxAutoCommitVector3f auto_commit_arg4(jenv, jarg4, &local_arg4);
   arg5 = jarg5 ? true : false; 
   arg6 = (btScalar)jarg6; 
   (arg1)->appendAnchor(arg2,arg3,(btVector3 const &)*arg4,arg5,arg6);
@@ -11474,9 +11474,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   arg2 = (int)jarg2; 
   arg3 = *(btRigidBody **)&jarg3; 
   btVector3 local_arg4;
-  gdx_setbtVector3FromVector3(jenv, local_arg4, jarg4);
+  gdx_setbtVector3FromVector3f(jenv, local_arg4, jarg4);
   arg4 = &local_arg4;
-  gdxAutoCommitVector3 auto_commit_arg4(jenv, jarg4, &local_arg4);
+  gdxAutoCommitVector3f auto_commit_arg4(jenv, jarg4, &local_arg4);
   arg5 = jarg5 ? true : false; 
   (arg1)->appendAnchor(arg2,arg3,(btVector3 const &)*arg4,arg5);
 }
@@ -11496,9 +11496,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   arg2 = (int)jarg2; 
   arg3 = *(btRigidBody **)&jarg3; 
   btVector3 local_arg4;
-  gdx_setbtVector3FromVector3(jenv, local_arg4, jarg4);
+  gdx_setbtVector3FromVector3f(jenv, local_arg4, jarg4);
   arg4 = &local_arg4;
-  gdxAutoCommitVector3 auto_commit_arg4(jenv, jarg4, &local_arg4);
+  gdxAutoCommitVector3f auto_commit_arg4(jenv, jarg4, &local_arg4);
   (arg1)->appendAnchor(arg2,arg3,(btVector3 const &)*arg4);
 }
 
@@ -11704,9 +11704,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   (arg1)->addForce((btVector3 const &)*arg2);
 }
 
@@ -11721,9 +11721,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   arg3 = (int)jarg3; 
   (arg1)->addForce((btVector3 const &)*arg2,arg3);
 }
@@ -11739,9 +11739,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   arg3 = (int)jarg3; 
   (arg1)->addAeroForceToNode((btVector3 const &)*arg2,arg3);
 }
@@ -11757,9 +11757,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   arg3 = (int)jarg3; 
   (arg1)->addAeroForceToFace((btVector3 const &)*arg2,arg3);
 }
@@ -11774,9 +11774,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   (arg1)->addVelocity((btVector3 const &)*arg2);
 }
 
@@ -11790,9 +11790,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   (arg1)->setVelocity((btVector3 const &)*arg2);
 }
 
@@ -11807,9 +11807,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   arg3 = (int)jarg3; 
   (arg1)->addVelocity((btVector3 const &)*arg2,arg3);
 }
@@ -11938,9 +11938,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody **)&jarg1; 
   btTransform local_arg2;
-  gdx_setbtTransformFromMatrix4(jenv, local_arg2, jarg2);
+  gdx_setbtTransformFromMatrix4f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitMatrix4 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitMatrix4f auto_commit_arg2(jenv, jarg2, &local_arg2);
   (arg1)->transform((btTransform const &)*arg2);
 }
 
@@ -11954,9 +11954,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   (arg1)->translate((btVector3 const &)*arg2);
 }
 
@@ -11970,9 +11970,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody **)&jarg1; 
   btQuaternion local_arg2;
-  gdx_setbtQuaternionFromQuaternion(jenv, local_arg2, jarg2);
+  gdx_setbtQuaternionFromQuat4f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitQuaternion auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitQuat4f auto_commit_arg2(jenv, jarg2, &local_arg2);
   (arg1)->rotate((btQuaternion const &)*arg2);
 }
 
@@ -11986,9 +11986,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   (arg1)->scale((btVector3 const &)*arg2);
 }
 
@@ -12059,8 +12059,8 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jarg1_;
   arg1 = *(btSoftBody::Cluster **)&jarg1; 
   result = btSoftBody::clusterCom((btSoftBody::Cluster const *)arg1);
-  jresult = gdx_getReturnVector3(jenv);
-  gdx_setVector3FrombtVector3(jenv, jresult, result);
+  jresult = gdx_getReturnVector3f(jenv);
+  gdx_setVector3fFrombtVector3(jenv, jresult, result);
   return jresult;
 }
 
@@ -12077,8 +12077,8 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   arg1 = *(btSoftBody **)&jarg1; 
   arg2 = (int)jarg2; 
   result = ((btSoftBody const *)arg1)->clusterCom(arg2);
-  jresult = gdx_getReturnVector3(jenv);
-  gdx_setVector3FrombtVector3(jenv, jresult, result);
+  jresult = gdx_getReturnVector3f(jenv);
+  gdx_setVector3fFrombtVector3(jenv, jresult, result);
   return jresult;
 }
 
@@ -12094,12 +12094,12 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jarg1_;
   arg1 = *(btSoftBody::Cluster **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   result = btSoftBody::clusterVelocity((btSoftBody::Cluster const *)arg1,(btVector3 const &)*arg2);
-  jresult = gdx_getReturnVector3(jenv);
-  gdx_setVector3FrombtVector3(jenv, jresult, result);
+  jresult = gdx_getReturnVector3f(jenv);
+  gdx_setVector3fFrombtVector3(jenv, jresult, result);
   return jresult;
 }
 
@@ -12114,13 +12114,13 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody::Cluster **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   btSoftBody::clusterVImpulse(arg1,(btVector3 const &)*arg2,(btVector3 const &)*arg3);
 }
 
@@ -12135,13 +12135,13 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody::Cluster **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   btSoftBody::clusterDImpulse(arg1,(btVector3 const &)*arg2,(btVector3 const &)*arg3);
 }
 
@@ -12157,9 +12157,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg3_;
   arg1 = *(btSoftBody::Cluster **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   arg3 = *(btSoftBody::Impulse **)&jarg3;
   if (!arg3) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "btSoftBody::Impulse const & reference is null");
@@ -12178,9 +12178,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody::Cluster **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btSoftBody::clusterVAImpulse(arg1,(btVector3 const &)*arg2);
 }
 
@@ -12194,9 +12194,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody::Cluster **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btSoftBody::clusterDAImpulse(arg1,(btVector3 const &)*arg2);
 }
 
@@ -12228,9 +12228,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody::Cluster **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btSoftBody::clusterDCImpulse(arg1,(btVector3 const &)*arg2);
 }
 
@@ -12419,13 +12419,13 @@ SWIGEXPORT jboolean JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbo
   (void)jarg4_;
   arg1 = *(btSoftBody **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   arg4 = *(btSoftBody::sRayCast **)&jarg4;
   if (!arg4) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "btSoftBody::sRayCast & reference is null");
@@ -12563,9 +12563,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   (arg1)->setWindVelocity((btVector3 const &)*arg2);
 }
 
@@ -12595,13 +12595,13 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   ((btSoftBody const *)arg1)->getAabb(*arg2,*arg3);
 }
 
@@ -12663,13 +12663,13 @@ SWIGEXPORT jint JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg1_;
   arg1 = *(btSoftBody **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   arg4 = *(btScalar **)&jarg4;
   if (!arg4) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "btScalar & reference is null");
@@ -12713,8 +12713,8 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jarg1_;
   arg1 = *(btSoftBody **)&jarg1; 
   result = ((btSoftBody const *)arg1)->evaluateCom();
-  jresult = gdx_getReturnVector3(jenv);
-  gdx_setVector3FrombtVector3(jenv, jresult, result);
+  jresult = gdx_getReturnVector3f(jenv);
+  gdx_setVector3fFrombtVector3(jenv, jresult, result);
   return jresult;
 }
 
@@ -12736,9 +12736,9 @@ SWIGEXPORT jboolean JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbo
   arg1 = *(btSoftBody **)&jarg1; 
   arg2 = *(btCollisionObjectWrapper **)&jarg2; 
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   arg4 = (btScalar)jarg4; 
   arg5 = *(btSoftBody::sCti **)&jarg5;
   if (!arg5) {
@@ -13860,8 +13860,8 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jarg1_;
   arg1 = *(btSoftBodyTriangleCallback **)&jarg1; 
   result = (btVector3 *) &((btSoftBodyTriangleCallback const *)arg1)->getAabbMin();
-  jresult = gdx_getReturnVector3(jenv);
-  gdx_setVector3FrombtVector3(jenv, jresult, result);
+  jresult = gdx_getReturnVector3f(jenv);
+  gdx_setVector3fFrombtVector3(jenv, jresult, result);
   return jresult;
 }
 
@@ -13876,8 +13876,8 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jarg1_;
   arg1 = *(btSoftBodyTriangleCallback **)&jarg1; 
   result = (btVector3 *) &((btSoftBodyTriangleCallback const *)arg1)->getAabbMax();
-  jresult = gdx_getReturnVector3(jenv);
-  gdx_setVector3FrombtVector3(jenv, jresult, result);
+  jresult = gdx_getReturnVector3f(jenv);
+  gdx_setVector3fFrombtVector3(jenv, jresult, result);
   return jresult;
 }
 
@@ -18291,13 +18291,13 @@ SWIGEXPORT jlong JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJ
     return 0;
   } 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   arg4 = (int)jarg4; 
   arg5 = (int)jarg5; 
   result = (btSoftBody *)btSoftBodyHelpers::CreateRope(*arg1,(btVector3 const &)*arg2,(btVector3 const &)*arg3,arg4,arg5);
@@ -18328,21 +18328,21 @@ SWIGEXPORT jlong JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJ
     return 0;
   } 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   btVector3 local_arg4;
-  gdx_setbtVector3FromVector3(jenv, local_arg4, jarg4);
+  gdx_setbtVector3FromVector3f(jenv, local_arg4, jarg4);
   arg4 = &local_arg4;
-  gdxAutoCommitVector3 auto_commit_arg4(jenv, jarg4, &local_arg4);
+  gdxAutoCommitVector3f auto_commit_arg4(jenv, jarg4, &local_arg4);
   btVector3 local_arg5;
-  gdx_setbtVector3FromVector3(jenv, local_arg5, jarg5);
+  gdx_setbtVector3FromVector3f(jenv, local_arg5, jarg5);
   arg5 = &local_arg5;
-  gdxAutoCommitVector3 auto_commit_arg5(jenv, jarg5, &local_arg5);
+  gdxAutoCommitVector3f auto_commit_arg5(jenv, jarg5, &local_arg5);
   arg6 = (int)jarg6; 
   arg7 = (int)jarg7; 
   arg8 = (int)jarg8; 
@@ -18376,21 +18376,21 @@ SWIGEXPORT jlong JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJ
     return 0;
   } 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   btVector3 local_arg4;
-  gdx_setbtVector3FromVector3(jenv, local_arg4, jarg4);
+  gdx_setbtVector3FromVector3f(jenv, local_arg4, jarg4);
   arg4 = &local_arg4;
-  gdxAutoCommitVector3 auto_commit_arg4(jenv, jarg4, &local_arg4);
+  gdxAutoCommitVector3f auto_commit_arg4(jenv, jarg4, &local_arg4);
   btVector3 local_arg5;
-  gdx_setbtVector3FromVector3(jenv, local_arg5, jarg5);
+  gdx_setbtVector3FromVector3f(jenv, local_arg5, jarg5);
   arg5 = &local_arg5;
-  gdxAutoCommitVector3 auto_commit_arg5(jenv, jarg5, &local_arg5);
+  gdxAutoCommitVector3f auto_commit_arg5(jenv, jarg5, &local_arg5);
   arg6 = (int)jarg6; 
   arg7 = (int)jarg7; 
   arg8 = (int)jarg8; 
@@ -18430,21 +18430,21 @@ SWIGEXPORT jlong JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJ
     return 0;
   } 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   btVector3 local_arg4;
-  gdx_setbtVector3FromVector3(jenv, local_arg4, jarg4);
+  gdx_setbtVector3FromVector3f(jenv, local_arg4, jarg4);
   arg4 = &local_arg4;
-  gdxAutoCommitVector3 auto_commit_arg4(jenv, jarg4, &local_arg4);
+  gdxAutoCommitVector3f auto_commit_arg4(jenv, jarg4, &local_arg4);
   btVector3 local_arg5;
-  gdx_setbtVector3FromVector3(jenv, local_arg5, jarg5);
+  gdx_setbtVector3FromVector3f(jenv, local_arg5, jarg5);
   arg5 = &local_arg5;
-  gdxAutoCommitVector3 auto_commit_arg5(jenv, jarg5, &local_arg5);
+  gdxAutoCommitVector3f auto_commit_arg5(jenv, jarg5, &local_arg5);
   arg6 = (int)jarg6; 
   arg7 = (int)jarg7; 
   arg8 = (int)jarg8; 
@@ -18494,13 +18494,13 @@ SWIGEXPORT jlong JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJ
     return 0;
   } 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   arg4 = (int)jarg4; 
   result = (btSoftBody *)btSoftBodyHelpers::CreateEllipsoid(*arg1,(btVector3 const &)*arg2,(btVector3 const &)*arg3,arg4);
   *(btSoftBody **)&jresult = result; 
@@ -18846,17 +18846,17 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jenv;
   (void)jcls;
   btMatrix3x3 local_arg1;
-  gdx_setbtMatrix3x3FromMatrix3(jenv, local_arg1, jarg1);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitMatrix3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitMatrix3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   btMatrix3x3 local_arg2;
-  gdx_setbtMatrix3x3FromMatrix3(jenv, local_arg2, jarg2);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitMatrix3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitMatrix3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   arg3 = (btScalar)jarg3; 
   result = Lerp((btMatrix3x3 const &)*arg1,(btMatrix3x3 const &)*arg2,arg3);
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -18870,13 +18870,13 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jenv;
   (void)jcls;
   btVector3 local_arg1;
-  gdx_setbtVector3FromVector3(jenv, local_arg1, jarg1);
+  gdx_setbtVector3FromVector3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitVector3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitVector3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   arg2 = (btScalar)jarg2; 
   result = Clamp((btVector3 const &)*arg1,arg2);
-  jresult = gdx_getReturnVector3(jenv);
-  gdx_setVector3FrombtVector3(jenv, jresult, result);
+  jresult = gdx_getReturnVector3f(jenv);
+  gdx_setVector3fFrombtVector3(jenv, jresult, result);
   return jresult;
 }
 
@@ -18890,13 +18890,13 @@ SWIGEXPORT jfloat JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbody
   (void)jenv;
   (void)jcls;
   btVector3 local_arg1;
-  gdx_setbtVector3FromVector3(jenv, local_arg1, jarg1);
+  gdx_setbtVector3FromVector3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitVector3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitVector3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   result = (btScalar)ClusterMetric((btVector3 const &)*arg1,(btVector3 const &)*arg2);
   jresult = (jfloat)result; 
   return jresult;
@@ -18912,13 +18912,13 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jenv;
   (void)jcls;
   btVector3 local_arg1;
-  gdx_setbtVector3FromVector3(jenv, local_arg1, jarg1);
+  gdx_setbtVector3FromVector3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitVector3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitVector3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   arg2 = (btScalar)jarg2; 
   result = ScaleAlongAxis((btVector3 const &)*arg1,arg2);
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -18931,12 +18931,12 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jenv;
   (void)jcls;
   btVector3 local_arg1;
-  gdx_setbtVector3FromVector3(jenv, local_arg1, jarg1);
+  gdx_setbtVector3FromVector3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitVector3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitVector3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   result = Cross((btVector3 const &)*arg1);
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -18950,8 +18950,8 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jcls;
   arg1 = (btScalar)jarg1; 
   result = Diagonal(arg1);
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -18965,16 +18965,16 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jenv;
   (void)jcls;
   btMatrix3x3 local_arg1;
-  gdx_setbtMatrix3x3FromMatrix3(jenv, local_arg1, jarg1);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitMatrix3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitMatrix3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   btMatrix3x3 local_arg2;
-  gdx_setbtMatrix3x3FromMatrix3(jenv, local_arg2, jarg2);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitMatrix3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitMatrix3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   result = Add((btMatrix3x3 const &)*arg1,(btMatrix3x3 const &)*arg2);
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -18988,16 +18988,16 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jenv;
   (void)jcls;
   btMatrix3x3 local_arg1;
-  gdx_setbtMatrix3x3FromMatrix3(jenv, local_arg1, jarg1);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitMatrix3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitMatrix3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   btMatrix3x3 local_arg2;
-  gdx_setbtMatrix3x3FromMatrix3(jenv, local_arg2, jarg2);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitMatrix3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitMatrix3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   result = Sub((btMatrix3x3 const &)*arg1,(btMatrix3x3 const &)*arg2);
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -19011,13 +19011,13 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jenv;
   (void)jcls;
   btMatrix3x3 local_arg1;
-  gdx_setbtMatrix3x3FromMatrix3(jenv, local_arg1, jarg1);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitMatrix3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitMatrix3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   arg2 = (btScalar)jarg2; 
   result = Mul((btMatrix3x3 const &)*arg1,arg2);
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -19028,9 +19028,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jenv;
   (void)jcls;
   btMatrix3x3 local_arg1;
-  gdx_setbtMatrix3x3FromMatrix3(jenv, local_arg1, jarg1);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitMatrix3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitMatrix3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   Orthogonalize(*arg1);
 }
 
@@ -19046,16 +19046,16 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jcls;
   arg1 = (btScalar)jarg1; 
   btMatrix3x3 local_arg2;
-  gdx_setbtMatrix3x3FromMatrix3(jenv, local_arg2, jarg2);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitMatrix3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitMatrix3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   result = MassMatrix(arg1,(btMatrix3x3 const &)*arg2,(btVector3 const &)*arg3);
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -19075,16 +19075,16 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   arg2 = (btScalar)jarg2; 
   arg3 = (btScalar)jarg3; 
   btMatrix3x3 local_arg4;
-  gdx_setbtMatrix3x3FromMatrix3(jenv, local_arg4, jarg4);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, local_arg4, jarg4);
   arg4 = &local_arg4;
-  gdxAutoCommitMatrix3 auto_commit_arg4(jenv, jarg4, &local_arg4);
+  gdxAutoCommitMatrix3f auto_commit_arg4(jenv, jarg4, &local_arg4);
   btVector3 local_arg5;
-  gdx_setbtVector3FromVector3(jenv, local_arg5, jarg5);
+  gdx_setbtVector3FromVector3f(jenv, local_arg5, jarg5);
   arg5 = &local_arg5;
-  gdxAutoCommitVector3 auto_commit_arg5(jenv, jarg5, &local_arg5);
+  gdxAutoCommitVector3f auto_commit_arg5(jenv, jarg5, &local_arg5);
   result = ImpulseMatrix(arg1,arg2,arg3,(btMatrix3x3 const &)*arg4,(btVector3 const &)*arg5);
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -19103,25 +19103,25 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jcls;
   arg1 = (btScalar)jarg1; 
   btMatrix3x3 local_arg2;
-  gdx_setbtMatrix3x3FromMatrix3(jenv, local_arg2, jarg2);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitMatrix3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitMatrix3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   arg4 = (btScalar)jarg4; 
   btMatrix3x3 local_arg5;
-  gdx_setbtMatrix3x3FromMatrix3(jenv, local_arg5, jarg5);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, local_arg5, jarg5);
   arg5 = &local_arg5;
-  gdxAutoCommitMatrix3 auto_commit_arg5(jenv, jarg5, &local_arg5);
+  gdxAutoCommitMatrix3f auto_commit_arg5(jenv, jarg5, &local_arg5);
   btVector3 local_arg6;
-  gdx_setbtVector3FromVector3(jenv, local_arg6, jarg6);
+  gdx_setbtVector3FromVector3f(jenv, local_arg6, jarg6);
   arg6 = &local_arg6;
-  gdxAutoCommitVector3 auto_commit_arg6(jenv, jarg6, &local_arg6);
+  gdxAutoCommitVector3f auto_commit_arg6(jenv, jarg6, &local_arg6);
   result = ImpulseMatrix(arg1,(btMatrix3x3 const &)*arg2,(btVector3 const &)*arg3,arg4,(btMatrix3x3 const &)*arg5,(btVector3 const &)*arg6);
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -19135,16 +19135,16 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jenv;
   (void)jcls;
   btMatrix3x3 local_arg1;
-  gdx_setbtMatrix3x3FromMatrix3(jenv, local_arg1, jarg1);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitMatrix3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitMatrix3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   btMatrix3x3 local_arg2;
-  gdx_setbtMatrix3x3FromMatrix3(jenv, local_arg2, jarg2);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitMatrix3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitMatrix3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   result = AngularImpulseMatrix((btMatrix3x3 const &)*arg1,(btMatrix3x3 const &)*arg2);
-  jresult = gdx_getReturnMatrix3(jenv);
-  gdx_setMatrix3FrombtMatrix3x3(jenv, jresult, result);
+  jresult = gdx_getReturnMatrix3f(jenv);
+  gdx_setMatrix3fFrombtMatrix3x3(jenv, jresult, result);
   return jresult;
 }
 
@@ -19158,16 +19158,16 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jenv;
   (void)jcls;
   btVector3 local_arg1;
-  gdx_setbtVector3FromVector3(jenv, local_arg1, jarg1);
+  gdx_setbtVector3FromVector3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitVector3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitVector3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   result = ProjectOnAxis((btVector3 const &)*arg1,(btVector3 const &)*arg2);
-  jresult = gdx_getReturnVector3(jenv);
-  gdx_setVector3FrombtVector3(jenv, jresult, result);
+  jresult = gdx_getReturnVector3f(jenv);
+  gdx_setVector3fFrombtVector3(jenv, jresult, result);
   return jresult;
 }
 
@@ -19181,16 +19181,16 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jenv;
   (void)jcls;
   btVector3 local_arg1;
-  gdx_setbtVector3FromVector3(jenv, local_arg1, jarg1);
+  gdx_setbtVector3FromVector3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitVector3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitVector3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   result = ProjectOnPlane((btVector3 const &)*arg1,(btVector3 const &)*arg2);
-  jresult = gdx_getReturnVector3(jenv);
-  gdx_setVector3FrombtVector3(jenv, jresult, result);
+  jresult = gdx_getReturnVector3f(jenv);
+  gdx_setVector3fFrombtVector3(jenv, jresult, result);
   return jresult;
 }
 
@@ -19204,17 +19204,17 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jenv;
   (void)jcls;
   btVector3 local_arg1;
-  gdx_setbtVector3FromVector3(jenv, local_arg1, jarg1);
+  gdx_setbtVector3FromVector3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitVector3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitVector3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   arg4 = *(btScalar **)&jarg4;
   if (!arg4) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "btScalar & reference is null");
@@ -19234,21 +19234,21 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jenv;
   (void)jcls;
   btVector3 local_arg1;
-  gdx_setbtVector3FromVector3(jenv, local_arg1, jarg1);
+  gdx_setbtVector3FromVector3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitVector3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitVector3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   btVector3 local_arg4;
-  gdx_setbtVector3FromVector3(jenv, local_arg4, jarg4);
+  gdx_setbtVector3FromVector3f(jenv, local_arg4, jarg4);
   arg4 = &local_arg4;
-  gdxAutoCommitVector3 auto_commit_arg4(jenv, jarg4, &local_arg4);
+  gdxAutoCommitVector3f auto_commit_arg4(jenv, jarg4, &local_arg4);
   arg5 = *(btScalar **)&jarg5;
   if (!arg5) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "btScalar & reference is null");
@@ -19269,24 +19269,24 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jenv;
   (void)jcls;
   btVector3 local_arg1;
-  gdx_setbtVector3FromVector3(jenv, local_arg1, jarg1);
+  gdx_setbtVector3FromVector3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitVector3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitVector3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   btVector3 local_arg4;
-  gdx_setbtVector3FromVector3(jenv, local_arg4, jarg4);
+  gdx_setbtVector3FromVector3f(jenv, local_arg4, jarg4);
   arg4 = &local_arg4;
-  gdxAutoCommitVector3 auto_commit_arg4(jenv, jarg4, &local_arg4);
+  gdxAutoCommitVector3f auto_commit_arg4(jenv, jarg4, &local_arg4);
   result = BaryCoord((btVector3 const &)*arg1,(btVector3 const &)*arg2,(btVector3 const &)*arg3,(btVector3 const &)*arg4);
-  jresult = gdx_getReturnVector3(jenv);
-  gdx_setVector3FrombtVector3(jenv, jresult, result);
+  jresult = gdx_getReturnVector3f(jenv);
+  gdx_setVector3fFrombtVector3(jenv, jresult, result);
   return jresult;
 }
 
@@ -19305,13 +19305,13 @@ SWIGEXPORT jfloat JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbody
   (void)jarg1_;
   arg1 = *(btSoftBody::ImplicitFn **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   arg4 = (btScalar)jarg4; 
   arg5 = (int)jarg5; 
   result = (btScalar)ImplicitSolve(arg1,(btVector3 const &)*arg2,(btVector3 const &)*arg3,arg4,arg5);
@@ -19333,13 +19333,13 @@ SWIGEXPORT jfloat JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbody
   (void)jarg1_;
   arg1 = *(btSoftBody::ImplicitFn **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   arg4 = (btScalar)jarg4; 
   result = (btScalar)ImplicitSolve(arg1,(btVector3 const &)*arg2,(btVector3 const &)*arg3,arg4);
   jresult = (jfloat)result; 
@@ -19355,12 +19355,12 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
   (void)jenv;
   (void)jcls;
   btVector3 local_arg1;
-  gdx_setbtVector3FromVector3(jenv, local_arg1, jarg1);
+  gdx_setbtVector3FromVector3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitVector3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitVector3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   result = NormalizeAny((btVector3 const &)*arg1);
-  jresult = gdx_getReturnVector3(jenv);
-  gdx_setVector3FrombtVector3(jenv, jresult, result);
+  jresult = gdx_getReturnVector3f(jenv);
+  gdx_setVector3fFrombtVector3(jenv, jresult, result);
   return jresult;
 }
 
@@ -19400,8 +19400,8 @@ SWIGEXPORT jobject JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbod
     return 0;
   } 
   result = CenterOf((btSoftBody::Face const &)*arg1);
-  jresult = gdx_getReturnVector3(jenv);
-  gdx_setVector3FrombtVector3(jenv, jresult, result);
+  jresult = gdx_getReturnVector3f(jenv);
+  gdx_setVector3fFrombtVector3(jenv, jresult, result);
   return jresult;
 }
 
@@ -19416,17 +19416,17 @@ SWIGEXPORT jfloat JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbody
   (void)jenv;
   (void)jcls;
   btVector3 local_arg1;
-  gdx_setbtVector3FromVector3(jenv, local_arg1, jarg1);
+  gdx_setbtVector3FromVector3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitVector3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitVector3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   result = (btScalar)AreaOf((btVector3 const &)*arg1,(btVector3 const &)*arg2,(btVector3 const &)*arg3);
   jresult = (jfloat)result; 
   return jresult;
@@ -19444,21 +19444,21 @@ SWIGEXPORT jfloat JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_Softbody
   (void)jenv;
   (void)jcls;
   btVector3 local_arg1;
-  gdx_setbtVector3FromVector3(jenv, local_arg1, jarg1);
+  gdx_setbtVector3FromVector3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitVector3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitVector3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btVector3 local_arg3;
-  gdx_setbtVector3FromVector3(jenv, local_arg3, jarg3);
+  gdx_setbtVector3FromVector3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitVector3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitVector3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   btVector3 local_arg4;
-  gdx_setbtVector3FromVector3(jenv, local_arg4, jarg4);
+  gdx_setbtVector3FromVector3f(jenv, local_arg4, jarg4);
   arg4 = &local_arg4;
-  gdxAutoCommitVector3 auto_commit_arg4(jenv, jarg4, &local_arg4);
+  gdxAutoCommitVector3f auto_commit_arg4(jenv, jarg4, &local_arg4);
   result = (btScalar)VolumeOf((btVector3 const &)*arg1,(btVector3 const &)*arg2,(btVector3 const &)*arg3,(btVector3 const &)*arg4);
   jresult = (jfloat)result; 
   return jresult;
@@ -19476,9 +19476,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg3_;
   arg1 = *(btSoftBodyWorldInfo **)&jarg1; 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   arg3 = *(btSoftBody::sMedium **)&jarg3;
   if (!arg3) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "btSoftBody::sMedium & reference is null");
@@ -19502,9 +19502,9 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
     return ;
   } 
   btVector3 local_arg2;
-  gdx_setbtVector3FromVector3(jenv, local_arg2, jarg2);
+  gdx_setbtVector3FromVector3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitVector3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitVector3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   arg3 = (btScalar)jarg3; 
   ApplyClampedForce(*arg1,(btVector3 const &)*arg2,arg3);
 }
@@ -19545,9 +19545,9 @@ SWIGEXPORT jint JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jcls;
   (void)jarg3_;
   btMatrix3x3 local_arg1;
-  gdx_setbtMatrix3x3FromMatrix3(jenv, local_arg1, jarg1);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitMatrix3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitMatrix3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   arg2 = *(btMatrix3x3 **)&jarg2; 
   arg3 = *(btVector3 **)&jarg3; 
   result = (int)btEigen::system(*arg1,arg2,arg3);
@@ -19565,9 +19565,9 @@ SWIGEXPORT jint JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jenv;
   (void)jcls;
   btMatrix3x3 local_arg1;
-  gdx_setbtMatrix3x3FromMatrix3(jenv, local_arg1, jarg1);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitMatrix3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitMatrix3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   arg2 = *(btMatrix3x3 **)&jarg2; 
   result = (int)btEigen::system(*arg1,arg2);
   jresult = (jint)result; 
@@ -19607,17 +19607,17 @@ SWIGEXPORT jint JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jenv;
   (void)jcls;
   btMatrix3x3 local_arg1;
-  gdx_setbtMatrix3x3FromMatrix3(jenv, local_arg1, jarg1);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitMatrix3 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitMatrix3f auto_commit_arg1(jenv, jarg1, &local_arg1);
   btMatrix3x3 local_arg2;
-  gdx_setbtMatrix3x3FromMatrix3(jenv, local_arg2, jarg2);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitMatrix3 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitMatrix3f auto_commit_arg2(jenv, jarg2, &local_arg2);
   btMatrix3x3 local_arg3;
-  gdx_setbtMatrix3x3FromMatrix3(jenv, local_arg3, jarg3);
+  gdx_setbtMatrix3x3FromMatrix3f(jenv, local_arg3, jarg3);
   arg3 = &local_arg3;
-  gdxAutoCommitMatrix3 auto_commit_arg3(jenv, jarg3, &local_arg3);
+  gdxAutoCommitMatrix3f auto_commit_arg3(jenv, jarg3, &local_arg3);
   result = (int)PolarDecompose((btMatrix3x3 const &)*arg1,*arg2,*arg3);
   jresult = (jint)result; 
   return jresult;
@@ -20780,19 +20780,19 @@ SWIGEXPORT void JNICALL Java_com_badlogic_gdx_physics_bullet_softbody_SoftbodyJN
   (void)jarg4_;
   (void)jarg6_;
   btTransform local_arg1;
-  gdx_setbtTransformFromMatrix4(jenv, local_arg1, jarg1);
+  gdx_setbtTransformFromMatrix4f(jenv, local_arg1, jarg1);
   arg1 = &local_arg1;
-  gdxAutoCommitMatrix4 auto_commit_arg1(jenv, jarg1, &local_arg1);
+  gdxAutoCommitMatrix4f auto_commit_arg1(jenv, jarg1, &local_arg1);
   btTransform local_arg2;
-  gdx_setbtTransformFromMatrix4(jenv, local_arg2, jarg2);
+  gdx_setbtTransformFromMatrix4f(jenv, local_arg2, jarg2);
   arg2 = &local_arg2;
-  gdxAutoCommitMatrix4 auto_commit_arg2(jenv, jarg2, &local_arg2);
+  gdxAutoCommitMatrix4f auto_commit_arg2(jenv, jarg2, &local_arg2);
   arg3 = *(btCollisionObject **)&jarg3; 
   arg4 = *(btCollisionShape **)&jarg4; 
   btTransform local_arg5;
-  gdx_setbtTransformFromMatrix4(jenv, local_arg5, jarg5);
+  gdx_setbtTransformFromMatrix4f(jenv, local_arg5, jarg5);
   arg5 = &local_arg5;
-  gdxAutoCommitMatrix4 auto_commit_arg5(jenv, jarg5, &local_arg5);
+  gdxAutoCommitMatrix4f auto_commit_arg5(jenv, jarg5, &local_arg5);
   arg6 = *(btCollisionWorld::RayResultCallback **)&jarg6;
   if (!arg6) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "btCollisionWorld::RayResultCallback & reference is null");

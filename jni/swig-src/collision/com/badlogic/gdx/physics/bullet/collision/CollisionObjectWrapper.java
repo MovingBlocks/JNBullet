@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class CollisionObjectWrapper extends BulletBase {
 	private long swigCPtr;
@@ -75,27 +75,27 @@ public class CollisionObjectWrapper extends BulletBase {
 		super.dispose();
 	}
 
-  public CollisionObjectWrapper(btCollisionObjectWrapper parent, btCollisionShape shape, btCollisionObject collisionObject, Matrix4 worldTransform, int partId, int index) {
+  public CollisionObjectWrapper(btCollisionObjectWrapper parent, btCollisionShape shape, btCollisionObject collisionObject, Matrix4f worldTransform, int partId, int index) {
     this(CollisionJNI.new_CollisionObjectWrapper__SWIG_0(btCollisionObjectWrapper.getCPtr(parent), parent, btCollisionShape.getCPtr(shape), shape, btCollisionObject.getCPtr(collisionObject), collisionObject, worldTransform, partId, index), true);
   }
 
-  public CollisionObjectWrapper(btCollisionObjectWrapper parent, btCollisionShape shape, btCollisionObject collisionObject, Matrix4 worldTransform, int partId) {
+  public CollisionObjectWrapper(btCollisionObjectWrapper parent, btCollisionShape shape, btCollisionObject collisionObject, Matrix4f worldTransform, int partId) {
     this(CollisionJNI.new_CollisionObjectWrapper__SWIG_1(btCollisionObjectWrapper.getCPtr(parent), parent, btCollisionShape.getCPtr(shape), shape, btCollisionObject.getCPtr(collisionObject), collisionObject, worldTransform, partId), true);
   }
 
-  public CollisionObjectWrapper(btCollisionObjectWrapper parent, btCollisionShape shape, btCollisionObject collisionObject, Matrix4 worldTransform) {
+  public CollisionObjectWrapper(btCollisionObjectWrapper parent, btCollisionShape shape, btCollisionObject collisionObject, Matrix4f worldTransform) {
     this(CollisionJNI.new_CollisionObjectWrapper__SWIG_2(btCollisionObjectWrapper.getCPtr(parent), parent, btCollisionShape.getCPtr(shape), shape, btCollisionObject.getCPtr(collisionObject), collisionObject, worldTransform), true);
   }
 
-  public CollisionObjectWrapper(btCollisionShape shape, btCollisionObject collisionObject, Matrix4 worldTransform, int partId, int index) {
+  public CollisionObjectWrapper(btCollisionShape shape, btCollisionObject collisionObject, Matrix4f worldTransform, int partId, int index) {
     this(CollisionJNI.new_CollisionObjectWrapper__SWIG_3(btCollisionShape.getCPtr(shape), shape, btCollisionObject.getCPtr(collisionObject), collisionObject, worldTransform, partId, index), true);
   }
 
-  public CollisionObjectWrapper(btCollisionShape shape, btCollisionObject collisionObject, Matrix4 worldTransform, int partId) {
+  public CollisionObjectWrapper(btCollisionShape shape, btCollisionObject collisionObject, Matrix4f worldTransform, int partId) {
     this(CollisionJNI.new_CollisionObjectWrapper__SWIG_4(btCollisionShape.getCPtr(shape), shape, btCollisionObject.getCPtr(collisionObject), collisionObject, worldTransform, partId), true);
   }
 
-  public CollisionObjectWrapper(btCollisionShape shape, btCollisionObject collisionObject, Matrix4 worldTransform) {
+  public CollisionObjectWrapper(btCollisionShape shape, btCollisionObject collisionObject, Matrix4f worldTransform) {
     this(CollisionJNI.new_CollisionObjectWrapper__SWIG_5(btCollisionShape.getCPtr(shape), shape, btCollisionObject.getCPtr(collisionObject), collisionObject, worldTransform), true);
   }
 

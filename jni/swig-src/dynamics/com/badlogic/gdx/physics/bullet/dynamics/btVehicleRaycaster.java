@@ -11,10 +11,10 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btVehicleRaycaster extends BulletBase {
 	private long swigCPtr;
@@ -134,7 +134,7 @@ public class btVehicleRaycaster extends BulletBase {
   
   }
 
-  public long castRay(Vector3 from, Vector3 to, btVehicleRaycaster.btVehicleRaycasterResult result) {
+  public long castRay(Vector3f from, Vector3f to, btVehicleRaycaster.btVehicleRaycasterResult result) {
     return DynamicsJNI.btVehicleRaycaster_castRay(swigCPtr, this, from, to, btVehicleRaycaster.btVehicleRaycasterResult.getCPtr(result), result);
   }
 

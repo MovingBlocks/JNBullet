@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btTetrahedronShapeEx extends btBU_Simplex1to4 {
 	private long swigCPtr;
@@ -62,7 +62,7 @@ public class btTetrahedronShapeEx extends btBU_Simplex1to4 {
     this(CollisionJNI.new_btTetrahedronShapeEx(), true);
   }
 
-  public void setVertices(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3) {
+  public void setVertices(Vector3f v0, Vector3f v1, Vector3f v2, Vector3f v3) {
     CollisionJNI.btTetrahedronShapeEx_setVertices(swigCPtr, this, v0, v1, v2, v3);
   }
 

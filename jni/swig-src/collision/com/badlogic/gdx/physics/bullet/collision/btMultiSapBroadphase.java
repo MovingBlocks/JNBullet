@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btMultiSapBroadphase extends btBroadphaseInterface {
 	private long swigCPtr;
@@ -127,7 +127,7 @@ public class btMultiSapBroadphase extends btBroadphaseInterface {
       return CollisionJNI.btMultiSapBroadphase_btMultiSapProxy_shapeType_get(swigCPtr, this);
     }
   
-    public btMultiSapProxy(Vector3 aabbMin, Vector3 aabbMax, int shapeType, long userPtr, short collisionFilterGroup, short collisionFilterMask) {
+    public btMultiSapProxy(Vector3f aabbMin, Vector3f aabbMax, int shapeType, long userPtr, short collisionFilterGroup, short collisionFilterMask) {
       this(CollisionJNI.new_btMultiSapBroadphase_btMultiSapProxy(aabbMin, aabbMax, shapeType, userPtr, collisionFilterGroup, collisionFilterMask), true);
     }
   
@@ -137,15 +137,15 @@ public class btMultiSapBroadphase extends btBroadphaseInterface {
     return new SWIGTYPE_p_btAlignedObjectArrayT_btBroadphaseInterface_p_t(CollisionJNI.btMultiSapBroadphase_getBroadphaseArray__SWIG_0(swigCPtr, this), false);
   }
 
-  public void rayTest(Vector3 rayFrom, Vector3 rayTo, btBroadphaseRayCallback rayCallback, Vector3 aabbMin, Vector3 aabbMax) {
+  public void rayTest(Vector3f rayFrom, Vector3f rayTo, btBroadphaseRayCallback rayCallback, Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btMultiSapBroadphase_rayTest__SWIG_0(swigCPtr, this, rayFrom, rayTo, btBroadphaseRayCallback.getCPtr(rayCallback), rayCallback, aabbMin, aabbMax);
   }
 
-  public void rayTest(Vector3 rayFrom, Vector3 rayTo, btBroadphaseRayCallback rayCallback, Vector3 aabbMin) {
+  public void rayTest(Vector3f rayFrom, Vector3f rayTo, btBroadphaseRayCallback rayCallback, Vector3f aabbMin) {
     CollisionJNI.btMultiSapBroadphase_rayTest__SWIG_1(swigCPtr, this, rayFrom, rayTo, btBroadphaseRayCallback.getCPtr(rayCallback), rayCallback, aabbMin);
   }
 
-  public void rayTest(Vector3 rayFrom, Vector3 rayTo, btBroadphaseRayCallback rayCallback) {
+  public void rayTest(Vector3f rayFrom, Vector3f rayTo, btBroadphaseRayCallback rayCallback) {
     CollisionJNI.btMultiSapBroadphase_rayTest__SWIG_2(swigCPtr, this, rayFrom, rayTo, btBroadphaseRayCallback.getCPtr(rayCallback), rayCallback);
   }
 
@@ -162,7 +162,7 @@ public class btMultiSapBroadphase extends btBroadphaseInterface {
     return (cPtr == 0) ? null : new btOverlappingPairCache(cPtr, false);
   }
 
-  public void buildTree(Vector3 bvhAabbMin, Vector3 bvhAabbMax) {
+  public void buildTree(Vector3f bvhAabbMin, Vector3f bvhAabbMax) {
     CollisionJNI.btMultiSapBroadphase_buildTree(swigCPtr, this, bvhAabbMin, bvhAabbMax);
   }
 

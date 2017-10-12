@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.model.MeshPart;
@@ -106,11 +106,11 @@ public class btBvhTriangleMeshShape extends btTriangleMeshShape {
 		this(1, btTriangleIndexVertexArray.obtain(meshParts), useQuantizedAabbCompression, buildBvh);
 	}
 	
-	public <T extends MeshPart> btBvhTriangleMeshShape(final Array<T> meshParts, boolean useQuantizedAabbCompression, Vector3 bvhAabbMin, Vector3 bvhAabbMax) {
+	public <T extends MeshPart> btBvhTriangleMeshShape(final Array<T> meshParts, boolean useQuantizedAabbCompression, Vector3f bvhAabbMin, Vector3f bvhAabbMax) {
 		this(1, btTriangleIndexVertexArray.obtain(meshParts), useQuantizedAabbCompression, bvhAabbMin, bvhAabbMax);
 	}
 	
-	public <T extends MeshPart> btBvhTriangleMeshShape(final Array<T> meshParts, boolean useQuantizedAabbCompression, Vector3 bvhAabbMin, Vector3 bvhAabbMax, boolean buildBvh) {
+	public <T extends MeshPart> btBvhTriangleMeshShape(final Array<T> meshParts, boolean useQuantizedAabbCompression, Vector3f bvhAabbMin, Vector3f bvhAabbMax, boolean buildBvh) {
 		this(1, btTriangleIndexVertexArray.obtain(meshParts), useQuantizedAabbCompression, bvhAabbMin, bvhAabbMax, buildBvh);
 	}
 	
@@ -122,11 +122,11 @@ public class btBvhTriangleMeshShape extends btTriangleMeshShape {
 		this(0, meshInterface, useQuantizedAabbCompression, buildBvh);
 	}
 	
-	public btBvhTriangleMeshShape(btStridingMeshInterface meshInterface, boolean useQuantizedAabbCompression, Vector3 bvhAabbMin, Vector3 bvhAabbMax, boolean buildBvh) {
+	public btBvhTriangleMeshShape(btStridingMeshInterface meshInterface, boolean useQuantizedAabbCompression, Vector3f bvhAabbMin, Vector3f bvhAabbMax, boolean buildBvh) {
 		this(0, meshInterface, useQuantizedAabbCompression, bvhAabbMin, bvhAabbMax, buildBvh);
 	}
 	
-	public btBvhTriangleMeshShape(btStridingMeshInterface meshInterface, boolean useQuantizedAabbCompression, Vector3 bvhAabbMin, Vector3 bvhAabbMax) {
+	public btBvhTriangleMeshShape(btStridingMeshInterface meshInterface, boolean useQuantizedAabbCompression, Vector3f bvhAabbMin, Vector3f bvhAabbMax) {
 		this(0, meshInterface, useQuantizedAabbCompression, bvhAabbMin, bvhAabbMax);
 	}
 	
@@ -144,14 +144,14 @@ public class btBvhTriangleMeshShape extends btTriangleMeshShape {
 			meshInterface.obtain();
 	}
 	
-	private btBvhTriangleMeshShape(int obtained, btStridingMeshInterface meshInterface, boolean useQuantizedAabbCompression, Vector3 bvhAabbMin, Vector3 bvhAabbMax, boolean buildBvh) {
+	private btBvhTriangleMeshShape(int obtained, btStridingMeshInterface meshInterface, boolean useQuantizedAabbCompression, Vector3f bvhAabbMin, Vector3f bvhAabbMax, boolean buildBvh) {
 		this(true, meshInterface, useQuantizedAabbCompression, bvhAabbMin, bvhAabbMax, buildBvh);
 		this.meshInterface = meshInterface;
 		if (obtained == 0)
 			meshInterface.obtain();
 	}
 	
-	private btBvhTriangleMeshShape(int obtained, btStridingMeshInterface meshInterface, boolean useQuantizedAabbCompression, Vector3 bvhAabbMin, Vector3 bvhAabbMax) {
+	private btBvhTriangleMeshShape(int obtained, btStridingMeshInterface meshInterface, boolean useQuantizedAabbCompression, Vector3f bvhAabbMin, Vector3f bvhAabbMax) {
 		this(true, meshInterface, useQuantizedAabbCompression, bvhAabbMin, bvhAabbMax);
 		this.meshInterface = meshInterface;
 		if (obtained == 0)
@@ -170,19 +170,19 @@ public class btBvhTriangleMeshShape extends btTriangleMeshShape {
     return CollisionJNI.btBvhTriangleMeshShape_getOwnsBvh(swigCPtr, this);
   }
 
-  public void performRaycast(btTriangleCallback callback, Vector3 raySource, Vector3 rayTarget) {
+  public void performRaycast(btTriangleCallback callback, Vector3f raySource, Vector3f rayTarget) {
     CollisionJNI.btBvhTriangleMeshShape_performRaycast(swigCPtr, this, btTriangleCallback.getCPtr(callback), callback, raySource, rayTarget);
   }
 
-  public void performConvexcast(btTriangleCallback callback, Vector3 boxSource, Vector3 boxTarget, Vector3 boxMin, Vector3 boxMax) {
+  public void performConvexcast(btTriangleCallback callback, Vector3f boxSource, Vector3f boxTarget, Vector3f boxMin, Vector3f boxMax) {
     CollisionJNI.btBvhTriangleMeshShape_performConvexcast(swigCPtr, this, btTriangleCallback.getCPtr(callback), callback, boxSource, boxTarget, boxMin, boxMax);
   }
 
-  public void refitTree(Vector3 aabbMin, Vector3 aabbMax) {
+  public void refitTree(Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btBvhTriangleMeshShape_refitTree(swigCPtr, this, aabbMin, aabbMax);
   }
 
-  public void partialRefitTree(Vector3 aabbMin, Vector3 aabbMax) {
+  public void partialRefitTree(Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btBvhTriangleMeshShape_partialRefitTree(swigCPtr, this, aabbMin, aabbMax);
   }
 
@@ -191,7 +191,7 @@ public class btBvhTriangleMeshShape extends btTriangleMeshShape {
     return (cPtr == 0) ? null : new btOptimizedBvh(cPtr, false);
   }
 
-  public void setOptimizedBvh(btOptimizedBvh bvh, Vector3 localScaling) {
+  public void setOptimizedBvh(btOptimizedBvh bvh, Vector3f localScaling) {
     CollisionJNI.btBvhTriangleMeshShape_setOptimizedBvh__SWIG_0(swigCPtr, this, btOptimizedBvh.getCPtr(bvh), bvh, localScaling);
   }
 
@@ -232,11 +232,11 @@ public class btBvhTriangleMeshShape extends btTriangleMeshShape {
     this(CollisionJNI.new_btBvhTriangleMeshShape__SWIG_1(dummy, btStridingMeshInterface.getCPtr(meshInterface), meshInterface, useQuantizedAabbCompression), true);
   }
 
-  private btBvhTriangleMeshShape(boolean dummy, btStridingMeshInterface meshInterface, boolean useQuantizedAabbCompression, Vector3 bvhAabbMin, Vector3 bvhAabbMax, boolean buildBvh) {
+  private btBvhTriangleMeshShape(boolean dummy, btStridingMeshInterface meshInterface, boolean useQuantizedAabbCompression, Vector3f bvhAabbMin, Vector3f bvhAabbMax, boolean buildBvh) {
     this(CollisionJNI.new_btBvhTriangleMeshShape__SWIG_2(dummy, btStridingMeshInterface.getCPtr(meshInterface), meshInterface, useQuantizedAabbCompression, bvhAabbMin, bvhAabbMax, buildBvh), true);
   }
 
-  private btBvhTriangleMeshShape(boolean dummy, btStridingMeshInterface meshInterface, boolean useQuantizedAabbCompression, Vector3 bvhAabbMin, Vector3 bvhAabbMax) {
+  private btBvhTriangleMeshShape(boolean dummy, btStridingMeshInterface meshInterface, boolean useQuantizedAabbCompression, Vector3f bvhAabbMin, Vector3f bvhAabbMax) {
     this(CollisionJNI.new_btBvhTriangleMeshShape__SWIG_3(dummy, btStridingMeshInterface.getCPtr(meshInterface), meshInterface, useQuantizedAabbCompression, bvhAabbMin, bvhAabbMax), true);
   }
 

@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btBroadphaseInterface extends BulletBase {
 	private long swigCPtr;
@@ -58,7 +58,7 @@ public class btBroadphaseInterface extends BulletBase {
 		super.delete();
 	}
 
-  public btBroadphaseProxy createProxy(Vector3 aabbMin, Vector3 aabbMax, int shapeType, long userPtr, short collisionFilterGroup, short collisionFilterMask, btDispatcher dispatcher, long multiSapProxy) {
+  public btBroadphaseProxy createProxy(Vector3f aabbMin, Vector3f aabbMax, int shapeType, long userPtr, short collisionFilterGroup, short collisionFilterMask, btDispatcher dispatcher, long multiSapProxy) {
 	return btBroadphaseProxy.internalTemp(CollisionJNI.btBroadphaseInterface_createProxy(swigCPtr, this, aabbMin, aabbMax, shapeType, userPtr, collisionFilterGroup, collisionFilterMask, btDispatcher.getCPtr(dispatcher), dispatcher, multiSapProxy), false);
 }
 
@@ -66,27 +66,27 @@ public class btBroadphaseInterface extends BulletBase {
     CollisionJNI.btBroadphaseInterface_destroyProxy(swigCPtr, this, btBroadphaseProxy.getCPtr(proxy), proxy, btDispatcher.getCPtr(dispatcher), dispatcher);
   }
 
-  public void setAabb(btBroadphaseProxy proxy, Vector3 aabbMin, Vector3 aabbMax, btDispatcher dispatcher) {
+  public void setAabb(btBroadphaseProxy proxy, Vector3f aabbMin, Vector3f aabbMax, btDispatcher dispatcher) {
     CollisionJNI.btBroadphaseInterface_setAabb(swigCPtr, this, btBroadphaseProxy.getCPtr(proxy), proxy, aabbMin, aabbMax, btDispatcher.getCPtr(dispatcher), dispatcher);
   }
 
-  public void getAabb(btBroadphaseProxy proxy, Vector3 aabbMin, Vector3 aabbMax) {
+  public void getAabb(btBroadphaseProxy proxy, Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btBroadphaseInterface_getAabb(swigCPtr, this, btBroadphaseProxy.getCPtr(proxy), proxy, aabbMin, aabbMax);
   }
 
-  public void rayTest(Vector3 rayFrom, Vector3 rayTo, btBroadphaseRayCallback rayCallback, Vector3 aabbMin, Vector3 aabbMax) {
+  public void rayTest(Vector3f rayFrom, Vector3f rayTo, btBroadphaseRayCallback rayCallback, Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btBroadphaseInterface_rayTest__SWIG_0(swigCPtr, this, rayFrom, rayTo, btBroadphaseRayCallback.getCPtr(rayCallback), rayCallback, aabbMin, aabbMax);
   }
 
-  public void rayTest(Vector3 rayFrom, Vector3 rayTo, btBroadphaseRayCallback rayCallback, Vector3 aabbMin) {
+  public void rayTest(Vector3f rayFrom, Vector3f rayTo, btBroadphaseRayCallback rayCallback, Vector3f aabbMin) {
     CollisionJNI.btBroadphaseInterface_rayTest__SWIG_1(swigCPtr, this, rayFrom, rayTo, btBroadphaseRayCallback.getCPtr(rayCallback), rayCallback, aabbMin);
   }
 
-  public void rayTest(Vector3 rayFrom, Vector3 rayTo, btBroadphaseRayCallback rayCallback) {
+  public void rayTest(Vector3f rayFrom, Vector3f rayTo, btBroadphaseRayCallback rayCallback) {
     CollisionJNI.btBroadphaseInterface_rayTest__SWIG_2(swigCPtr, this, rayFrom, rayTo, btBroadphaseRayCallback.getCPtr(rayCallback), rayCallback);
   }
 
-  public void aabbTest(Vector3 aabbMin, Vector3 aabbMax, btBroadphaseAabbCallback callback) {
+  public void aabbTest(Vector3f aabbMin, Vector3f aabbMax, btBroadphaseAabbCallback callback) {
     CollisionJNI.btBroadphaseInterface_aabbTest(swigCPtr, this, aabbMin, aabbMax, btBroadphaseAabbCallback.getCPtr(callback), callback);
   }
 
@@ -99,7 +99,7 @@ public class btBroadphaseInterface extends BulletBase {
     return (cPtr == 0) ? null : new btOverlappingPairCache(cPtr, false);
   }
 
-  public void getBroadphaseAabb(Vector3 aabbMin, Vector3 aabbMax) {
+  public void getBroadphaseAabb(Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btBroadphaseInterface_getBroadphaseAabb(swigCPtr, this, aabbMin, aabbMax);
   }
 

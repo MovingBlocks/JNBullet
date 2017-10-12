@@ -11,10 +11,10 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btRaycastVehicle extends btActionInterface {
 	private long swigCPtr;
@@ -160,7 +160,7 @@ public class btRaycastVehicle extends btActionInterface {
     this(DynamicsJNI.new_btRaycastVehicle(btRaycastVehicle.btVehicleTuning.getCPtr(tuning), tuning, btRigidBody.getCPtr(chassis), chassis, btVehicleRaycaster.getCPtr(raycaster), raycaster), true);
   }
 
-  public Matrix4 getChassisWorldTransform() {
+  public Matrix4f getChassisWorldTransform() {
 	return DynamicsJNI.btRaycastVehicle_getChassisWorldTransform(swigCPtr, this);
 }
 
@@ -188,7 +188,7 @@ public class btRaycastVehicle extends btActionInterface {
     DynamicsJNI.btRaycastVehicle_applyEngineForce(swigCPtr, this, force, wheel);
   }
 
-  public Matrix4 getWheelTransformWS(int wheelIndex) {
+  public Matrix4f getWheelTransformWS(int wheelIndex) {
 	return DynamicsJNI.btRaycastVehicle_getWheelTransformWS(swigCPtr, this, wheelIndex);
 }
 
@@ -200,7 +200,7 @@ public class btRaycastVehicle extends btActionInterface {
     DynamicsJNI.btRaycastVehicle_updateWheelTransform__SWIG_1(swigCPtr, this, wheelIndex);
   }
 
-  public btWheelInfo addWheel(Vector3 connectionPointCS0, Vector3 wheelDirectionCS0, Vector3 wheelAxleCS, float suspensionRestLength, float wheelRadius, btRaycastVehicle.btVehicleTuning tuning, boolean isFrontWheel) {
+  public btWheelInfo addWheel(Vector3f connectionPointCS0, Vector3f wheelDirectionCS0, Vector3f wheelAxleCS, float suspensionRestLength, float wheelRadius, btRaycastVehicle.btVehicleTuning tuning, boolean isFrontWheel) {
     return new btWheelInfo(DynamicsJNI.btRaycastVehicle_addWheel(swigCPtr, this, connectionPointCS0, wheelDirectionCS0, wheelAxleCS, suspensionRestLength, wheelRadius, btRaycastVehicle.btVehicleTuning.getCPtr(tuning), tuning, isFrontWheel), false);
   }
 
@@ -261,7 +261,7 @@ public class btRaycastVehicle extends btActionInterface {
     return DynamicsJNI.btRaycastVehicle_getForwardAxis(swigCPtr, this);
   }
 
-  public Vector3 getForwardVector() {
+  public Vector3f getForwardVector() {
 	return DynamicsJNI.btRaycastVehicle_getForwardVector(swigCPtr, this);
 }
 

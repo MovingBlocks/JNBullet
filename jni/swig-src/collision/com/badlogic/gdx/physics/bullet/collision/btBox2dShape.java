@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btBox2dShape extends btPolyhedralConvexShape {
 	private long swigCPtr;
@@ -58,15 +58,15 @@ public class btBox2dShape extends btPolyhedralConvexShape {
 		super.delete();
 	}
 
-  public Vector3 getHalfExtentsWithMargin() {
+  public Vector3f getHalfExtentsWithMargin() {
 	return CollisionJNI.btBox2dShape_getHalfExtentsWithMargin(swigCPtr, this);
 }
 
-  public Vector3 getHalfExtentsWithoutMargin() {
+  public Vector3f getHalfExtentsWithoutMargin() {
 	return CollisionJNI.btBox2dShape_getHalfExtentsWithoutMargin(swigCPtr, this);
 }
 
-  public btBox2dShape(Vector3 boxHalfExtents) {
+  public btBox2dShape(Vector3f boxHalfExtents) {
     this(CollisionJNI.new_btBox2dShape(boxHalfExtents), true);
   }
 
@@ -84,7 +84,7 @@ public class btBox2dShape extends btPolyhedralConvexShape {
     return (cPtr == 0) ? null : new btVector3(cPtr, false);
   }
 
-  public Vector3 getCentroid() {
+  public Vector3f getCentroid() {
 	return CollisionJNI.btBox2dShape_getCentroid(swigCPtr, this);
 }
 

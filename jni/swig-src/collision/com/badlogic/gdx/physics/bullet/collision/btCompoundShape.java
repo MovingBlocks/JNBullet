@@ -9,10 +9,10 @@
 package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btCompoundShape extends btCollisionShape {
 	private long swigCPtr;
@@ -59,7 +59,7 @@ public class btCompoundShape extends btCollisionShape {
 
 	protected Array<btCollisionShape> children = new Array<btCollisionShape>();
 	
-	public void addChildShape(Matrix4 localTransform, btCollisionShape shape) {
+	public void addChildShape(Matrix4f localTransform, btCollisionShape shape) {
 		internalAddChildShape(localTransform, shape);
 		children.add(shape);
 		shape.obtain();
@@ -101,7 +101,7 @@ public class btCompoundShape extends btCollisionShape {
     this(CollisionJNI.new_btCompoundShape__SWIG_2(), true);
   }
 
-  private void internalAddChildShape(Matrix4 localTransform, btCollisionShape shape) {
+  private void internalAddChildShape(Matrix4f localTransform, btCollisionShape shape) {
     CollisionJNI.btCompoundShape_internalAddChildShape(swigCPtr, this, localTransform, btCollisionShape.getCPtr(shape), shape);
   }
 
@@ -117,15 +117,15 @@ public class btCompoundShape extends btCollisionShape {
     return CollisionJNI.btCompoundShape_getNumChildShapes(swigCPtr, this);
   }
 
-  public Matrix4 getChildTransform(int index) {
+  public Matrix4f getChildTransform(int index) {
 	return CollisionJNI.btCompoundShape_getChildTransform__SWIG_0(swigCPtr, this, index);
 }
 
-  public void updateChildTransform(int childIndex, Matrix4 newChildTransform, boolean shouldRecalculateLocalAabb) {
+  public void updateChildTransform(int childIndex, Matrix4f newChildTransform, boolean shouldRecalculateLocalAabb) {
     CollisionJNI.btCompoundShape_updateChildTransform__SWIG_0(swigCPtr, this, childIndex, newChildTransform, shouldRecalculateLocalAabb);
   }
 
-  public void updateChildTransform(int childIndex, Matrix4 newChildTransform) {
+  public void updateChildTransform(int childIndex, Matrix4f newChildTransform) {
     CollisionJNI.btCompoundShape_updateChildTransform__SWIG_1(swigCPtr, this, childIndex, newChildTransform);
   }
 
@@ -147,7 +147,7 @@ public class btCompoundShape extends btCollisionShape {
     CollisionJNI.btCompoundShape_createAabbTreeFromChildren(swigCPtr, this);
   }
 
-  public void calculatePrincipalAxisTransform(java.nio.FloatBuffer masses, Matrix4 principal, Vector3 inertia) {
+  public void calculatePrincipalAxisTransform(java.nio.FloatBuffer masses, Matrix4f principal, Vector3f inertia) {
     assert masses.isDirect() : "Buffer must be allocated direct.";
     {
       CollisionJNI.btCompoundShape_calculatePrincipalAxisTransform(swigCPtr, this, masses, principal, inertia);

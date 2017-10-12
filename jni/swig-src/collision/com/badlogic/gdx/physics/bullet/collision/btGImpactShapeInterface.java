@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btGImpactShapeInterface extends btConcaveShape {
 	private long swigCPtr;
@@ -128,7 +128,7 @@ public class btGImpactShapeInterface extends btConcaveShape {
     CollisionJNI.btGImpactShapeInterface_getPrimitiveTriangle(swigCPtr, this, index, btPrimitiveTriangle.getCPtr(triangle), triangle);
   }
 
-  public void getChildAabb(int child_index, Matrix4 t, Vector3 aabbMin, Vector3 aabbMax) {
+  public void getChildAabb(int child_index, Matrix4f t, Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btGImpactShapeInterface_getChildAabb(swigCPtr, this, child_index, t, aabbMin, aabbMax);
   }
 
@@ -137,19 +137,19 @@ public class btGImpactShapeInterface extends btConcaveShape {
     return (cPtr == 0) ? null : btCollisionShape.newDerivedObject(cPtr, false);
   }
 
-  public Matrix4 getChildTransform(int index) {
+  public Matrix4f getChildTransform(int index) {
 	return CollisionJNI.btGImpactShapeInterface_getChildTransform(swigCPtr, this, index);
 }
 
-  public void setChildTransform(int index, Matrix4 transform) {
+  public void setChildTransform(int index, Matrix4f transform) {
     CollisionJNI.btGImpactShapeInterface_setChildTransform(swigCPtr, this, index, transform);
   }
 
-  public void rayTest(Vector3 rayFrom, Vector3 rayTo, RayResultCallback resultCallback) {
+  public void rayTest(Vector3f rayFrom, Vector3f rayTo, RayResultCallback resultCallback) {
     CollisionJNI.btGImpactShapeInterface_rayTest(swigCPtr, this, rayFrom, rayTo, RayResultCallback.getCPtr(resultCallback), resultCallback);
   }
 
-  public void processAllTrianglesRay(btTriangleCallback arg0, Vector3 arg1, Vector3 arg2) {
+  public void processAllTrianglesRay(btTriangleCallback arg0, Vector3f arg1, Vector3f arg2) {
     CollisionJNI.btGImpactShapeInterface_processAllTrianglesRay(swigCPtr, this, btTriangleCallback.getCPtr(arg0), arg0, arg1, arg2);
   }
 

@@ -11,10 +11,10 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btHingeConstraint extends btTypedConstraint {
 	private long swigCPtr;
@@ -59,35 +59,35 @@ public class btHingeConstraint extends btTypedConstraint {
 		super.delete();
 	}
 
-  public btHingeConstraint(btRigidBody rbA, btRigidBody rbB, Vector3 pivotInA, Vector3 pivotInB, Vector3 axisInA, Vector3 axisInB, boolean useReferenceFrameA) {
+  public btHingeConstraint(btRigidBody rbA, btRigidBody rbB, Vector3f pivotInA, Vector3f pivotInB, Vector3f axisInA, Vector3f axisInB, boolean useReferenceFrameA) {
     this(DynamicsJNI.new_btHingeConstraint__SWIG_0(btRigidBody.getCPtr(rbA), rbA, btRigidBody.getCPtr(rbB), rbB, pivotInA, pivotInB, axisInA, axisInB, useReferenceFrameA), true);
   }
 
-  public btHingeConstraint(btRigidBody rbA, btRigidBody rbB, Vector3 pivotInA, Vector3 pivotInB, Vector3 axisInA, Vector3 axisInB) {
+  public btHingeConstraint(btRigidBody rbA, btRigidBody rbB, Vector3f pivotInA, Vector3f pivotInB, Vector3f axisInA, Vector3f axisInB) {
     this(DynamicsJNI.new_btHingeConstraint__SWIG_1(btRigidBody.getCPtr(rbA), rbA, btRigidBody.getCPtr(rbB), rbB, pivotInA, pivotInB, axisInA, axisInB), true);
   }
 
-  public btHingeConstraint(btRigidBody rbA, Vector3 pivotInA, Vector3 axisInA, boolean useReferenceFrameA) {
+  public btHingeConstraint(btRigidBody rbA, Vector3f pivotInA, Vector3f axisInA, boolean useReferenceFrameA) {
     this(DynamicsJNI.new_btHingeConstraint__SWIG_2(btRigidBody.getCPtr(rbA), rbA, pivotInA, axisInA, useReferenceFrameA), true);
   }
 
-  public btHingeConstraint(btRigidBody rbA, Vector3 pivotInA, Vector3 axisInA) {
+  public btHingeConstraint(btRigidBody rbA, Vector3f pivotInA, Vector3f axisInA) {
     this(DynamicsJNI.new_btHingeConstraint__SWIG_3(btRigidBody.getCPtr(rbA), rbA, pivotInA, axisInA), true);
   }
 
-  public btHingeConstraint(btRigidBody rbA, btRigidBody rbB, Matrix4 rbAFrame, Matrix4 rbBFrame, boolean useReferenceFrameA) {
+  public btHingeConstraint(btRigidBody rbA, btRigidBody rbB, Matrix4f rbAFrame, Matrix4f rbBFrame, boolean useReferenceFrameA) {
     this(DynamicsJNI.new_btHingeConstraint__SWIG_4(btRigidBody.getCPtr(rbA), rbA, btRigidBody.getCPtr(rbB), rbB, rbAFrame, rbBFrame, useReferenceFrameA), true);
   }
 
-  public btHingeConstraint(btRigidBody rbA, btRigidBody rbB, Matrix4 rbAFrame, Matrix4 rbBFrame) {
+  public btHingeConstraint(btRigidBody rbA, btRigidBody rbB, Matrix4f rbAFrame, Matrix4f rbBFrame) {
     this(DynamicsJNI.new_btHingeConstraint__SWIG_5(btRigidBody.getCPtr(rbA), rbA, btRigidBody.getCPtr(rbB), rbB, rbAFrame, rbBFrame), true);
   }
 
-  public btHingeConstraint(btRigidBody rbA, Matrix4 rbAFrame, boolean useReferenceFrameA) {
+  public btHingeConstraint(btRigidBody rbA, Matrix4f rbAFrame, boolean useReferenceFrameA) {
     this(DynamicsJNI.new_btHingeConstraint__SWIG_6(btRigidBody.getCPtr(rbA), rbA, rbAFrame, useReferenceFrameA), true);
   }
 
-  public btHingeConstraint(btRigidBody rbA, Matrix4 rbAFrame) {
+  public btHingeConstraint(btRigidBody rbA, Matrix4f rbAFrame) {
     this(DynamicsJNI.new_btHingeConstraint__SWIG_7(btRigidBody.getCPtr(rbA), rbA, rbAFrame), true);
   }
 
@@ -95,15 +95,15 @@ public class btHingeConstraint extends btTypedConstraint {
     DynamicsJNI.btHingeConstraint_getInfo1NonVirtual(swigCPtr, this, btTypedConstraint.btConstraintInfo1.getCPtr(info), info);
   }
 
-  public void getInfo2NonVirtual(btTypedConstraint.btConstraintInfo2 info, Matrix4 transA, Matrix4 transB, Vector3 angVelA, Vector3 angVelB) {
+  public void getInfo2NonVirtual(btTypedConstraint.btConstraintInfo2 info, Matrix4f transA, Matrix4f transB, Vector3f angVelA, Vector3f angVelB) {
     DynamicsJNI.btHingeConstraint_getInfo2NonVirtual(swigCPtr, this, btTypedConstraint.btConstraintInfo2.getCPtr(info), info, transA, transB, angVelA, angVelB);
   }
 
-  public void getInfo2Internal(btTypedConstraint.btConstraintInfo2 info, Matrix4 transA, Matrix4 transB, Vector3 angVelA, Vector3 angVelB) {
+  public void getInfo2Internal(btTypedConstraint.btConstraintInfo2 info, Matrix4f transA, Matrix4f transB, Vector3f angVelA, Vector3f angVelB) {
     DynamicsJNI.btHingeConstraint_getInfo2Internal(swigCPtr, this, btTypedConstraint.btConstraintInfo2.getCPtr(info), info, transA, transB, angVelA, angVelB);
   }
 
-  public void getInfo2InternalUsingFrameOffset(btTypedConstraint.btConstraintInfo2 info, Matrix4 transA, Matrix4 transB, Vector3 angVelA, Vector3 angVelB) {
+  public void getInfo2InternalUsingFrameOffset(btTypedConstraint.btConstraintInfo2 info, Matrix4f transA, Matrix4f transB, Vector3f angVelA, Vector3f angVelB) {
     DynamicsJNI.btHingeConstraint_getInfo2InternalUsingFrameOffset(swigCPtr, this, btTypedConstraint.btConstraintInfo2.getCPtr(info), info, transA, transB, angVelA, angVelB);
   }
 
@@ -119,15 +119,15 @@ public class btHingeConstraint extends btTypedConstraint {
 	return btRigidBody.getInstance(DynamicsJNI.btHingeConstraint_getRigidBodyB__SWIG_0(swigCPtr, this), false);
 }
 
-  public Matrix4 getFrameOffsetA() {
+  public Matrix4f getFrameOffsetA() {
 	return DynamicsJNI.btHingeConstraint_getFrameOffsetA(swigCPtr, this);
 }
 
-  public Matrix4 getFrameOffsetB() {
+  public Matrix4f getFrameOffsetB() {
 	return DynamicsJNI.btHingeConstraint_getFrameOffsetB(swigCPtr, this);
 }
 
-  public void setFrames(Matrix4 frameA, Matrix4 frameB) {
+  public void setFrames(Matrix4f frameA, Matrix4f frameB) {
     DynamicsJNI.btHingeConstraint_setFrames(swigCPtr, this, frameA, frameB);
   }
 
@@ -151,7 +151,7 @@ public class btHingeConstraint extends btTypedConstraint {
     DynamicsJNI.btHingeConstraint_setMotorTargetVelocity(swigCPtr, this, motorTargetVelocity);
   }
 
-  public void setMotorTarget(Quaternion qAinB, float dt) {
+  public void setMotorTarget(Quat4f qAinB, float dt) {
     DynamicsJNI.btHingeConstraint_setMotorTarget__SWIG_0(swigCPtr, this, qAinB, dt);
   }
 
@@ -187,7 +187,7 @@ public class btHingeConstraint extends btTypedConstraint {
     return DynamicsJNI.btHingeConstraint_getLimitRelaxationFactor(swigCPtr, this);
   }
 
-  public void setAxis(Vector3 axisInA) {
+  public void setAxis(Vector3f axisInA) {
     DynamicsJNI.btHingeConstraint_setAxis(swigCPtr, this, axisInA);
   }
 
@@ -207,19 +207,19 @@ public class btHingeConstraint extends btTypedConstraint {
     return DynamicsJNI.btHingeConstraint_getHingeAngle__SWIG_0(swigCPtr, this);
   }
 
-  public float getHingeAngle(Matrix4 transA, Matrix4 transB) {
+  public float getHingeAngle(Matrix4f transA, Matrix4f transB) {
     return DynamicsJNI.btHingeConstraint_getHingeAngle__SWIG_1(swigCPtr, this, transA, transB);
   }
 
-  public void testLimit(Matrix4 transA, Matrix4 transB) {
+  public void testLimit(Matrix4f transA, Matrix4f transB) {
     DynamicsJNI.btHingeConstraint_testLimit(swigCPtr, this, transA, transB);
   }
 
-  public Matrix4 getAFrame() {
+  public Matrix4f getAFrame() {
 	return DynamicsJNI.btHingeConstraint_getAFrame__SWIG_0(swigCPtr, this);
 }
 
-  public Matrix4 getBFrame() {
+  public Matrix4f getBFrame() {
 	return DynamicsJNI.btHingeConstraint_getBFrame__SWIG_0(swigCPtr, this);
 }
 

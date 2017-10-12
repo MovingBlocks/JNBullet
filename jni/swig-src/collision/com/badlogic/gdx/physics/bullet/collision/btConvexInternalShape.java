@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btConvexInternalShape extends btConvexShape {
 	private long swigCPtr;
@@ -58,11 +58,11 @@ public class btConvexInternalShape extends btConvexShape {
 		super.delete();
 	}
 
-  public Vector3 getImplicitShapeDimensions() {
+  public Vector3f getImplicitShapeDimensions() {
 	return CollisionJNI.btConvexInternalShape_getImplicitShapeDimensions(swigCPtr, this);
 }
 
-  public void setImplicitShapeDimensions(Vector3 dimensions) {
+  public void setImplicitShapeDimensions(Vector3f dimensions) {
     CollisionJNI.btConvexInternalShape_setImplicitShapeDimensions(swigCPtr, this, dimensions);
   }
 
@@ -74,15 +74,15 @@ public class btConvexInternalShape extends btConvexShape {
     CollisionJNI.btConvexInternalShape_setSafeMargin__SWIG_1(swigCPtr, this, minDimension);
   }
 
-  public void setSafeMargin(Vector3 halfExtents, float defaultMarginMultiplier) {
+  public void setSafeMargin(Vector3f halfExtents, float defaultMarginMultiplier) {
     CollisionJNI.btConvexInternalShape_setSafeMargin__SWIG_2(swigCPtr, this, halfExtents, defaultMarginMultiplier);
   }
 
-  public void setSafeMargin(Vector3 halfExtents) {
+  public void setSafeMargin(Vector3f halfExtents) {
     CollisionJNI.btConvexInternalShape_setSafeMargin__SWIG_3(swigCPtr, this, halfExtents);
   }
 
-  public Vector3 getLocalScalingNV() {
+  public Vector3f getLocalScalingNV() {
 	return CollisionJNI.btConvexInternalShape_getLocalScalingNV(swigCPtr, this);
 }
 

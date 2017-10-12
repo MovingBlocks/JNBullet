@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btBroadphaseProxy extends BulletBase {
 	private long swigCPtr;
@@ -149,11 +149,11 @@ public class btBroadphaseProxy extends BulletBase {
     this(CollisionJNI.new_btBroadphaseProxy__SWIG_0(), true);
   }
 
-  public btBroadphaseProxy(Vector3 aabbMin, Vector3 aabbMax, long userPtr, short collisionFilterGroup, short collisionFilterMask, long multiSapParentProxy) {
+  public btBroadphaseProxy(Vector3f aabbMin, Vector3f aabbMax, long userPtr, short collisionFilterGroup, short collisionFilterMask, long multiSapParentProxy) {
     this(CollisionJNI.new_btBroadphaseProxy__SWIG_1(aabbMin, aabbMax, userPtr, collisionFilterGroup, collisionFilterMask, multiSapParentProxy), true);
   }
 
-  public btBroadphaseProxy(Vector3 aabbMin, Vector3 aabbMax, long userPtr, short collisionFilterGroup, short collisionFilterMask) {
+  public btBroadphaseProxy(Vector3f aabbMin, Vector3f aabbMax, long userPtr, short collisionFilterGroup, short collisionFilterMask) {
     this(CollisionJNI.new_btBroadphaseProxy__SWIG_2(aabbMin, aabbMax, userPtr, collisionFilterGroup, collisionFilterMask), true);
   }
 

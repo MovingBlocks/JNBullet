@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btGImpactBvh extends BulletBase {
 	private long swigCPtr;
@@ -91,11 +91,11 @@ public class btGImpactBvh extends BulletBase {
     return CollisionJNI.btGImpactBvh_boxQuery(swigCPtr, this, btAABB.getCPtr(box), box, SWIGTYPE_p_btAlignedObjectArrayT_int_t.getCPtr(collided_results));
   }
 
-  public boolean boxQueryTrans(btAABB box, Matrix4 transform, SWIGTYPE_p_btAlignedObjectArrayT_int_t collided_results) {
+  public boolean boxQueryTrans(btAABB box, Matrix4f transform, SWIGTYPE_p_btAlignedObjectArrayT_int_t collided_results) {
     return CollisionJNI.btGImpactBvh_boxQueryTrans(swigCPtr, this, btAABB.getCPtr(box), box, transform, SWIGTYPE_p_btAlignedObjectArrayT_int_t.getCPtr(collided_results));
   }
 
-  public boolean rayQuery(Vector3 ray_dir, Vector3 ray_origin, SWIGTYPE_p_btAlignedObjectArrayT_int_t collided_results) {
+  public boolean rayQuery(Vector3f ray_dir, Vector3f ray_origin, SWIGTYPE_p_btAlignedObjectArrayT_int_t collided_results) {
     return CollisionJNI.btGImpactBvh_rayQuery(swigCPtr, this, ray_dir, ray_origin, SWIGTYPE_p_btAlignedObjectArrayT_int_t.getCPtr(collided_results));
   }
 
@@ -153,7 +153,7 @@ public class btGImpactBvh extends BulletBase {
     return (cPtr == 0) ? null : new GIM_BVH_TREE_NODE(cPtr, false);
   }
 
-  public static void find_collision(btGImpactBvh boxset1, Matrix4 trans1, btGImpactBvh boxset2, Matrix4 trans2, btPairSet collision_pairs) {
+  public static void find_collision(btGImpactBvh boxset1, Matrix4f trans1, btGImpactBvh boxset2, Matrix4f trans2, btPairSet collision_pairs) {
     CollisionJNI.btGImpactBvh_find_collision(btGImpactBvh.getCPtr(boxset1), boxset1, trans1, btGImpactBvh.getCPtr(boxset2), boxset2, trans2, btPairSet.getCPtr(collision_pairs), collision_pairs);
   }
 

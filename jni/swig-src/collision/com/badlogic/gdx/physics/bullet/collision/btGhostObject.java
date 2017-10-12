@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btGhostObject extends btCollisionObject {
 	private long swigCPtr;
@@ -62,15 +62,15 @@ public class btGhostObject extends btCollisionObject {
     this(CollisionJNI.new_btGhostObject(), true);
   }
 
-  public void convexSweepTest(btConvexShape castShape, Matrix4 convexFromWorld, Matrix4 convexToWorld, ConvexResultCallback resultCallback, float allowedCcdPenetration) {
+  public void convexSweepTest(btConvexShape castShape, Matrix4f convexFromWorld, Matrix4f convexToWorld, ConvexResultCallback resultCallback, float allowedCcdPenetration) {
     CollisionJNI.btGhostObject_convexSweepTest__SWIG_0(swigCPtr, this, btConvexShape.getCPtr(castShape), castShape, convexFromWorld, convexToWorld, ConvexResultCallback.getCPtr(resultCallback), resultCallback, allowedCcdPenetration);
   }
 
-  public void convexSweepTest(btConvexShape castShape, Matrix4 convexFromWorld, Matrix4 convexToWorld, ConvexResultCallback resultCallback) {
+  public void convexSweepTest(btConvexShape castShape, Matrix4f convexFromWorld, Matrix4f convexToWorld, ConvexResultCallback resultCallback) {
     CollisionJNI.btGhostObject_convexSweepTest__SWIG_1(swigCPtr, this, btConvexShape.getCPtr(castShape), castShape, convexFromWorld, convexToWorld, ConvexResultCallback.getCPtr(resultCallback), resultCallback);
   }
 
-  public void rayTest(Vector3 rayFromWorld, Vector3 rayToWorld, RayResultCallback resultCallback) {
+  public void rayTest(Vector3f rayFromWorld, Vector3f rayToWorld, RayResultCallback resultCallback) {
     CollisionJNI.btGhostObject_rayTest(swigCPtr, this, rayFromWorld, rayToWorld, RayResultCallback.getCPtr(resultCallback), resultCallback);
   }
 

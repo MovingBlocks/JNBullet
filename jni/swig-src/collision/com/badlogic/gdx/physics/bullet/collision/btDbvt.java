@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btDbvt extends BulletBase {
 	private long swigCPtr;
@@ -546,11 +546,11 @@ public class btDbvt extends BulletBase {
     CollisionJNI.btDbvt_update__SWIG_2(swigCPtr, this, btDbvtNode.getCPtr(leaf), leaf, btDbvtAabbMm.getCPtr(volume), volume);
   }
 
-  public boolean update(btDbvtNode leaf, btDbvtAabbMm volume, Vector3 velocity, float margin) {
+  public boolean update(btDbvtNode leaf, btDbvtAabbMm volume, Vector3f velocity, float margin) {
     return CollisionJNI.btDbvt_update__SWIG_3(swigCPtr, this, btDbvtNode.getCPtr(leaf), leaf, btDbvtAabbMm.getCPtr(volume), volume, velocity, margin);
   }
 
-  public boolean update(btDbvtNode leaf, btDbvtAabbMm volume, Vector3 velocity) {
+  public boolean update(btDbvtNode leaf, btDbvtAabbMm volume, Vector3f velocity) {
     return CollisionJNI.btDbvt_update__SWIG_4(swigCPtr, this, btDbvtNode.getCPtr(leaf), leaf, btDbvtAabbMm.getCPtr(volume), volume, velocity);
   }
 
@@ -614,11 +614,11 @@ public class btDbvt extends BulletBase {
     CollisionJNI.btDbvt_collideTVNoStackAlloc(swigCPtr, this, btDbvtNode.getCPtr(root), root, btDbvtAabbMm.getCPtr(volume), volume, SWIGTYPE_p_btAlignedObjectArrayT_btDbvtNode_const_p_t.getCPtr(stack), ICollide.getCPtr(policy), policy);
   }
 
-  public static void rayTest(btDbvtNode root, Vector3 rayFrom, Vector3 rayTo, ICollide policy) {
+  public static void rayTest(btDbvtNode root, Vector3f rayFrom, Vector3f rayTo, ICollide policy) {
     CollisionJNI.btDbvt_rayTest(btDbvtNode.getCPtr(root), root, rayFrom, rayTo, ICollide.getCPtr(policy), policy);
   }
 
-  public void rayTestInternal(btDbvtNode root, Vector3 rayFrom, Vector3 rayTo, Vector3 rayDirectionInverse, long[] signs, float lambda_max, Vector3 aabbMin, Vector3 aabbMax, ICollide policy) {
+  public void rayTestInternal(btDbvtNode root, Vector3f rayFrom, Vector3f rayTo, Vector3f rayDirectionInverse, long[] signs, float lambda_max, Vector3f aabbMin, Vector3f aabbMax, ICollide policy) {
     CollisionJNI.btDbvt_rayTestInternal(swigCPtr, this, btDbvtNode.getCPtr(root), root, rayFrom, rayTo, rayDirectionInverse, signs, lambda_max, aabbMin, aabbMax, ICollide.getCPtr(policy), policy);
   }
 
@@ -629,14 +629,14 @@ public class btDbvt extends BulletBase {
     }
   }
 
-  public static void collideOCL(btDbvtNode root, btVector3 normals, java.nio.FloatBuffer offsets, Vector3 sortaxis, int count, ICollide policy, boolean fullsort) {
+  public static void collideOCL(btDbvtNode root, btVector3 normals, java.nio.FloatBuffer offsets, Vector3f sortaxis, int count, ICollide policy, boolean fullsort) {
     assert offsets.isDirect() : "Buffer must be allocated direct.";
     {
       CollisionJNI.btDbvt_collideOCL__SWIG_0(btDbvtNode.getCPtr(root), root, btVector3.getCPtr(normals), normals, offsets, sortaxis, count, ICollide.getCPtr(policy), policy, fullsort);
     }
   }
 
-  public static void collideOCL(btDbvtNode root, btVector3 normals, java.nio.FloatBuffer offsets, Vector3 sortaxis, int count, ICollide policy) {
+  public static void collideOCL(btDbvtNode root, btVector3 normals, java.nio.FloatBuffer offsets, Vector3f sortaxis, int count, ICollide policy) {
     assert offsets.isDirect() : "Buffer must be allocated direct.";
     {
       CollisionJNI.btDbvt_collideOCL__SWIG_1(btDbvtNode.getCPtr(root), root, btVector3.getCPtr(normals), normals, offsets, sortaxis, count, ICollide.getCPtr(policy), policy);
@@ -666,7 +666,7 @@ public class btDbvt extends BulletBase {
     }
   }
 
-  public static void collideOCL(btDbvtNode root, java.nio.FloatBuffer normals, java.nio.FloatBuffer offsets, Vector3 sortaxis, int count, ICollide policy, boolean fullsort) {
+  public static void collideOCL(btDbvtNode root, java.nio.FloatBuffer normals, java.nio.FloatBuffer offsets, Vector3f sortaxis, int count, ICollide policy, boolean fullsort) {
     assert normals.isDirect() : "Buffer must be allocated direct.";
     assert offsets.isDirect() : "Buffer must be allocated direct.";
     {
@@ -674,7 +674,7 @@ public class btDbvt extends BulletBase {
     }
   }
 
-  public static void collideOCL(btDbvtNode root, java.nio.FloatBuffer normals, java.nio.FloatBuffer offsets, Vector3 sortaxis, int count, ICollide policy) {
+  public static void collideOCL(btDbvtNode root, java.nio.FloatBuffer normals, java.nio.FloatBuffer offsets, Vector3f sortaxis, int count, ICollide policy) {
     assert normals.isDirect() : "Buffer must be allocated direct.";
     assert offsets.isDirect() : "Buffer must be allocated direct.";
     {

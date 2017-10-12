@@ -11,10 +11,10 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btCharacterControllerInterface extends btActionInterface {
 	private long swigCPtr;
@@ -59,11 +59,11 @@ public class btCharacterControllerInterface extends btActionInterface {
 		super.delete();
 	}
 
-  public void setWalkDirection(Vector3 walkDirection) {
+  public void setWalkDirection(Vector3f walkDirection) {
     DynamicsJNI.btCharacterControllerInterface_setWalkDirection(swigCPtr, this, walkDirection);
   }
 
-  public void setVelocityForTimeInterval(Vector3 velocity, float timeInterval) {
+  public void setVelocityForTimeInterval(Vector3f velocity, float timeInterval) {
     DynamicsJNI.btCharacterControllerInterface_setVelocityForTimeInterval(swigCPtr, this, velocity, timeInterval);
   }
 
@@ -71,7 +71,7 @@ public class btCharacterControllerInterface extends btActionInterface {
     DynamicsJNI.btCharacterControllerInterface_reset(swigCPtr, this, btCollisionWorld.getCPtr(collisionWorld), collisionWorld);
   }
 
-  public void warp(Vector3 origin) {
+  public void warp(Vector3f origin) {
     DynamicsJNI.btCharacterControllerInterface_warp(swigCPtr, this, origin);
   }
 
@@ -87,7 +87,7 @@ public class btCharacterControllerInterface extends btActionInterface {
     return DynamicsJNI.btCharacterControllerInterface_canJump(swigCPtr, this);
   }
 
-  public void jump(Vector3 dir) {
+  public void jump(Vector3f dir) {
     DynamicsJNI.btCharacterControllerInterface_jump__SWIG_0(swigCPtr, this, dir);
   }
 

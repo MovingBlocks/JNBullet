@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btConvexHullShape extends btPolyhedralConvexAabbCachingShape {
 	private long swigCPtr;
@@ -89,11 +89,11 @@ public class btConvexHullShape extends btPolyhedralConvexAabbCachingShape {
     this(CollisionJNI.new_btConvexHullShape__SWIG_3(), true);
   }
 
-  public void addPoint(Vector3 point, boolean recalculateLocalAabb) {
+  public void addPoint(Vector3f point, boolean recalculateLocalAabb) {
     CollisionJNI.btConvexHullShape_addPoint__SWIG_0(swigCPtr, this, point, recalculateLocalAabb);
   }
 
-  public void addPoint(Vector3 point) {
+  public void addPoint(Vector3f point) {
     CollisionJNI.btConvexHullShape_addPoint__SWIG_1(swigCPtr, this, point);
   }
 
@@ -111,7 +111,7 @@ public class btConvexHullShape extends btPolyhedralConvexAabbCachingShape {
     CollisionJNI.btConvexHullShape_optimizeConvexHull(swigCPtr, this);
   }
 
-  public Vector3 getScaledPoint(int i) {
+  public Vector3f getScaledPoint(int i) {
 	return CollisionJNI.btConvexHullShape_getScaledPoint(swigCPtr, this, i);
 }
 

@@ -11,10 +11,10 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btPoint2PointConstraint extends btTypedConstraint {
 	private long swigCPtr;
@@ -76,11 +76,11 @@ public class btPoint2PointConstraint extends btTypedConstraint {
     return (cPtr == 0) ? null : new btConstraintSetting(cPtr, false);
   }
 
-  public btPoint2PointConstraint(btRigidBody rbA, btRigidBody rbB, Vector3 pivotInA, Vector3 pivotInB) {
+  public btPoint2PointConstraint(btRigidBody rbA, btRigidBody rbB, Vector3f pivotInA, Vector3f pivotInB) {
     this(DynamicsJNI.new_btPoint2PointConstraint__SWIG_0(btRigidBody.getCPtr(rbA), rbA, btRigidBody.getCPtr(rbB), rbB, pivotInA, pivotInB), true);
   }
 
-  public btPoint2PointConstraint(btRigidBody rbA, Vector3 pivotInA) {
+  public btPoint2PointConstraint(btRigidBody rbA, Vector3f pivotInA) {
     this(DynamicsJNI.new_btPoint2PointConstraint__SWIG_1(btRigidBody.getCPtr(rbA), rbA, pivotInA), true);
   }
 
@@ -88,7 +88,7 @@ public class btPoint2PointConstraint extends btTypedConstraint {
     DynamicsJNI.btPoint2PointConstraint_getInfo1NonVirtual(swigCPtr, this, btTypedConstraint.btConstraintInfo1.getCPtr(info), info);
   }
 
-  public void getInfo2NonVirtual(btTypedConstraint.btConstraintInfo2 info, Matrix4 body0_trans, Matrix4 body1_trans) {
+  public void getInfo2NonVirtual(btTypedConstraint.btConstraintInfo2 info, Matrix4f body0_trans, Matrix4f body1_trans) {
     DynamicsJNI.btPoint2PointConstraint_getInfo2NonVirtual(swigCPtr, this, btTypedConstraint.btConstraintInfo2.getCPtr(info), info, body0_trans, body1_trans);
   }
 
@@ -96,19 +96,19 @@ public class btPoint2PointConstraint extends btTypedConstraint {
     DynamicsJNI.btPoint2PointConstraint_updateRHS(swigCPtr, this, timeStep);
   }
 
-  public void setPivotA(Vector3 pivotA) {
+  public void setPivotA(Vector3f pivotA) {
     DynamicsJNI.btPoint2PointConstraint_setPivotA(swigCPtr, this, pivotA);
   }
 
-  public void setPivotB(Vector3 pivotB) {
+  public void setPivotB(Vector3f pivotB) {
     DynamicsJNI.btPoint2PointConstraint_setPivotB(swigCPtr, this, pivotB);
   }
 
-  public Vector3 getPivotInA() {
+  public Vector3f getPivotInA() {
 	return DynamicsJNI.btPoint2PointConstraint_getPivotInA(swigCPtr, this);
 }
 
-  public Vector3 getPivotInB() {
+  public Vector3f getPivotInB() {
 	return DynamicsJNI.btPoint2PointConstraint_getPivotInB(swigCPtr, this);
 }
 

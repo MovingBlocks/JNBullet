@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btTriangleConvexcastCallback extends btTriangleCallback {
 	private long swigCPtr;
@@ -133,7 +133,7 @@ public class btTriangleConvexcastCallback extends btTriangleCallback {
     return CollisionJNI.btTriangleConvexcastCallback_allowedPenetration_get(swigCPtr, this);
   }
 
-  public btTriangleConvexcastCallback(btConvexShape convexShape, Matrix4 convexShapeFrom, Matrix4 convexShapeTo, Matrix4 triangleToWorld, float triangleCollisionMargin) {
+  public btTriangleConvexcastCallback(btConvexShape convexShape, Matrix4f convexShapeFrom, Matrix4f convexShapeTo, Matrix4f triangleToWorld, float triangleCollisionMargin) {
     this(CollisionJNI.new_btTriangleConvexcastCallback(btConvexShape.getCPtr(convexShape), convexShape, convexShapeFrom, convexShapeTo, triangleToWorld, triangleCollisionMargin), true);
     CollisionJNI.btTriangleConvexcastCallback_director_connect(this, swigCPtr, swigCMemOwn, true);
   }
@@ -142,7 +142,7 @@ public class btTriangleConvexcastCallback extends btTriangleCallback {
     if (getClass() == btTriangleConvexcastCallback.class) CollisionJNI.btTriangleConvexcastCallback_processTriangle(swigCPtr, this, btVector3.getCPtr(triangle), triangle, partId, triangleIndex); else CollisionJNI.btTriangleConvexcastCallback_processTriangleSwigExplicitbtTriangleConvexcastCallback(swigCPtr, this, btVector3.getCPtr(triangle), triangle, partId, triangleIndex);
   }
 
-  public float reportHit(Vector3 hitNormalLocal, Vector3 hitPointLocal, float hitFraction, int partId, int triangleIndex) {
+  public float reportHit(Vector3f hitNormalLocal, Vector3f hitPointLocal, float hitFraction, int partId, int triangleIndex) {
     return CollisionJNI.btTriangleConvexcastCallback_reportHit(swigCPtr, this, hitNormalLocal, hitPointLocal, hitFraction, partId, triangleIndex);
   }
 

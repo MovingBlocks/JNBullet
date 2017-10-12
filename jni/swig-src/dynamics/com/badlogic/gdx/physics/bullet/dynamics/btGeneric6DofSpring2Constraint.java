@@ -11,10 +11,10 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btGeneric6DofSpring2Constraint extends btTypedConstraint {
 	private long swigCPtr;
@@ -59,19 +59,19 @@ public class btGeneric6DofSpring2Constraint extends btTypedConstraint {
 		super.delete();
 	}
 
-  public btGeneric6DofSpring2Constraint(btRigidBody rbA, btRigidBody rbB, Matrix4 frameInA, Matrix4 frameInB, int rotOrder) {
+  public btGeneric6DofSpring2Constraint(btRigidBody rbA, btRigidBody rbB, Matrix4f frameInA, Matrix4f frameInB, int rotOrder) {
     this(DynamicsJNI.new_btGeneric6DofSpring2Constraint__SWIG_0(btRigidBody.getCPtr(rbA), rbA, btRigidBody.getCPtr(rbB), rbB, frameInA, frameInB, rotOrder), true);
   }
 
-  public btGeneric6DofSpring2Constraint(btRigidBody rbA, btRigidBody rbB, Matrix4 frameInA, Matrix4 frameInB) {
+  public btGeneric6DofSpring2Constraint(btRigidBody rbA, btRigidBody rbB, Matrix4f frameInA, Matrix4f frameInB) {
     this(DynamicsJNI.new_btGeneric6DofSpring2Constraint__SWIG_1(btRigidBody.getCPtr(rbA), rbA, btRigidBody.getCPtr(rbB), rbB, frameInA, frameInB), true);
   }
 
-  public btGeneric6DofSpring2Constraint(btRigidBody rbB, Matrix4 frameInB, int rotOrder) {
+  public btGeneric6DofSpring2Constraint(btRigidBody rbB, Matrix4f frameInB, int rotOrder) {
     this(DynamicsJNI.new_btGeneric6DofSpring2Constraint__SWIG_2(btRigidBody.getCPtr(rbB), rbB, frameInB, rotOrder), true);
   }
 
-  public btGeneric6DofSpring2Constraint(btRigidBody rbB, Matrix4 frameInB) {
+  public btGeneric6DofSpring2Constraint(btRigidBody rbB, Matrix4f frameInB) {
     this(DynamicsJNI.new_btGeneric6DofSpring2Constraint__SWIG_3(btRigidBody.getCPtr(rbB), rbB, frameInB), true);
   }
 
@@ -85,7 +85,7 @@ public class btGeneric6DofSpring2Constraint extends btTypedConstraint {
     return (cPtr == 0) ? null : new btTranslationalLimitMotor2(cPtr, false);
   }
 
-  public void calculateTransforms(Matrix4 transA, Matrix4 transB) {
+  public void calculateTransforms(Matrix4f transA, Matrix4f transB) {
     DynamicsJNI.btGeneric6DofSpring2Constraint_calculateTransforms__SWIG_0(swigCPtr, this, transA, transB);
   }
 
@@ -93,23 +93,23 @@ public class btGeneric6DofSpring2Constraint extends btTypedConstraint {
     DynamicsJNI.btGeneric6DofSpring2Constraint_calculateTransforms__SWIG_1(swigCPtr, this);
   }
 
-  public Matrix4 getCalculatedTransformA() {
+  public Matrix4f getCalculatedTransformA() {
 	return DynamicsJNI.btGeneric6DofSpring2Constraint_getCalculatedTransformA(swigCPtr, this);
 }
 
-  public Matrix4 getCalculatedTransformB() {
+  public Matrix4f getCalculatedTransformB() {
 	return DynamicsJNI.btGeneric6DofSpring2Constraint_getCalculatedTransformB(swigCPtr, this);
 }
 
-  public Matrix4 getFrameOffsetA() {
+  public Matrix4f getFrameOffsetA() {
 	return DynamicsJNI.btGeneric6DofSpring2Constraint_getFrameOffsetA__SWIG_0(swigCPtr, this);
 }
 
-  public Matrix4 getFrameOffsetB() {
+  public Matrix4f getFrameOffsetB() {
 	return DynamicsJNI.btGeneric6DofSpring2Constraint_getFrameOffsetB__SWIG_0(swigCPtr, this);
 }
 
-  public Vector3 getAxis(int axis_index) {
+  public Vector3f getAxis(int axis_index) {
 	return DynamicsJNI.btGeneric6DofSpring2Constraint_getAxis(swigCPtr, this, axis_index);
 }
 
@@ -121,55 +121,55 @@ public class btGeneric6DofSpring2Constraint extends btTypedConstraint {
     return DynamicsJNI.btGeneric6DofSpring2Constraint_getRelativePivotPosition(swigCPtr, this, axis_index);
   }
 
-  public void setFrames(Matrix4 frameA, Matrix4 frameB) {
+  public void setFrames(Matrix4f frameA, Matrix4f frameB) {
     DynamicsJNI.btGeneric6DofSpring2Constraint_setFrames(swigCPtr, this, frameA, frameB);
   }
 
-  public void setLinearLowerLimit(Vector3 linearLower) {
+  public void setLinearLowerLimit(Vector3f linearLower) {
     DynamicsJNI.btGeneric6DofSpring2Constraint_setLinearLowerLimit(swigCPtr, this, linearLower);
   }
 
-  public void getLinearLowerLimit(Vector3 linearLower) {
+  public void getLinearLowerLimit(Vector3f linearLower) {
     DynamicsJNI.btGeneric6DofSpring2Constraint_getLinearLowerLimit(swigCPtr, this, linearLower);
   }
 
-  public void setLinearUpperLimit(Vector3 linearUpper) {
+  public void setLinearUpperLimit(Vector3f linearUpper) {
     DynamicsJNI.btGeneric6DofSpring2Constraint_setLinearUpperLimit(swigCPtr, this, linearUpper);
   }
 
-  public void getLinearUpperLimit(Vector3 linearUpper) {
+  public void getLinearUpperLimit(Vector3f linearUpper) {
     DynamicsJNI.btGeneric6DofSpring2Constraint_getLinearUpperLimit(swigCPtr, this, linearUpper);
   }
 
-  public void setAngularLowerLimit(Vector3 angularLower) {
+  public void setAngularLowerLimit(Vector3f angularLower) {
     DynamicsJNI.btGeneric6DofSpring2Constraint_setAngularLowerLimit(swigCPtr, this, angularLower);
   }
 
-  public void setAngularLowerLimitReversed(Vector3 angularLower) {
+  public void setAngularLowerLimitReversed(Vector3f angularLower) {
     DynamicsJNI.btGeneric6DofSpring2Constraint_setAngularLowerLimitReversed(swigCPtr, this, angularLower);
   }
 
-  public void getAngularLowerLimit(Vector3 angularLower) {
+  public void getAngularLowerLimit(Vector3f angularLower) {
     DynamicsJNI.btGeneric6DofSpring2Constraint_getAngularLowerLimit(swigCPtr, this, angularLower);
   }
 
-  public void getAngularLowerLimitReversed(Vector3 angularLower) {
+  public void getAngularLowerLimitReversed(Vector3f angularLower) {
     DynamicsJNI.btGeneric6DofSpring2Constraint_getAngularLowerLimitReversed(swigCPtr, this, angularLower);
   }
 
-  public void setAngularUpperLimit(Vector3 angularUpper) {
+  public void setAngularUpperLimit(Vector3f angularUpper) {
     DynamicsJNI.btGeneric6DofSpring2Constraint_setAngularUpperLimit(swigCPtr, this, angularUpper);
   }
 
-  public void setAngularUpperLimitReversed(Vector3 angularUpper) {
+  public void setAngularUpperLimitReversed(Vector3f angularUpper) {
     DynamicsJNI.btGeneric6DofSpring2Constraint_setAngularUpperLimitReversed(swigCPtr, this, angularUpper);
   }
 
-  public void getAngularUpperLimit(Vector3 angularUpper) {
+  public void getAngularUpperLimit(Vector3f angularUpper) {
     DynamicsJNI.btGeneric6DofSpring2Constraint_getAngularUpperLimit(swigCPtr, this, angularUpper);
   }
 
-  public void getAngularUpperLimitReversed(Vector3 angularUpper) {
+  public void getAngularUpperLimitReversed(Vector3f angularUpper) {
     DynamicsJNI.btGeneric6DofSpring2Constraint_getAngularUpperLimitReversed(swigCPtr, this, angularUpper);
   }
 
@@ -193,7 +193,7 @@ public class btGeneric6DofSpring2Constraint extends btTypedConstraint {
     return DynamicsJNI.btGeneric6DofSpring2Constraint_getRotationOrder(swigCPtr, this);
   }
 
-  public void setAxis(Vector3 axis1, Vector3 axis2) {
+  public void setAxis(Vector3f axis1, Vector3f axis2) {
     DynamicsJNI.btGeneric6DofSpring2Constraint_setAxis(swigCPtr, this, axis1, axis2);
   }
 
@@ -269,31 +269,31 @@ public class btGeneric6DofSpring2Constraint extends btTypedConstraint {
     return DynamicsJNI.btGeneric6DofSpring2Constraint_getParam__SWIG_1(swigCPtr, this, num);
   }
 
-  public static float btGetMatrixElem(Matrix3 mat, int index) {
+  public static float btGetMatrixElem(Matrix3f mat, int index) {
     return DynamicsJNI.btGeneric6DofSpring2Constraint_btGetMatrixElem(mat, index);
   }
 
-  public static boolean matrixToEulerXYZ(Matrix3 mat, Vector3 xyz) {
+  public static boolean matrixToEulerXYZ(Matrix3f mat, Vector3f xyz) {
     return DynamicsJNI.btGeneric6DofSpring2Constraint_matrixToEulerXYZ(mat, xyz);
   }
 
-  public static boolean matrixToEulerXZY(Matrix3 mat, Vector3 xyz) {
+  public static boolean matrixToEulerXZY(Matrix3f mat, Vector3f xyz) {
     return DynamicsJNI.btGeneric6DofSpring2Constraint_matrixToEulerXZY(mat, xyz);
   }
 
-  public static boolean matrixToEulerYXZ(Matrix3 mat, Vector3 xyz) {
+  public static boolean matrixToEulerYXZ(Matrix3f mat, Vector3f xyz) {
     return DynamicsJNI.btGeneric6DofSpring2Constraint_matrixToEulerYXZ(mat, xyz);
   }
 
-  public static boolean matrixToEulerYZX(Matrix3 mat, Vector3 xyz) {
+  public static boolean matrixToEulerYZX(Matrix3f mat, Vector3f xyz) {
     return DynamicsJNI.btGeneric6DofSpring2Constraint_matrixToEulerYZX(mat, xyz);
   }
 
-  public static boolean matrixToEulerZXY(Matrix3 mat, Vector3 xyz) {
+  public static boolean matrixToEulerZXY(Matrix3f mat, Vector3f xyz) {
     return DynamicsJNI.btGeneric6DofSpring2Constraint_matrixToEulerZXY(mat, xyz);
   }
 
-  public static boolean matrixToEulerZYX(Matrix3 mat, Vector3 xyz) {
+  public static boolean matrixToEulerZYX(Matrix3f mat, Vector3f xyz) {
     return DynamicsJNI.btGeneric6DofSpring2Constraint_matrixToEulerZYX(mat, xyz);
   }
 

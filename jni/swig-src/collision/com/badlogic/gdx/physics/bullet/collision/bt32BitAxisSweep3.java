@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class bt32BitAxisSweep3 extends btAxisSweep3InternalInt {
 	private long swigCPtr;
@@ -58,19 +58,19 @@ public class bt32BitAxisSweep3 extends btAxisSweep3InternalInt {
 		super.delete();
 	}
 
-  public bt32BitAxisSweep3(Vector3 worldAabbMin, Vector3 worldAabbMax, long maxHandles, btOverlappingPairCache pairCache, boolean disableRaycastAccelerator) {
+  public bt32BitAxisSweep3(Vector3f worldAabbMin, Vector3f worldAabbMax, long maxHandles, btOverlappingPairCache pairCache, boolean disableRaycastAccelerator) {
     this(CollisionJNI.new_bt32BitAxisSweep3__SWIG_0(worldAabbMin, worldAabbMax, maxHandles, btOverlappingPairCache.getCPtr(pairCache), pairCache, disableRaycastAccelerator), true);
   }
 
-  public bt32BitAxisSweep3(Vector3 worldAabbMin, Vector3 worldAabbMax, long maxHandles, btOverlappingPairCache pairCache) {
+  public bt32BitAxisSweep3(Vector3f worldAabbMin, Vector3f worldAabbMax, long maxHandles, btOverlappingPairCache pairCache) {
     this(CollisionJNI.new_bt32BitAxisSweep3__SWIG_1(worldAabbMin, worldAabbMax, maxHandles, btOverlappingPairCache.getCPtr(pairCache), pairCache), true);
   }
 
-  public bt32BitAxisSweep3(Vector3 worldAabbMin, Vector3 worldAabbMax, long maxHandles) {
+  public bt32BitAxisSweep3(Vector3f worldAabbMin, Vector3f worldAabbMax, long maxHandles) {
     this(CollisionJNI.new_bt32BitAxisSweep3__SWIG_2(worldAabbMin, worldAabbMax, maxHandles), true);
   }
 
-  public bt32BitAxisSweep3(Vector3 worldAabbMin, Vector3 worldAabbMax) {
+  public bt32BitAxisSweep3(Vector3f worldAabbMin, Vector3f worldAabbMax) {
     this(CollisionJNI.new_bt32BitAxisSweep3__SWIG_3(worldAabbMin, worldAabbMax), true);
   }
 

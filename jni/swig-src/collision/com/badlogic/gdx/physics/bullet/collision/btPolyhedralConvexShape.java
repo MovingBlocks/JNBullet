@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btPolyhedralConvexShape extends btConvexInternalShape {
 	private long swigCPtr;
@@ -79,11 +79,11 @@ public class btPolyhedralConvexShape extends btConvexInternalShape {
     return CollisionJNI.btPolyhedralConvexShape_getNumEdges(swigCPtr, this);
   }
 
-  public void getEdge(int i, Vector3 pa, Vector3 pb) {
+  public void getEdge(int i, Vector3f pa, Vector3f pb) {
     CollisionJNI.btPolyhedralConvexShape_getEdge(swigCPtr, this, i, pa, pb);
   }
 
-  public void getVertex(int i, Vector3 vtx) {
+  public void getVertex(int i, Vector3f vtx) {
     CollisionJNI.btPolyhedralConvexShape_getVertex(swigCPtr, this, i, vtx);
   }
 
@@ -91,11 +91,11 @@ public class btPolyhedralConvexShape extends btConvexInternalShape {
     return CollisionJNI.btPolyhedralConvexShape_getNumPlanes(swigCPtr, this);
   }
 
-  public void getPlane(Vector3 planeNormal, Vector3 planeSupport, int i) {
+  public void getPlane(Vector3f planeNormal, Vector3f planeSupport, int i) {
     CollisionJNI.btPolyhedralConvexShape_getPlane(swigCPtr, this, planeNormal, planeSupport, i);
   }
 
-  public boolean isInside(Vector3 pt, float tolerance) {
+  public boolean isInside(Vector3f pt, float tolerance) {
     return CollisionJNI.btPolyhedralConvexShape_isInside(swigCPtr, this, pt, tolerance);
   }
 

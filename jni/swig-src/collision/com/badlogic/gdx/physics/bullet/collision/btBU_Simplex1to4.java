@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btBU_Simplex1to4 extends btPolyhedralConvexAabbCachingShape {
 	private long swigCPtr;
@@ -62,19 +62,19 @@ public class btBU_Simplex1to4 extends btPolyhedralConvexAabbCachingShape {
     this(CollisionJNI.new_btBU_Simplex1to4__SWIG_0(), true);
   }
 
-  public btBU_Simplex1to4(Vector3 pt0) {
+  public btBU_Simplex1to4(Vector3f pt0) {
     this(CollisionJNI.new_btBU_Simplex1to4__SWIG_1(pt0), true);
   }
 
-  public btBU_Simplex1to4(Vector3 pt0, Vector3 pt1) {
+  public btBU_Simplex1to4(Vector3f pt0, Vector3f pt1) {
     this(CollisionJNI.new_btBU_Simplex1to4__SWIG_2(pt0, pt1), true);
   }
 
-  public btBU_Simplex1to4(Vector3 pt0, Vector3 pt1, Vector3 pt2) {
+  public btBU_Simplex1to4(Vector3f pt0, Vector3f pt1, Vector3f pt2) {
     this(CollisionJNI.new_btBU_Simplex1to4__SWIG_3(pt0, pt1, pt2), true);
   }
 
-  public btBU_Simplex1to4(Vector3 pt0, Vector3 pt1, Vector3 pt2, Vector3 pt3) {
+  public btBU_Simplex1to4(Vector3f pt0, Vector3f pt1, Vector3f pt2, Vector3f pt3) {
     this(CollisionJNI.new_btBU_Simplex1to4__SWIG_4(pt0, pt1, pt2, pt3), true);
   }
 
@@ -82,7 +82,7 @@ public class btBU_Simplex1to4 extends btPolyhedralConvexAabbCachingShape {
     CollisionJNI.btBU_Simplex1to4_reset(swigCPtr, this);
   }
 
-  public void addVertex(Vector3 pt) {
+  public void addVertex(Vector3f pt) {
     CollisionJNI.btBU_Simplex1to4_addVertex(swigCPtr, this, pt);
   }
 

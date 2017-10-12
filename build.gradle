@@ -41,9 +41,16 @@ ext {
 }
 
 sourceSets {
-    generator {
+    main {
         java {
-            srcDir 'src'
+            srcDirs = [
+                "jni/swig-src/collision",
+                "jni/swig-src/dynamics",
+                "jni/swig-src/extras",
+                "jni/swig-src/linearmath",
+                "jni/swig-src/softbody",
+                'src'
+            ]
         }
     }
 }
@@ -65,13 +72,21 @@ ant.importBuild('jni/build.xml') { antTaskName ->
     "jni_${antTaskName}".toString()
 }
 
-
-
 // regroup ant tasks
 tasks.matching { task ->
-    task.name.startsWith('swig_')
-    task.name.startsWith('jni_')
+    task.name.startsWith('swig_') or task.name.startsWith('jni_')
 }*.group = 'Ant'
+
+
+build.doFirst {
+    swig_all.execute()
+}
+
+assemble.dependsOn('jni_pack_natives')
+jni_pack_natives.dependsOn('jni_compile_natives')
+jni_compile_natives.dependsOn('swig_all')
+//jni_pack-natives.dependsOn('jni_compile-natives')
+
 
 // Library and distribution config
 group = 'org.terasology'
@@ -80,6 +95,7 @@ description = 'A math / geometry library'
 dependencies {
     compile group: 'org.terasology', name: 'TeraMath', version: '1.4.0'
     compile "com.badlogicgames.gdx:gdx-jnigen:1.9.7-SNAPSHOT"
+    compile "com.badlogicgames.gdx:gdx:1.9.7-SNAPSHOT"
 
 }
 

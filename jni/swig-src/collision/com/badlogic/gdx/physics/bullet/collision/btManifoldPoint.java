@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btManifoldPoint extends BulletBase {
 	private long swigCPtr;
@@ -79,7 +79,7 @@ public class btManifoldPoint extends BulletBase {
     this(CollisionJNI.new_btManifoldPoint__SWIG_0(), true);
   }
 
-  public btManifoldPoint(Vector3 pointA, Vector3 pointB, Vector3 normal, float distance) {
+  public btManifoldPoint(Vector3f pointA, Vector3f pointB, Vector3f normal, float distance) {
     this(CollisionJNI.new_btManifoldPoint__SWIG_1(pointA, pointB, normal, distance), true);
   }
 
@@ -275,59 +275,59 @@ public class btManifoldPoint extends BulletBase {
     CollisionJNI.btManifoldPoint_setUserValue(swigCPtr, this, value);
   }
 
-  public void getLocalPointA(Vector3 out) {
+  public void getLocalPointA(Vector3f out) {
     CollisionJNI.btManifoldPoint_getLocalPointA(swigCPtr, this, out);
   }
 
-  public void setLocalPointA(Vector3 value) {
+  public void setLocalPointA(Vector3f value) {
     CollisionJNI.btManifoldPoint_setLocalPointA(swigCPtr, this, value);
   }
 
-  public void getLocalPointB(Vector3 out) {
+  public void getLocalPointB(Vector3f out) {
     CollisionJNI.btManifoldPoint_getLocalPointB(swigCPtr, this, out);
   }
 
-  public void setLocalPointB(Vector3 value) {
+  public void setLocalPointB(Vector3f value) {
     CollisionJNI.btManifoldPoint_setLocalPointB(swigCPtr, this, value);
   }
 
-  public void getPositionWorldOnA(Vector3 out) {
+  public void getPositionWorldOnA(Vector3f out) {
     CollisionJNI.btManifoldPoint_getPositionWorldOnA(swigCPtr, this, out);
   }
 
-  public void setPositionWorldOnA(Vector3 value) {
+  public void setPositionWorldOnA(Vector3f value) {
     CollisionJNI.btManifoldPoint_setPositionWorldOnA(swigCPtr, this, value);
   }
 
-  public void getPositionWorldOnB(Vector3 out) {
+  public void getPositionWorldOnB(Vector3f out) {
     CollisionJNI.btManifoldPoint_getPositionWorldOnB(swigCPtr, this, out);
   }
 
-  public void setPositionWorldOnB(Vector3 value) {
+  public void setPositionWorldOnB(Vector3f value) {
     CollisionJNI.btManifoldPoint_setPositionWorldOnB(swigCPtr, this, value);
   }
 
-  public void getNormalWorldOnB(Vector3 out) {
+  public void getNormalWorldOnB(Vector3f out) {
     CollisionJNI.btManifoldPoint_getNormalWorldOnB(swigCPtr, this, out);
   }
 
-  public void setNormalWorldOnB(Vector3 value) {
+  public void setNormalWorldOnB(Vector3f value) {
     CollisionJNI.btManifoldPoint_setNormalWorldOnB(swigCPtr, this, value);
   }
 
-  public void getLateralFrictionDir1(Vector3 out) {
+  public void getLateralFrictionDir1(Vector3f out) {
     CollisionJNI.btManifoldPoint_getLateralFrictionDir1(swigCPtr, this, out);
   }
 
-  public void setLateralFrictionDir1(Vector3 value) {
+  public void setLateralFrictionDir1(Vector3f value) {
     CollisionJNI.btManifoldPoint_setLateralFrictionDir1(swigCPtr, this, value);
   }
 
-  public void getLateralFrictionDir2(Vector3 out) {
+  public void getLateralFrictionDir2(Vector3f out) {
     CollisionJNI.btManifoldPoint_getLateralFrictionDir2(swigCPtr, this, out);
   }
 
-  public void setLateralFrictionDir2(Vector3 value) {
+  public void setLateralFrictionDir2(Vector3f value) {
     CollisionJNI.btManifoldPoint_setLateralFrictionDir2(swigCPtr, this, value);
   }
 

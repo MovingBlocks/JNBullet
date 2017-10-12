@@ -11,53 +11,53 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class Dynamics implements DynamicsConstants {
 
-	/** Temporary Vector3 instance, used by native methods that return a Vector3 instance */
-	public final static Vector3 staticVector3 = new Vector3();
-	/** Pool of Vector3, used by native (callback) method for the arguments */
-	public final static com.badlogic.gdx.utils.Pool<Vector3> poolVector3 = new com.badlogic.gdx.utils.Pool<Vector3>() {
+	/** Temporary Vector3f instance, used by native methods that return a Vector3f instance */
+	public final static Vector3f staticVector3f = new Vector3f();
+	/** Pool of Vector3f, used by native (callback) method for the arguments */
+	public final static com.badlogic.gdx.utils.Pool<Vector3f> poolVector3f = new com.badlogic.gdx.utils.Pool<Vector3f>() {
 		@Override
-		protected Vector3 newObject() {
-			return new Vector3();
+		protected Vector3f newObject() {
+			return new Vector3f();
 		}
 	};
 
 
-	/** Temporary Quaternion instance, used by native methods that return a Quaternion instance */
-	public final static Quaternion staticQuaternion = new Quaternion();
-	/** Pool of Quaternion, used by native (callback) method for the arguments */
-	public final static com.badlogic.gdx.utils.Pool<Quaternion> poolQuaternion = new com.badlogic.gdx.utils.Pool<Quaternion>() {
+	/** Temporary Quat4f instance, used by native methods that return a Quat4f instance */
+	public final static Quat4f staticQuat4f = new Quat4f();
+	/** Pool of Quat4f, used by native (callback) method for the arguments */
+	public final static com.badlogic.gdx.utils.Pool<Quat4f> poolQuat4f = new com.badlogic.gdx.utils.Pool<Quat4f>() {
 		@Override
-		protected Quaternion newObject() {
-			return new Quaternion();
+		protected Quat4f newObject() {
+			return new Quat4f();
 		}
 	};
 
 
-	/** Temporary Matrix3 instance, used by native methods that return a Matrix3 instance */
-	public final static Matrix3 staticMatrix3 = new Matrix3();
-	/** Pool of Matrix3, used by native (callback) method for the arguments */
-	public final static com.badlogic.gdx.utils.Pool<Matrix3> poolMatrix3 = new com.badlogic.gdx.utils.Pool<Matrix3>() {
+	/** Temporary Matrix3f instance, used by native methods that return a Matrix3f instance */
+	public final static Matrix3f staticMatrix3f = new Matrix3f();
+	/** Pool of Matrix3f, used by native (callback) method for the arguments */
+	public final static com.badlogic.gdx.utils.Pool<Matrix3f> poolMatrix3f = new com.badlogic.gdx.utils.Pool<Matrix3f>() {
 		@Override
-		protected Matrix3 newObject() {
-			return new Matrix3();
+		protected Matrix3f newObject() {
+			return new Matrix3f();
 		}
 	};
 
 
-	/** Temporary Matrix4 instance, used by native methods that return a Matrix4 instance */
-	public final static Matrix4 staticMatrix4 = new Matrix4();
-	/** Pool of Matrix4, used by native (callback) method for the arguments */
-	public final static com.badlogic.gdx.utils.Pool<Matrix4> poolMatrix4 = new com.badlogic.gdx.utils.Pool<Matrix4>() {
+	/** Temporary Matrix4f instance, used by native methods that return a Matrix4f instance */
+	public final static Matrix4f staticMatrix4f = new Matrix4f();
+	/** Pool of Matrix4f, used by native (callback) method for the arguments */
+	public final static com.badlogic.gdx.utils.Pool<Matrix4f> poolMatrix4f = new com.badlogic.gdx.utils.Pool<Matrix4f>() {
 		@Override
-		protected Matrix4 newObject() {
-			return new Matrix4();
+		protected Matrix4f newObject() {
+			return new Matrix4f();
 		}
 	};
 
@@ -85,11 +85,11 @@ public class Dynamics implements DynamicsConstants {
     DynamicsJNI.InternalTickCallback_CB(btDynamicsWorld.getCPtr(world), world, timeStep);
   }
 
-  public static float resolveSingleCollision(btRigidBody body1, btCollisionObject colObj2, Vector3 contactPositionWorld, Vector3 contactNormalOnB, btContactSolverInfo solverInfo, float distance) {
+  public static float resolveSingleCollision(btRigidBody body1, btCollisionObject colObj2, Vector3f contactPositionWorld, Vector3f contactNormalOnB, btContactSolverInfo solverInfo, float distance) {
     return DynamicsJNI.resolveSingleCollision(btRigidBody.getCPtr(body1), body1, btCollisionObject.getCPtr(colObj2), colObj2, contactPositionWorld, contactNormalOnB, btContactSolverInfo.getCPtr(solverInfo), solverInfo, distance);
   }
 
-  public static void resolveSingleBilateral(btRigidBody body1, Vector3 pos1, btRigidBody body2, Vector3 pos2, float distance, Vector3 normal, SWIGTYPE_p_float impulse, float timeStep) {
+  public static void resolveSingleBilateral(btRigidBody body1, Vector3f pos1, btRigidBody body2, Vector3f pos2, float distance, Vector3f normal, SWIGTYPE_p_float impulse, float timeStep) {
     DynamicsJNI.resolveSingleBilateral(btRigidBody.getCPtr(body1), body1, pos1, btRigidBody.getCPtr(body2), body2, pos2, distance, normal, SWIGTYPE_p_float.getCPtr(impulse), timeStep);
   }
 

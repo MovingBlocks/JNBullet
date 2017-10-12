@@ -11,10 +11,10 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btUniversalConstraint extends btGeneric6DofConstraint {
 	private long swigCPtr;
@@ -59,23 +59,23 @@ public class btUniversalConstraint extends btGeneric6DofConstraint {
 		super.delete();
 	}
 
-  public btUniversalConstraint(btRigidBody rbA, btRigidBody rbB, Vector3 anchor, Vector3 axis1, Vector3 axis2) {
+  public btUniversalConstraint(btRigidBody rbA, btRigidBody rbB, Vector3f anchor, Vector3f axis1, Vector3f axis2) {
     this(DynamicsJNI.new_btUniversalConstraint(btRigidBody.getCPtr(rbA), rbA, btRigidBody.getCPtr(rbB), rbB, anchor, axis1, axis2), true);
   }
 
-  public Vector3 getAnchor() {
+  public Vector3f getAnchor() {
 	return DynamicsJNI.btUniversalConstraint_getAnchor(swigCPtr, this);
 }
 
-  public Vector3 getAnchor2() {
+  public Vector3f getAnchor2() {
 	return DynamicsJNI.btUniversalConstraint_getAnchor2(swigCPtr, this);
 }
 
-  public Vector3 getAxis1() {
+  public Vector3f getAxis1() {
 	return DynamicsJNI.btUniversalConstraint_getAxis1(swigCPtr, this);
 }
 
-  public Vector3 getAxis2() {
+  public Vector3f getAxis2() {
 	return DynamicsJNI.btUniversalConstraint_getAxis2(swigCPtr, this);
 }
 
@@ -95,7 +95,7 @@ public class btUniversalConstraint extends btGeneric6DofConstraint {
     DynamicsJNI.btUniversalConstraint_setLowerLimit(swigCPtr, this, ang1min, ang2min);
   }
 
-  public void setAxis(Vector3 axis1, Vector3 axis2) {
+  public void setAxis(Vector3f axis1, Vector3f axis2) {
     DynamicsJNI.btUniversalConstraint_setAxis(swigCPtr, this, axis1, axis2);
   }
 

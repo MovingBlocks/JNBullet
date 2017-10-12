@@ -9,10 +9,10 @@
 package com.badlogic.gdx.physics.bullet.linearmath;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btTransform extends BulletBase {
 	private long swigCPtr;
@@ -61,39 +61,39 @@ public class btTransform extends BulletBase {
     this(LinearMathJNI.new_btTransform__SWIG_0(), true);
   }
 
-  public btTransform(Quaternion q, Vector3 c) {
+  public btTransform(Quat4f q, Vector3f c) {
     this(LinearMathJNI.new_btTransform__SWIG_1(q, c), true);
   }
 
-  public btTransform(Quaternion q) {
+  public btTransform(Quat4f q) {
     this(LinearMathJNI.new_btTransform__SWIG_2(q), true);
   }
 
-  public btTransform(Matrix3 b, Vector3 c) {
+  public btTransform(Matrix3f b, Vector3f c) {
     this(LinearMathJNI.new_btTransform__SWIG_3(b, c), true);
   }
 
-  public btTransform(Matrix3 b) {
+  public btTransform(Matrix3f b) {
     this(LinearMathJNI.new_btTransform__SWIG_4(b), true);
   }
 
-  public btTransform(Matrix4 other) {
+  public btTransform(Matrix4f other) {
     this(LinearMathJNI.new_btTransform__SWIG_5(other), true);
   }
 
-  public void mult(Matrix4 t1, Matrix4 t2) {
+  public void mult(Matrix4f t1, Matrix4f t2) {
     LinearMathJNI.btTransform_mult(swigCPtr, this, t1, t2);
   }
 
-  public Matrix3 getBasis() {
+  public Matrix3f getBasis() {
 	return LinearMathJNI.btTransform_getBasis__SWIG_0(swigCPtr, this);
 }
 
-  public Vector3 getOrigin() {
+  public Vector3f getOrigin() {
 	return LinearMathJNI.btTransform_getOrigin__SWIG_0(swigCPtr, this);
 }
 
-  public Quaternion getRotation() {
+  public Quat4f getRotation() {
 	return LinearMathJNI.btTransform_getRotation(swigCPtr, this);
 }
 
@@ -105,19 +105,19 @@ public class btTransform extends BulletBase {
     LinearMathJNI.btTransform_getOpenGLMatrix(swigCPtr, this, m);
   }
 
-  public void setOrigin(Vector3 origin) {
+  public void setOrigin(Vector3f origin) {
     LinearMathJNI.btTransform_setOrigin(swigCPtr, this, origin);
   }
 
-  public Vector3 invXform(Vector3 inVec) {
+  public Vector3f invXform(Vector3f inVec) {
 	return LinearMathJNI.btTransform_invXform(swigCPtr, this, inVec);
 }
 
-  public void setBasis(Matrix3 basis) {
+  public void setBasis(Matrix3f basis) {
     LinearMathJNI.btTransform_setBasis(swigCPtr, this, basis);
   }
 
-  public void setRotation(Quaternion q) {
+  public void setRotation(Quat4f q) {
     LinearMathJNI.btTransform_setRotation(swigCPtr, this, q);
   }
 
@@ -125,15 +125,15 @@ public class btTransform extends BulletBase {
     LinearMathJNI.btTransform_setIdentity(swigCPtr, this);
   }
 
-  public Matrix4 inverse() {
+  public Matrix4f inverse() {
 	return LinearMathJNI.btTransform_inverse(swigCPtr, this);
 }
 
-  public Matrix4 inverseTimes(Matrix4 t) {
+  public Matrix4f inverseTimes(Matrix4f t) {
 	return LinearMathJNI.btTransform_inverseTimes(swigCPtr, this, t);
 }
 
-  public static Matrix4 getIdentity() {
+  public static Matrix4f getIdentity() {
 	return LinearMathJNI.btTransform_getIdentity();
 }
 

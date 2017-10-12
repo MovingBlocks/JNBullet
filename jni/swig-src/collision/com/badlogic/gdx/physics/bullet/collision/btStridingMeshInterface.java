@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btStridingMeshInterface extends BulletBase {
 	private long swigCPtr;
@@ -58,11 +58,11 @@ public class btStridingMeshInterface extends BulletBase {
 		super.delete();
 	}
 
-  public void InternalProcessAllTriangles(btInternalTriangleIndexCallback callback, Vector3 aabbMin, Vector3 aabbMax) {
+  public void InternalProcessAllTriangles(btInternalTriangleIndexCallback callback, Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btStridingMeshInterface_InternalProcessAllTriangles(swigCPtr, this, btInternalTriangleIndexCallback.getCPtr(callback), callback, aabbMin, aabbMax);
   }
 
-  public void calculateAabbBruteForce(Vector3 aabbMin, Vector3 aabbMax) {
+  public void calculateAabbBruteForce(Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btStridingMeshInterface_calculateAabbBruteForce(swigCPtr, this, aabbMin, aabbMax);
   }
 
@@ -106,7 +106,7 @@ public class btStridingMeshInterface extends BulletBase {
     return CollisionJNI.btStridingMeshInterface_hasPremadeAabb(swigCPtr, this);
   }
 
-  public void setPremadeAabb(Vector3 aabbMin, Vector3 aabbMax) {
+  public void setPremadeAabb(Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btStridingMeshInterface_setPremadeAabb(swigCPtr, this, aabbMin, aabbMax);
   }
 
@@ -114,11 +114,11 @@ public class btStridingMeshInterface extends BulletBase {
     CollisionJNI.btStridingMeshInterface_getPremadeAabb(swigCPtr, this, btVector3.getCPtr(aabbMin), aabbMin, btVector3.getCPtr(aabbMax), aabbMax);
   }
 
-  public Vector3 getScaling() {
+  public Vector3f getScaling() {
 	return CollisionJNI.btStridingMeshInterface_getScaling(swigCPtr, this);
 }
 
-  public void setScaling(Vector3 scaling) {
+  public void setScaling(Vector3f scaling) {
     CollisionJNI.btStridingMeshInterface_setScaling(swigCPtr, this, scaling);
   }
 

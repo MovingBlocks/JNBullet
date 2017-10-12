@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btCollisionObject extends BulletBase implements 
 	com.badlogic.gdx.utils.Disposable
@@ -173,15 +173,15 @@ public class btCollisionObject extends BulletBase implements
     return CollisionJNI.btCollisionObject_mergesSimulationIslands(swigCPtr, this);
   }
 
-  public Vector3 getAnisotropicFriction() {
+  public Vector3f getAnisotropicFriction() {
 	return CollisionJNI.btCollisionObject_getAnisotropicFriction__SWIG_0(swigCPtr, this);
 }
 
-  public void setAnisotropicFriction(Vector3 anisotropicFriction, int frictionMode) {
+  public void setAnisotropicFriction(Vector3f anisotropicFriction, int frictionMode) {
     CollisionJNI.btCollisionObject_setAnisotropicFriction__SWIG_0(swigCPtr, this, anisotropicFriction, frictionMode);
   }
 
-  public void setAnisotropicFriction(Vector3 anisotropicFriction) {
+  public void setAnisotropicFriction(Vector3f anisotropicFriction) {
     CollisionJNI.btCollisionObject_setAnisotropicFriction__SWIG_1(swigCPtr, this, anisotropicFriction);
   }
 
@@ -326,11 +326,11 @@ public class btCollisionObject extends BulletBase implements
     return CollisionJNI.btCollisionObject_getInternalType(swigCPtr, this);
   }
 
-  public Matrix4 getWorldTransform() {
+  public Matrix4f getWorldTransform() {
 	return CollisionJNI.btCollisionObject_getWorldTransform__SWIG_0(swigCPtr, this);
 }
 
-  public void setWorldTransform(Matrix4 worldTrans) {
+  public void setWorldTransform(Matrix4f worldTrans) {
     CollisionJNI.btCollisionObject_setWorldTransform(swigCPtr, this, worldTrans);
   }
 
@@ -342,27 +342,27 @@ public class btCollisionObject extends BulletBase implements
     CollisionJNI.btCollisionObject_setBroadphaseHandle(swigCPtr, this, btBroadphaseProxy.getCPtr(handle), handle);
   }
 
-  public Matrix4 getInterpolationWorldTransform() {
+  public Matrix4f getInterpolationWorldTransform() {
 	return CollisionJNI.btCollisionObject_getInterpolationWorldTransform__SWIG_0(swigCPtr, this);
 }
 
-  public void setInterpolationWorldTransform(Matrix4 trans) {
+  public void setInterpolationWorldTransform(Matrix4f trans) {
     CollisionJNI.btCollisionObject_setInterpolationWorldTransform(swigCPtr, this, trans);
   }
 
-  public void setInterpolationLinearVelocity(Vector3 linvel) {
+  public void setInterpolationLinearVelocity(Vector3f linvel) {
     CollisionJNI.btCollisionObject_setInterpolationLinearVelocity(swigCPtr, this, linvel);
   }
 
-  public void setInterpolationAngularVelocity(Vector3 angvel) {
+  public void setInterpolationAngularVelocity(Vector3f angvel) {
     CollisionJNI.btCollisionObject_setInterpolationAngularVelocity(swigCPtr, this, angvel);
   }
 
-  public Vector3 getInterpolationLinearVelocity() {
+  public Vector3f getInterpolationLinearVelocity() {
 	return CollisionJNI.btCollisionObject_getInterpolationLinearVelocity__SWIG_0(swigCPtr, this);
 }
 
-  public Vector3 getInterpolationAngularVelocity() {
+  public Vector3f getInterpolationAngularVelocity() {
 	return CollisionJNI.btCollisionObject_getInterpolationAngularVelocity__SWIG_0(swigCPtr, this);
 }
 
@@ -471,23 +471,23 @@ public class btCollisionObject extends BulletBase implements
     return (cPtr == 0) ? null : new GdxCollisionObjectBridge(cPtr, false);
   }
 
-  public void getAnisotropicFriction(Vector3 out) {
+  public void getAnisotropicFriction(Vector3f out) {
     CollisionJNI.btCollisionObject_getAnisotropicFriction__SWIG_1(swigCPtr, this, out);
   }
 
-  public void getWorldTransform(Matrix4 out) {
+  public void getWorldTransform(Matrix4f out) {
     CollisionJNI.btCollisionObject_getWorldTransform__SWIG_2(swigCPtr, this, out);
   }
 
-  public void getInterpolationWorldTransform(Matrix4 out) {
+  public void getInterpolationWorldTransform(Matrix4f out) {
     CollisionJNI.btCollisionObject_getInterpolationWorldTransform__SWIG_2(swigCPtr, this, out);
   }
 
-  public void getInterpolationLinearVelocity(Vector3 out) {
+  public void getInterpolationLinearVelocity(Vector3f out) {
     CollisionJNI.btCollisionObject_getInterpolationLinearVelocity__SWIG_1(swigCPtr, this, out);
   }
 
-  public void getInterpolationAngularVelocity(Vector3 out) {
+  public void getInterpolationAngularVelocity(Vector3f out) {
     CollisionJNI.btCollisionObject_getInterpolationAngularVelocity__SWIG_1(swigCPtr, this, out);
   }
 

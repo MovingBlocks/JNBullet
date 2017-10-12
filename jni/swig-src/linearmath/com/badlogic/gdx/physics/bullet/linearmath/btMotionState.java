@@ -9,10 +9,10 @@
 package com.badlogic.gdx.physics.bullet.linearmath;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btMotionState extends BulletBase {
 	private long swigCPtr;
@@ -72,11 +72,11 @@ public class btMotionState extends BulletBase {
     LinearMathJNI.btMotionState_change_ownership(this, swigCPtr, true);
   }
 
-  public void getWorldTransform(Matrix4 worldTrans) {
+  public void getWorldTransform(Matrix4f worldTrans) {
     LinearMathJNI.btMotionState_getWorldTransform(swigCPtr, this, worldTrans);
   }
 
-  public void setWorldTransform(Matrix4 worldTrans) {
+  public void setWorldTransform(Matrix4f worldTrans) {
     LinearMathJNI.btMotionState_setWorldTransform(swigCPtr, this, worldTrans);
   }
 

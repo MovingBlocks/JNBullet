@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btTriangleMesh extends btTriangleIndexVertexArray {
 	private long swigCPtr;
@@ -86,11 +86,11 @@ public class btTriangleMesh extends btTriangleIndexVertexArray {
     return CollisionJNI.btTriangleMesh_getUse4componentVertices(swigCPtr, this);
   }
 
-  public void addTriangle(Vector3 vertex0, Vector3 vertex1, Vector3 vertex2, boolean removeDuplicateVertices) {
+  public void addTriangle(Vector3f vertex0, Vector3f vertex1, Vector3f vertex2, boolean removeDuplicateVertices) {
     CollisionJNI.btTriangleMesh_addTriangle__SWIG_0(swigCPtr, this, vertex0, vertex1, vertex2, removeDuplicateVertices);
   }
 
-  public void addTriangle(Vector3 vertex0, Vector3 vertex1, Vector3 vertex2) {
+  public void addTriangle(Vector3f vertex0, Vector3f vertex1, Vector3f vertex2) {
     CollisionJNI.btTriangleMesh_addTriangle__SWIG_1(swigCPtr, this, vertex0, vertex1, vertex2);
   }
 
@@ -102,7 +102,7 @@ public class btTriangleMesh extends btTriangleIndexVertexArray {
     return CollisionJNI.btTriangleMesh_getNumTriangles(swigCPtr, this);
   }
 
-  public int findOrAddVertex(Vector3 vertex, boolean removeDuplicateVertices) {
+  public int findOrAddVertex(Vector3f vertex, boolean removeDuplicateVertices) {
     return CollisionJNI.btTriangleMesh_findOrAddVertex(swigCPtr, this, vertex, removeDuplicateVertices);
   }
 

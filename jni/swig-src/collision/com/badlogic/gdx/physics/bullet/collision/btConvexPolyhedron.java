@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btConvexPolyhedron extends BulletBase {
 	private long swigCPtr;
@@ -141,7 +141,7 @@ public class btConvexPolyhedron extends BulletBase {
     return CollisionJNI.btConvexPolyhedron_testContainment(swigCPtr, this);
   }
 
-  public void project(Matrix4 trans, Vector3 dir, SWIGTYPE_p_float minProj, SWIGTYPE_p_float maxProj, Vector3 witnesPtMin, Vector3 witnesPtMax) {
+  public void project(Matrix4f trans, Vector3f dir, SWIGTYPE_p_float minProj, SWIGTYPE_p_float maxProj, Vector3f witnesPtMin, Vector3f witnesPtMax) {
     CollisionJNI.btConvexPolyhedron_project(swigCPtr, this, trans, dir, SWIGTYPE_p_float.getCPtr(minProj), SWIGTYPE_p_float.getCPtr(maxProj), witnesPtMin, witnesPtMax);
   }
 

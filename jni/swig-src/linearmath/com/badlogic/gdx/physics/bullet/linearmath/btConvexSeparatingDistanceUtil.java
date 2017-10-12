@@ -9,10 +9,10 @@
 package com.badlogic.gdx.physics.bullet.linearmath;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btConvexSeparatingDistanceUtil extends BulletBase {
 	private long swigCPtr;
@@ -65,11 +65,11 @@ public class btConvexSeparatingDistanceUtil extends BulletBase {
     return LinearMathJNI.btConvexSeparatingDistanceUtil_getConservativeSeparatingDistance(swigCPtr, this);
   }
 
-  public void updateSeparatingDistance(Matrix4 transA, Matrix4 transB) {
+  public void updateSeparatingDistance(Matrix4f transA, Matrix4f transB) {
     LinearMathJNI.btConvexSeparatingDistanceUtil_updateSeparatingDistance(swigCPtr, this, transA, transB);
   }
 
-  public void initSeparatingDistance(Vector3 separatingVector, float separatingDistance, Matrix4 transA, Matrix4 transB) {
+  public void initSeparatingDistance(Vector3f separatingVector, float separatingDistance, Matrix4f transA, Matrix4f transB) {
     LinearMathJNI.btConvexSeparatingDistanceUtil_initSeparatingDistance(swigCPtr, this, separatingVector, separatingDistance, transA, transB);
   }
 

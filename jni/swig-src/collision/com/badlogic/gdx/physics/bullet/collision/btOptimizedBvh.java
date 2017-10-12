@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btOptimizedBvh extends btQuantizedBvh {
 	private long swigCPtr;
@@ -62,15 +62,15 @@ public class btOptimizedBvh extends btQuantizedBvh {
     this(CollisionJNI.new_btOptimizedBvh(), true);
   }
 
-  public void build(btStridingMeshInterface triangles, boolean useQuantizedAabbCompression, Vector3 bvhAabbMin, Vector3 bvhAabbMax) {
+  public void build(btStridingMeshInterface triangles, boolean useQuantizedAabbCompression, Vector3f bvhAabbMin, Vector3f bvhAabbMax) {
     CollisionJNI.btOptimizedBvh_build(swigCPtr, this, btStridingMeshInterface.getCPtr(triangles), triangles, useQuantizedAabbCompression, bvhAabbMin, bvhAabbMax);
   }
 
-  public void refit(btStridingMeshInterface triangles, Vector3 aabbMin, Vector3 aabbMax) {
+  public void refit(btStridingMeshInterface triangles, Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btOptimizedBvh_refit(swigCPtr, this, btStridingMeshInterface.getCPtr(triangles), triangles, aabbMin, aabbMax);
   }
 
-  public void refitPartial(btStridingMeshInterface triangles, Vector3 aabbMin, Vector3 aabbMax) {
+  public void refitPartial(btStridingMeshInterface triangles, Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btOptimizedBvh_refitPartial(swigCPtr, this, btStridingMeshInterface.getCPtr(triangles), triangles, aabbMin, aabbMax);
   }
 

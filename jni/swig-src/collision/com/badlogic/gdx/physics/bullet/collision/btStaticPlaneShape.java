@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btStaticPlaneShape extends btConcaveShape {
 	private long swigCPtr;
@@ -58,11 +58,11 @@ public class btStaticPlaneShape extends btConcaveShape {
 		super.delete();
 	}
 
-  public btStaticPlaneShape(Vector3 planeNormal, float planeConstant) {
+  public btStaticPlaneShape(Vector3f planeNormal, float planeConstant) {
     this(CollisionJNI.new_btStaticPlaneShape(planeNormal, planeConstant), true);
   }
 
-  public Vector3 getPlaneNormal() {
+  public Vector3f getPlaneNormal() {
 	return CollisionJNI.btStaticPlaneShape_getPlaneNormal(swigCPtr, this);
 }
 

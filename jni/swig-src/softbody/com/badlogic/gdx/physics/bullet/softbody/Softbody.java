@@ -12,141 +12,141 @@ import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
 import com.badlogic.gdx.physics.bullet.dynamics.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class Softbody implements SoftbodyConstants {
 
-	/** Temporary Vector3 instance, used by native methods that return a Vector3 instance */
-	public final static Vector3 staticVector3 = new Vector3();
-	/** Pool of Vector3, used by native (callback) method for the arguments */
-	public final static com.badlogic.gdx.utils.Pool<Vector3> poolVector3 = new com.badlogic.gdx.utils.Pool<Vector3>() {
+	/** Temporary Vector3f instance, used by native methods that return a Vector3f instance */
+	public final static Vector3f staticVector3f = new Vector3f();
+	/** Pool of Vector3f, used by native (callback) method for the arguments */
+	public final static com.badlogic.gdx.utils.Pool<Vector3f> poolVector3f = new com.badlogic.gdx.utils.Pool<Vector3f>() {
 		@Override
-		protected Vector3 newObject() {
-			return new Vector3();
+		protected Vector3f newObject() {
+			return new Vector3f();
 		}
 	};
 
 
-	/** Temporary Quaternion instance, used by native methods that return a Quaternion instance */
-	public final static Quaternion staticQuaternion = new Quaternion();
-	/** Pool of Quaternion, used by native (callback) method for the arguments */
-	public final static com.badlogic.gdx.utils.Pool<Quaternion> poolQuaternion = new com.badlogic.gdx.utils.Pool<Quaternion>() {
+	/** Temporary Quat4f instance, used by native methods that return a Quat4f instance */
+	public final static Quat4f staticQuat4f = new Quat4f();
+	/** Pool of Quat4f, used by native (callback) method for the arguments */
+	public final static com.badlogic.gdx.utils.Pool<Quat4f> poolQuat4f = new com.badlogic.gdx.utils.Pool<Quat4f>() {
 		@Override
-		protected Quaternion newObject() {
-			return new Quaternion();
+		protected Quat4f newObject() {
+			return new Quat4f();
 		}
 	};
 
 
-	/** Temporary Matrix3 instance, used by native methods that return a Matrix3 instance */
-	public final static Matrix3 staticMatrix3 = new Matrix3();
-	/** Pool of Matrix3, used by native (callback) method for the arguments */
-	public final static com.badlogic.gdx.utils.Pool<Matrix3> poolMatrix3 = new com.badlogic.gdx.utils.Pool<Matrix3>() {
+	/** Temporary Matrix3f instance, used by native methods that return a Matrix3f instance */
+	public final static Matrix3f staticMatrix3f = new Matrix3f();
+	/** Pool of Matrix3f, used by native (callback) method for the arguments */
+	public final static com.badlogic.gdx.utils.Pool<Matrix3f> poolMatrix3f = new com.badlogic.gdx.utils.Pool<Matrix3f>() {
 		@Override
-		protected Matrix3 newObject() {
-			return new Matrix3();
+		protected Matrix3f newObject() {
+			return new Matrix3f();
 		}
 	};
 
 
-	/** Temporary Matrix4 instance, used by native methods that return a Matrix4 instance */
-	public final static Matrix4 staticMatrix4 = new Matrix4();
-	/** Pool of Matrix4, used by native (callback) method for the arguments */
-	public final static com.badlogic.gdx.utils.Pool<Matrix4> poolMatrix4 = new com.badlogic.gdx.utils.Pool<Matrix4>() {
+	/** Temporary Matrix4f instance, used by native methods that return a Matrix4f instance */
+	public final static Matrix4f staticMatrix4f = new Matrix4f();
+	/** Pool of Matrix4f, used by native (callback) method for the arguments */
+	public final static com.badlogic.gdx.utils.Pool<Matrix4f> poolMatrix4f = new com.badlogic.gdx.utils.Pool<Matrix4f>() {
 		@Override
-		protected Matrix4 newObject() {
-			return new Matrix4();
+		protected Matrix4f newObject() {
+			return new Matrix4f();
 		}
 	};
 
-  public static Matrix3 Lerp(Matrix3 a, Matrix3 b, float t) {
+  public static Matrix3f Lerp(Matrix3f a, Matrix3f b, float t) {
 	return SoftbodyJNI.Lerp(a, b, t);
 }
 
-  public static Vector3 Clamp(Vector3 v, float maxlength) {
+  public static Vector3f Clamp(Vector3f v, float maxlength) {
 	return SoftbodyJNI.Clamp(v, maxlength);
 }
 
-  public static float ClusterMetric(Vector3 x, Vector3 y) {
+  public static float ClusterMetric(Vector3f x, Vector3f y) {
     return SoftbodyJNI.ClusterMetric(x, y);
   }
 
-  public static Matrix3 ScaleAlongAxis(Vector3 a, float s) {
+  public static Matrix3f ScaleAlongAxis(Vector3f a, float s) {
 	return SoftbodyJNI.ScaleAlongAxis(a, s);
 }
 
-  public static Matrix3 Cross(Vector3 v) {
+  public static Matrix3f Cross(Vector3f v) {
 	return SoftbodyJNI.Cross(v);
 }
 
-  public static Matrix3 Diagonal(float x) {
+  public static Matrix3f Diagonal(float x) {
 	return SoftbodyJNI.Diagonal(x);
 }
 
-  public static Matrix3 Add(Matrix3 a, Matrix3 b) {
+  public static Matrix3f Add(Matrix3f a, Matrix3f b) {
 	return SoftbodyJNI.Add(a, b);
 }
 
-  public static Matrix3 Sub(Matrix3 a, Matrix3 b) {
+  public static Matrix3f Sub(Matrix3f a, Matrix3f b) {
 	return SoftbodyJNI.Sub(a, b);
 }
 
-  public static Matrix3 Mul(Matrix3 a, float b) {
+  public static Matrix3f Mul(Matrix3f a, float b) {
 	return SoftbodyJNI.Mul(a, b);
 }
 
-  public static void Orthogonalize(Matrix3 m) {
+  public static void Orthogonalize(Matrix3f m) {
     SoftbodyJNI.Orthogonalize(m);
   }
 
-  public static Matrix3 MassMatrix(float im, Matrix3 iwi, Vector3 r) {
+  public static Matrix3f MassMatrix(float im, Matrix3f iwi, Vector3f r) {
 	return SoftbodyJNI.MassMatrix(im, iwi, r);
 }
 
-  public static Matrix3 ImpulseMatrix(float dt, float ima, float imb, Matrix3 iwi, Vector3 r) {
+  public static Matrix3f ImpulseMatrix(float dt, float ima, float imb, Matrix3f iwi, Vector3f r) {
 	return SoftbodyJNI.ImpulseMatrix__SWIG_0(dt, ima, imb, iwi, r);
 }
 
-  public static Matrix3 ImpulseMatrix(float ima, Matrix3 iia, Vector3 ra, float imb, Matrix3 iib, Vector3 rb) {
+  public static Matrix3f ImpulseMatrix(float ima, Matrix3f iia, Vector3f ra, float imb, Matrix3f iib, Vector3f rb) {
 	return SoftbodyJNI.ImpulseMatrix__SWIG_1(ima, iia, ra, imb, iib, rb);
 }
 
-  public static Matrix3 AngularImpulseMatrix(Matrix3 iia, Matrix3 iib) {
+  public static Matrix3f AngularImpulseMatrix(Matrix3f iia, Matrix3f iib) {
 	return SoftbodyJNI.AngularImpulseMatrix(iia, iib);
 }
 
-  public static Vector3 ProjectOnAxis(Vector3 v, Vector3 a) {
+  public static Vector3f ProjectOnAxis(Vector3f v, Vector3f a) {
 	return SoftbodyJNI.ProjectOnAxis(v, a);
 }
 
-  public static Vector3 ProjectOnPlane(Vector3 v, Vector3 a) {
+  public static Vector3f ProjectOnPlane(Vector3f v, Vector3f a) {
 	return SoftbodyJNI.ProjectOnPlane(v, a);
 }
 
-  public static void ProjectOrigin(Vector3 a, Vector3 b, Vector3 prj, SWIGTYPE_p_float sqd) {
+  public static void ProjectOrigin(Vector3f a, Vector3f b, Vector3f prj, SWIGTYPE_p_float sqd) {
     SoftbodyJNI.ProjectOrigin__SWIG_0(a, b, prj, SWIGTYPE_p_float.getCPtr(sqd));
   }
 
-  public static void ProjectOrigin(Vector3 a, Vector3 b, Vector3 c, Vector3 prj, SWIGTYPE_p_float sqd) {
+  public static void ProjectOrigin(Vector3f a, Vector3f b, Vector3f c, Vector3f prj, SWIGTYPE_p_float sqd) {
     SoftbodyJNI.ProjectOrigin__SWIG_1(a, b, c, prj, SWIGTYPE_p_float.getCPtr(sqd));
   }
 
-  public static Vector3 BaryCoord(Vector3 a, Vector3 b, Vector3 c, Vector3 p) {
+  public static Vector3f BaryCoord(Vector3f a, Vector3f b, Vector3f c, Vector3f p) {
 	return SoftbodyJNI.BaryCoord(a, b, c, p);
 }
 
-  public static float ImplicitSolve(btSoftBody.ImplicitFn fn, Vector3 a, Vector3 b, float accuracy, int maxiterations) {
+  public static float ImplicitSolve(btSoftBody.ImplicitFn fn, Vector3f a, Vector3f b, float accuracy, int maxiterations) {
     return SoftbodyJNI.ImplicitSolve__SWIG_0(btSoftBody.ImplicitFn.getCPtr(fn), fn, a, b, accuracy, maxiterations);
   }
 
-  public static float ImplicitSolve(btSoftBody.ImplicitFn fn, Vector3 a, Vector3 b, float accuracy) {
+  public static float ImplicitSolve(btSoftBody.ImplicitFn fn, Vector3f a, Vector3f b, float accuracy) {
     return SoftbodyJNI.ImplicitSolve__SWIG_1(btSoftBody.ImplicitFn.getCPtr(fn), fn, a, b, accuracy);
   }
 
-  public static Vector3 NormalizeAny(Vector3 v) {
+  public static Vector3f NormalizeAny(Vector3f v) {
 	return SoftbodyJNI.NormalizeAny(v);
 }
 
@@ -154,23 +154,23 @@ public class Softbody implements SoftbodyConstants {
     return new btDbvtAabbMm(SoftbodyJNI.VolumeOf__SWIG_0(btSoftBody.Face.getCPtr(f), f, margin), true);
   }
 
-  public static Vector3 CenterOf(btSoftBody.Face f) {
+  public static Vector3f CenterOf(btSoftBody.Face f) {
 	return SoftbodyJNI.CenterOf(btSoftBody.Face.getCPtr(f), f);
 }
 
-  public static float AreaOf(Vector3 x0, Vector3 x1, Vector3 x2) {
+  public static float AreaOf(Vector3f x0, Vector3f x1, Vector3f x2) {
     return SoftbodyJNI.AreaOf(x0, x1, x2);
   }
 
-  public static float VolumeOf(Vector3 x0, Vector3 x1, Vector3 x2, Vector3 x3) {
+  public static float VolumeOf(Vector3f x0, Vector3f x1, Vector3f x2, Vector3f x3) {
     return SoftbodyJNI.VolumeOf__SWIG_1(x0, x1, x2, x3);
   }
 
-  public static void EvaluateMedium(btSoftBodyWorldInfo wfi, Vector3 x, btSoftBody.sMedium medium) {
+  public static void EvaluateMedium(btSoftBodyWorldInfo wfi, Vector3f x, btSoftBody.sMedium medium) {
     SoftbodyJNI.EvaluateMedium(btSoftBodyWorldInfo.getCPtr(wfi), wfi, x, btSoftBody.sMedium.getCPtr(medium), medium);
   }
 
-  public static void ApplyClampedForce(btSoftBody.Node n, Vector3 f, float dt) {
+  public static void ApplyClampedForce(btSoftBody.Node n, Vector3f f, float dt) {
     SoftbodyJNI.ApplyClampedForce(btSoftBody.Node.getCPtr(n), n, f, dt);
   }
 
@@ -178,7 +178,7 @@ public class Softbody implements SoftbodyConstants {
     return SoftbodyJNI.MatchEdge(btSoftBody.Node.getCPtr(a), a, btSoftBody.Node.getCPtr(b), b, btSoftBody.Node.getCPtr(ma), ma, btSoftBody.Node.getCPtr(mb), mb);
   }
 
-  public static int PolarDecompose(Matrix3 m, Matrix3 q, Matrix3 s) {
+  public static int PolarDecompose(Matrix3f m, Matrix3f q, Matrix3f s) {
     return SoftbodyJNI.PolarDecompose(m, q, s);
   }
 

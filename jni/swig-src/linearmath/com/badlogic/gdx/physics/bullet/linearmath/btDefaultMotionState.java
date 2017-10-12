@@ -9,10 +9,10 @@
 package com.badlogic.gdx.physics.bullet.linearmath;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btDefaultMotionState extends btMotionState {
 	private long swigCPtr;
@@ -92,11 +92,11 @@ public class btDefaultMotionState extends btMotionState {
     return LinearMathJNI.btDefaultMotionState_userPointer_get(swigCPtr, this);
   }
 
-  public btDefaultMotionState(Matrix4 startTrans, Matrix4 centerOfMassOffset) {
+  public btDefaultMotionState(Matrix4f startTrans, Matrix4f centerOfMassOffset) {
     this(LinearMathJNI.new_btDefaultMotionState__SWIG_0(startTrans, centerOfMassOffset), true);
   }
 
-  public btDefaultMotionState(Matrix4 startTrans) {
+  public btDefaultMotionState(Matrix4f startTrans) {
     this(LinearMathJNI.new_btDefaultMotionState__SWIG_1(startTrans), true);
   }
 
@@ -104,15 +104,15 @@ public class btDefaultMotionState extends btMotionState {
     this(LinearMathJNI.new_btDefaultMotionState__SWIG_2(), true);
   }
 
-  public void getGraphicsWorldTrans(Matrix4 out) {
+  public void getGraphicsWorldTrans(Matrix4f out) {
     LinearMathJNI.btDefaultMotionState_getGraphicsWorldTrans(swigCPtr, this, out);
   }
 
-  public void getCenterOfMassOffset(Matrix4 out) {
+  public void getCenterOfMassOffset(Matrix4f out) {
     LinearMathJNI.btDefaultMotionState_getCenterOfMassOffset(swigCPtr, this, out);
   }
 
-  public void getStartWorldTrans(Matrix4 out) {
+  public void getStartWorldTrans(Matrix4f out) {
     LinearMathJNI.btDefaultMotionState_getStartWorldTrans(swigCPtr, this, out);
   }
 

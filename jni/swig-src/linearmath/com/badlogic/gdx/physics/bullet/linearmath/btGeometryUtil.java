@@ -9,10 +9,10 @@
 package com.badlogic.gdx.physics.bullet.linearmath;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btGeometryUtil extends BulletBase {
 	private long swigCPtr;
@@ -65,15 +65,15 @@ public class btGeometryUtil extends BulletBase {
     LinearMathJNI.btGeometryUtil_getVerticesFromPlaneEquations(btVector3Array.getCPtr(planeEquations), planeEquations, btVector3Array.getCPtr(verticesOut), verticesOut);
   }
 
-  public static boolean isInside(btVector3Array vertices, Vector3 planeNormal, float margin) {
+  public static boolean isInside(btVector3Array vertices, Vector3f planeNormal, float margin) {
     return LinearMathJNI.btGeometryUtil_isInside(btVector3Array.getCPtr(vertices), vertices, planeNormal, margin);
   }
 
-  public static boolean isPointInsidePlanes(btVector3Array planeEquations, Vector3 point, float margin) {
+  public static boolean isPointInsidePlanes(btVector3Array planeEquations, Vector3f point, float margin) {
     return LinearMathJNI.btGeometryUtil_isPointInsidePlanes(btVector3Array.getCPtr(planeEquations), planeEquations, point, margin);
   }
 
-  public static boolean areVerticesBehindPlane(Vector3 planeNormal, btVector3Array vertices, float margin) {
+  public static boolean areVerticesBehindPlane(Vector3f planeNormal, btVector3Array vertices, float margin) {
     return LinearMathJNI.btGeometryUtil_areVerticesBehindPlane(planeNormal, btVector3Array.getCPtr(vertices), vertices, margin);
   }
 

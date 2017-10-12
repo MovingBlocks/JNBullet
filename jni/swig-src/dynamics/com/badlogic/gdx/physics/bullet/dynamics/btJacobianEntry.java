@@ -11,10 +11,10 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btJacobianEntry extends BulletBase {
 	private long swigCPtr;
@@ -63,19 +63,19 @@ public class btJacobianEntry extends BulletBase {
     this(DynamicsJNI.new_btJacobianEntry__SWIG_0(), true);
   }
 
-  public btJacobianEntry(Matrix3 world2A, Matrix3 world2B, Vector3 rel_pos1, Vector3 rel_pos2, Vector3 jointAxis, Vector3 inertiaInvA, float massInvA, Vector3 inertiaInvB, float massInvB) {
+  public btJacobianEntry(Matrix3f world2A, Matrix3f world2B, Vector3f rel_pos1, Vector3f rel_pos2, Vector3f jointAxis, Vector3f inertiaInvA, float massInvA, Vector3f inertiaInvB, float massInvB) {
     this(DynamicsJNI.new_btJacobianEntry__SWIG_1(world2A, world2B, rel_pos1, rel_pos2, jointAxis, inertiaInvA, massInvA, inertiaInvB, massInvB), true);
   }
 
-  public btJacobianEntry(Vector3 jointAxis, Matrix3 world2A, Matrix3 world2B, Vector3 inertiaInvA, Vector3 inertiaInvB) {
+  public btJacobianEntry(Vector3f jointAxis, Matrix3f world2A, Matrix3f world2B, Vector3f inertiaInvA, Vector3f inertiaInvB) {
     this(DynamicsJNI.new_btJacobianEntry__SWIG_2(jointAxis, world2A, world2B, inertiaInvA, inertiaInvB), true);
   }
 
-  public btJacobianEntry(Vector3 axisInA, Vector3 axisInB, Vector3 inertiaInvA, Vector3 inertiaInvB) {
+  public btJacobianEntry(Vector3f axisInA, Vector3f axisInB, Vector3f inertiaInvA, Vector3f inertiaInvB) {
     this(DynamicsJNI.new_btJacobianEntry__SWIG_3(axisInA, axisInB, inertiaInvA, inertiaInvB), true);
   }
 
-  public btJacobianEntry(Matrix3 world2A, Vector3 rel_pos1, Vector3 rel_pos2, Vector3 jointAxis, Vector3 inertiaInvA, float massInvA) {
+  public btJacobianEntry(Matrix3f world2A, Vector3f rel_pos1, Vector3f rel_pos2, Vector3f jointAxis, Vector3f inertiaInvA, float massInvA) {
     this(DynamicsJNI.new_btJacobianEntry__SWIG_4(world2A, rel_pos1, rel_pos2, jointAxis, inertiaInvA, massInvA), true);
   }
 
@@ -91,7 +91,7 @@ public class btJacobianEntry extends BulletBase {
     return DynamicsJNI.btJacobianEntry_getNonDiagonal__SWIG_1(swigCPtr, this, btJacobianEntry.getCPtr(jacB), jacB, massInvA, massInvB);
   }
 
-  public float getRelativeVelocity(Vector3 linvelA, Vector3 angvelA, Vector3 linvelB, Vector3 angvelB) {
+  public float getRelativeVelocity(Vector3f linvelA, Vector3f angvelA, Vector3f linvelB, Vector3f angvelB) {
     return DynamicsJNI.btJacobianEntry_getRelativeVelocity(swigCPtr, this, linvelA, angvelA, linvelB, angvelB);
   }
 

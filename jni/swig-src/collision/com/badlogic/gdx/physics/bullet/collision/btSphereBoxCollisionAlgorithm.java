@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btSphereBoxCollisionAlgorithm extends btActivatingCollisionAlgorithm {
 	private long swigCPtr;
@@ -62,11 +62,11 @@ public class btSphereBoxCollisionAlgorithm extends btActivatingCollisionAlgorith
     this(CollisionJNI.new_btSphereBoxCollisionAlgorithm(btPersistentManifold.getCPtr(mf), mf, btCollisionAlgorithmConstructionInfo.getCPtr(ci), ci, btCollisionObjectWrapper.getCPtr(body0Wrap), body0Wrap, btCollisionObjectWrapper.getCPtr(body1Wrap), body1Wrap, isSwapped), true);
   }
 
-  public boolean getSphereDistance(btCollisionObjectWrapper boxObjWrap, Vector3 v3PointOnBox, Vector3 normal, SWIGTYPE_p_float penetrationDepth, Vector3 v3SphereCenter, float fRadius, float maxContactDistance) {
+  public boolean getSphereDistance(btCollisionObjectWrapper boxObjWrap, Vector3f v3PointOnBox, Vector3f normal, SWIGTYPE_p_float penetrationDepth, Vector3f v3SphereCenter, float fRadius, float maxContactDistance) {
     return CollisionJNI.btSphereBoxCollisionAlgorithm_getSphereDistance(swigCPtr, this, btCollisionObjectWrapper.getCPtr(boxObjWrap), boxObjWrap, v3PointOnBox, normal, SWIGTYPE_p_float.getCPtr(penetrationDepth), v3SphereCenter, fRadius, maxContactDistance);
   }
 
-  public float getSpherePenetration(Vector3 boxHalfExtent, Vector3 sphereRelPos, Vector3 closestPoint, Vector3 normal) {
+  public float getSpherePenetration(Vector3f boxHalfExtent, Vector3f sphereRelPos, Vector3f closestPoint, Vector3f normal) {
     return CollisionJNI.btSphereBoxCollisionAlgorithm_getSpherePenetration(swigCPtr, this, boxHalfExtent, sphereRelPos, closestPoint, normal);
   }
 

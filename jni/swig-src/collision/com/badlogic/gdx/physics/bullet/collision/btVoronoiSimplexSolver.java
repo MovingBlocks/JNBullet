@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btVoronoiSimplexSolver extends BulletBase {
 	private long swigCPtr;
@@ -174,15 +174,15 @@ public class btVoronoiSimplexSolver extends BulletBase {
     return CollisionJNI.btVoronoiSimplexSolver_updateClosestVectorAndPoints(swigCPtr, this);
   }
 
-  public boolean closestPtPointTetrahedron(Vector3 p, Vector3 a, Vector3 b, Vector3 c, Vector3 d, btSubSimplexClosestResult finalResult) {
+  public boolean closestPtPointTetrahedron(Vector3f p, Vector3f a, Vector3f b, Vector3f c, Vector3f d, btSubSimplexClosestResult finalResult) {
     return CollisionJNI.btVoronoiSimplexSolver_closestPtPointTetrahedron(swigCPtr, this, p, a, b, c, d, btSubSimplexClosestResult.getCPtr(finalResult), finalResult);
   }
 
-  public int pointOutsideOfPlane(Vector3 p, Vector3 a, Vector3 b, Vector3 c, Vector3 d) {
+  public int pointOutsideOfPlane(Vector3f p, Vector3f a, Vector3f b, Vector3f c, Vector3f d) {
     return CollisionJNI.btVoronoiSimplexSolver_pointOutsideOfPlane(swigCPtr, this, p, a, b, c, d);
   }
 
-  public boolean closestPtPointTriangle(Vector3 p, Vector3 a, Vector3 b, Vector3 c, btSubSimplexClosestResult result) {
+  public boolean closestPtPointTriangle(Vector3f p, Vector3f a, Vector3f b, Vector3f c, btSubSimplexClosestResult result) {
     return CollisionJNI.btVoronoiSimplexSolver_closestPtPointTriangle(swigCPtr, this, p, a, b, c, btSubSimplexClosestResult.getCPtr(result), result);
   }
 
@@ -194,11 +194,11 @@ public class btVoronoiSimplexSolver extends BulletBase {
     CollisionJNI.btVoronoiSimplexSolver_reset(swigCPtr, this);
   }
 
-  public void addVertex(Vector3 w, Vector3 p, Vector3 q) {
+  public void addVertex(Vector3f w, Vector3f p, Vector3f q) {
     CollisionJNI.btVoronoiSimplexSolver_addVertex(swigCPtr, this, w, p, q);
   }
 
-  public boolean closest(Vector3 v) {
+  public boolean closest(Vector3f v) {
     return CollisionJNI.btVoronoiSimplexSolver_closest(swigCPtr, this, v);
   }
 
@@ -214,11 +214,11 @@ public class btVoronoiSimplexSolver extends BulletBase {
     return CollisionJNI.btVoronoiSimplexSolver_getSimplex(swigCPtr, this, btVector3.getCPtr(pBuf), pBuf, btVector3.getCPtr(qBuf), qBuf, btVector3.getCPtr(yBuf), yBuf);
   }
 
-  public boolean inSimplex(Vector3 w) {
+  public boolean inSimplex(Vector3f w) {
     return CollisionJNI.btVoronoiSimplexSolver_inSimplex(swigCPtr, this, w);
   }
 
-  public void backup_closest(Vector3 v) {
+  public void backup_closest(Vector3f v) {
     CollisionJNI.btVoronoiSimplexSolver_backup_closest(swigCPtr, this, v);
   }
 
@@ -226,7 +226,7 @@ public class btVoronoiSimplexSolver extends BulletBase {
     return CollisionJNI.btVoronoiSimplexSolver_emptySimplex(swigCPtr, this);
   }
 
-  public void compute_points(Vector3 p1, Vector3 p2) {
+  public void compute_points(Vector3f p1, Vector3f p2) {
     CollisionJNI.btVoronoiSimplexSolver_compute_points(swigCPtr, this, p1, p2);
   }
 

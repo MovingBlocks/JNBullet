@@ -10,53 +10,53 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class Collision implements CollisionConstants {
 
-	/** Temporary Vector3 instance, used by native methods that return a Vector3 instance */
-	public final static Vector3 staticVector3 = new Vector3();
-	/** Pool of Vector3, used by native (callback) method for the arguments */
-	public final static com.badlogic.gdx.utils.Pool<Vector3> poolVector3 = new com.badlogic.gdx.utils.Pool<Vector3>() {
+	/** Temporary Vector3f instance, used by native methods that return a Vector3f instance */
+	public final static Vector3f staticVector3f = new Vector3f();
+	/** Pool of Vector3f, used by native (callback) method for the arguments */
+	public final static com.badlogic.gdx.utils.Pool<Vector3f> poolVector3f = new com.badlogic.gdx.utils.Pool<Vector3f>() {
 		@Override
-		protected Vector3 newObject() {
-			return new Vector3();
+		protected Vector3f newObject() {
+			return new Vector3f();
 		}
 	};
 
 
-	/** Temporary Quaternion instance, used by native methods that return a Quaternion instance */
-	public final static Quaternion staticQuaternion = new Quaternion();
-	/** Pool of Quaternion, used by native (callback) method for the arguments */
-	public final static com.badlogic.gdx.utils.Pool<Quaternion> poolQuaternion = new com.badlogic.gdx.utils.Pool<Quaternion>() {
+	/** Temporary Quat4f instance, used by native methods that return a Quat4f instance */
+	public final static Quat4f staticQuat4f = new Quat4f();
+	/** Pool of Quat4f, used by native (callback) method for the arguments */
+	public final static com.badlogic.gdx.utils.Pool<Quat4f> poolQuat4f = new com.badlogic.gdx.utils.Pool<Quat4f>() {
 		@Override
-		protected Quaternion newObject() {
-			return new Quaternion();
+		protected Quat4f newObject() {
+			return new Quat4f();
 		}
 	};
 
 
-	/** Temporary Matrix3 instance, used by native methods that return a Matrix3 instance */
-	public final static Matrix3 staticMatrix3 = new Matrix3();
-	/** Pool of Matrix3, used by native (callback) method for the arguments */
-	public final static com.badlogic.gdx.utils.Pool<Matrix3> poolMatrix3 = new com.badlogic.gdx.utils.Pool<Matrix3>() {
+	/** Temporary Matrix3f instance, used by native methods that return a Matrix3f instance */
+	public final static Matrix3f staticMatrix3f = new Matrix3f();
+	/** Pool of Matrix3f, used by native (callback) method for the arguments */
+	public final static com.badlogic.gdx.utils.Pool<Matrix3f> poolMatrix3f = new com.badlogic.gdx.utils.Pool<Matrix3f>() {
 		@Override
-		protected Matrix3 newObject() {
-			return new Matrix3();
+		protected Matrix3f newObject() {
+			return new Matrix3f();
 		}
 	};
 
 
-	/** Temporary Matrix4 instance, used by native methods that return a Matrix4 instance */
-	public final static Matrix4 staticMatrix4 = new Matrix4();
-	/** Pool of Matrix4, used by native (callback) method for the arguments */
-	public final static com.badlogic.gdx.utils.Pool<Matrix4> poolMatrix4 = new com.badlogic.gdx.utils.Pool<Matrix4>() {
+	/** Temporary Matrix4f instance, used by native methods that return a Matrix4f instance */
+	public final static Matrix4f staticMatrix4f = new Matrix4f();
+	/** Pool of Matrix4f, used by native (callback) method for the arguments */
+	public final static com.badlogic.gdx.utils.Pool<Matrix4f> poolMatrix4f = new com.badlogic.gdx.utils.Pool<Matrix4f>() {
 		@Override
-		protected Matrix4 newObject() {
-			return new Matrix4();
+		protected Matrix4f newObject() {
+			return new Matrix4f();
 		}
 	};
 
@@ -108,7 +108,7 @@ public class Collision implements CollisionConstants {
     return CollisionJNI.Intersect__SWIG_0(btDbvtAabbMm.getCPtr(a), a, btDbvtAabbMm.getCPtr(b), b);
   }
 
-  public static boolean Intersect(btDbvtAabbMm a, Vector3 b) {
+  public static boolean Intersect(btDbvtAabbMm a, Vector3f b) {
     return CollisionJNI.Intersect__SWIG_1(btDbvtAabbMm.getCPtr(a), a, b);
   }
 
@@ -211,41 +211,41 @@ public class Collision implements CollisionConstants {
     return CollisionJNI.gContactBreakingThreshold_get();
   }
 
-  public static void bt_calc_quantization_parameters(Vector3 outMinBound, Vector3 outMaxBound, Vector3 bvhQuantization, Vector3 srcMinBound, Vector3 srcMaxBound, float quantizationMargin) {
+  public static void bt_calc_quantization_parameters(Vector3f outMinBound, Vector3f outMaxBound, Vector3f bvhQuantization, Vector3f srcMinBound, Vector3f srcMaxBound, float quantizationMargin) {
     CollisionJNI.bt_calc_quantization_parameters(outMinBound, outMaxBound, bvhQuantization, srcMinBound, srcMaxBound, quantizationMargin);
   }
 
-  public static void bt_quantize_clamp(java.nio.IntBuffer out, Vector3 point, Vector3 min_bound, Vector3 max_bound, Vector3 bvhQuantization) {
+  public static void bt_quantize_clamp(java.nio.IntBuffer out, Vector3f point, Vector3f min_bound, Vector3f max_bound, Vector3f bvhQuantization) {
     assert out.isDirect() : "Buffer must be allocated direct.";
     {
       CollisionJNI.bt_quantize_clamp(out, point, min_bound, max_bound, bvhQuantization);
     }
   }
 
-  public static Vector3 bt_unquantize(java.nio.IntBuffer vecIn, Vector3 offset, Vector3 bvhQuantization) {
+  public static Vector3f bt_unquantize(java.nio.IntBuffer vecIn, Vector3f offset, Vector3f bvhQuantization) {
     assert vecIn.isDirect() : "Buffer must be allocated direct.";
     {
 	return CollisionJNI.bt_unquantize(vecIn, offset, bvhQuantization);
 }
   }
 
-  public static float bt_mat3_dot_col(Matrix3 mat, Vector3 vec3, int colindex) {
+  public static float bt_mat3_dot_col(Matrix3f mat, Vector3f vec3, int colindex) {
     return CollisionJNI.bt_mat3_dot_col(mat, vec3, colindex);
   }
 
-  public static boolean btCompareTransformsEqual(Matrix4 t1, Matrix4 t2) {
+  public static boolean btCompareTransformsEqual(Matrix4f t1, Matrix4f t2) {
     return CollisionJNI.btCompareTransformsEqual(t1, t2);
   }
 
-  public static float bt_distance_point_plane(btVector4 plane, Vector3 point) {
+  public static float bt_distance_point_plane(btVector4 plane, Vector3f point) {
     return CollisionJNI.bt_distance_point_plane(btVector4.getCPtr(plane), plane, point);
   }
 
-  public static void bt_vec_blend(Vector3 vr, Vector3 va, Vector3 vb, float blend_factor) {
+  public static void bt_vec_blend(Vector3f vr, Vector3f va, Vector3f vb, float blend_factor) {
     CollisionJNI.bt_vec_blend(vr, va, vb, blend_factor);
   }
 
-  public static void bt_plane_clip_polygon_collect(Vector3 point0, Vector3 point1, float dist0, float dist1, btVector3 clipped, SWIGTYPE_p_int clipped_count) {
+  public static void bt_plane_clip_polygon_collect(Vector3f point0, Vector3f point1, float dist0, float dist1, btVector3 clipped, SWIGTYPE_p_int clipped_count) {
     CollisionJNI.bt_plane_clip_polygon_collect(point0, point1, dist0, dist1, btVector3.getCPtr(clipped), clipped, SWIGTYPE_p_int.getCPtr(clipped_count));
   }
 
@@ -253,23 +253,23 @@ public class Collision implements CollisionConstants {
     return CollisionJNI.bt_plane_clip_polygon(btVector4.getCPtr(plane), plane, btVector3.getCPtr(polygon_points), polygon_points, polygon_point_count, btVector3.getCPtr(clipped), clipped);
   }
 
-  public static int bt_plane_clip_triangle(btVector4 plane, Vector3 point0, Vector3 point1, Vector3 point2, btVector3 clipped) {
+  public static int bt_plane_clip_triangle(btVector4 plane, Vector3f point0, Vector3f point1, Vector3f point2, btVector3 clipped) {
     return CollisionJNI.bt_plane_clip_triangle(btVector4.getCPtr(plane), plane, point0, point1, point2, btVector3.getCPtr(clipped), clipped);
   }
 
-  public static void bt_edge_plane(Vector3 e1, Vector3 e2, Vector3 normal, btVector4 plane) {
+  public static void bt_edge_plane(Vector3f e1, Vector3f e2, Vector3f normal, btVector4 plane) {
     CollisionJNI.bt_edge_plane(e1, e2, normal, btVector4.getCPtr(plane), plane);
   }
 
-  public static void bt_closest_point_on_segment(Vector3 cp, Vector3 v, Vector3 e1, Vector3 e2) {
+  public static void bt_closest_point_on_segment(Vector3f cp, Vector3f v, Vector3f e1, Vector3f e2) {
     CollisionJNI.bt_closest_point_on_segment(cp, v, e1, e2);
   }
 
-  public static int bt_line_plane_collision(btVector4 plane, Vector3 vDir, Vector3 vPoint, Vector3 pout, SWIGTYPE_p_float tparam, float tmin, float tmax) {
+  public static int bt_line_plane_collision(btVector4 plane, Vector3f vDir, Vector3f vPoint, Vector3f pout, SWIGTYPE_p_float tparam, float tmin, float tmax) {
     return CollisionJNI.bt_line_plane_collision(btVector4.getCPtr(plane), plane, vDir, vPoint, pout, SWIGTYPE_p_float.getCPtr(tparam), tmin, tmax);
   }
 
-  public static void bt_segment_collision(Vector3 vA1, Vector3 vA2, Vector3 vB1, Vector3 vB2, Vector3 vPointA, Vector3 vPointB) {
+  public static void bt_segment_collision(Vector3f vA1, Vector3f vA2, Vector3f vB1, Vector3f vB2, Vector3f vPointA, Vector3f vPointB) {
     CollisionJNI.bt_segment_collision(vA1, vA2, vB1, vB2, vPointA, vPointB);
   }
 
@@ -285,11 +285,11 @@ public class Collision implements CollisionConstants {
     CollisionJNI.btPoolFree(ptr);
   }
 
-  public static Vector3 gim_inertia_add_transformed(Vector3 source_inertia, Vector3 added_inertia, Matrix4 transform) {
+  public static Vector3f gim_inertia_add_transformed(Vector3f source_inertia, Vector3f added_inertia, Matrix4f transform) {
 	return CollisionJNI.gim_inertia_add_transformed(source_inertia, added_inertia, transform);
 }
 
-  public static Vector3 gim_get_point_inertia(Vector3 point, float mass) {
+  public static Vector3f gim_get_point_inertia(Vector3f point, float mass) {
 	return CollisionJNI.gim_get_point_inertia(point, mass);
 }
 

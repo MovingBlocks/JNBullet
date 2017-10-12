@@ -67,7 +67,7 @@
 		return collisionShape;
 	}
 	
-	public btRigidBodyConstructionInfo(float mass, btMotionState motionState, btCollisionShape collisionShape, Vector3 localInertia) {
+	public btRigidBodyConstructionInfo(float mass, btMotionState motionState, btCollisionShape collisionShape, Vector3f localInertia) {
 		this(false, mass, motionState, collisionShape, localInertia);
 		refMotionState(motionState);
 		refCollisionShape(collisionShape);
@@ -143,7 +143,7 @@
 		refMotionState(constructionInfo.getMotionState());
 	}
 	
-	public btRigidBody(float mass, btMotionState motionState, btCollisionShape collisionShape, Vector3 localInertia) {
+	public btRigidBody(float mass, btMotionState motionState, btCollisionShape collisionShape, Vector3f localInertia) {
 		this(false, mass, motionState, collisionShape, localInertia);
 		refCollisionShape(collisionShape);
 		refMotionState(motionState);

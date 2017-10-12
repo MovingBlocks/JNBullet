@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btAxisSweep3InternalInt extends btBroadphaseInterface {
 	private long swigCPtr;
@@ -208,19 +208,19 @@ public class btAxisSweep3InternalInt extends btBroadphaseInterface {
   
   }
 
-  public btAxisSweep3InternalInt(Vector3 worldAabbMin, Vector3 worldAabbMax, long handleMask, long handleSentinel, long maxHandles, btOverlappingPairCache pairCache, boolean disableRaycastAccelerator) {
+  public btAxisSweep3InternalInt(Vector3f worldAabbMin, Vector3f worldAabbMax, long handleMask, long handleSentinel, long maxHandles, btOverlappingPairCache pairCache, boolean disableRaycastAccelerator) {
     this(CollisionJNI.new_btAxisSweep3InternalInt__SWIG_0(worldAabbMin, worldAabbMax, handleMask, handleSentinel, maxHandles, btOverlappingPairCache.getCPtr(pairCache), pairCache, disableRaycastAccelerator), true);
   }
 
-  public btAxisSweep3InternalInt(Vector3 worldAabbMin, Vector3 worldAabbMax, long handleMask, long handleSentinel, long maxHandles, btOverlappingPairCache pairCache) {
+  public btAxisSweep3InternalInt(Vector3f worldAabbMin, Vector3f worldAabbMax, long handleMask, long handleSentinel, long maxHandles, btOverlappingPairCache pairCache) {
     this(CollisionJNI.new_btAxisSweep3InternalInt__SWIG_1(worldAabbMin, worldAabbMax, handleMask, handleSentinel, maxHandles, btOverlappingPairCache.getCPtr(pairCache), pairCache), true);
   }
 
-  public btAxisSweep3InternalInt(Vector3 worldAabbMin, Vector3 worldAabbMax, long handleMask, long handleSentinel, long maxHandles) {
+  public btAxisSweep3InternalInt(Vector3f worldAabbMin, Vector3f worldAabbMax, long handleMask, long handleSentinel, long maxHandles) {
     this(CollisionJNI.new_btAxisSweep3InternalInt__SWIG_2(worldAabbMin, worldAabbMax, handleMask, handleSentinel, maxHandles), true);
   }
 
-  public btAxisSweep3InternalInt(Vector3 worldAabbMin, Vector3 worldAabbMax, long handleMask, long handleSentinel) {
+  public btAxisSweep3InternalInt(Vector3f worldAabbMin, Vector3f worldAabbMax, long handleMask, long handleSentinel) {
     this(CollisionJNI.new_btAxisSweep3InternalInt__SWIG_3(worldAabbMin, worldAabbMax, handleMask, handleSentinel), true);
   }
 
@@ -228,7 +228,7 @@ public class btAxisSweep3InternalInt extends btBroadphaseInterface {
     return CollisionJNI.btAxisSweep3InternalInt_getNumHandles(swigCPtr, this);
   }
 
-  public long addHandle(Vector3 aabbMin, Vector3 aabbMax, long pOwner, short collisionFilterGroup, short collisionFilterMask, btDispatcher dispatcher, long multiSapProxy) {
+  public long addHandle(Vector3f aabbMin, Vector3f aabbMax, long pOwner, short collisionFilterGroup, short collisionFilterMask, btDispatcher dispatcher, long multiSapProxy) {
     return CollisionJNI.btAxisSweep3InternalInt_addHandle(swigCPtr, this, aabbMin, aabbMax, pOwner, collisionFilterGroup, collisionFilterMask, btDispatcher.getCPtr(dispatcher), dispatcher, multiSapProxy);
   }
 
@@ -236,7 +236,7 @@ public class btAxisSweep3InternalInt extends btBroadphaseInterface {
     CollisionJNI.btAxisSweep3InternalInt_removeHandle(swigCPtr, this, handle, btDispatcher.getCPtr(dispatcher), dispatcher);
   }
 
-  public void updateHandle(long handle, Vector3 aabbMin, Vector3 aabbMax, btDispatcher dispatcher) {
+  public void updateHandle(long handle, Vector3f aabbMin, Vector3f aabbMax, btDispatcher dispatcher) {
     CollisionJNI.btAxisSweep3InternalInt_updateHandle(swigCPtr, this, handle, aabbMin, aabbMax, btDispatcher.getCPtr(dispatcher), dispatcher);
   }
 
@@ -245,26 +245,26 @@ public class btAxisSweep3InternalInt extends btBroadphaseInterface {
     return (cPtr == 0) ? null : new btAxisSweep3InternalInt.Handle(cPtr, false);
   }
 
-  public void rayTest(Vector3 rayFrom, Vector3 rayTo, btBroadphaseRayCallback rayCallback, Vector3 aabbMin, Vector3 aabbMax) {
+  public void rayTest(Vector3f rayFrom, Vector3f rayTo, btBroadphaseRayCallback rayCallback, Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btAxisSweep3InternalInt_rayTest__SWIG_0(swigCPtr, this, rayFrom, rayTo, btBroadphaseRayCallback.getCPtr(rayCallback), rayCallback, aabbMin, aabbMax);
   }
 
-  public void rayTest(Vector3 rayFrom, Vector3 rayTo, btBroadphaseRayCallback rayCallback, Vector3 aabbMin) {
+  public void rayTest(Vector3f rayFrom, Vector3f rayTo, btBroadphaseRayCallback rayCallback, Vector3f aabbMin) {
     CollisionJNI.btAxisSweep3InternalInt_rayTest__SWIG_1(swigCPtr, this, rayFrom, rayTo, btBroadphaseRayCallback.getCPtr(rayCallback), rayCallback, aabbMin);
   }
 
-  public void rayTest(Vector3 rayFrom, Vector3 rayTo, btBroadphaseRayCallback rayCallback) {
+  public void rayTest(Vector3f rayFrom, Vector3f rayTo, btBroadphaseRayCallback rayCallback) {
     CollisionJNI.btAxisSweep3InternalInt_rayTest__SWIG_2(swigCPtr, this, rayFrom, rayTo, btBroadphaseRayCallback.getCPtr(rayCallback), rayCallback);
   }
 
-  public void quantize(java.nio.LongBuffer out, Vector3 point, int isMax) {
+  public void quantize(java.nio.LongBuffer out, Vector3f point, int isMax) {
     assert out.isDirect() : "Buffer must be allocated direct.";
     {
       CollisionJNI.btAxisSweep3InternalInt_quantize(swigCPtr, this, out, point, isMax);
     }
   }
 
-  public void unQuantize(btBroadphaseProxy proxy, Vector3 aabbMin, Vector3 aabbMax) {
+  public void unQuantize(btBroadphaseProxy proxy, Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btAxisSweep3InternalInt_unQuantize(swigCPtr, this, btBroadphaseProxy.getCPtr(proxy), proxy, aabbMin, aabbMax);
   }
 

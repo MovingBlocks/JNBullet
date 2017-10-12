@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btBoxShape extends btPolyhedralConvexShape {
 	private long swigCPtr;
@@ -58,15 +58,15 @@ public class btBoxShape extends btPolyhedralConvexShape {
 		super.delete();
 	}
 
-  public Vector3 getHalfExtentsWithMargin() {
+  public Vector3f getHalfExtentsWithMargin() {
 	return CollisionJNI.btBoxShape_getHalfExtentsWithMargin(swigCPtr, this);
 }
 
-  public Vector3 getHalfExtentsWithoutMargin() {
+  public Vector3f getHalfExtentsWithoutMargin() {
 	return CollisionJNI.btBoxShape_getHalfExtentsWithoutMargin(swigCPtr, this);
 }
 
-  public btBoxShape(Vector3 boxHalfExtents) {
+  public btBoxShape(Vector3f boxHalfExtents) {
     this(CollisionJNI.new_btBoxShape(boxHalfExtents), true);
   }
 

@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btMinkowskiSumShape extends btConvexInternalShape {
 	private long swigCPtr;
@@ -62,19 +62,19 @@ public class btMinkowskiSumShape extends btConvexInternalShape {
     this(CollisionJNI.new_btMinkowskiSumShape(btConvexShape.getCPtr(shapeA), shapeA, btConvexShape.getCPtr(shapeB), shapeB), true);
   }
 
-  public void setTransformA(Matrix4 transA) {
+  public void setTransformA(Matrix4f transA) {
     CollisionJNI.btMinkowskiSumShape_setTransformA(swigCPtr, this, transA);
   }
 
-  public void setTransformB(Matrix4 transB) {
+  public void setTransformB(Matrix4f transB) {
     CollisionJNI.btMinkowskiSumShape_setTransformB(swigCPtr, this, transB);
   }
 
-  public Matrix4 getTransformA() {
+  public Matrix4f getTransformA() {
 	return CollisionJNI.btMinkowskiSumShape_getTransformA(swigCPtr, this);
 }
 
-  public Matrix4 GetTransformB() {
+  public Matrix4f GetTransformB() {
 	return CollisionJNI.btMinkowskiSumShape_GetTransformB(swigCPtr, this);
 }
 

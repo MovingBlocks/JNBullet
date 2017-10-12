@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btPolyhedralConvexAabbCachingShape extends btPolyhedralConvexShape {
 	private long swigCPtr;
@@ -58,7 +58,7 @@ public class btPolyhedralConvexAabbCachingShape extends btPolyhedralConvexShape 
 		super.delete();
 	}
 
-  public void getNonvirtualAabb(Matrix4 trans, Vector3 aabbMin, Vector3 aabbMax, float margin) {
+  public void getNonvirtualAabb(Matrix4f trans, Vector3f aabbMin, Vector3f aabbMax, float margin) {
     CollisionJNI.btPolyhedralConvexAabbCachingShape_getNonvirtualAabb(swigCPtr, this, trans, aabbMin, aabbMax, margin);
   }
 

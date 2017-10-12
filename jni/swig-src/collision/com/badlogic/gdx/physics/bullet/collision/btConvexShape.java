@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btConvexShape extends btCollisionShape {
 	private long swigCPtr;
@@ -58,19 +58,19 @@ public class btConvexShape extends btCollisionShape {
 		super.delete();
 	}
 
-  public Vector3 localGetSupportingVertex(Vector3 vec) {
+  public Vector3f localGetSupportingVertex(Vector3f vec) {
 	return CollisionJNI.btConvexShape_localGetSupportingVertex(swigCPtr, this, vec);
 }
 
-  public Vector3 localGetSupportingVertexWithoutMargin(Vector3 vec) {
+  public Vector3f localGetSupportingVertexWithoutMargin(Vector3f vec) {
 	return CollisionJNI.btConvexShape_localGetSupportingVertexWithoutMargin(swigCPtr, this, vec);
 }
 
-  public Vector3 localGetSupportVertexWithoutMarginNonVirtual(Vector3 vec) {
+  public Vector3f localGetSupportVertexWithoutMarginNonVirtual(Vector3f vec) {
 	return CollisionJNI.btConvexShape_localGetSupportVertexWithoutMarginNonVirtual(swigCPtr, this, vec);
 }
 
-  public Vector3 localGetSupportVertexNonVirtual(Vector3 vec) {
+  public Vector3f localGetSupportVertexNonVirtual(Vector3f vec) {
 	return CollisionJNI.btConvexShape_localGetSupportVertexNonVirtual(swigCPtr, this, vec);
 }
 
@@ -78,11 +78,11 @@ public class btConvexShape extends btCollisionShape {
     return CollisionJNI.btConvexShape_getMarginNonVirtual(swigCPtr, this);
   }
 
-  public void getAabbNonVirtual(Matrix4 t, Vector3 aabbMin, Vector3 aabbMax) {
+  public void getAabbNonVirtual(Matrix4f t, Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btConvexShape_getAabbNonVirtual(swigCPtr, this, t, aabbMin, aabbMax);
   }
 
-  public void project(Matrix4 trans, Vector3 dir, SWIGTYPE_p_float minProj, SWIGTYPE_p_float maxProj, Vector3 witnesPtMin, Vector3 witnesPtMax) {
+  public void project(Matrix4f trans, Vector3f dir, SWIGTYPE_p_float minProj, SWIGTYPE_p_float maxProj, Vector3f witnesPtMin, Vector3f witnesPtMax) {
     CollisionJNI.btConvexShape_project(swigCPtr, this, trans, dir, SWIGTYPE_p_float.getCPtr(minProj), SWIGTYPE_p_float.getCPtr(maxProj), witnesPtMin, witnesPtMax);
   }
 
@@ -90,7 +90,7 @@ public class btConvexShape extends btCollisionShape {
     CollisionJNI.btConvexShape_batchedUnitVectorGetSupportingVertexWithoutMargin(swigCPtr, this, btVector3.getCPtr(vectors), vectors, btVector3.getCPtr(supportVerticesOut), supportVerticesOut, numVectors);
   }
 
-  public void getAabbSlow(Matrix4 t, Vector3 aabbMin, Vector3 aabbMax) {
+  public void getAabbSlow(Matrix4f t, Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btConvexShape_getAabbSlow(swigCPtr, this, t, aabbMin, aabbMax);
   }
 
@@ -98,7 +98,7 @@ public class btConvexShape extends btCollisionShape {
     return CollisionJNI.btConvexShape_getNumPreferredPenetrationDirections(swigCPtr, this);
   }
 
-  public void getPreferredPenetrationDirection(int index, Vector3 penetrationVector) {
+  public void getPreferredPenetrationDirection(int index, Vector3f penetrationVector) {
     CollisionJNI.btConvexShape_getPreferredPenetrationDirection(swigCPtr, this, index, penetrationVector);
   }
 

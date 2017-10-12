@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class ClosestNotMeConvexResultCallback extends ClosestConvexResultCallback {
 	private long swigCPtr;
@@ -74,7 +74,7 @@ public class ClosestNotMeConvexResultCallback extends ClosestConvexResultCallbac
     return CollisionJNI.ClosestNotMeConvexResultCallback_allowedPenetration_get(swigCPtr, this);
   }
 
-  public ClosestNotMeConvexResultCallback(btCollisionObject me, Vector3 fromA, Vector3 toA) {
+  public ClosestNotMeConvexResultCallback(btCollisionObject me, Vector3f fromA, Vector3f toA) {
     this(CollisionJNI.new_ClosestNotMeConvexResultCallback(btCollisionObject.getCPtr(me), me, fromA, toA), true);
   }
 

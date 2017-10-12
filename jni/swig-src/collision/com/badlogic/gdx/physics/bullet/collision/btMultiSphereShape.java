@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btMultiSphereShape extends btConvexInternalAabbCachingShape {
 	private long swigCPtr;
@@ -58,7 +58,7 @@ public class btMultiSphereShape extends btConvexInternalAabbCachingShape {
 		super.delete();
 	}
 
-  public btMultiSphereShape(Vector3[] positions, float[] radi, int numSpheres) {
+  public btMultiSphereShape(Vector3f[] positions, float[] radi, int numSpheres) {
     this(CollisionJNI.new_btMultiSphereShape(positions, radi, numSpheres), true);
   }
 
@@ -66,7 +66,7 @@ public class btMultiSphereShape extends btConvexInternalAabbCachingShape {
     return CollisionJNI.btMultiSphereShape_getSphereCount(swigCPtr, this);
   }
 
-  public Vector3 getSpherePosition(int index) {
+  public Vector3f getSpherePosition(int index) {
 	return CollisionJNI.btMultiSphereShape_getSpherePosition(swigCPtr, this, index);
 }
 

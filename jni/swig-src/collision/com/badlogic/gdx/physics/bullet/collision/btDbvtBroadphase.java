@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btDbvtBroadphase extends btBroadphaseInterface {
 	private long swigCPtr;
@@ -229,15 +229,15 @@ public class btDbvtBroadphase extends btBroadphaseInterface {
     CollisionJNI.btDbvtBroadphase_optimize(swigCPtr, this);
   }
 
-  public void rayTest(Vector3 rayFrom, Vector3 rayTo, btBroadphaseRayCallback rayCallback, Vector3 aabbMin, Vector3 aabbMax) {
+  public void rayTest(Vector3f rayFrom, Vector3f rayTo, btBroadphaseRayCallback rayCallback, Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btDbvtBroadphase_rayTest__SWIG_0(swigCPtr, this, rayFrom, rayTo, btBroadphaseRayCallback.getCPtr(rayCallback), rayCallback, aabbMin, aabbMax);
   }
 
-  public void rayTest(Vector3 rayFrom, Vector3 rayTo, btBroadphaseRayCallback rayCallback, Vector3 aabbMin) {
+  public void rayTest(Vector3f rayFrom, Vector3f rayTo, btBroadphaseRayCallback rayCallback, Vector3f aabbMin) {
     CollisionJNI.btDbvtBroadphase_rayTest__SWIG_1(swigCPtr, this, rayFrom, rayTo, btBroadphaseRayCallback.getCPtr(rayCallback), rayCallback, aabbMin);
   }
 
-  public void rayTest(Vector3 rayFrom, Vector3 rayTo, btBroadphaseRayCallback rayCallback) {
+  public void rayTest(Vector3f rayFrom, Vector3f rayTo, btBroadphaseRayCallback rayCallback) {
     CollisionJNI.btDbvtBroadphase_rayTest__SWIG_2(swigCPtr, this, rayFrom, rayTo, btBroadphaseRayCallback.getCPtr(rayCallback), rayCallback);
   }
 
@@ -258,7 +258,7 @@ public class btDbvtBroadphase extends btBroadphaseInterface {
     return CollisionJNI.btDbvtBroadphase_getVelocityPrediction(swigCPtr, this);
   }
 
-  public void setAabbForceUpdate(btBroadphaseProxy absproxy, Vector3 aabbMin, Vector3 aabbMax, btDispatcher arg3) {
+  public void setAabbForceUpdate(btBroadphaseProxy absproxy, Vector3f aabbMin, Vector3f aabbMax, btDispatcher arg3) {
     CollisionJNI.btDbvtBroadphase_setAabbForceUpdate(swigCPtr, this, btBroadphaseProxy.getCPtr(absproxy), absproxy, aabbMin, aabbMax, btDispatcher.getCPtr(arg3), arg3);
   }
 

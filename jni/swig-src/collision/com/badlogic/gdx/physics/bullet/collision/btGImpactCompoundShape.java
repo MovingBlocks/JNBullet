@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btGImpactCompoundShape extends btGImpactShapeInterface {
 	private long swigCPtr;
@@ -137,7 +137,7 @@ public class btGImpactCompoundShape extends btGImpactShapeInterface {
     return (cPtr == 0) ? null : new btGImpactCompoundShape.CompoundPrimitiveManager(cPtr, false);
   }
 
-  public void addChildShape(Matrix4 localTransform, btCollisionShape shape) {
+  public void addChildShape(Matrix4f localTransform, btCollisionShape shape) {
     CollisionJNI.btGImpactCompoundShape_addChildShape__SWIG_0(swigCPtr, this, localTransform, btCollisionShape.getCPtr(shape), shape);
   }
 

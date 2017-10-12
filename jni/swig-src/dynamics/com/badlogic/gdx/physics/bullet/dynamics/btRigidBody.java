@@ -11,10 +11,10 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btRigidBody extends btCollisionObject {
 	private long swigCPtr;
@@ -82,7 +82,7 @@ public class btRigidBody extends btCollisionObject {
 		refMotionState(constructionInfo.getMotionState());
 	}
 	
-	public btRigidBody(float mass, btMotionState motionState, btCollisionShape collisionShape, Vector3 localInertia) {
+	public btRigidBody(float mass, btMotionState motionState, btCollisionShape collisionShape, Vector3f localInertia) {
 		this(false, mass, motionState, collisionShape, localInertia);
 		refCollisionShape(collisionShape);
 		refMotionState(motionState);
@@ -206,7 +206,7 @@ public class btRigidBody extends btCollisionObject {
   		return collisionShape;
   	}
   	
-  	public btRigidBodyConstructionInfo(float mass, btMotionState motionState, btCollisionShape collisionShape, Vector3 localInertia) {
+  	public btRigidBodyConstructionInfo(float mass, btMotionState motionState, btCollisionShape collisionShape, Vector3f localInertia) {
   		this(false, mass, motionState, collisionShape, localInertia);
   		refMotionState(motionState);
   		refCollisionShape(collisionShape);
@@ -377,7 +377,7 @@ public class btRigidBody extends btCollisionObject {
       return DynamicsJNI.btRigidBody_btRigidBodyConstructionInfo_additionalAngularDampingFactor_get(swigCPtr, this);
     }
   
-    private btRigidBodyConstructionInfo(boolean dummy, float mass, btMotionState motionState, btCollisionShape collisionShape, Vector3 localInertia) {
+    private btRigidBodyConstructionInfo(boolean dummy, float mass, btMotionState motionState, btCollisionShape collisionShape, Vector3f localInertia) {
       this(DynamicsJNI.new_btRigidBody_btRigidBodyConstructionInfo__SWIG_0(dummy, mass, btMotionState.getCPtr(motionState), motionState, btCollisionShape.getCPtr(collisionShape), collisionShape, localInertia), true);
     }
   
@@ -387,11 +387,11 @@ public class btRigidBody extends btCollisionObject {
   
   }
 
-  public void proceedToTransform(Matrix4 newTrans) {
+  public void proceedToTransform(Matrix4f newTrans) {
     DynamicsJNI.btRigidBody_proceedToTransform(swigCPtr, this, newTrans);
   }
 
-  public void predictIntegratedTransform(float step, Matrix4 predictedTransform) {
+  public void predictIntegratedTransform(float step, Matrix4f predictedTransform) {
     DynamicsJNI.btRigidBody_predictIntegratedTransform(swigCPtr, this, step, predictedTransform);
   }
 
@@ -403,11 +403,11 @@ public class btRigidBody extends btCollisionObject {
     DynamicsJNI.btRigidBody_applyGravity(swigCPtr, this);
   }
 
-  public void setGravity(Vector3 acceleration) {
+  public void setGravity(Vector3f acceleration) {
     DynamicsJNI.btRigidBody_setGravity(swigCPtr, this, acceleration);
   }
 
-  public Vector3 getGravity() {
+  public Vector3f getGravity() {
 	return DynamicsJNI.btRigidBody_getGravity(swigCPtr, this);
 }
 
@@ -435,15 +435,15 @@ public class btRigidBody extends btCollisionObject {
     DynamicsJNI.btRigidBody_applyDamping(swigCPtr, this, timeStep);
   }
 
-  public void setMassProps(float mass, Vector3 inertia) {
+  public void setMassProps(float mass, Vector3f inertia) {
     DynamicsJNI.btRigidBody_setMassProps(swigCPtr, this, mass, inertia);
   }
 
-  public Vector3 getLinearFactor() {
+  public Vector3f getLinearFactor() {
 	return DynamicsJNI.btRigidBody_getLinearFactor(swigCPtr, this);
 }
 
-  public void setLinearFactor(Vector3 linearFactor) {
+  public void setLinearFactor(Vector3f linearFactor) {
     DynamicsJNI.btRigidBody_setLinearFactor(swigCPtr, this, linearFactor);
   }
 
@@ -451,7 +451,7 @@ public class btRigidBody extends btCollisionObject {
     return DynamicsJNI.btRigidBody_getInvMass(swigCPtr, this);
   }
 
-  public Matrix3 getInvInertiaTensorWorld() {
+  public Matrix3f getInvInertiaTensorWorld() {
 	return DynamicsJNI.btRigidBody_getInvInertiaTensorWorld(swigCPtr, this);
 }
 
@@ -459,27 +459,27 @@ public class btRigidBody extends btCollisionObject {
     DynamicsJNI.btRigidBody_integrateVelocities(swigCPtr, this, step);
   }
 
-  public void setCenterOfMassTransform(Matrix4 xform) {
+  public void setCenterOfMassTransform(Matrix4f xform) {
     DynamicsJNI.btRigidBody_setCenterOfMassTransform(swigCPtr, this, xform);
   }
 
-  public void applyCentralForce(Vector3 force) {
+  public void applyCentralForce(Vector3f force) {
     DynamicsJNI.btRigidBody_applyCentralForce(swigCPtr, this, force);
   }
 
-  public Vector3 getTotalForce() {
+  public Vector3f getTotalForce() {
 	return DynamicsJNI.btRigidBody_getTotalForce(swigCPtr, this);
 }
 
-  public Vector3 getTotalTorque() {
+  public Vector3f getTotalTorque() {
 	return DynamicsJNI.btRigidBody_getTotalTorque(swigCPtr, this);
 }
 
-  public Vector3 getInvInertiaDiagLocal() {
+  public Vector3f getInvInertiaDiagLocal() {
 	return DynamicsJNI.btRigidBody_getInvInertiaDiagLocal(swigCPtr, this);
 }
 
-  public void setInvInertiaDiagLocal(Vector3 diagInvInertia) {
+  public void setInvInertiaDiagLocal(Vector3f diagInvInertia) {
     DynamicsJNI.btRigidBody_setInvInertiaDiagLocal(swigCPtr, this, diagInvInertia);
   }
 
@@ -487,23 +487,23 @@ public class btRigidBody extends btCollisionObject {
     DynamicsJNI.btRigidBody_setSleepingThresholds(swigCPtr, this, linear, angular);
   }
 
-  public void applyTorque(Vector3 torque) {
+  public void applyTorque(Vector3f torque) {
     DynamicsJNI.btRigidBody_applyTorque(swigCPtr, this, torque);
   }
 
-  public void applyForce(Vector3 force, Vector3 rel_pos) {
+  public void applyForce(Vector3f force, Vector3f rel_pos) {
     DynamicsJNI.btRigidBody_applyForce(swigCPtr, this, force, rel_pos);
   }
 
-  public void applyCentralImpulse(Vector3 impulse) {
+  public void applyCentralImpulse(Vector3f impulse) {
     DynamicsJNI.btRigidBody_applyCentralImpulse(swigCPtr, this, impulse);
   }
 
-  public void applyTorqueImpulse(Vector3 torque) {
+  public void applyTorqueImpulse(Vector3f torque) {
     DynamicsJNI.btRigidBody_applyTorqueImpulse(swigCPtr, this, torque);
   }
 
-  public void applyImpulse(Vector3 impulse, Vector3 rel_pos) {
+  public void applyImpulse(Vector3f impulse, Vector3f rel_pos) {
     DynamicsJNI.btRigidBody_applyImpulse(swigCPtr, this, impulse, rel_pos);
   }
 
@@ -515,51 +515,51 @@ public class btRigidBody extends btCollisionObject {
     DynamicsJNI.btRigidBody_updateInertiaTensor(swigCPtr, this);
   }
 
-  public Vector3 getCenterOfMassPosition() {
+  public Vector3f getCenterOfMassPosition() {
 	return DynamicsJNI.btRigidBody_getCenterOfMassPosition(swigCPtr, this);
 }
 
-  public Quaternion getOrientation() {
+  public Quat4f getOrientation() {
 	return DynamicsJNI.btRigidBody_getOrientation(swigCPtr, this);
 }
 
-  public Matrix4 getCenterOfMassTransform() {
+  public Matrix4f getCenterOfMassTransform() {
 	return DynamicsJNI.btRigidBody_getCenterOfMassTransform(swigCPtr, this);
 }
 
-  public Vector3 getLinearVelocity() {
+  public Vector3f getLinearVelocity() {
 	return DynamicsJNI.btRigidBody_getLinearVelocity(swigCPtr, this);
 }
 
-  public Vector3 getAngularVelocity() {
+  public Vector3f getAngularVelocity() {
 	return DynamicsJNI.btRigidBody_getAngularVelocity(swigCPtr, this);
 }
 
-  public void setLinearVelocity(Vector3 lin_vel) {
+  public void setLinearVelocity(Vector3f lin_vel) {
     DynamicsJNI.btRigidBody_setLinearVelocity(swigCPtr, this, lin_vel);
   }
 
-  public void setAngularVelocity(Vector3 ang_vel) {
+  public void setAngularVelocity(Vector3f ang_vel) {
     DynamicsJNI.btRigidBody_setAngularVelocity(swigCPtr, this, ang_vel);
   }
 
-  public Vector3 getVelocityInLocalPoint(Vector3 rel_pos) {
+  public Vector3f getVelocityInLocalPoint(Vector3f rel_pos) {
 	return DynamicsJNI.btRigidBody_getVelocityInLocalPoint(swigCPtr, this, rel_pos);
 }
 
-  public void translate(Vector3 v) {
+  public void translate(Vector3f v) {
     DynamicsJNI.btRigidBody_translate(swigCPtr, this, v);
   }
 
-  public void getAabb(Vector3 aabbMin, Vector3 aabbMax) {
+  public void getAabb(Vector3f aabbMin, Vector3f aabbMax) {
     DynamicsJNI.btRigidBody_getAabb(swigCPtr, this, aabbMin, aabbMax);
   }
 
-  public float computeImpulseDenominator(Vector3 pos, Vector3 normal) {
+  public float computeImpulseDenominator(Vector3f pos, Vector3f normal) {
     return DynamicsJNI.btRigidBody_computeImpulseDenominator(swigCPtr, this, pos, normal);
   }
 
-  public float computeAngularImpulseDenominator(Vector3 axis) {
+  public float computeAngularImpulseDenominator(Vector3f axis) {
     return DynamicsJNI.btRigidBody_computeAngularImpulseDenominator(swigCPtr, this, axis);
   }
 
@@ -604,7 +604,7 @@ public class btRigidBody extends btCollisionObject {
     return DynamicsJNI.btRigidBody_frictionSolverType_get(swigCPtr, this);
   }
 
-  public void setAngularFactor(Vector3 angFac) {
+  public void setAngularFactor(Vector3f angFac) {
     DynamicsJNI.btRigidBody_setAngularFactor__SWIG_0(swigCPtr, this, angFac);
   }
 
@@ -612,7 +612,7 @@ public class btRigidBody extends btCollisionObject {
     DynamicsJNI.btRigidBody_setAngularFactor__SWIG_1(swigCPtr, this, angFac);
   }
 
-  public Vector3 getAngularFactor() {
+  public Vector3f getAngularFactor() {
 	return DynamicsJNI.btRigidBody_getAngularFactor(swigCPtr, this);
 }
 
@@ -645,19 +645,19 @@ public class btRigidBody extends btCollisionObject {
     return DynamicsJNI.btRigidBody_getFlags(swigCPtr, this);
   }
 
-  public Vector3 computeGyroscopicImpulseImplicit_World(float dt) {
+  public Vector3f computeGyroscopicImpulseImplicit_World(float dt) {
 	return DynamicsJNI.btRigidBody_computeGyroscopicImpulseImplicit_World(swigCPtr, this, dt);
 }
 
-  public Vector3 computeGyroscopicImpulseImplicit_Body(float step) {
+  public Vector3f computeGyroscopicImpulseImplicit_Body(float step) {
 	return DynamicsJNI.btRigidBody_computeGyroscopicImpulseImplicit_Body(swigCPtr, this, step);
 }
 
-  public Vector3 computeGyroscopicForceExplicit(float maxGyroscopicForce) {
+  public Vector3f computeGyroscopicForceExplicit(float maxGyroscopicForce) {
 	return DynamicsJNI.btRigidBody_computeGyroscopicForceExplicit(swigCPtr, this, maxGyroscopicForce);
 }
 
-  public Vector3 getLocalInertia() {
+  public Vector3f getLocalInertia() {
 	return DynamicsJNI.btRigidBody_getLocalInertia(swigCPtr, this);
 }
 
@@ -665,7 +665,7 @@ public class btRigidBody extends btCollisionObject {
     this(DynamicsJNI.new_btRigidBody__SWIG_0(dummy, btRigidBody.btRigidBodyConstructionInfo.getCPtr(constructionInfo), constructionInfo), true);
   }
 
-  private btRigidBody(boolean dummy, float mass, btMotionState motionState, btCollisionShape collisionShape, Vector3 localInertia) {
+  private btRigidBody(boolean dummy, float mass, btMotionState motionState, btCollisionShape collisionShape, Vector3f localInertia) {
     this(DynamicsJNI.new_btRigidBody__SWIG_1(dummy, mass, btMotionState.getCPtr(motionState), motionState, btCollisionShape.getCPtr(collisionShape), collisionShape, localInertia), true);
   }
 

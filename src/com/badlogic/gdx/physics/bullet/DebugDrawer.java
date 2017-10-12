@@ -27,6 +27,7 @@ import com.badlogic.gdx.physics.bullet.linearmath.btIDebugDraw;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import org.terasology.math.geom.Vector3f;
 
 /** @author xoppa */
 public class DebugDrawer extends btIDebugDraw implements Disposable {
@@ -40,27 +41,33 @@ public class DebugDrawer extends btIDebugDraw implements Disposable {
 	private Camera camera;
 	private Viewport viewport;
 	private int debugMode = btIDebugDraw.DebugDrawModes.DBG_NoDebug;
-
+	
+	
 	@Override
-	public void drawLine (Vector3 from, Vector3 to, Vector3 color) {
+	public void drawLine (Vector3f from, Vector3f to, Vector3f color) {
 		shapeRenderer.setColor(color.x, color.y, color.z, 1f);
-		shapeRenderer.line(from, to);
+		shapeRenderer.line(new Vector3(from.x,from.y,from.z), new Vector3(to.x,to.y,to.z));
 	}
 
 	@Override
-	public void drawContactPoint (Vector3 pointOnB, Vector3 normalOnB, float distance, int lifeTime, Vector3 color) {
+	public void drawContactPoint (Vector3f pointOnB, Vector3f normalOnB, float distance, int lifeTime, Vector3f color) {
 		shapeRenderer.setColor(color.x, color.y, color.z, 1f);
 		shapeRenderer.point(pointOnB.x, pointOnB.y, pointOnB.z);
 
-		shapeRenderer.line(pointOnB, normalOnB.scl(distance).add(pointOnB));
+		Vector3f temp = normalOnB.scale(distance).add(pointOnB);
+		shapeRenderer.line(new Vector3(pointOnB.x,pointOnB.y,pointOnB.z), new Vector3(temp.x,temp.y,temp.z));
 	}
 
 	@Override
-	public void drawTriangle (Vector3 v0, Vector3 v1, Vector3 v2, Vector3 color, float arg4) {
+	public void drawTriangle (Vector3f v0, Vector3f v1, Vector3f v2, Vector3f color, float arg4) {
 		shapeRenderer.setColor(color.x, color.y, color.z, arg4);
-		shapeRenderer.line(v0, v1);
-		shapeRenderer.line(v1, v2);
-		shapeRenderer.line(v2, v0);
+		Vector3 v0f = new Vector3(v0.x,v0.y,v0.z);
+		Vector3 v1f = new Vector3(v1.x,v1.y,v1.z);
+		Vector3 v2f = new Vector3(v2.x,v2.y,v2.z);
+		
+		shapeRenderer.line(v0f, v1f);
+		shapeRenderer.line(v1f, v2f);
+		shapeRenderer.line(v2f, v0f);
 	}
 
 	@Override
@@ -69,7 +76,7 @@ public class DebugDrawer extends btIDebugDraw implements Disposable {
 	}
 
 	@Override
-	public void draw3dText (Vector3 location, String textString) {
+	public void draw3dText (Vector3f location, String textString) {
 		if (spriteBatch == null) {
 			spriteBatch = new SpriteBatch();
 		}
@@ -77,13 +84,15 @@ public class DebugDrawer extends btIDebugDraw implements Disposable {
 			font = new BitmapFont();
 		}
 
+		Vector3 loc = new Vector3(location.x,location.y,location.z);
+		
 		// this check is necessary to avoid "mirrored" instances of the text
-		if (camera.frustum.pointInFrustum(location)) {
+		if (camera.frustum.pointInFrustum(loc )) {
 			if (viewport != null) {
-				camera.project(location, viewport.getScreenX(), viewport.getScreenY(), viewport.getScreenWidth(),
+				camera.project(loc , viewport.getScreenX(), viewport.getScreenY(), viewport.getScreenWidth(),
 					viewport.getScreenHeight());
 			} else {
-				camera.project(location);
+				camera.project(loc );
 			}
 
 			shapeRenderer.end();

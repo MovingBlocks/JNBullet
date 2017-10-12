@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btConvexPenetrationDepthSolver extends BulletBase {
 	private long swigCPtr;
@@ -58,7 +58,7 @@ public class btConvexPenetrationDepthSolver extends BulletBase {
 		super.delete();
 	}
 
-  public boolean calcPenDepth(btVoronoiSimplexSolver simplexSolver, btConvexShape convexA, btConvexShape convexB, Matrix4 transA, Matrix4 transB, Vector3 v, Vector3 pa, Vector3 pb, btIDebugDraw debugDraw) {
+  public boolean calcPenDepth(btVoronoiSimplexSolver simplexSolver, btConvexShape convexA, btConvexShape convexB, Matrix4f transA, Matrix4f transB, Vector3f v, Vector3f pa, Vector3f pb, btIDebugDraw debugDraw) {
     return CollisionJNI.btConvexPenetrationDepthSolver_calcPenDepth(swigCPtr, this, btVoronoiSimplexSolver.getCPtr(simplexSolver), simplexSolver, btConvexShape.getCPtr(convexA), convexA, btConvexShape.getCPtr(convexB), convexB, transA, transB, v, pa, pb, btIDebugDraw.getCPtr(debugDraw), debugDraw);
   }
 

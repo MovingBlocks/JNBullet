@@ -12,10 +12,10 @@ import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
 import com.badlogic.gdx.physics.bullet.dynamics.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btSoftBodyHelpers extends BulletBase {
 	private long swigCPtr;
@@ -112,17 +112,17 @@ public class btSoftBodyHelpers extends BulletBase {
     SoftbodyJNI.btSoftBodyHelpers_DrawFrame(btSoftBody.getCPtr(psb), psb, btIDebugDraw.getCPtr(idraw), idraw);
   }
 
-  public static btSoftBody CreateRope(btSoftBodyWorldInfo worldInfo, Vector3 from, Vector3 to, int res, int fixeds) {
+  public static btSoftBody CreateRope(btSoftBodyWorldInfo worldInfo, Vector3f from, Vector3f to, int res, int fixeds) {
     long cPtr = SoftbodyJNI.btSoftBodyHelpers_CreateRope(btSoftBodyWorldInfo.getCPtr(worldInfo), worldInfo, from, to, res, fixeds);
     return (cPtr == 0) ? null : new btSoftBody(cPtr, false);
   }
 
-  public static btSoftBody CreatePatch(btSoftBodyWorldInfo worldInfo, Vector3 corner00, Vector3 corner10, Vector3 corner01, Vector3 corner11, int resx, int resy, int fixeds, boolean gendiags) {
+  public static btSoftBody CreatePatch(btSoftBodyWorldInfo worldInfo, Vector3f corner00, Vector3f corner10, Vector3f corner01, Vector3f corner11, int resx, int resy, int fixeds, boolean gendiags) {
     long cPtr = SoftbodyJNI.btSoftBodyHelpers_CreatePatch(btSoftBodyWorldInfo.getCPtr(worldInfo), worldInfo, corner00, corner10, corner01, corner11, resx, resy, fixeds, gendiags);
     return (cPtr == 0) ? null : new btSoftBody(cPtr, false);
   }
 
-  public static btSoftBody CreatePatchUV(btSoftBodyWorldInfo worldInfo, Vector3 corner00, Vector3 corner10, Vector3 corner01, Vector3 corner11, int resx, int resy, int fixeds, boolean gendiags, java.nio.FloatBuffer tex_coords) {
+  public static btSoftBody CreatePatchUV(btSoftBodyWorldInfo worldInfo, Vector3f corner00, Vector3f corner10, Vector3f corner01, Vector3f corner11, int resx, int resy, int fixeds, boolean gendiags, java.nio.FloatBuffer tex_coords) {
     assert tex_coords.isDirect() : "Buffer must be allocated direct.";
     {
       long cPtr = SoftbodyJNI.btSoftBodyHelpers_CreatePatchUV__SWIG_0(btSoftBodyWorldInfo.getCPtr(worldInfo), worldInfo, corner00, corner10, corner01, corner11, resx, resy, fixeds, gendiags, tex_coords);
@@ -130,7 +130,7 @@ public class btSoftBodyHelpers extends BulletBase {
     }
   }
 
-  public static btSoftBody CreatePatchUV(btSoftBodyWorldInfo worldInfo, Vector3 corner00, Vector3 corner10, Vector3 corner01, Vector3 corner11, int resx, int resy, int fixeds, boolean gendiags) {
+  public static btSoftBody CreatePatchUV(btSoftBodyWorldInfo worldInfo, Vector3f corner00, Vector3f corner10, Vector3f corner01, Vector3f corner11, int resx, int resy, int fixeds, boolean gendiags) {
     long cPtr = SoftbodyJNI.btSoftBodyHelpers_CreatePatchUV__SWIG_1(btSoftBodyWorldInfo.getCPtr(worldInfo), worldInfo, corner00, corner10, corner01, corner11, resx, resy, fixeds, gendiags);
     return (cPtr == 0) ? null : new btSoftBody(cPtr, false);
   }
@@ -139,7 +139,7 @@ public class btSoftBodyHelpers extends BulletBase {
     return SoftbodyJNI.btSoftBodyHelpers_CalculateUV(resx, resy, ix, iy, id);
   }
 
-  public static btSoftBody CreateEllipsoid(btSoftBodyWorldInfo worldInfo, Vector3 center, Vector3 radius, int res) {
+  public static btSoftBody CreateEllipsoid(btSoftBodyWorldInfo worldInfo, Vector3f center, Vector3f radius, int res) {
     long cPtr = SoftbodyJNI.btSoftBodyHelpers_CreateEllipsoid(btSoftBodyWorldInfo.getCPtr(worldInfo), worldInfo, center, radius, res);
     return (cPtr == 0) ? null : new btSoftBody(cPtr, false);
   }

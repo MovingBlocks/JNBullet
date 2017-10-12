@@ -9,10 +9,10 @@
 package com.badlogic.gdx.physics.bullet.linearmath;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btTransformUtil extends BulletBase {
 	private long swigCPtr;
@@ -57,23 +57,23 @@ public class btTransformUtil extends BulletBase {
 		super.delete();
 	}
 
-  public static void integrateTransform(Matrix4 curTrans, Vector3 linvel, Vector3 angvel, float timeStep, Matrix4 predictedTransform) {
+  public static void integrateTransform(Matrix4f curTrans, Vector3f linvel, Vector3f angvel, float timeStep, Matrix4f predictedTransform) {
     LinearMathJNI.btTransformUtil_integrateTransform(curTrans, linvel, angvel, timeStep, predictedTransform);
   }
 
-  public static void calculateVelocityQuaternion(Vector3 pos0, Vector3 pos1, Quaternion orn0, Quaternion orn1, float timeStep, Vector3 linVel, Vector3 angVel) {
+  public static void calculateVelocityQuaternion(Vector3f pos0, Vector3f pos1, Quat4f orn0, Quat4f orn1, float timeStep, Vector3f linVel, Vector3f angVel) {
     LinearMathJNI.btTransformUtil_calculateVelocityQuaternion(pos0, pos1, orn0, orn1, timeStep, linVel, angVel);
   }
 
-  public static void calculateDiffAxisAngleQuaternion(Quaternion orn0, Quaternion orn1a, Vector3 axis, SWIGTYPE_p_float angle) {
+  public static void calculateDiffAxisAngleQuaternion(Quat4f orn0, Quat4f orn1a, Vector3f axis, SWIGTYPE_p_float angle) {
     LinearMathJNI.btTransformUtil_calculateDiffAxisAngleQuaternion(orn0, orn1a, axis, SWIGTYPE_p_float.getCPtr(angle));
   }
 
-  public static void calculateVelocity(Matrix4 transform0, Matrix4 transform1, float timeStep, Vector3 linVel, Vector3 angVel) {
+  public static void calculateVelocity(Matrix4f transform0, Matrix4f transform1, float timeStep, Vector3f linVel, Vector3f angVel) {
     LinearMathJNI.btTransformUtil_calculateVelocity(transform0, transform1, timeStep, linVel, angVel);
   }
 
-  public static void calculateDiffAxisAngle(Matrix4 transform0, Matrix4 transform1, Vector3 axis, SWIGTYPE_p_float angle) {
+  public static void calculateDiffAxisAngle(Matrix4f transform0, Matrix4f transform1, Vector3f axis, SWIGTYPE_p_float angle) {
     LinearMathJNI.btTransformUtil_calculateDiffAxisAngle(transform0, transform1, axis, SWIGTYPE_p_float.getCPtr(angle));
   }
 

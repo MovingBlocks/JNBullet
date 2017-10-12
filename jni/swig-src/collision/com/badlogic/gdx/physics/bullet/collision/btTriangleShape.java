@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btTriangleShape extends btPolyhedralConvexShape {
 	private long swigCPtr;
@@ -67,7 +67,7 @@ public class btTriangleShape extends btPolyhedralConvexShape {
     return (cPtr == 0) ? null : new btVector3(cPtr, false);
   }
 
-  public Vector3 getVertexPtr(int index) {
+  public Vector3f getVertexPtr(int index) {
 	return CollisionJNI.btTriangleShape_getVertexPtr__SWIG_0(swigCPtr, this, index);
 }
 
@@ -75,15 +75,15 @@ public class btTriangleShape extends btPolyhedralConvexShape {
     this(CollisionJNI.new_btTriangleShape__SWIG_0(), true);
   }
 
-  public btTriangleShape(Vector3 p0, Vector3 p1, Vector3 p2) {
+  public btTriangleShape(Vector3f p0, Vector3f p1, Vector3f p2) {
     this(CollisionJNI.new_btTriangleShape__SWIG_1(p0, p1, p2), true);
   }
 
-  public void calcNormal(Vector3 normal) {
+  public void calcNormal(Vector3f normal) {
     CollisionJNI.btTriangleShape_calcNormal(swigCPtr, this, normal);
   }
 
-  public void getPlaneEquation(int i, Vector3 planeNormal, Vector3 planeSupport) {
+  public void getPlaneEquation(int i, Vector3f planeNormal, Vector3f planeSupport) {
     CollisionJNI.btTriangleShape_getPlaneEquation(swigCPtr, this, i, planeNormal, planeSupport);
   }
 

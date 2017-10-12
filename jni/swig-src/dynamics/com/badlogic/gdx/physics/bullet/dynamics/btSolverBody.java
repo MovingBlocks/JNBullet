@@ -11,10 +11,10 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btSolverBody extends BulletBase {
 	private long swigCPtr;
@@ -175,63 +175,63 @@ public class btSolverBody extends BulletBase {
 	return btRigidBody.getInstance(DynamicsJNI.btSolverBody_originalBody_get(swigCPtr, this), false);
 }
 
-  public void getVelocityInLocalPointNoDelta(Vector3 rel_pos, Vector3 velocity) {
+  public void getVelocityInLocalPointNoDelta(Vector3f rel_pos, Vector3f velocity) {
     DynamicsJNI.btSolverBody_getVelocityInLocalPointNoDelta(swigCPtr, this, rel_pos, velocity);
   }
 
-  public void getVelocityInLocalPointObsolete(Vector3 rel_pos, Vector3 velocity) {
+  public void getVelocityInLocalPointObsolete(Vector3f rel_pos, Vector3f velocity) {
     DynamicsJNI.btSolverBody_getVelocityInLocalPointObsolete(swigCPtr, this, rel_pos, velocity);
   }
 
-  public void getAngularVelocity(Vector3 angVel) {
+  public void getAngularVelocity(Vector3f angVel) {
     DynamicsJNI.btSolverBody_getAngularVelocity(swigCPtr, this, angVel);
   }
 
-  public void applyImpulse(Vector3 linearComponent, Vector3 angularComponent, float impulseMagnitude) {
+  public void applyImpulse(Vector3f linearComponent, Vector3f angularComponent, float impulseMagnitude) {
     DynamicsJNI.btSolverBody_applyImpulse(swigCPtr, this, linearComponent, angularComponent, impulseMagnitude);
   }
 
-  public void internalApplyPushImpulse(Vector3 linearComponent, Vector3 angularComponent, float impulseMagnitude) {
+  public void internalApplyPushImpulse(Vector3f linearComponent, Vector3f angularComponent, float impulseMagnitude) {
     DynamicsJNI.btSolverBody_internalApplyPushImpulse(swigCPtr, this, linearComponent, angularComponent, impulseMagnitude);
   }
 
-  public Vector3 internalGetDeltaLinearVelocity() {
+  public Vector3f internalGetDeltaLinearVelocity() {
 	return DynamicsJNI.btSolverBody_internalGetDeltaLinearVelocity(swigCPtr, this);
 }
 
-  public Vector3 internalGetDeltaAngularVelocity() {
+  public Vector3f internalGetDeltaAngularVelocity() {
 	return DynamicsJNI.btSolverBody_internalGetDeltaAngularVelocity(swigCPtr, this);
 }
 
-  public Vector3 internalGetAngularFactor() {
+  public Vector3f internalGetAngularFactor() {
 	return DynamicsJNI.btSolverBody_internalGetAngularFactor(swigCPtr, this);
 }
 
-  public Vector3 internalGetInvMass() {
+  public Vector3f internalGetInvMass() {
 	return DynamicsJNI.btSolverBody_internalGetInvMass(swigCPtr, this);
 }
 
-  public void internalSetInvMass(Vector3 invMass) {
+  public void internalSetInvMass(Vector3f invMass) {
     DynamicsJNI.btSolverBody_internalSetInvMass(swigCPtr, this, invMass);
   }
 
-  public Vector3 internalGetPushVelocity() {
+  public Vector3f internalGetPushVelocity() {
 	return DynamicsJNI.btSolverBody_internalGetPushVelocity(swigCPtr, this);
 }
 
-  public Vector3 internalGetTurnVelocity() {
+  public Vector3f internalGetTurnVelocity() {
 	return DynamicsJNI.btSolverBody_internalGetTurnVelocity(swigCPtr, this);
 }
 
-  public void internalGetVelocityInLocalPointObsolete(Vector3 rel_pos, Vector3 velocity) {
+  public void internalGetVelocityInLocalPointObsolete(Vector3f rel_pos, Vector3f velocity) {
     DynamicsJNI.btSolverBody_internalGetVelocityInLocalPointObsolete(swigCPtr, this, rel_pos, velocity);
   }
 
-  public void internalGetAngularVelocity(Vector3 angVel) {
+  public void internalGetAngularVelocity(Vector3f angVel) {
     DynamicsJNI.btSolverBody_internalGetAngularVelocity(swigCPtr, this, angVel);
   }
 
-  public void internalApplyImpulse(Vector3 linearComponent, Vector3 angularComponent, float impulseMagnitude) {
+  public void internalApplyImpulse(Vector3f linearComponent, Vector3f angularComponent, float impulseMagnitude) {
     DynamicsJNI.btSolverBody_internalApplyImpulse(swigCPtr, this, linearComponent, angularComponent, impulseMagnitude);
   }
 

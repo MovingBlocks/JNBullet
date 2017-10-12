@@ -9,10 +9,10 @@
 package com.badlogic.gdx.physics.bullet.linearmath;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btVector3 extends BulletBase {
 	private long swigCPtr;
@@ -73,7 +73,7 @@ public class btVector3 extends BulletBase {
     this(LinearMathJNI.new_btVector3__SWIG_1(_x, _y, _z), true);
   }
 
-  public float dot(Vector3 v) {
+  public float dot(Vector3f v) {
     return LinearMathJNI.btVector3_dot(swigCPtr, this, v);
   }
 
@@ -93,43 +93,43 @@ public class btVector3 extends BulletBase {
     return LinearMathJNI.btVector3_safeNorm(swigCPtr, this);
   }
 
-  public float distance2(Vector3 v) {
+  public float distance2(Vector3f v) {
     return LinearMathJNI.btVector3_distance2(swigCPtr, this, v);
   }
 
-  public float distance(Vector3 v) {
+  public float distance(Vector3f v) {
     return LinearMathJNI.btVector3_distance(swigCPtr, this, v);
   }
 
-  public Vector3 safeNormalize() {
+  public Vector3f safeNormalize() {
 	return LinearMathJNI.btVector3_safeNormalize(swigCPtr, this);
 }
 
-  public Vector3 normalize() {
+  public Vector3f normalize() {
 	return LinearMathJNI.btVector3_normalize(swigCPtr, this);
 }
 
-  public Vector3 normalized() {
+  public Vector3f normalized() {
 	return LinearMathJNI.btVector3_normalized(swigCPtr, this);
 }
 
-  public Vector3 rotate(Vector3 wAxis, float angle) {
+  public Vector3f rotate(Vector3f wAxis, float angle) {
 	return LinearMathJNI.btVector3_rotate(swigCPtr, this, wAxis, angle);
 }
 
-  public float angle(Vector3 v) {
+  public float angle(Vector3f v) {
     return LinearMathJNI.btVector3_angle(swigCPtr, this, v);
   }
 
-  public Vector3 absolute() {
+  public Vector3f absolute() {
 	return LinearMathJNI.btVector3_absolute(swigCPtr, this);
 }
 
-  public Vector3 cross(Vector3 v) {
+  public Vector3f cross(Vector3f v) {
 	return LinearMathJNI.btVector3_cross(swigCPtr, this, v);
 }
 
-  public float triple(Vector3 v1, Vector3 v2) {
+  public float triple(Vector3f v1, Vector3f v2) {
     return LinearMathJNI.btVector3_triple(swigCPtr, this, v1, v2);
   }
 
@@ -149,11 +149,11 @@ public class btVector3 extends BulletBase {
     return LinearMathJNI.btVector3_closestAxis(swigCPtr, this);
   }
 
-  public void setInterpolate3(Vector3 v0, Vector3 v1, float rt) {
+  public void setInterpolate3(Vector3f v0, Vector3f v1, float rt) {
     LinearMathJNI.btVector3_setInterpolate3(swigCPtr, this, v0, v1, rt);
   }
 
-  public Vector3 lerp(Vector3 v, float t) {
+  public Vector3f lerp(Vector3f v, float t) {
 	return LinearMathJNI.btVector3_lerp(swigCPtr, this, v, t);
 }
 
@@ -201,11 +201,11 @@ public class btVector3 extends BulletBase {
     return LinearMathJNI.btVector3_w(swigCPtr, this);
   }
 
-  public void setMax(Vector3 other) {
+  public void setMax(Vector3f other) {
     LinearMathJNI.btVector3_setMax(swigCPtr, this, other);
   }
 
-  public void setMin(Vector3 other) {
+  public void setMin(Vector3f other) {
     LinearMathJNI.btVector3_setMin(swigCPtr, this, other);
   }
 
@@ -261,7 +261,7 @@ public class btVector3 extends BulletBase {
     return LinearMathJNI.btVector3_minDot(swigCPtr, this, btVector3.getCPtr(array), array, array_count, SWIGTYPE_p_float.getCPtr(dotOut));
   }
 
-  public Vector3 dot3(Vector3 v0, Vector3 v1, Vector3 v2) {
+  public Vector3f dot3(Vector3f v0, Vector3f v1, Vector3f v2) {
 	return LinearMathJNI.btVector3_dot3(swigCPtr, this, v0, v1, v2);
 }
 

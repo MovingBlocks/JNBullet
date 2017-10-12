@@ -9,10 +9,10 @@
 package com.badlogic.gdx.physics.bullet.linearmath;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btIDebugDraw extends BulletBase {
 	private long swigCPtr;
@@ -192,31 +192,31 @@ public class btIDebugDraw extends BulletBase {
     if (getClass() == btIDebugDraw.class) LinearMathJNI.btIDebugDraw_setDefaultColors(swigCPtr, this, btIDebugDraw.DefaultColors.getCPtr(arg0), arg0); else LinearMathJNI.btIDebugDraw_setDefaultColorsSwigExplicitbtIDebugDraw(swigCPtr, this, btIDebugDraw.DefaultColors.getCPtr(arg0), arg0);
   }
 
-  public void drawLine(Vector3 from, Vector3 to, Vector3 color) {
+  public void drawLine(Vector3f from, Vector3f to, Vector3f color) {
     LinearMathJNI.btIDebugDraw_drawLine__SWIG_0(swigCPtr, this, from, to, color);
   }
 
-  public void drawLine(Vector3 from, Vector3 to, Vector3 fromColor, Vector3 toColor) {
+  public void drawLine(Vector3f from, Vector3f to, Vector3f fromColor, Vector3f toColor) {
     if (getClass() == btIDebugDraw.class) LinearMathJNI.btIDebugDraw_drawLine__SWIG_1(swigCPtr, this, from, to, fromColor, toColor); else LinearMathJNI.btIDebugDraw_drawLineSwigExplicitbtIDebugDraw__SWIG_1(swigCPtr, this, from, to, fromColor, toColor);
   }
 
-  public void drawSphere(float radius, Matrix4 transform, Vector3 color) {
+  public void drawSphere(float radius, Matrix4f transform, Vector3f color) {
     if (getClass() == btIDebugDraw.class) LinearMathJNI.btIDebugDraw_drawSphere__SWIG_0(swigCPtr, this, radius, transform, color); else LinearMathJNI.btIDebugDraw_drawSphereSwigExplicitbtIDebugDraw__SWIG_0(swigCPtr, this, radius, transform, color);
   }
 
-  public void drawSphere(Vector3 p, float radius, Vector3 color) {
+  public void drawSphere(Vector3f p, float radius, Vector3f color) {
     if (getClass() == btIDebugDraw.class) LinearMathJNI.btIDebugDraw_drawSphere__SWIG_1(swigCPtr, this, p, radius, color); else LinearMathJNI.btIDebugDraw_drawSphereSwigExplicitbtIDebugDraw__SWIG_1(swigCPtr, this, p, radius, color);
   }
 
-  public void drawTriangle(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 arg3, Vector3 arg4, Vector3 arg5, Vector3 color, float alpha) {
+  public void drawTriangle(Vector3f v0, Vector3f v1, Vector3f v2, Vector3f arg3, Vector3f arg4, Vector3f arg5, Vector3f color, float alpha) {
     if (getClass() == btIDebugDraw.class) LinearMathJNI.btIDebugDraw_drawTriangle__SWIG_0(swigCPtr, this, v0, v1, v2, arg3, arg4, arg5, color, alpha); else LinearMathJNI.btIDebugDraw_drawTriangleSwigExplicitbtIDebugDraw__SWIG_0(swigCPtr, this, v0, v1, v2, arg3, arg4, arg5, color, alpha);
   }
 
-  public void drawTriangle(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 color, float arg4) {
+  public void drawTriangle(Vector3f v0, Vector3f v1, Vector3f v2, Vector3f color, float arg4) {
     if (getClass() == btIDebugDraw.class) LinearMathJNI.btIDebugDraw_drawTriangle__SWIG_1(swigCPtr, this, v0, v1, v2, color, arg4); else LinearMathJNI.btIDebugDraw_drawTriangleSwigExplicitbtIDebugDraw__SWIG_1(swigCPtr, this, v0, v1, v2, color, arg4);
   }
 
-  public void drawContactPoint(Vector3 PointOnB, Vector3 normalOnB, float distance, int lifeTime, Vector3 color) {
+  public void drawContactPoint(Vector3f PointOnB, Vector3f normalOnB, float distance, int lifeTime, Vector3f color) {
     LinearMathJNI.btIDebugDraw_drawContactPoint(swigCPtr, this, PointOnB, normalOnB, distance, lifeTime, color);
   }
 
@@ -224,7 +224,7 @@ public class btIDebugDraw extends BulletBase {
     LinearMathJNI.btIDebugDraw_reportErrorWarning(swigCPtr, this, warningString);
   }
 
-  public void draw3dText(Vector3 location, String textString) {
+  public void draw3dText(Vector3f location, String textString) {
     LinearMathJNI.btIDebugDraw_draw3dText(swigCPtr, this, location, textString);
   }
 
@@ -236,55 +236,55 @@ public class btIDebugDraw extends BulletBase {
     return LinearMathJNI.btIDebugDraw_getDebugMode(swigCPtr, this);
   }
 
-  public void drawAabb(Vector3 from, Vector3 to, Vector3 color) {
+  public void drawAabb(Vector3f from, Vector3f to, Vector3f color) {
     if (getClass() == btIDebugDraw.class) LinearMathJNI.btIDebugDraw_drawAabb(swigCPtr, this, from, to, color); else LinearMathJNI.btIDebugDraw_drawAabbSwigExplicitbtIDebugDraw(swigCPtr, this, from, to, color);
   }
 
-  public void drawTransform(Matrix4 transform, float orthoLen) {
+  public void drawTransform(Matrix4f transform, float orthoLen) {
     if (getClass() == btIDebugDraw.class) LinearMathJNI.btIDebugDraw_drawTransform(swigCPtr, this, transform, orthoLen); else LinearMathJNI.btIDebugDraw_drawTransformSwigExplicitbtIDebugDraw(swigCPtr, this, transform, orthoLen);
   }
 
-  public void drawArc(Vector3 center, Vector3 normal, Vector3 axis, float radiusA, float radiusB, float minAngle, float maxAngle, Vector3 color, boolean drawSect, float stepDegrees) {
+  public void drawArc(Vector3f center, Vector3f normal, Vector3f axis, float radiusA, float radiusB, float minAngle, float maxAngle, Vector3f color, boolean drawSect, float stepDegrees) {
     if (getClass() == btIDebugDraw.class) LinearMathJNI.btIDebugDraw_drawArc__SWIG_0(swigCPtr, this, center, normal, axis, radiusA, radiusB, minAngle, maxAngle, color, drawSect, stepDegrees); else LinearMathJNI.btIDebugDraw_drawArcSwigExplicitbtIDebugDraw__SWIG_0(swigCPtr, this, center, normal, axis, radiusA, radiusB, minAngle, maxAngle, color, drawSect, stepDegrees);
   }
 
-  public void drawArc(Vector3 center, Vector3 normal, Vector3 axis, float radiusA, float radiusB, float minAngle, float maxAngle, Vector3 color, boolean drawSect) {
+  public void drawArc(Vector3f center, Vector3f normal, Vector3f axis, float radiusA, float radiusB, float minAngle, float maxAngle, Vector3f color, boolean drawSect) {
     if (getClass() == btIDebugDraw.class) LinearMathJNI.btIDebugDraw_drawArc__SWIG_1(swigCPtr, this, center, normal, axis, radiusA, radiusB, minAngle, maxAngle, color, drawSect); else LinearMathJNI.btIDebugDraw_drawArcSwigExplicitbtIDebugDraw__SWIG_1(swigCPtr, this, center, normal, axis, radiusA, radiusB, minAngle, maxAngle, color, drawSect);
   }
 
-  public void drawSpherePatch(Vector3 center, Vector3 up, Vector3 axis, float radius, float minTh, float maxTh, float minPs, float maxPs, Vector3 color, float stepDegrees, boolean drawCenter) {
+  public void drawSpherePatch(Vector3f center, Vector3f up, Vector3f axis, float radius, float minTh, float maxTh, float minPs, float maxPs, Vector3f color, float stepDegrees, boolean drawCenter) {
     if (getClass() == btIDebugDraw.class) LinearMathJNI.btIDebugDraw_drawSpherePatch__SWIG_0(swigCPtr, this, center, up, axis, radius, minTh, maxTh, minPs, maxPs, color, stepDegrees, drawCenter); else LinearMathJNI.btIDebugDraw_drawSpherePatchSwigExplicitbtIDebugDraw__SWIG_0(swigCPtr, this, center, up, axis, radius, minTh, maxTh, minPs, maxPs, color, stepDegrees, drawCenter);
   }
 
-  public void drawSpherePatch(Vector3 center, Vector3 up, Vector3 axis, float radius, float minTh, float maxTh, float minPs, float maxPs, Vector3 color, float stepDegrees) {
+  public void drawSpherePatch(Vector3f center, Vector3f up, Vector3f axis, float radius, float minTh, float maxTh, float minPs, float maxPs, Vector3f color, float stepDegrees) {
     if (getClass() == btIDebugDraw.class) LinearMathJNI.btIDebugDraw_drawSpherePatch__SWIG_1(swigCPtr, this, center, up, axis, radius, minTh, maxTh, minPs, maxPs, color, stepDegrees); else LinearMathJNI.btIDebugDraw_drawSpherePatchSwigExplicitbtIDebugDraw__SWIG_1(swigCPtr, this, center, up, axis, radius, minTh, maxTh, minPs, maxPs, color, stepDegrees);
   }
 
-  public void drawSpherePatch(Vector3 center, Vector3 up, Vector3 axis, float radius, float minTh, float maxTh, float minPs, float maxPs, Vector3 color) {
+  public void drawSpherePatch(Vector3f center, Vector3f up, Vector3f axis, float radius, float minTh, float maxTh, float minPs, float maxPs, Vector3f color) {
     if (getClass() == btIDebugDraw.class) LinearMathJNI.btIDebugDraw_drawSpherePatch__SWIG_2(swigCPtr, this, center, up, axis, radius, minTh, maxTh, minPs, maxPs, color); else LinearMathJNI.btIDebugDraw_drawSpherePatchSwigExplicitbtIDebugDraw__SWIG_2(swigCPtr, this, center, up, axis, radius, minTh, maxTh, minPs, maxPs, color);
   }
 
-  public void drawBox(Vector3 bbMin, Vector3 bbMax, Vector3 color) {
+  public void drawBox(Vector3f bbMin, Vector3f bbMax, Vector3f color) {
     if (getClass() == btIDebugDraw.class) LinearMathJNI.btIDebugDraw_drawBox__SWIG_0(swigCPtr, this, bbMin, bbMax, color); else LinearMathJNI.btIDebugDraw_drawBoxSwigExplicitbtIDebugDraw__SWIG_0(swigCPtr, this, bbMin, bbMax, color);
   }
 
-  public void drawBox(Vector3 bbMin, Vector3 bbMax, Matrix4 trans, Vector3 color) {
+  public void drawBox(Vector3f bbMin, Vector3f bbMax, Matrix4f trans, Vector3f color) {
     if (getClass() == btIDebugDraw.class) LinearMathJNI.btIDebugDraw_drawBox__SWIG_1(swigCPtr, this, bbMin, bbMax, trans, color); else LinearMathJNI.btIDebugDraw_drawBoxSwigExplicitbtIDebugDraw__SWIG_1(swigCPtr, this, bbMin, bbMax, trans, color);
   }
 
-  public void drawCapsule(float radius, float halfHeight, int upAxis, Matrix4 transform, Vector3 color) {
+  public void drawCapsule(float radius, float halfHeight, int upAxis, Matrix4f transform, Vector3f color) {
     if (getClass() == btIDebugDraw.class) LinearMathJNI.btIDebugDraw_drawCapsule(swigCPtr, this, radius, halfHeight, upAxis, transform, color); else LinearMathJNI.btIDebugDraw_drawCapsuleSwigExplicitbtIDebugDraw(swigCPtr, this, radius, halfHeight, upAxis, transform, color);
   }
 
-  public void drawCylinder(float radius, float halfHeight, int upAxis, Matrix4 transform, Vector3 color) {
+  public void drawCylinder(float radius, float halfHeight, int upAxis, Matrix4f transform, Vector3f color) {
     if (getClass() == btIDebugDraw.class) LinearMathJNI.btIDebugDraw_drawCylinder(swigCPtr, this, radius, halfHeight, upAxis, transform, color); else LinearMathJNI.btIDebugDraw_drawCylinderSwigExplicitbtIDebugDraw(swigCPtr, this, radius, halfHeight, upAxis, transform, color);
   }
 
-  public void drawCone(float radius, float height, int upAxis, Matrix4 transform, Vector3 color) {
+  public void drawCone(float radius, float height, int upAxis, Matrix4f transform, Vector3f color) {
     if (getClass() == btIDebugDraw.class) LinearMathJNI.btIDebugDraw_drawCone(swigCPtr, this, radius, height, upAxis, transform, color); else LinearMathJNI.btIDebugDraw_drawConeSwigExplicitbtIDebugDraw(swigCPtr, this, radius, height, upAxis, transform, color);
   }
 
-  public void drawPlane(Vector3 planeNormal, float planeConst, Matrix4 transform, Vector3 color) {
+  public void drawPlane(Vector3f planeNormal, float planeConst, Matrix4f transform, Vector3f color) {
     if (getClass() == btIDebugDraw.class) LinearMathJNI.btIDebugDraw_drawPlane(swigCPtr, this, planeNormal, planeConst, transform, color); else LinearMathJNI.btIDebugDraw_drawPlaneSwigExplicitbtIDebugDraw(swigCPtr, this, planeNormal, planeConst, transform, color);
   }
 

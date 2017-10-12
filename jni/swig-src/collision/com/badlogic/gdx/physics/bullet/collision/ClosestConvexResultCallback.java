@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class ClosestConvexResultCallback extends ConvexResultCallback {
 	private long swigCPtr;
@@ -73,7 +73,7 @@ public class ClosestConvexResultCallback extends ConvexResultCallback {
     CollisionJNI.ClosestConvexResultCallback_change_ownership(this, swigCPtr, true);
   }
 
-  public ClosestConvexResultCallback(Vector3 convexFromWorld, Vector3 convexToWorld) {
+  public ClosestConvexResultCallback(Vector3f convexFromWorld, Vector3f convexToWorld) {
     this(CollisionJNI.new_ClosestConvexResultCallback(convexFromWorld, convexToWorld), true);
     CollisionJNI.ClosestConvexResultCallback_director_connect(this, swigCPtr, swigCMemOwn, true);
   }
@@ -108,35 +108,35 @@ public class ClosestConvexResultCallback extends ConvexResultCallback {
     return (getClass() == ClosestConvexResultCallback.class) ? CollisionJNI.ClosestConvexResultCallback_addSingleResult(swigCPtr, this, LocalConvexResult.getCPtr(convexResult), convexResult, normalInWorldSpace) : CollisionJNI.ClosestConvexResultCallback_addSingleResultSwigExplicitClosestConvexResultCallback(swigCPtr, this, LocalConvexResult.getCPtr(convexResult), convexResult, normalInWorldSpace);
   }
 
-  public void getConvexFromWorld(Vector3 out) {
+  public void getConvexFromWorld(Vector3f out) {
     CollisionJNI.ClosestConvexResultCallback_getConvexFromWorld(swigCPtr, this, out);
   }
 
-  public void setRayFromWorld(Vector3 value) {
+  public void setRayFromWorld(Vector3f value) {
     CollisionJNI.ClosestConvexResultCallback_setRayFromWorld(swigCPtr, this, value);
   }
 
-  public void getConvexToWorld(Vector3 out) {
+  public void getConvexToWorld(Vector3f out) {
     CollisionJNI.ClosestConvexResultCallback_getConvexToWorld(swigCPtr, this, out);
   }
 
-  public void setConvexToWorld(Vector3 value) {
+  public void setConvexToWorld(Vector3f value) {
     CollisionJNI.ClosestConvexResultCallback_setConvexToWorld(swigCPtr, this, value);
   }
 
-  public void getHitNormalWorld(Vector3 out) {
+  public void getHitNormalWorld(Vector3f out) {
     CollisionJNI.ClosestConvexResultCallback_getHitNormalWorld(swigCPtr, this, out);
   }
 
-  public void setHitNormalWorld(Vector3 value) {
+  public void setHitNormalWorld(Vector3f value) {
     CollisionJNI.ClosestConvexResultCallback_setHitNormalWorld(swigCPtr, this, value);
   }
 
-  public void getHitPointWorld(Vector3 out) {
+  public void getHitPointWorld(Vector3f out) {
     CollisionJNI.ClosestConvexResultCallback_getHitPointWorld(swigCPtr, this, out);
   }
 
-  public void setHitPointWorld(Vector3 value) {
+  public void setHitPointWorld(Vector3f value) {
     CollisionJNI.ClosestConvexResultCallback_setHitPointWorld(swigCPtr, this, value);
   }
 

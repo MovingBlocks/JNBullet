@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btConvexTriangleMeshShape extends btPolyhedralConvexAabbCachingShape {
 	private long swigCPtr;
@@ -71,7 +71,7 @@ public class btConvexTriangleMeshShape extends btPolyhedralConvexAabbCachingShap
     return (cPtr == 0) ? null : new btStridingMeshInterface(cPtr, false);
   }
 
-  public void calculatePrincipalAxisTransform(Matrix4 principal, Vector3 inertia, SWIGTYPE_p_float volume) {
+  public void calculatePrincipalAxisTransform(Matrix4f principal, Vector3f inertia, SWIGTYPE_p_float volume) {
     CollisionJNI.btConvexTriangleMeshShape_calculatePrincipalAxisTransform(swigCPtr, this, principal, inertia, SWIGTYPE_p_float.getCPtr(volume));
   }
 

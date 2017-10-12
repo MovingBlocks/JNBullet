@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btCollisionWorld extends BulletBase {
 	private long swigCPtr;
@@ -106,7 +106,7 @@ public class btCollisionWorld extends BulletBase {
     CollisionJNI.btCollisionWorld_debugDrawWorld(swigCPtr, this);
   }
 
-  public void debugDrawObject(Matrix4 worldTransform, btCollisionShape shape, Vector3 color) {
+  public void debugDrawObject(Matrix4f worldTransform, btCollisionShape shape, Vector3f color) {
     CollisionJNI.btCollisionWorld_debugDrawObject(swigCPtr, this, worldTransform, btCollisionShape.getCPtr(shape), shape, color);
   }
 
@@ -114,15 +114,15 @@ public class btCollisionWorld extends BulletBase {
     return CollisionJNI.btCollisionWorld_getNumCollisionObjects(swigCPtr, this);
   }
 
-  public void rayTest(Vector3 rayFromWorld, Vector3 rayToWorld, RayResultCallback resultCallback) {
+  public void rayTest(Vector3f rayFromWorld, Vector3f rayToWorld, RayResultCallback resultCallback) {
     CollisionJNI.btCollisionWorld_rayTest(swigCPtr, this, rayFromWorld, rayToWorld, RayResultCallback.getCPtr(resultCallback), resultCallback);
   }
 
-  public void convexSweepTest(btConvexShape castShape, Matrix4 from, Matrix4 to, ConvexResultCallback resultCallback, float allowedCcdPenetration) {
+  public void convexSweepTest(btConvexShape castShape, Matrix4f from, Matrix4f to, ConvexResultCallback resultCallback, float allowedCcdPenetration) {
     CollisionJNI.btCollisionWorld_convexSweepTest__SWIG_0(swigCPtr, this, btConvexShape.getCPtr(castShape), castShape, from, to, ConvexResultCallback.getCPtr(resultCallback), resultCallback, allowedCcdPenetration);
   }
 
-  public void convexSweepTest(btConvexShape castShape, Matrix4 from, Matrix4 to, ConvexResultCallback resultCallback) {
+  public void convexSweepTest(btConvexShape castShape, Matrix4f from, Matrix4f to, ConvexResultCallback resultCallback) {
     CollisionJNI.btCollisionWorld_convexSweepTest__SWIG_1(swigCPtr, this, btConvexShape.getCPtr(castShape), castShape, from, to, ConvexResultCallback.getCPtr(resultCallback), resultCallback);
   }
 
@@ -134,19 +134,19 @@ public class btCollisionWorld extends BulletBase {
     CollisionJNI.btCollisionWorld_contactPairTest(swigCPtr, this, btCollisionObject.getCPtr(colObjA), colObjA, btCollisionObject.getCPtr(colObjB), colObjB, ContactResultCallback.getCPtr(resultCallback), resultCallback);
   }
 
-  public static void rayTestSingle(Matrix4 rayFromTrans, Matrix4 rayToTrans, btCollisionObject collisionObject, btCollisionShape collisionShape, Matrix4 colObjWorldTransform, RayResultCallback resultCallback) {
+  public static void rayTestSingle(Matrix4f rayFromTrans, Matrix4f rayToTrans, btCollisionObject collisionObject, btCollisionShape collisionShape, Matrix4f colObjWorldTransform, RayResultCallback resultCallback) {
     CollisionJNI.btCollisionWorld_rayTestSingle(rayFromTrans, rayToTrans, btCollisionObject.getCPtr(collisionObject), collisionObject, btCollisionShape.getCPtr(collisionShape), collisionShape, colObjWorldTransform, RayResultCallback.getCPtr(resultCallback), resultCallback);
   }
 
-  public static void rayTestSingleInternal(Matrix4 rayFromTrans, Matrix4 rayToTrans, btCollisionObjectWrapper collisionObjectWrap, RayResultCallback resultCallback) {
+  public static void rayTestSingleInternal(Matrix4f rayFromTrans, Matrix4f rayToTrans, btCollisionObjectWrapper collisionObjectWrap, RayResultCallback resultCallback) {
     CollisionJNI.btCollisionWorld_rayTestSingleInternal(rayFromTrans, rayToTrans, btCollisionObjectWrapper.getCPtr(collisionObjectWrap), collisionObjectWrap, RayResultCallback.getCPtr(resultCallback), resultCallback);
   }
 
-  public static void objectQuerySingle(btConvexShape castShape, Matrix4 rayFromTrans, Matrix4 rayToTrans, btCollisionObject collisionObject, btCollisionShape collisionShape, Matrix4 colObjWorldTransform, ConvexResultCallback resultCallback, float allowedPenetration) {
+  public static void objectQuerySingle(btConvexShape castShape, Matrix4f rayFromTrans, Matrix4f rayToTrans, btCollisionObject collisionObject, btCollisionShape collisionShape, Matrix4f colObjWorldTransform, ConvexResultCallback resultCallback, float allowedPenetration) {
     CollisionJNI.btCollisionWorld_objectQuerySingle(btConvexShape.getCPtr(castShape), castShape, rayFromTrans, rayToTrans, btCollisionObject.getCPtr(collisionObject), collisionObject, btCollisionShape.getCPtr(collisionShape), collisionShape, colObjWorldTransform, ConvexResultCallback.getCPtr(resultCallback), resultCallback, allowedPenetration);
   }
 
-  public static void objectQuerySingleInternal(btConvexShape castShape, Matrix4 convexFromTrans, Matrix4 convexToTrans, btCollisionObjectWrapper colObjWrap, ConvexResultCallback resultCallback, float allowedPenetration) {
+  public static void objectQuerySingleInternal(btConvexShape castShape, Matrix4f convexFromTrans, Matrix4f convexToTrans, btCollisionObjectWrapper colObjWrap, ConvexResultCallback resultCallback, float allowedPenetration) {
     CollisionJNI.btCollisionWorld_objectQuerySingleInternal(btConvexShape.getCPtr(castShape), castShape, convexFromTrans, convexToTrans, btCollisionObjectWrapper.getCPtr(colObjWrap), colObjWrap, ConvexResultCallback.getCPtr(resultCallback), resultCallback, allowedPenetration);
   }
 

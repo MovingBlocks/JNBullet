@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class AllHitsRayResultCallback extends RayResultCallback {
 	private long swigCPtr;
@@ -73,7 +73,7 @@ public class AllHitsRayResultCallback extends RayResultCallback {
     CollisionJNI.AllHitsRayResultCallback_change_ownership(this, swigCPtr, true);
   }
 
-  public AllHitsRayResultCallback(Vector3 rayFromWorld, Vector3 rayToWorld) {
+  public AllHitsRayResultCallback(Vector3f rayFromWorld, Vector3f rayToWorld) {
     this(CollisionJNI.new_AllHitsRayResultCallback(rayFromWorld, rayToWorld), true);
     CollisionJNI.AllHitsRayResultCallback_director_connect(this, swigCPtr, swigCMemOwn, true);
   }
@@ -118,19 +118,19 @@ public class AllHitsRayResultCallback extends RayResultCallback {
     return (getClass() == AllHitsRayResultCallback.class) ? CollisionJNI.AllHitsRayResultCallback_addSingleResult(swigCPtr, this, LocalRayResult.getCPtr(rayResult), rayResult, normalInWorldSpace) : CollisionJNI.AllHitsRayResultCallback_addSingleResultSwigExplicitAllHitsRayResultCallback(swigCPtr, this, LocalRayResult.getCPtr(rayResult), rayResult, normalInWorldSpace);
   }
 
-  public void getRayFromWorld(Vector3 out) {
+  public void getRayFromWorld(Vector3f out) {
     CollisionJNI.AllHitsRayResultCallback_getRayFromWorld(swigCPtr, this, out);
   }
 
-  public void setRayFromWorld(Vector3 value) {
+  public void setRayFromWorld(Vector3f value) {
     CollisionJNI.AllHitsRayResultCallback_setRayFromWorld(swigCPtr, this, value);
   }
 
-  public void getRayToWorld(Vector3 out) {
+  public void getRayToWorld(Vector3f out) {
     CollisionJNI.AllHitsRayResultCallback_getRayToWorld(swigCPtr, this, out);
   }
 
-  public void setRayToWorld(Vector3 value) {
+  public void setRayToWorld(Vector3f value) {
     CollisionJNI.AllHitsRayResultCallback_setRayToWorld(swigCPtr, this, value);
   }
 

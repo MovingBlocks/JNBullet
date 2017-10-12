@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btGjkPairDetector extends btDiscreteCollisionDetectorInterface {
 	private long swigCPtr;
@@ -126,11 +126,11 @@ public class btGjkPairDetector extends btDiscreteCollisionDetectorInterface {
     CollisionJNI.btGjkPairDetector_setMinkowskiB(swigCPtr, this, btConvexShape.getCPtr(minkB), minkB);
   }
 
-  public void setCachedSeperatingAxis(Vector3 seperatingAxis) {
+  public void setCachedSeperatingAxis(Vector3f seperatingAxis) {
     CollisionJNI.btGjkPairDetector_setCachedSeperatingAxis(swigCPtr, this, seperatingAxis);
   }
 
-  public Vector3 getCachedSeparatingAxis() {
+  public Vector3f getCachedSeparatingAxis() {
 	return CollisionJNI.btGjkPairDetector_getCachedSeparatingAxis(swigCPtr, this);
 }
 

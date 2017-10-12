@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btTriangleMeshShape extends btConcaveShape {
 	private long swigCPtr;
@@ -58,11 +58,11 @@ public class btTriangleMeshShape extends btConcaveShape {
 		super.delete();
 	}
 
-  public Vector3 localGetSupportingVertex(Vector3 vec) {
+  public Vector3f localGetSupportingVertex(Vector3f vec) {
 	return CollisionJNI.btTriangleMeshShape_localGetSupportingVertex(swigCPtr, this, vec);
 }
 
-  public Vector3 localGetSupportingVertexWithoutMargin(Vector3 vec) {
+  public Vector3f localGetSupportingVertexWithoutMargin(Vector3f vec) {
 	return CollisionJNI.btTriangleMeshShape_localGetSupportingVertexWithoutMargin(swigCPtr, this, vec);
 }
 
@@ -75,11 +75,11 @@ public class btTriangleMeshShape extends btConcaveShape {
     return (cPtr == 0) ? null : new btStridingMeshInterface(cPtr, false);
   }
 
-  public Vector3 getLocalAabbMin() {
+  public Vector3f getLocalAabbMin() {
 	return CollisionJNI.btTriangleMeshShape_getLocalAabbMin(swigCPtr, this);
 }
 
-  public Vector3 getLocalAabbMax() {
+  public Vector3f getLocalAabbMax() {
 	return CollisionJNI.btTriangleMeshShape_getLocalAabbMax(swigCPtr, this);
 }
 

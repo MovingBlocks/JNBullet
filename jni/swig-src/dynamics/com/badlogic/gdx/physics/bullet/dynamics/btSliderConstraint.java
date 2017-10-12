@@ -11,10 +11,10 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btSliderConstraint extends btTypedConstraint {
 	private long swigCPtr;
@@ -59,11 +59,11 @@ public class btSliderConstraint extends btTypedConstraint {
 		super.delete();
 	}
 
-  public btSliderConstraint(btRigidBody rbA, btRigidBody rbB, Matrix4 frameInA, Matrix4 frameInB, boolean useLinearReferenceFrameA) {
+  public btSliderConstraint(btRigidBody rbA, btRigidBody rbB, Matrix4f frameInA, Matrix4f frameInB, boolean useLinearReferenceFrameA) {
     this(DynamicsJNI.new_btSliderConstraint__SWIG_0(btRigidBody.getCPtr(rbA), rbA, btRigidBody.getCPtr(rbB), rbB, frameInA, frameInB, useLinearReferenceFrameA), true);
   }
 
-  public btSliderConstraint(btRigidBody rbB, Matrix4 frameInB, boolean useLinearReferenceFrameA) {
+  public btSliderConstraint(btRigidBody rbB, Matrix4f frameInB, boolean useLinearReferenceFrameA) {
     this(DynamicsJNI.new_btSliderConstraint__SWIG_1(btRigidBody.getCPtr(rbB), rbB, frameInB, useLinearReferenceFrameA), true);
   }
 
@@ -71,7 +71,7 @@ public class btSliderConstraint extends btTypedConstraint {
     DynamicsJNI.btSliderConstraint_getInfo1NonVirtual(swigCPtr, this, btTypedConstraint.btConstraintInfo1.getCPtr(info), info);
   }
 
-  public void getInfo2NonVirtual(btTypedConstraint.btConstraintInfo2 info, Matrix4 transA, Matrix4 transB, Vector3 linVelA, Vector3 linVelB, float rbAinvMass, float rbBinvMass) {
+  public void getInfo2NonVirtual(btTypedConstraint.btConstraintInfo2 info, Matrix4f transA, Matrix4f transB, Vector3f linVelA, Vector3f linVelB, float rbAinvMass, float rbBinvMass) {
     DynamicsJNI.btSliderConstraint_getInfo2NonVirtual(swigCPtr, this, btTypedConstraint.btConstraintInfo2.getCPtr(info), info, transA, transB, linVelA, linVelB, rbAinvMass, rbBinvMass);
   }
 
@@ -83,19 +83,19 @@ public class btSliderConstraint extends btTypedConstraint {
 	return btRigidBody.getInstance(DynamicsJNI.btSliderConstraint_getRigidBodyB(swigCPtr, this), false);
 }
 
-  public Matrix4 getCalculatedTransformA() {
+  public Matrix4f getCalculatedTransformA() {
 	return DynamicsJNI.btSliderConstraint_getCalculatedTransformA(swigCPtr, this);
 }
 
-  public Matrix4 getCalculatedTransformB() {
+  public Matrix4f getCalculatedTransformB() {
 	return DynamicsJNI.btSliderConstraint_getCalculatedTransformB(swigCPtr, this);
 }
 
-  public Matrix4 getFrameOffsetA() {
+  public Matrix4f getFrameOffsetA() {
 	return DynamicsJNI.btSliderConstraint_getFrameOffsetA__SWIG_0(swigCPtr, this);
 }
 
-  public Matrix4 getFrameOffsetB() {
+  public Matrix4f getFrameOffsetB() {
 	return DynamicsJNI.btSliderConstraint_getFrameOffsetB__SWIG_0(swigCPtr, this);
 }
 
@@ -351,7 +351,7 @@ public class btSliderConstraint extends btTypedConstraint {
     return DynamicsJNI.btSliderConstraint_getAngDepth(swigCPtr, this);
   }
 
-  public void calculateTransforms(Matrix4 transA, Matrix4 transB) {
+  public void calculateTransforms(Matrix4f transA, Matrix4f transB) {
     DynamicsJNI.btSliderConstraint_calculateTransforms(swigCPtr, this, transA, transB);
   }
 
@@ -363,11 +363,11 @@ public class btSliderConstraint extends btTypedConstraint {
     DynamicsJNI.btSliderConstraint_testAngLimits(swigCPtr, this);
   }
 
-  public Vector3 getAncorInA() {
+  public Vector3f getAncorInA() {
 	return DynamicsJNI.btSliderConstraint_getAncorInA(swigCPtr, this);
 }
 
-  public Vector3 getAncorInB() {
+  public Vector3f getAncorInB() {
 	return DynamicsJNI.btSliderConstraint_getAncorInB(swigCPtr, this);
 }
 
@@ -379,7 +379,7 @@ public class btSliderConstraint extends btTypedConstraint {
     DynamicsJNI.btSliderConstraint_setUseFrameOffset(swigCPtr, this, frameOffsetOnOff);
   }
 
-  public void setFrames(Matrix4 frameA, Matrix4 frameB) {
+  public void setFrames(Matrix4f frameA, Matrix4f frameB) {
     DynamicsJNI.btSliderConstraint_setFrames(swigCPtr, this, frameA, frameB);
   }
 

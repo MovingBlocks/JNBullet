@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btPersistentManifold extends btTypedObject {
 	private long swigCPtr;
@@ -158,7 +158,7 @@ public class btPersistentManifold extends btTypedObject {
     return CollisionJNI.btPersistentManifold_validContactDistance(swigCPtr, this, btManifoldPoint.getCPtr(pt), pt);
   }
 
-  public void refreshContactPoints(Matrix4 trA, Matrix4 trB) {
+  public void refreshContactPoints(Matrix4f trA, Matrix4f trB) {
     CollisionJNI.btPersistentManifold_refreshContactPoints(swigCPtr, this, trA, trB);
   }
 

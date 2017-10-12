@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btDbvtProxy extends btBroadphaseProxy {
 	private long swigCPtr;
@@ -83,7 +83,7 @@ public class btDbvtProxy extends btBroadphaseProxy {
     return CollisionJNI.btDbvtProxy_stage_get(swigCPtr, this);
   }
 
-  public btDbvtProxy(Vector3 aabbMin, Vector3 aabbMax, long userPtr, short collisionFilterGroup, short collisionFilterMask) {
+  public btDbvtProxy(Vector3f aabbMin, Vector3f aabbMax, long userPtr, short collisionFilterGroup, short collisionFilterMask) {
     this(CollisionJNI.new_btDbvtProxy(aabbMin, aabbMax, userPtr, collisionFilterGroup, collisionFilterMask), true);
   }
 

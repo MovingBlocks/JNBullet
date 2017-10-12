@@ -11,10 +11,10 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btHingeAccumulatedAngleConstraint extends btHingeConstraint {
 	private long swigCPtr;
@@ -59,35 +59,35 @@ public class btHingeAccumulatedAngleConstraint extends btHingeConstraint {
 		super.delete();
 	}
 
-  public btHingeAccumulatedAngleConstraint(btRigidBody rbA, btRigidBody rbB, Vector3 pivotInA, Vector3 pivotInB, Vector3 axisInA, Vector3 axisInB, boolean useReferenceFrameA) {
+  public btHingeAccumulatedAngleConstraint(btRigidBody rbA, btRigidBody rbB, Vector3f pivotInA, Vector3f pivotInB, Vector3f axisInA, Vector3f axisInB, boolean useReferenceFrameA) {
     this(DynamicsJNI.new_btHingeAccumulatedAngleConstraint__SWIG_0(btRigidBody.getCPtr(rbA), rbA, btRigidBody.getCPtr(rbB), rbB, pivotInA, pivotInB, axisInA, axisInB, useReferenceFrameA), true);
   }
 
-  public btHingeAccumulatedAngleConstraint(btRigidBody rbA, btRigidBody rbB, Vector3 pivotInA, Vector3 pivotInB, Vector3 axisInA, Vector3 axisInB) {
+  public btHingeAccumulatedAngleConstraint(btRigidBody rbA, btRigidBody rbB, Vector3f pivotInA, Vector3f pivotInB, Vector3f axisInA, Vector3f axisInB) {
     this(DynamicsJNI.new_btHingeAccumulatedAngleConstraint__SWIG_1(btRigidBody.getCPtr(rbA), rbA, btRigidBody.getCPtr(rbB), rbB, pivotInA, pivotInB, axisInA, axisInB), true);
   }
 
-  public btHingeAccumulatedAngleConstraint(btRigidBody rbA, Vector3 pivotInA, Vector3 axisInA, boolean useReferenceFrameA) {
+  public btHingeAccumulatedAngleConstraint(btRigidBody rbA, Vector3f pivotInA, Vector3f axisInA, boolean useReferenceFrameA) {
     this(DynamicsJNI.new_btHingeAccumulatedAngleConstraint__SWIG_2(btRigidBody.getCPtr(rbA), rbA, pivotInA, axisInA, useReferenceFrameA), true);
   }
 
-  public btHingeAccumulatedAngleConstraint(btRigidBody rbA, Vector3 pivotInA, Vector3 axisInA) {
+  public btHingeAccumulatedAngleConstraint(btRigidBody rbA, Vector3f pivotInA, Vector3f axisInA) {
     this(DynamicsJNI.new_btHingeAccumulatedAngleConstraint__SWIG_3(btRigidBody.getCPtr(rbA), rbA, pivotInA, axisInA), true);
   }
 
-  public btHingeAccumulatedAngleConstraint(btRigidBody rbA, btRigidBody rbB, Matrix4 rbAFrame, Matrix4 rbBFrame, boolean useReferenceFrameA) {
+  public btHingeAccumulatedAngleConstraint(btRigidBody rbA, btRigidBody rbB, Matrix4f rbAFrame, Matrix4f rbBFrame, boolean useReferenceFrameA) {
     this(DynamicsJNI.new_btHingeAccumulatedAngleConstraint__SWIG_4(btRigidBody.getCPtr(rbA), rbA, btRigidBody.getCPtr(rbB), rbB, rbAFrame, rbBFrame, useReferenceFrameA), true);
   }
 
-  public btHingeAccumulatedAngleConstraint(btRigidBody rbA, btRigidBody rbB, Matrix4 rbAFrame, Matrix4 rbBFrame) {
+  public btHingeAccumulatedAngleConstraint(btRigidBody rbA, btRigidBody rbB, Matrix4f rbAFrame, Matrix4f rbBFrame) {
     this(DynamicsJNI.new_btHingeAccumulatedAngleConstraint__SWIG_5(btRigidBody.getCPtr(rbA), rbA, btRigidBody.getCPtr(rbB), rbB, rbAFrame, rbBFrame), true);
   }
 
-  public btHingeAccumulatedAngleConstraint(btRigidBody rbA, Matrix4 rbAFrame, boolean useReferenceFrameA) {
+  public btHingeAccumulatedAngleConstraint(btRigidBody rbA, Matrix4f rbAFrame, boolean useReferenceFrameA) {
     this(DynamicsJNI.new_btHingeAccumulatedAngleConstraint__SWIG_6(btRigidBody.getCPtr(rbA), rbA, rbAFrame, useReferenceFrameA), true);
   }
 
-  public btHingeAccumulatedAngleConstraint(btRigidBody rbA, Matrix4 rbAFrame) {
+  public btHingeAccumulatedAngleConstraint(btRigidBody rbA, Matrix4f rbAFrame) {
     this(DynamicsJNI.new_btHingeAccumulatedAngleConstraint__SWIG_7(btRigidBody.getCPtr(rbA), rbA, rbAFrame), true);
   }
 

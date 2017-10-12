@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btDbvtAabbMm extends BulletBase {
 	private long swigCPtr;
@@ -74,35 +74,35 @@ public class btDbvtAabbMm extends BulletBase {
 		return instance;
 	}
 
-  public Vector3 Center() {
+  public Vector3f Center() {
 	return CollisionJNI.btDbvtAabbMm_Center(swigCPtr, this);
 }
 
-  public Vector3 Lengths() {
+  public Vector3f Lengths() {
 	return CollisionJNI.btDbvtAabbMm_Lengths(swigCPtr, this);
 }
 
-  public Vector3 Extents() {
+  public Vector3f Extents() {
 	return CollisionJNI.btDbvtAabbMm_Extents(swigCPtr, this);
 }
 
-  public Vector3 Mins() {
+  public Vector3f Mins() {
 	return CollisionJNI.btDbvtAabbMm_Mins(swigCPtr, this);
 }
 
-  public Vector3 Maxs() {
+  public Vector3f Maxs() {
 	return CollisionJNI.btDbvtAabbMm_Maxs(swigCPtr, this);
 }
 
-  public static btDbvtAabbMm FromCE(Vector3 c, Vector3 e) {
+  public static btDbvtAabbMm FromCE(Vector3f c, Vector3f e) {
     return new btDbvtAabbMm(CollisionJNI.btDbvtAabbMm_FromCE(c, e), true);
   }
 
-  public static btDbvtAabbMm FromCR(Vector3 c, float r) {
+  public static btDbvtAabbMm FromCR(Vector3f c, float r) {
     return new btDbvtAabbMm(CollisionJNI.btDbvtAabbMm_FromCR(c, r), true);
   }
 
-  public static btDbvtAabbMm FromMM(Vector3 mi, Vector3 mx) {
+  public static btDbvtAabbMm FromMM(Vector3f mi, Vector3f mx) {
     return new btDbvtAabbMm(CollisionJNI.btDbvtAabbMm_FromMM(mi, mx), true);
   }
 
@@ -114,11 +114,11 @@ public class btDbvtAabbMm extends BulletBase {
     return new btDbvtAabbMm(CollisionJNI.btDbvtAabbMm_FromPoints__SWIG_1(SWIGTYPE_p_p_btVector3.getCPtr(ppts), n), true);
   }
 
-  public void Expand(Vector3 e) {
+  public void Expand(Vector3f e) {
     CollisionJNI.btDbvtAabbMm_Expand(swigCPtr, this, e);
   }
 
-  public void SignedExpand(Vector3 e) {
+  public void SignedExpand(Vector3f e) {
     CollisionJNI.btDbvtAabbMm_SignedExpand(swigCPtr, this, e);
   }
 
@@ -126,19 +126,19 @@ public class btDbvtAabbMm extends BulletBase {
     return CollisionJNI.btDbvtAabbMm_Contain(swigCPtr, this, btDbvtAabbMm.getCPtr(a), a);
   }
 
-  public int Classify(Vector3 n, float o, int s) {
+  public int Classify(Vector3f n, float o, int s) {
     return CollisionJNI.btDbvtAabbMm_Classify(swigCPtr, this, n, o, s);
   }
 
-  public float ProjectMinimum(Vector3 v, long signs) {
+  public float ProjectMinimum(Vector3f v, long signs) {
     return CollisionJNI.btDbvtAabbMm_ProjectMinimum(swigCPtr, this, v, signs);
   }
 
-  public Vector3 tMins() {
+  public Vector3f tMins() {
 	return CollisionJNI.btDbvtAabbMm_tMins(swigCPtr, this);
 }
 
-  public Vector3 tMaxs() {
+  public Vector3f tMaxs() {
 	return CollisionJNI.btDbvtAabbMm_tMaxs(swigCPtr, this);
 }
 

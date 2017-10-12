@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btConvexCast extends BulletBase {
 	private long swigCPtr;
@@ -105,7 +105,7 @@ public class btConvexCast extends BulletBase {
       CollisionJNI.btConvexCast_CastResult_DebugDraw(swigCPtr, this, fraction);
     }
   
-    public void drawCoordSystem(Matrix4 trans) {
+    public void drawCoordSystem(Matrix4f trans) {
       CollisionJNI.btConvexCast_CastResult_drawCoordSystem(swigCPtr, this, trans);
     }
   
@@ -180,7 +180,7 @@ public class btConvexCast extends BulletBase {
   
   }
 
-  public boolean calcTimeOfImpact(Matrix4 fromA, Matrix4 toA, Matrix4 fromB, Matrix4 toB, btConvexCast.CastResult result) {
+  public boolean calcTimeOfImpact(Matrix4f fromA, Matrix4f toA, Matrix4f fromB, Matrix4f toB, btConvexCast.CastResult result) {
     return CollisionJNI.btConvexCast_calcTimeOfImpact(swigCPtr, this, fromA, toA, fromB, toB, btConvexCast.CastResult.getCPtr(result), result);
   }
 

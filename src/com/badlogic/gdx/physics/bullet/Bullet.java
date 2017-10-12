@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.SharedLibraryLoader;
+import org.terasology.math.geom.Matrix4f;
 
 public class Bullet {
 	/** The version of the Bullet library used by this wrapper. */
@@ -155,7 +156,8 @@ public class Bullet {
 		result.obtain();
 		for (int i = 0, n = parts.size; i < n; i++) {
 			final btBvhTriangleMeshShape shape = btBvhTriangleMeshShape.obtain(parts.get(i).parts);
-			result.addChildShape(parts.get(i).transform, shape);
+			
+			result.addChildShape(new Matrix4f(parts.get(i).transform.val),shape);//parts.get(i).transform, shape);
 			shape.release();
 		}
 		return result;

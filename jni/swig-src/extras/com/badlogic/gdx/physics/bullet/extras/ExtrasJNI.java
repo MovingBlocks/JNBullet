@@ -12,10 +12,10 @@ import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
 import com.badlogic.gdx.physics.bullet.dynamics.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 import com.badlogic.gdx.utils.Pool;
 
 public class ExtrasJNI {
@@ -62,11 +62,11 @@ public class ExtrasJNI {
   public final static native long btWorldImporter_getRigidBodyByName(long jarg1, btWorldImporter jarg1_, String jarg2);
   public final static native long btWorldImporter_getConstraintByName(long jarg1, btWorldImporter jarg1_, String jarg2);
   public final static native String btWorldImporter_getNameForPointer__SWIG_0(long jarg1, btWorldImporter jarg1_, long jarg2);
-  public final static native void btWorldImporter_setDynamicsWorldInfo(long jarg1, btWorldImporter jarg1_, Vector3 jarg2, long jarg3, btContactSolverInfo jarg3_);
-  public final static native long btWorldImporter_createRigidBody(long jarg1, btWorldImporter jarg1_, boolean jarg2, float jarg3, Matrix4 jarg4, long jarg5, btCollisionShape jarg5_, String jarg6);
-  public final static native long btWorldImporter_createCollisionObject(long jarg1, btWorldImporter jarg1_, Matrix4 jarg2, long jarg3, btCollisionShape jarg3_, String jarg4);
-  public final static native long btWorldImporter_createPlaneShape(long jarg1, btWorldImporter jarg1_, Vector3 jarg2, float jarg3);
-  public final static native long btWorldImporter_createBoxShape(long jarg1, btWorldImporter jarg1_, Vector3 jarg2);
+  public final static native void btWorldImporter_setDynamicsWorldInfo(long jarg1, btWorldImporter jarg1_, Vector3f jarg2, long jarg3, btContactSolverInfo jarg3_);
+  public final static native long btWorldImporter_createRigidBody(long jarg1, btWorldImporter jarg1_, boolean jarg2, float jarg3, Matrix4f jarg4, long jarg5, btCollisionShape jarg5_, String jarg6);
+  public final static native long btWorldImporter_createCollisionObject(long jarg1, btWorldImporter jarg1_, Matrix4f jarg2, long jarg3, btCollisionShape jarg3_, String jarg4);
+  public final static native long btWorldImporter_createPlaneShape(long jarg1, btWorldImporter jarg1_, Vector3f jarg2, float jarg3);
+  public final static native long btWorldImporter_createBoxShape(long jarg1, btWorldImporter jarg1_, Vector3f jarg2);
   public final static native long btWorldImporter_createSphereShape(long jarg1, btWorldImporter jarg1_, float jarg2);
   public final static native long btWorldImporter_createCapsuleShapeX(long jarg1, btWorldImporter jarg1_, float jarg2, float jarg3);
   public final static native long btWorldImporter_createCapsuleShapeY(long jarg1, btWorldImporter jarg1_, float jarg2, float jarg3);
@@ -84,26 +84,26 @@ public class ExtrasJNI {
   public final static native long btWorldImporter_createStridingMeshInterfaceData(long jarg1, btWorldImporter jarg1_, long jarg2, btStridingMeshInterfaceData jarg2_);
   public final static native long btWorldImporter_createConvexHullShape(long jarg1, btWorldImporter jarg1_);
   public final static native long btWorldImporter_createCompoundShape(long jarg1, btWorldImporter jarg1_);
-  public final static native long btWorldImporter_createScaledTrangleMeshShape(long jarg1, btWorldImporter jarg1_, long jarg2, btBvhTriangleMeshShape jarg2_, Vector3 jarg3);
+  public final static native long btWorldImporter_createScaledTrangleMeshShape(long jarg1, btWorldImporter jarg1_, long jarg2, btBvhTriangleMeshShape jarg2_, Vector3f jarg3);
   public final static native long btWorldImporter_createMultiSphereShape(long jarg1, btWorldImporter jarg1_, long jarg2, btVector3 jarg2_, java.nio.FloatBuffer jarg3, int jarg4);
   public final static native long btWorldImporter_createMeshInterface(long jarg1, btWorldImporter jarg1_, long jarg2, btStridingMeshInterfaceData jarg2_);
   public final static native long btWorldImporter_createOptimizedBvh(long jarg1, btWorldImporter jarg1_);
   public final static native long btWorldImporter_createTriangleInfoMap(long jarg1, btWorldImporter jarg1_);
-  public final static native long btWorldImporter_createPoint2PointConstraint__SWIG_0(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, long jarg3, btRigidBody jarg3_, Vector3 jarg4, Vector3 jarg5);
-  public final static native long btWorldImporter_createPoint2PointConstraint__SWIG_1(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, Vector3 jarg3);
-  public final static native long btWorldImporter_createHingeConstraint__SWIG_0(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, long jarg3, btRigidBody jarg3_, Matrix4 jarg4, Matrix4 jarg5, boolean jarg6);
-  public final static native long btWorldImporter_createHingeConstraint__SWIG_1(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, long jarg3, btRigidBody jarg3_, Matrix4 jarg4, Matrix4 jarg5);
-  public final static native long btWorldImporter_createHingeConstraint__SWIG_2(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, Matrix4 jarg3, boolean jarg4);
-  public final static native long btWorldImporter_createHingeConstraint__SWIG_3(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, Matrix4 jarg3);
-  public final static native long btWorldImporter_createConeTwistConstraint__SWIG_0(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, long jarg3, btRigidBody jarg3_, Matrix4 jarg4, Matrix4 jarg5);
-  public final static native long btWorldImporter_createConeTwistConstraint__SWIG_1(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, Matrix4 jarg3);
-  public final static native long btWorldImporter_createGeneric6DofConstraint__SWIG_0(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, long jarg3, btRigidBody jarg3_, Matrix4 jarg4, Matrix4 jarg5, boolean jarg6);
-  public final static native long btWorldImporter_createGeneric6DofConstraint__SWIG_1(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, Matrix4 jarg3, boolean jarg4);
-  public final static native long btWorldImporter_createGeneric6DofSpringConstraint(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, long jarg3, btRigidBody jarg3_, Matrix4 jarg4, Matrix4 jarg5, boolean jarg6);
-  public final static native long btWorldImporter_createGeneric6DofSpring2Constraint(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, long jarg3, btRigidBody jarg3_, Matrix4 jarg4, Matrix4 jarg5, int jarg6);
-  public final static native long btWorldImporter_createSliderConstraint__SWIG_0(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, long jarg3, btRigidBody jarg3_, Matrix4 jarg4, Matrix4 jarg5, boolean jarg6);
-  public final static native long btWorldImporter_createSliderConstraint__SWIG_1(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, Matrix4 jarg3, boolean jarg4);
-  public final static native long btWorldImporter_createGearConstraint(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, long jarg3, btRigidBody jarg3_, Vector3 jarg4, Vector3 jarg5, float jarg6);
+  public final static native long btWorldImporter_createPoint2PointConstraint__SWIG_0(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, long jarg3, btRigidBody jarg3_, Vector3f jarg4, Vector3f jarg5);
+  public final static native long btWorldImporter_createPoint2PointConstraint__SWIG_1(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, Vector3f jarg3);
+  public final static native long btWorldImporter_createHingeConstraint__SWIG_0(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, long jarg3, btRigidBody jarg3_, Matrix4f jarg4, Matrix4f jarg5, boolean jarg6);
+  public final static native long btWorldImporter_createHingeConstraint__SWIG_1(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, long jarg3, btRigidBody jarg3_, Matrix4f jarg4, Matrix4f jarg5);
+  public final static native long btWorldImporter_createHingeConstraint__SWIG_2(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, Matrix4f jarg3, boolean jarg4);
+  public final static native long btWorldImporter_createHingeConstraint__SWIG_3(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, Matrix4f jarg3);
+  public final static native long btWorldImporter_createConeTwistConstraint__SWIG_0(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, long jarg3, btRigidBody jarg3_, Matrix4f jarg4, Matrix4f jarg5);
+  public final static native long btWorldImporter_createConeTwistConstraint__SWIG_1(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, Matrix4f jarg3);
+  public final static native long btWorldImporter_createGeneric6DofConstraint__SWIG_0(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, long jarg3, btRigidBody jarg3_, Matrix4f jarg4, Matrix4f jarg5, boolean jarg6);
+  public final static native long btWorldImporter_createGeneric6DofConstraint__SWIG_1(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, Matrix4f jarg3, boolean jarg4);
+  public final static native long btWorldImporter_createGeneric6DofSpringConstraint(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, long jarg3, btRigidBody jarg3_, Matrix4f jarg4, Matrix4f jarg5, boolean jarg6);
+  public final static native long btWorldImporter_createGeneric6DofSpring2Constraint(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, long jarg3, btRigidBody jarg3_, Matrix4f jarg4, Matrix4f jarg5, int jarg6);
+  public final static native long btWorldImporter_createSliderConstraint__SWIG_0(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, long jarg3, btRigidBody jarg3_, Matrix4f jarg4, Matrix4f jarg5, boolean jarg6);
+  public final static native long btWorldImporter_createSliderConstraint__SWIG_1(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, Matrix4f jarg3, boolean jarg4);
+  public final static native long btWorldImporter_createGearConstraint(long jarg1, btWorldImporter jarg1_, long jarg2, btRigidBody jarg2_, long jarg3, btRigidBody jarg3_, Vector3f jarg4, Vector3f jarg5, float jarg6);
   public final static native long new_btBulletWorldImporter__SWIG_0(long jarg1, btDynamicsWorld jarg1_);
   public final static native long new_btBulletWorldImporter__SWIG_1();
   public final static native void delete_btBulletWorldImporter(long jarg1);
@@ -120,19 +120,19 @@ public class ExtrasJNI {
   public static void SwigDirector_btBulletWorldImporter_deleteAllData(btBulletWorldImporter jself) {
     jself.deleteAllData();
   }
-  public static void SwigDirector_btBulletWorldImporter_setDynamicsWorldInfo(btBulletWorldImporter jself, Vector3 gravity, long solverInfo) {
+  public static void SwigDirector_btBulletWorldImporter_setDynamicsWorldInfo(btBulletWorldImporter jself, Vector3f gravity, long solverInfo) {
     jself.setDynamicsWorldInfo(gravity, new btContactSolverInfo(solverInfo, false));
   }
-  public static long SwigDirector_btBulletWorldImporter_createRigidBody(btBulletWorldImporter jself, boolean isDynamic, float mass, Matrix4 startTransform, long shape, String bodyName) {
+  public static long SwigDirector_btBulletWorldImporter_createRigidBody(btBulletWorldImporter jself, boolean isDynamic, float mass, Matrix4f startTransform, long shape, String bodyName) {
     return btRigidBody.getCPtr(jself.createRigidBody(isDynamic, mass, startTransform, (shape == 0) ? null : new btCollisionShape(shape, false), bodyName));
   }
-  public static long SwigDirector_btBulletWorldImporter_createCollisionObject(btBulletWorldImporter jself, Matrix4 startTransform, long shape, String bodyName) {
+  public static long SwigDirector_btBulletWorldImporter_createCollisionObject(btBulletWorldImporter jself, Matrix4f startTransform, long shape, String bodyName) {
     return btCollisionObject.getCPtr(jself.createCollisionObject(startTransform, (shape == 0) ? null : new btCollisionShape(shape, false), bodyName));
   }
-  public static long SwigDirector_btBulletWorldImporter_createPlaneShape(btBulletWorldImporter jself, Vector3 planeNormal, float planeConstant) {
+  public static long SwigDirector_btBulletWorldImporter_createPlaneShape(btBulletWorldImporter jself, Vector3f planeNormal, float planeConstant) {
     return btCollisionShape.getCPtr(jself.createPlaneShape(planeNormal, planeConstant));
   }
-  public static long SwigDirector_btBulletWorldImporter_createBoxShape(btBulletWorldImporter jself, Vector3 halfExtents) {
+  public static long SwigDirector_btBulletWorldImporter_createBoxShape(btBulletWorldImporter jself, Vector3f halfExtents) {
     return btCollisionShape.getCPtr(jself.createBoxShape(halfExtents));
   }
   public static long SwigDirector_btBulletWorldImporter_createSphereShape(btBulletWorldImporter jself, float radius) {
@@ -186,7 +186,7 @@ public class ExtrasJNI {
   public static long SwigDirector_btBulletWorldImporter_createCompoundShape(btBulletWorldImporter jself) {
     return btCompoundShape.getCPtr(jself.createCompoundShape());
   }
-  public static long SwigDirector_btBulletWorldImporter_createScaledTrangleMeshShape(btBulletWorldImporter jself, long meshShape, Vector3 localScalingbtBvhTriangleMeshShape) {
+  public static long SwigDirector_btBulletWorldImporter_createScaledTrangleMeshShape(btBulletWorldImporter jself, long meshShape, Vector3f localScalingbtBvhTriangleMeshShape) {
     return btScaledBvhTriangleMeshShape.getCPtr(jself.createScaledTrangleMeshShape((meshShape == 0) ? null : new btBvhTriangleMeshShape(meshShape, false), localScalingbtBvhTriangleMeshShape));
   }
   public static long SwigDirector_btBulletWorldImporter_createMeshInterface(btBulletWorldImporter jself, long meshData) {
@@ -198,49 +198,49 @@ public class ExtrasJNI {
   public static long SwigDirector_btBulletWorldImporter_createTriangleInfoMap(btBulletWorldImporter jself) {
     return btTriangleInfoMap.getCPtr(jself.createTriangleInfoMap());
   }
-  public static long SwigDirector_btBulletWorldImporter_createPoint2PointConstraint__SWIG_0(btBulletWorldImporter jself, long rbA, long rbB, Vector3 pivotInA, Vector3 pivotInB) {
+  public static long SwigDirector_btBulletWorldImporter_createPoint2PointConstraint__SWIG_0(btBulletWorldImporter jself, long rbA, long rbB, Vector3f pivotInA, Vector3f pivotInB) {
     return btPoint2PointConstraint.getCPtr(jself.createPoint2PointConstraint(new btRigidBody(rbA, false), new btRigidBody(rbB, false), pivotInA, pivotInB));
   }
-  public static long SwigDirector_btBulletWorldImporter_createPoint2PointConstraint__SWIG_1(btBulletWorldImporter jself, long rbA, Vector3 pivotInA) {
+  public static long SwigDirector_btBulletWorldImporter_createPoint2PointConstraint__SWIG_1(btBulletWorldImporter jself, long rbA, Vector3f pivotInA) {
     return btPoint2PointConstraint.getCPtr(jself.createPoint2PointConstraint(new btRigidBody(rbA, false), pivotInA));
   }
-  public static long SwigDirector_btBulletWorldImporter_createHingeConstraint__SWIG_0(btBulletWorldImporter jself, long rbA, long rbB, Matrix4 rbAFrame, Matrix4 rbBFrame, boolean useReferenceFrameA) {
+  public static long SwigDirector_btBulletWorldImporter_createHingeConstraint__SWIG_0(btBulletWorldImporter jself, long rbA, long rbB, Matrix4f rbAFrame, Matrix4f rbBFrame, boolean useReferenceFrameA) {
     return btHingeConstraint.getCPtr(jself.createHingeConstraint(new btRigidBody(rbA, false), new btRigidBody(rbB, false), rbAFrame, rbBFrame, useReferenceFrameA));
   }
-  public static long SwigDirector_btBulletWorldImporter_createHingeConstraint__SWIG_1(btBulletWorldImporter jself, long rbA, long rbB, Matrix4 rbAFrame, Matrix4 rbBFrame) {
+  public static long SwigDirector_btBulletWorldImporter_createHingeConstraint__SWIG_1(btBulletWorldImporter jself, long rbA, long rbB, Matrix4f rbAFrame, Matrix4f rbBFrame) {
     return btHingeConstraint.getCPtr(jself.createHingeConstraint(new btRigidBody(rbA, false), new btRigidBody(rbB, false), rbAFrame, rbBFrame));
   }
-  public static long SwigDirector_btBulletWorldImporter_createHingeConstraint__SWIG_2(btBulletWorldImporter jself, long rbA, Matrix4 rbAFrame, boolean useReferenceFrameA) {
+  public static long SwigDirector_btBulletWorldImporter_createHingeConstraint__SWIG_2(btBulletWorldImporter jself, long rbA, Matrix4f rbAFrame, boolean useReferenceFrameA) {
     return btHingeConstraint.getCPtr(jself.createHingeConstraint(new btRigidBody(rbA, false), rbAFrame, useReferenceFrameA));
   }
-  public static long SwigDirector_btBulletWorldImporter_createHingeConstraint__SWIG_3(btBulletWorldImporter jself, long rbA, Matrix4 rbAFrame) {
+  public static long SwigDirector_btBulletWorldImporter_createHingeConstraint__SWIG_3(btBulletWorldImporter jself, long rbA, Matrix4f rbAFrame) {
     return btHingeConstraint.getCPtr(jself.createHingeConstraint(new btRigidBody(rbA, false), rbAFrame));
   }
-  public static long SwigDirector_btBulletWorldImporter_createConeTwistConstraint__SWIG_0(btBulletWorldImporter jself, long rbA, long rbB, Matrix4 rbAFrame, Matrix4 rbBFrame) {
+  public static long SwigDirector_btBulletWorldImporter_createConeTwistConstraint__SWIG_0(btBulletWorldImporter jself, long rbA, long rbB, Matrix4f rbAFrame, Matrix4f rbBFrame) {
     return btConeTwistConstraint.getCPtr(jself.createConeTwistConstraint(new btRigidBody(rbA, false), new btRigidBody(rbB, false), rbAFrame, rbBFrame));
   }
-  public static long SwigDirector_btBulletWorldImporter_createConeTwistConstraint__SWIG_1(btBulletWorldImporter jself, long rbA, Matrix4 rbAFrame) {
+  public static long SwigDirector_btBulletWorldImporter_createConeTwistConstraint__SWIG_1(btBulletWorldImporter jself, long rbA, Matrix4f rbAFrame) {
     return btConeTwistConstraint.getCPtr(jself.createConeTwistConstraint(new btRigidBody(rbA, false), rbAFrame));
   }
-  public static long SwigDirector_btBulletWorldImporter_createGeneric6DofConstraint__SWIG_0(btBulletWorldImporter jself, long rbA, long rbB, Matrix4 frameInA, Matrix4 frameInB, boolean useLinearReferenceFrameA) {
+  public static long SwigDirector_btBulletWorldImporter_createGeneric6DofConstraint__SWIG_0(btBulletWorldImporter jself, long rbA, long rbB, Matrix4f frameInA, Matrix4f frameInB, boolean useLinearReferenceFrameA) {
     return btGeneric6DofConstraint.getCPtr(jself.createGeneric6DofConstraint(new btRigidBody(rbA, false), new btRigidBody(rbB, false), frameInA, frameInB, useLinearReferenceFrameA));
   }
-  public static long SwigDirector_btBulletWorldImporter_createGeneric6DofConstraint__SWIG_1(btBulletWorldImporter jself, long rbB, Matrix4 frameInB, boolean useLinearReferenceFrameB) {
+  public static long SwigDirector_btBulletWorldImporter_createGeneric6DofConstraint__SWIG_1(btBulletWorldImporter jself, long rbB, Matrix4f frameInB, boolean useLinearReferenceFrameB) {
     return btGeneric6DofConstraint.getCPtr(jself.createGeneric6DofConstraint(new btRigidBody(rbB, false), frameInB, useLinearReferenceFrameB));
   }
-  public static long SwigDirector_btBulletWorldImporter_createGeneric6DofSpringConstraint(btBulletWorldImporter jself, long rbA, long rbB, Matrix4 frameInA, Matrix4 frameInB, boolean useLinearReferenceFrameA) {
+  public static long SwigDirector_btBulletWorldImporter_createGeneric6DofSpringConstraint(btBulletWorldImporter jself, long rbA, long rbB, Matrix4f frameInA, Matrix4f frameInB, boolean useLinearReferenceFrameA) {
     return btGeneric6DofSpringConstraint.getCPtr(jself.createGeneric6DofSpringConstraint(new btRigidBody(rbA, false), new btRigidBody(rbB, false), frameInA, frameInB, useLinearReferenceFrameA));
   }
-  public static long SwigDirector_btBulletWorldImporter_createGeneric6DofSpring2Constraint(btBulletWorldImporter jself, long rbA, long rbB, Matrix4 frameInA, Matrix4 frameInB, int rotateOrder) {
+  public static long SwigDirector_btBulletWorldImporter_createGeneric6DofSpring2Constraint(btBulletWorldImporter jself, long rbA, long rbB, Matrix4f frameInA, Matrix4f frameInB, int rotateOrder) {
     return btGeneric6DofSpring2Constraint.getCPtr(jself.createGeneric6DofSpring2Constraint(new btRigidBody(rbA, false), new btRigidBody(rbB, false), frameInA, frameInB, rotateOrder));
   }
-  public static long SwigDirector_btBulletWorldImporter_createSliderConstraint__SWIG_0(btBulletWorldImporter jself, long rbA, long rbB, Matrix4 frameInA, Matrix4 frameInB, boolean useLinearReferenceFrameA) {
+  public static long SwigDirector_btBulletWorldImporter_createSliderConstraint__SWIG_0(btBulletWorldImporter jself, long rbA, long rbB, Matrix4f frameInA, Matrix4f frameInB, boolean useLinearReferenceFrameA) {
     return btSliderConstraint.getCPtr(jself.createSliderConstraint(new btRigidBody(rbA, false), new btRigidBody(rbB, false), frameInA, frameInB, useLinearReferenceFrameA));
   }
-  public static long SwigDirector_btBulletWorldImporter_createSliderConstraint__SWIG_1(btBulletWorldImporter jself, long rbB, Matrix4 frameInB, boolean useLinearReferenceFrameA) {
+  public static long SwigDirector_btBulletWorldImporter_createSliderConstraint__SWIG_1(btBulletWorldImporter jself, long rbB, Matrix4f frameInB, boolean useLinearReferenceFrameA) {
     return btSliderConstraint.getCPtr(jself.createSliderConstraint(new btRigidBody(rbB, false), frameInB, useLinearReferenceFrameA));
   }
-  public static long SwigDirector_btBulletWorldImporter_createGearConstraint(btBulletWorldImporter jself, long rbA, long rbB, Vector3 axisInA, Vector3 axisInB, float ratio) {
+  public static long SwigDirector_btBulletWorldImporter_createGearConstraint(btBulletWorldImporter jself, long rbA, long rbB, Vector3f axisInA, Vector3f axisInB, float ratio) {
     return SWIGTYPE_p_btGearConstraint.getCPtr(jself.createGearConstraint(new btRigidBody(rbA, false), new btRigidBody(rbB, false), axisInA, axisInB, ratio));
   }
   public static boolean SwigDirector_btBulletWorldImporter_convertAllObjects(btBulletWorldImporter jself, long file) {

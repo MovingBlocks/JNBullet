@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btAxisSweep3 extends btAxisSweep3InternalShort {
 	private long swigCPtr;
@@ -58,19 +58,19 @@ public class btAxisSweep3 extends btAxisSweep3InternalShort {
 		super.delete();
 	}
 
-  public btAxisSweep3(Vector3 worldAabbMin, Vector3 worldAabbMax, int maxHandles, btOverlappingPairCache pairCache, boolean disableRaycastAccelerator) {
+  public btAxisSweep3(Vector3f worldAabbMin, Vector3f worldAabbMax, int maxHandles, btOverlappingPairCache pairCache, boolean disableRaycastAccelerator) {
     this(CollisionJNI.new_btAxisSweep3__SWIG_0(worldAabbMin, worldAabbMax, maxHandles, btOverlappingPairCache.getCPtr(pairCache), pairCache, disableRaycastAccelerator), true);
   }
 
-  public btAxisSweep3(Vector3 worldAabbMin, Vector3 worldAabbMax, int maxHandles, btOverlappingPairCache pairCache) {
+  public btAxisSweep3(Vector3f worldAabbMin, Vector3f worldAabbMax, int maxHandles, btOverlappingPairCache pairCache) {
     this(CollisionJNI.new_btAxisSweep3__SWIG_1(worldAabbMin, worldAabbMax, maxHandles, btOverlappingPairCache.getCPtr(pairCache), pairCache), true);
   }
 
-  public btAxisSweep3(Vector3 worldAabbMin, Vector3 worldAabbMax, int maxHandles) {
+  public btAxisSweep3(Vector3f worldAabbMin, Vector3f worldAabbMax, int maxHandles) {
     this(CollisionJNI.new_btAxisSweep3__SWIG_2(worldAabbMin, worldAabbMax, maxHandles), true);
   }
 
-  public btAxisSweep3(Vector3 worldAabbMin, Vector3 worldAabbMax) {
+  public btAxisSweep3(Vector3f worldAabbMin, Vector3f worldAabbMax) {
     this(CollisionJNI.new_btAxisSweep3__SWIG_3(worldAabbMin, worldAabbMax), true);
   }
 

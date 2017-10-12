@@ -11,10 +11,10 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btConeTwistConstraint extends btTypedConstraint {
 	private long swigCPtr;
@@ -59,11 +59,11 @@ public class btConeTwistConstraint extends btTypedConstraint {
 		super.delete();
 	}
 
-  public btConeTwistConstraint(btRigidBody rbA, btRigidBody rbB, Matrix4 rbAFrame, Matrix4 rbBFrame) {
+  public btConeTwistConstraint(btRigidBody rbA, btRigidBody rbB, Matrix4f rbAFrame, Matrix4f rbBFrame) {
     this(DynamicsJNI.new_btConeTwistConstraint__SWIG_0(btRigidBody.getCPtr(rbA), rbA, btRigidBody.getCPtr(rbB), rbB, rbAFrame, rbBFrame), true);
   }
 
-  public btConeTwistConstraint(btRigidBody rbA, Matrix4 rbAFrame) {
+  public btConeTwistConstraint(btRigidBody rbA, Matrix4f rbAFrame) {
     this(DynamicsJNI.new_btConeTwistConstraint__SWIG_1(btRigidBody.getCPtr(rbA), rbA, rbAFrame), true);
   }
 
@@ -71,7 +71,7 @@ public class btConeTwistConstraint extends btTypedConstraint {
     DynamicsJNI.btConeTwistConstraint_getInfo1NonVirtual(swigCPtr, this, btTypedConstraint.btConstraintInfo1.getCPtr(info), info);
   }
 
-  public void getInfo2NonVirtual(btTypedConstraint.btConstraintInfo2 info, Matrix4 transA, Matrix4 transB, Matrix3 invInertiaWorldA, Matrix3 invInertiaWorldB) {
+  public void getInfo2NonVirtual(btTypedConstraint.btConstraintInfo2 info, Matrix4f transA, Matrix4f transB, Matrix3f invInertiaWorldA, Matrix3f invInertiaWorldB) {
     DynamicsJNI.btConeTwistConstraint_getInfo2NonVirtual(swigCPtr, this, btTypedConstraint.btConstraintInfo2.getCPtr(info), info, transA, transB, invInertiaWorldA, invInertiaWorldB);
   }
 
@@ -119,11 +119,11 @@ public class btConeTwistConstraint extends btTypedConstraint {
     DynamicsJNI.btConeTwistConstraint_setLimit__SWIG_4(swigCPtr, this, _swingSpan1, _swingSpan2, _twistSpan);
   }
 
-  public Matrix4 getAFrame() {
+  public Matrix4f getAFrame() {
 	return DynamicsJNI.btConeTwistConstraint_getAFrame(swigCPtr, this);
 }
 
-  public Matrix4 getBFrame() {
+  public Matrix4f getBFrame() {
 	return DynamicsJNI.btConeTwistConstraint_getBFrame(swigCPtr, this);
 }
 
@@ -143,7 +143,7 @@ public class btConeTwistConstraint extends btTypedConstraint {
     DynamicsJNI.btConeTwistConstraint_calcAngleInfo(swigCPtr, this);
   }
 
-  public void calcAngleInfo2(Matrix4 transA, Matrix4 transB, Matrix3 invInertiaWorldA, Matrix3 invInertiaWorldB) {
+  public void calcAngleInfo2(Matrix4f transA, Matrix4f transB, Matrix3f invInertiaWorldA, Matrix3f invInertiaWorldB) {
     DynamicsJNI.btConeTwistConstraint_calcAngleInfo2(swigCPtr, this, transA, transB, invInertiaWorldA, invInertiaWorldB);
   }
 
@@ -219,19 +219,19 @@ public class btConeTwistConstraint extends btTypedConstraint {
     DynamicsJNI.btConeTwistConstraint_setFixThresh(swigCPtr, this, fixThresh);
   }
 
-  public void setMotorTarget(Quaternion q) {
+  public void setMotorTarget(Quat4f q) {
     DynamicsJNI.btConeTwistConstraint_setMotorTarget(swigCPtr, this, q);
   }
 
-  public Quaternion getMotorTarget() {
+  public Quat4f getMotorTarget() {
 	return DynamicsJNI.btConeTwistConstraint_getMotorTarget(swigCPtr, this);
 }
 
-  public void setMotorTargetInConstraintSpace(Quaternion q) {
+  public void setMotorTargetInConstraintSpace(Quat4f q) {
     DynamicsJNI.btConeTwistConstraint_setMotorTargetInConstraintSpace(swigCPtr, this, q);
   }
 
-  public Vector3 GetPointForAngle(float fAngleInRadians, float fLength) {
+  public Vector3f GetPointForAngle(float fAngleInRadians, float fLength) {
 	return DynamicsJNI.btConeTwistConstraint_GetPointForAngle(swigCPtr, this, fAngleInRadians, fLength);
 }
 
@@ -243,15 +243,15 @@ public class btConeTwistConstraint extends btTypedConstraint {
     DynamicsJNI.btConeTwistConstraint_setParam__SWIG_1(swigCPtr, this, num, value);
   }
 
-  public void setFrames(Matrix4 frameA, Matrix4 frameB) {
+  public void setFrames(Matrix4f frameA, Matrix4f frameB) {
     DynamicsJNI.btConeTwistConstraint_setFrames(swigCPtr, this, frameA, frameB);
   }
 
-  public Matrix4 getFrameOffsetA() {
+  public Matrix4f getFrameOffsetA() {
 	return DynamicsJNI.btConeTwistConstraint_getFrameOffsetA(swigCPtr, this);
 }
 
-  public Matrix4 getFrameOffsetB() {
+  public Matrix4f getFrameOffsetB() {
 	return DynamicsJNI.btConeTwistConstraint_getFrameOffsetB(swigCPtr, this);
 }
 

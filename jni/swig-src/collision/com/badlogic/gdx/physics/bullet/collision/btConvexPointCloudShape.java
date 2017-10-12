@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btConvexPointCloudShape extends btPolyhedralConvexAabbCachingShape {
 	private long swigCPtr;
@@ -62,15 +62,15 @@ public class btConvexPointCloudShape extends btPolyhedralConvexAabbCachingShape 
     this(CollisionJNI.new_btConvexPointCloudShape__SWIG_0(), true);
   }
 
-  public btConvexPointCloudShape(btVector3 points, int numPoints, Vector3 localScaling, boolean computeAabb) {
+  public btConvexPointCloudShape(btVector3 points, int numPoints, Vector3f localScaling, boolean computeAabb) {
     this(CollisionJNI.new_btConvexPointCloudShape__SWIG_1(btVector3.getCPtr(points), points, numPoints, localScaling, computeAabb), true);
   }
 
-  public btConvexPointCloudShape(btVector3 points, int numPoints, Vector3 localScaling) {
+  public btConvexPointCloudShape(btVector3 points, int numPoints, Vector3f localScaling) {
     this(CollisionJNI.new_btConvexPointCloudShape__SWIG_2(btVector3.getCPtr(points), points, numPoints, localScaling), true);
   }
 
-  public void setPoints(btVector3 points, int numPoints, boolean computeAabb, Vector3 localScaling) {
+  public void setPoints(btVector3 points, int numPoints, boolean computeAabb, Vector3f localScaling) {
     CollisionJNI.btConvexPointCloudShape_setPoints__SWIG_0(swigCPtr, this, btVector3.getCPtr(points), points, numPoints, computeAabb, localScaling);
   }
 
@@ -91,7 +91,7 @@ public class btConvexPointCloudShape extends btPolyhedralConvexAabbCachingShape 
     return CollisionJNI.btConvexPointCloudShape_getNumPoints(swigCPtr, this);
   }
 
-  public Vector3 getScaledPoint(int index) {
+  public Vector3f getScaledPoint(int index) {
 	return CollisionJNI.btConvexPointCloudShape_getScaledPoint(swigCPtr, this, index);
 }
 

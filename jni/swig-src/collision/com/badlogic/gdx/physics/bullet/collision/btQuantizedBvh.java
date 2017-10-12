@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btQuantizedBvh extends BulletBase {
 	private long swigCPtr;
@@ -62,11 +62,11 @@ public class btQuantizedBvh extends BulletBase {
     this(CollisionJNI.new_btQuantizedBvh(), true);
   }
 
-  public void setQuantizationValues(Vector3 bvhAabbMin, Vector3 bvhAabbMax, float quantizationMargin) {
+  public void setQuantizationValues(Vector3f bvhAabbMin, Vector3f bvhAabbMax, float quantizationMargin) {
     CollisionJNI.btQuantizedBvh_setQuantizationValues__SWIG_0(swigCPtr, this, bvhAabbMin, bvhAabbMax, quantizationMargin);
   }
 
-  public void setQuantizationValues(Vector3 bvhAabbMin, Vector3 bvhAabbMax) {
+  public void setQuantizationValues(Vector3f bvhAabbMin, Vector3f bvhAabbMax) {
     CollisionJNI.btQuantizedBvh_setQuantizationValues__SWIG_1(swigCPtr, this, bvhAabbMin, bvhAabbMax);
   }
 
@@ -78,33 +78,33 @@ public class btQuantizedBvh extends BulletBase {
     CollisionJNI.btQuantizedBvh_buildInternal(swigCPtr, this);
   }
 
-  public void reportAabbOverlappingNodex(btNodeOverlapCallback nodeCallback, Vector3 aabbMin, Vector3 aabbMax) {
+  public void reportAabbOverlappingNodex(btNodeOverlapCallback nodeCallback, Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btQuantizedBvh_reportAabbOverlappingNodex(swigCPtr, this, btNodeOverlapCallback.getCPtr(nodeCallback), nodeCallback, aabbMin, aabbMax);
   }
 
-  public void reportRayOverlappingNodex(btNodeOverlapCallback nodeCallback, Vector3 raySource, Vector3 rayTarget) {
+  public void reportRayOverlappingNodex(btNodeOverlapCallback nodeCallback, Vector3f raySource, Vector3f rayTarget) {
     CollisionJNI.btQuantizedBvh_reportRayOverlappingNodex(swigCPtr, this, btNodeOverlapCallback.getCPtr(nodeCallback), nodeCallback, raySource, rayTarget);
   }
 
-  public void reportBoxCastOverlappingNodex(btNodeOverlapCallback nodeCallback, Vector3 raySource, Vector3 rayTarget, Vector3 aabbMin, Vector3 aabbMax) {
+  public void reportBoxCastOverlappingNodex(btNodeOverlapCallback nodeCallback, Vector3f raySource, Vector3f rayTarget, Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btQuantizedBvh_reportBoxCastOverlappingNodex(swigCPtr, this, btNodeOverlapCallback.getCPtr(nodeCallback), nodeCallback, raySource, rayTarget, aabbMin, aabbMax);
   }
 
-  public void quantize(java.nio.IntBuffer out, Vector3 point, int isMax) {
+  public void quantize(java.nio.IntBuffer out, Vector3f point, int isMax) {
     assert out.isDirect() : "Buffer must be allocated direct.";
     {
       CollisionJNI.btQuantizedBvh_quantize(swigCPtr, this, out, point, isMax);
     }
   }
 
-  public void quantizeWithClamp(java.nio.IntBuffer out, Vector3 point2, int isMax) {
+  public void quantizeWithClamp(java.nio.IntBuffer out, Vector3f point2, int isMax) {
     assert out.isDirect() : "Buffer must be allocated direct.";
     {
       CollisionJNI.btQuantizedBvh_quantizeWithClamp(swigCPtr, this, out, point2, isMax);
     }
   }
 
-  public Vector3 unQuantize(java.nio.IntBuffer vecIn) {
+  public Vector3f unQuantize(java.nio.IntBuffer vecIn) {
     assert vecIn.isDirect() : "Buffer must be allocated direct.";
     {
 	return CollisionJNI.btQuantizedBvh_unQuantize(swigCPtr, this, vecIn);

@@ -9,10 +9,10 @@
 package com.badlogic.gdx.physics.bullet.linearmath;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btVector3Array extends BulletBase {
 	private long swigCPtr;
@@ -69,7 +69,7 @@ public class btVector3Array extends BulletBase {
     return LinearMathJNI.btVector3Array_size(swigCPtr, this);
   }
 
-  public Vector3 at(int n) {
+  public Vector3f at(int n) {
 	return LinearMathJNI.btVector3Array_at__SWIG_0(swigCPtr, this, n);
 }
 
@@ -85,7 +85,7 @@ public class btVector3Array extends BulletBase {
     LinearMathJNI.btVector3Array_resizeNoInitialize(swigCPtr, this, newsize);
   }
 
-  public void resize(int newsize, Vector3 fillData) {
+  public void resize(int newsize, Vector3f fillData) {
     LinearMathJNI.btVector3Array_resize__SWIG_0(swigCPtr, this, newsize, fillData);
   }
 
@@ -93,19 +93,19 @@ public class btVector3Array extends BulletBase {
     LinearMathJNI.btVector3Array_resize__SWIG_1(swigCPtr, this, newsize);
   }
 
-  public Vector3 expandNonInitializing() {
+  public Vector3f expandNonInitializing() {
 	return LinearMathJNI.btVector3Array_expandNonInitializing(swigCPtr, this);
 }
 
-  public Vector3 expand(Vector3 fillValue) {
+  public Vector3f expand(Vector3f fillValue) {
 	return LinearMathJNI.btVector3Array_expand__SWIG_0(swigCPtr, this, fillValue);
 }
 
-  public Vector3 expand() {
+  public Vector3f expand() {
 	return LinearMathJNI.btVector3Array_expand__SWIG_1(swigCPtr, this);
 }
 
-  public void push_back(Vector3 _Val) {
+  public void push_back(Vector3f _Val) {
     LinearMathJNI.btVector3Array_push_back(swigCPtr, this, _Val);
   }
 
@@ -170,15 +170,15 @@ public class btVector3Array extends BulletBase {
     LinearMathJNI.btVector3Array_swap(swigCPtr, this, index0, index1);
   }
 
-  public int findBinarySearch(Vector3 key) {
+  public int findBinarySearch(Vector3f key) {
     return LinearMathJNI.btVector3Array_findBinarySearch(swigCPtr, this, key);
   }
 
-  public int findLinearSearch(Vector3 key) {
+  public int findLinearSearch(Vector3f key) {
     return LinearMathJNI.btVector3Array_findLinearSearch(swigCPtr, this, key);
   }
 
-  public void remove(Vector3 key) {
+  public void remove(Vector3f key) {
     LinearMathJNI.btVector3Array_remove(swigCPtr, this, key);
   }
 

@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btGjkEpaSolver2 extends BulletBase {
 	private long swigCPtr;
@@ -152,23 +152,23 @@ public class btGjkEpaSolver2 extends BulletBase {
     return CollisionJNI.btGjkEpaSolver2_StackSizeRequirement();
   }
 
-  public static boolean Distance(btConvexShape shape0, Matrix4 wtrs0, btConvexShape shape1, Matrix4 wtrs1, Vector3 guess, btGjkEpaSolver2.sResults results) {
+  public static boolean Distance(btConvexShape shape0, Matrix4f wtrs0, btConvexShape shape1, Matrix4f wtrs1, Vector3f guess, btGjkEpaSolver2.sResults results) {
     return CollisionJNI.btGjkEpaSolver2_Distance(btConvexShape.getCPtr(shape0), shape0, wtrs0, btConvexShape.getCPtr(shape1), shape1, wtrs1, guess, btGjkEpaSolver2.sResults.getCPtr(results), results);
   }
 
-  public static boolean Penetration(btConvexShape shape0, Matrix4 wtrs0, btConvexShape shape1, Matrix4 wtrs1, Vector3 guess, btGjkEpaSolver2.sResults results, boolean usemargins) {
+  public static boolean Penetration(btConvexShape shape0, Matrix4f wtrs0, btConvexShape shape1, Matrix4f wtrs1, Vector3f guess, btGjkEpaSolver2.sResults results, boolean usemargins) {
     return CollisionJNI.btGjkEpaSolver2_Penetration__SWIG_0(btConvexShape.getCPtr(shape0), shape0, wtrs0, btConvexShape.getCPtr(shape1), shape1, wtrs1, guess, btGjkEpaSolver2.sResults.getCPtr(results), results, usemargins);
   }
 
-  public static boolean Penetration(btConvexShape shape0, Matrix4 wtrs0, btConvexShape shape1, Matrix4 wtrs1, Vector3 guess, btGjkEpaSolver2.sResults results) {
+  public static boolean Penetration(btConvexShape shape0, Matrix4f wtrs0, btConvexShape shape1, Matrix4f wtrs1, Vector3f guess, btGjkEpaSolver2.sResults results) {
     return CollisionJNI.btGjkEpaSolver2_Penetration__SWIG_1(btConvexShape.getCPtr(shape0), shape0, wtrs0, btConvexShape.getCPtr(shape1), shape1, wtrs1, guess, btGjkEpaSolver2.sResults.getCPtr(results), results);
   }
 
-  public static float SignedDistance(Vector3 position, float margin, btConvexShape shape, Matrix4 wtrs, btGjkEpaSolver2.sResults results) {
+  public static float SignedDistance(Vector3f position, float margin, btConvexShape shape, Matrix4f wtrs, btGjkEpaSolver2.sResults results) {
     return CollisionJNI.btGjkEpaSolver2_SignedDistance__SWIG_0(position, margin, btConvexShape.getCPtr(shape), shape, wtrs, btGjkEpaSolver2.sResults.getCPtr(results), results);
   }
 
-  public static boolean SignedDistance(btConvexShape shape0, Matrix4 wtrs0, btConvexShape shape1, Matrix4 wtrs1, Vector3 guess, btGjkEpaSolver2.sResults results) {
+  public static boolean SignedDistance(btConvexShape shape0, Matrix4f wtrs0, btConvexShape shape1, Matrix4f wtrs1, Vector3f guess, btGjkEpaSolver2.sResults results) {
     return CollisionJNI.btGjkEpaSolver2_SignedDistance__SWIG_1(btConvexShape.getCPtr(shape0), shape0, wtrs0, btConvexShape.getCPtr(shape1), shape1, wtrs1, guess, btGjkEpaSolver2.sResults.getCPtr(results), results);
   }
 

@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btCollisionShape extends BulletBase {
 	private long swigCPtr;
@@ -148,11 +148,11 @@ public class btCollisionShape extends BulletBase {
     throw new RuntimeException("Unknown shape type " + Integer.toString(shapeType));
   }
 
-  public void getAabb(Matrix4 t, Vector3 aabbMin, Vector3 aabbMax) {
+  public void getAabb(Matrix4f t, Vector3f aabbMin, Vector3f aabbMax) {
     CollisionJNI.btCollisionShape_getAabb(swigCPtr, this, t, aabbMin, aabbMax);
   }
 
-  public void getBoundingSphere(Vector3 center, SWIGTYPE_p_float radius) {
+  public void getBoundingSphere(Vector3f center, SWIGTYPE_p_float radius) {
     CollisionJNI.btCollisionShape_getBoundingSphere(swigCPtr, this, center, SWIGTYPE_p_float.getCPtr(radius));
   }
 
@@ -164,7 +164,7 @@ public class btCollisionShape extends BulletBase {
     return CollisionJNI.btCollisionShape_getContactBreakingThreshold(swigCPtr, this, defaultContactThresholdFactor);
   }
 
-  public void calculateTemporalAabb(Matrix4 curTrans, Vector3 linvel, Vector3 angvel, float timeStep, Vector3 temporalAabbMin, Vector3 temporalAabbMax) {
+  public void calculateTemporalAabb(Matrix4f curTrans, Vector3f linvel, Vector3f angvel, float timeStep, Vector3f temporalAabbMin, Vector3f temporalAabbMax) {
     CollisionJNI.btCollisionShape_calculateTemporalAabb(swigCPtr, this, curTrans, linvel, angvel, timeStep, temporalAabbMin, temporalAabbMax);
   }
 
@@ -200,15 +200,15 @@ public class btCollisionShape extends BulletBase {
     return CollisionJNI.btCollisionShape_isInfinite(swigCPtr, this);
   }
 
-  public void setLocalScaling(Vector3 scaling) {
+  public void setLocalScaling(Vector3f scaling) {
     CollisionJNI.btCollisionShape_setLocalScaling(swigCPtr, this, scaling);
   }
 
-  public Vector3 getLocalScaling() {
+  public Vector3f getLocalScaling() {
 	return CollisionJNI.btCollisionShape_getLocalScaling(swigCPtr, this);
 }
 
-  public void calculateLocalInertia(float mass, Vector3 inertia) {
+  public void calculateLocalInertia(float mass, Vector3f inertia) {
     CollisionJNI.btCollisionShape_calculateLocalInertia(swigCPtr, this, mass, inertia);
   }
 
@@ -220,7 +220,7 @@ public class btCollisionShape extends BulletBase {
     return CollisionJNI.btCollisionShape_getShapeType(swigCPtr, this);
   }
 
-  public Vector3 getAnisotropicRollingFrictionDirection() {
+  public Vector3f getAnisotropicRollingFrictionDirection() {
 	return CollisionJNI.btCollisionShape_getAnisotropicRollingFrictionDirection(swigCPtr, this);
 }
 

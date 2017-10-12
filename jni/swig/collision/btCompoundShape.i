@@ -6,10 +6,10 @@
 
 %typemap(javaimports) btCompoundShape %{
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 %}
 
 %rename(internalAddChildShape) btCompoundShape::addChildShape;
@@ -23,7 +23,7 @@ import com.badlogic.gdx.math.Matrix4;
 %typemap(javacode) btCompoundShape %{
 	protected Array<btCollisionShape> children = new Array<btCollisionShape>();
 	
-	public void addChildShape(Matrix4 localTransform, btCollisionShape shape) {
+	public void addChildShape(Matrix4f localTransform, btCollisionShape shape) {
 		internalAddChildShape(localTransform, shape);
 		children.add(shape);
 		shape.obtain();

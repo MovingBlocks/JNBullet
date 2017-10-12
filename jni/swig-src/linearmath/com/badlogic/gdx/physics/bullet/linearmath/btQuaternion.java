@@ -9,10 +9,10 @@
 package com.badlogic.gdx.physics.bullet.linearmath;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btQuaternion extends BulletBase {
 	private long swigCPtr;
@@ -65,7 +65,7 @@ public class btQuaternion extends BulletBase {
     this(LinearMathJNI.new_btQuaternion__SWIG_1(_x, _y, _z, _w), true);
   }
 
-  public btQuaternion(Vector3 _axis, float _angle) {
+  public btQuaternion(Vector3f _axis, float _angle) {
     this(LinearMathJNI.new_btQuaternion__SWIG_2(_axis, _angle), true);
   }
 
@@ -73,7 +73,7 @@ public class btQuaternion extends BulletBase {
     this(LinearMathJNI.new_btQuaternion__SWIG_3(yaw, pitch, roll), true);
   }
 
-  public void setRotation(Vector3 axis, float _angle) {
+  public void setRotation(Vector3f axis, float _angle) {
     LinearMathJNI.btQuaternion_setRotation(swigCPtr, this, axis, _angle);
   }
 
@@ -85,7 +85,7 @@ public class btQuaternion extends BulletBase {
     LinearMathJNI.btQuaternion_setEulerZYX(swigCPtr, this, yaw, pitch, roll);
   }
 
-  public float dot(Quaternion q) {
+  public float dot(Quat4f q) {
     return LinearMathJNI.btQuaternion_dot(swigCPtr, this, q);
   }
 
@@ -97,19 +97,19 @@ public class btQuaternion extends BulletBase {
     return LinearMathJNI.btQuaternion_length(swigCPtr, this);
   }
 
-  public Quaternion normalize() {
+  public Quat4f normalize() {
 	return LinearMathJNI.btQuaternion_normalize(swigCPtr, this);
 }
 
-  public Quaternion normalized() {
+  public Quat4f normalized() {
 	return LinearMathJNI.btQuaternion_normalized(swigCPtr, this);
 }
 
-  public float angle(Quaternion q) {
+  public float angle(Quat4f q) {
     return LinearMathJNI.btQuaternion_angle(swigCPtr, this, q);
   }
 
-  public float angleShortestPath(Quaternion q) {
+  public float angleShortestPath(Quat4f q) {
     return LinearMathJNI.btQuaternion_angleShortestPath(swigCPtr, this, q);
   }
 
@@ -121,27 +121,27 @@ public class btQuaternion extends BulletBase {
     return LinearMathJNI.btQuaternion_getAngleShortestPath(swigCPtr, this);
   }
 
-  public Vector3 getAxis() {
+  public Vector3f getAxis() {
 	return LinearMathJNI.btQuaternion_getAxis(swigCPtr, this);
 }
 
-  public Quaternion inverse() {
+  public Quat4f inverse() {
 	return LinearMathJNI.btQuaternion_inverse(swigCPtr, this);
 }
 
-  public Quaternion farthest(Quaternion qd) {
+  public Quat4f farthest(Quat4f qd) {
 	return LinearMathJNI.btQuaternion_farthest(swigCPtr, this, qd);
 }
 
-  public Quaternion nearest(Quaternion qd) {
+  public Quat4f nearest(Quat4f qd) {
 	return LinearMathJNI.btQuaternion_nearest(swigCPtr, this, qd);
 }
 
-  public Quaternion slerp(Quaternion q, float t) {
+  public Quat4f slerp(Quat4f q, float t) {
 	return LinearMathJNI.btQuaternion_slerp(swigCPtr, this, q, t);
 }
 
-  public static Quaternion getIdentity() {
+  public static Quat4f getIdentity() {
 	return LinearMathJNI.btQuaternion_getIdentity();
 }
 

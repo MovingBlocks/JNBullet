@@ -11,10 +11,10 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btTranslationalLimitMotor extends BulletBase {
 	private long swigCPtr;
@@ -209,7 +209,7 @@ public class btTranslationalLimitMotor extends BulletBase {
     return DynamicsJNI.btTranslationalLimitMotor_testLimitValue(swigCPtr, this, limitIndex, test_value);
   }
 
-  public float solveLinearAxis(float timeStep, float jacDiagABInv, btRigidBody body1, Vector3 pointInA, btRigidBody body2, Vector3 pointInB, int limit_index, Vector3 axis_normal_on_a, Vector3 anchorPos) {
+  public float solveLinearAxis(float timeStep, float jacDiagABInv, btRigidBody body1, Vector3f pointInA, btRigidBody body2, Vector3f pointInB, int limit_index, Vector3f axis_normal_on_a, Vector3f anchorPos) {
     return DynamicsJNI.btTranslationalLimitMotor_solveLinearAxis(swigCPtr, this, timeStep, jacDiagABInv, btRigidBody.getCPtr(body1), body1, pointInA, btRigidBody.getCPtr(body2), body2, pointInB, limit_index, axis_normal_on_a, anchorPos);
   }
 

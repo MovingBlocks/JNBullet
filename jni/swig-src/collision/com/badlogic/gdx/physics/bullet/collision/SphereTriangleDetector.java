@@ -10,10 +10,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class SphereTriangleDetector extends btDiscreteCollisionDetectorInterface {
 	private long swigCPtr;
@@ -70,7 +70,7 @@ public class SphereTriangleDetector extends btDiscreteCollisionDetectorInterface
     this(CollisionJNI.new_SphereTriangleDetector(btSphereShape.getCPtr(sphere), sphere, btTriangleShape.getCPtr(triangle), triangle, contactBreakingThreshold), true);
   }
 
-  public boolean collide(Vector3 sphereCenter, Vector3 point, Vector3 resultNormal, SWIGTYPE_p_float depth, SWIGTYPE_p_float timeOfImpact, float contactBreakingThreshold) {
+  public boolean collide(Vector3f sphereCenter, Vector3f point, Vector3f resultNormal, SWIGTYPE_p_float depth, SWIGTYPE_p_float timeOfImpact, float contactBreakingThreshold) {
     return CollisionJNI.SphereTriangleDetector_collide(swigCPtr, this, sphereCenter, point, resultNormal, SWIGTYPE_p_float.getCPtr(depth), SWIGTYPE_p_float.getCPtr(timeOfImpact), contactBreakingThreshold);
   }
 

@@ -12,10 +12,10 @@ import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
 import com.badlogic.gdx.physics.bullet.dynamics.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btSoftRigidDynamicsWorld extends btDiscreteDynamicsWorld {
 	private long swigCPtr;
@@ -100,7 +100,7 @@ public class btSoftRigidDynamicsWorld extends btDiscreteDynamicsWorld {
     return new SWIGTYPE_p_btAlignedObjectArrayT_btSoftBody_p_t(SoftbodyJNI.btSoftRigidDynamicsWorld_getSoftBodyArray__SWIG_0(swigCPtr, this), false);
   }
 
-  public static void rayTestSingle(Matrix4 rayFromTrans, Matrix4 rayToTrans, btCollisionObject collisionObject, btCollisionShape collisionShape, Matrix4 colObjWorldTransform, RayResultCallback resultCallback) {
+  public static void rayTestSingle(Matrix4f rayFromTrans, Matrix4f rayToTrans, btCollisionObject collisionObject, btCollisionShape collisionShape, Matrix4f colObjWorldTransform, RayResultCallback resultCallback) {
     SoftbodyJNI.btSoftRigidDynamicsWorld_rayTestSingle(rayFromTrans, rayToTrans, btCollisionObject.getCPtr(collisionObject), collisionObject, btCollisionShape.getCPtr(collisionShape), collisionShape, colObjWorldTransform, RayResultCallback.getCPtr(resultCallback), resultCallback);
   }
 

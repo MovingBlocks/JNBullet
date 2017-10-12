@@ -11,10 +11,10 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Matrix4;
+import org.terasology.math.geom.Vector3f;
+import org.terasology.math.geom.Quat4f;
+import org.terasology.math.geom.Matrix3f;
+import org.terasology.math.geom.Matrix4f;
 
 public class btGeneric6DofSpringConstraint extends btGeneric6DofConstraint {
 	private long swigCPtr;
@@ -59,11 +59,11 @@ public class btGeneric6DofSpringConstraint extends btGeneric6DofConstraint {
 		super.delete();
 	}
 
-  public btGeneric6DofSpringConstraint(btRigidBody rbA, btRigidBody rbB, Matrix4 frameInA, Matrix4 frameInB, boolean useLinearReferenceFrameA) {
+  public btGeneric6DofSpringConstraint(btRigidBody rbA, btRigidBody rbB, Matrix4f frameInA, Matrix4f frameInB, boolean useLinearReferenceFrameA) {
     this(DynamicsJNI.new_btGeneric6DofSpringConstraint__SWIG_0(btRigidBody.getCPtr(rbA), rbA, btRigidBody.getCPtr(rbB), rbB, frameInA, frameInB, useLinearReferenceFrameA), true);
   }
 
-  public btGeneric6DofSpringConstraint(btRigidBody rbB, Matrix4 frameInB, boolean useLinearReferenceFrameB) {
+  public btGeneric6DofSpringConstraint(btRigidBody rbB, Matrix4f frameInB, boolean useLinearReferenceFrameB) {
     this(DynamicsJNI.new_btGeneric6DofSpringConstraint__SWIG_1(btRigidBody.getCPtr(rbB), rbB, frameInB, useLinearReferenceFrameB), true);
   }
 
@@ -107,7 +107,7 @@ public class btGeneric6DofSpringConstraint extends btGeneric6DofConstraint {
     return DynamicsJNI.btGeneric6DofSpringConstraint_getEquilibriumPoint(swigCPtr, this, index);
   }
 
-  public void setAxis(Vector3 axis1, Vector3 axis2) {
+  public void setAxis(Vector3f axis1, Vector3f axis2) {
     DynamicsJNI.btGeneric6DofSpringConstraint_setAxis(swigCPtr, this, axis1, axis2);
   }
 
