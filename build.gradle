@@ -21,21 +21,21 @@ plugins {
 
 apply plugin: 'java'
 apply plugin: 'maven'
-
+apply plugin: 'project-report'
 
 sourceCompatibility = 1.7
 version = '1.0'
 
 // gradle wrapper version
-//wrapper {
-//    gradleVersion '2.6'
-//}
+wrapper {
+    gradleVersion '2.6'
+}
 
 ext {
-    generatedSrcDir = "jni/swig-src/collision:jni/swig-src/dynamics:jni/swig-src/extras:jni/swig-src/linearmath:jni/swig-src/softbody:src"
 
     // Read environment variables, including variables passed by jenkins continuous integration server
     env = System.getenv()
+
 }
 
 
@@ -48,7 +48,12 @@ repositories {
 sourceSets {
     main {
         java {
-            srcDir generatedSrcDir
+            srcDirs "jni/swig-src/collision"
+            srcDirs "jni/swig-src/dynamics"
+            srcDirs "jni/swig-src/extras"
+            srcDirs "jni/swig-src/linearmath"
+            srcDirs "jni/swig-src/softbody"
+            srcDirs "src"
         }
     }
 }
@@ -70,7 +75,8 @@ tasks.matching { task ->
 
 //assemble.dependsOn('jni_pack_natives')
 jni_pack_natives.dependsOn('jni_compile_natives')
-assemble.dependsOn swig_all
+compileJava.dependsOn('jni_pack_natives')
+//assemble.dependsOn swig_all
 
 
 // Library and distribution config
@@ -78,16 +84,10 @@ group = 'org.terasology'
 description = 'A Physics library'
 
 
-task sourceJar(type: Jar, dependsOn: jni_pack_natives) {
+task sourceJar(type: Jar) {
     description = "Create a JAR with all sources"
     from sourceSets.main.allSource
     classifier = 'sources'
-}
-
-task nativeJar(type: Jar, dependsOn: jni_pack_natives) {
-    description = "Create a JAR with all sources"
-    from files("libs/gdx-bullet-native")
-    classifier = 'natives'
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
@@ -96,13 +96,18 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
 }
 
+
 // Define the artifacts we want to publish (the .pom will also be included since the Maven plugin is active)
 artifacts {
     archives sourceJar
-    archives nativeJar
+    archives(file('libs/gdx-bullet-natives.jar'))
     archives javadocJar
 }
 
+
+javadoc {
+    failOnError = false
+}
 
 
 
@@ -110,8 +115,6 @@ dependencies {
     compile group: 'org.terasology', name: 'TeraMath', version: '1.4.0'
     compile "com.badlogicgames.gdx:gdx-jnigen:1.9.7-SNAPSHOT"
     compile "com.badlogicgames.gdx:gdx:1.9.7-SNAPSHOT"
-    compile files("libs/gdx-bullet-native")
-
 }
 
 
