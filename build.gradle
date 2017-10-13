@@ -118,7 +118,11 @@ javadoc {
 
 
 dependencies {
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.12'
+
+//    generatorCompile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.12'
+
     compile group: 'org.terasology', name: 'TeraMath', version: '1.4.0'
     compile "com.badlogicgames.gdx:gdx-jnigen:1.9.7-SNAPSHOT"
-    compile "com.badlogicgames.gdx:gdx:1.9.7-SNAPSHOT"
+//    compile "com.badlogicgames.gdx:gdx:1.9.7-SNAPSHOT"
 } 

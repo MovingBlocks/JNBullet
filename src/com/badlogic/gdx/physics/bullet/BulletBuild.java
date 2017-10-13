@@ -16,12 +16,8 @@
 
 package com.badlogic.gdx.physics.bullet;
 
-import java.io.File;
-
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.jnigen.AntScriptGenerator;
 import com.badlogic.gdx.jnigen.BuildConfig;
-import com.badlogic.gdx.jnigen.BuildExecutor;
 import com.badlogic.gdx.jnigen.BuildTarget;
 import com.badlogic.gdx.jnigen.BuildTarget.TargetOs;
 import com.badlogic.gdx.jnigen.NativeCodeGenerator;
@@ -99,7 +95,7 @@ public class BulletBuild {
 		ios.cppFlags += cppFlags;
 
 		new AntScriptGenerator().generate(new BuildConfig("gdx-bullet"), win32home, win32, win64, lin32, lin64, mac, mac64, android, ios);
-		new FileHandle(new File("jni/Application.mk")).writeString("\nAPP_STL := stlport_static\n", true);
+		//new FileHandle(new File("jni/Application.mk")).writeString("\nAPP_STL := stlport_static\n", true);
 
 		// build natives
 		// BuildExecutor.executeAnt("jni/build-windows32home.xml", "-v");

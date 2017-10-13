@@ -16,10 +16,15 @@
 
 package com.badlogic.gdx.physics.bullet;
 
-import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.utils.Disposable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BulletBase implements Disposable {
+	private static final Logger logger = LoggerFactory.getLogger(BulletBase.class);
+	
+	
 	private long cPointer;
 	protected boolean swigCMemOwn;
 	private boolean disposed;
@@ -99,7 +104,7 @@ public class BulletBase implements Disposable {
 	@Override
 	public void dispose () {
 		if (refCount > 0 && Bullet.useRefCounting && Bullet.enableLogging)
-			Gdx.app.error("Bullet", "Disposing "+toString()+" while it still has "+refCount+" references.");
+			logger.error("Disposing "+toString()+" while it still has "+refCount+" references.");
 		disposed = true;
 		delete();
 	}
@@ -117,23 +122,24 @@ public class BulletBase implements Disposable {
 	protected void destroy() {
 		try {
 			if (destroyed && Bullet.enableLogging)
-				Gdx.app.error("Bullet", "Already destroyed "+toString());
+				logger.error("Already destroyed "+toString());
 			destroyed = true;
 			
 			if (swigCMemOwn && !disposed) {
 				if (Bullet.enableLogging)
-					Gdx.app.error("Bullet", "Disposing "+toString()+" due to garbage collection.");
+					logger.error("Disposing "+toString()+" due to garbage collection.");
 				dispose();
 			}
 		} catch(Throwable e) {
-			Gdx.app.error("Bullet", "Exception while destroying "+toString(), e);
+			logger.error("Exception while destroying "+toString(),e);
 		}
 	}
 	
 	@Override
 	protected void finalize() throws Throwable {
 		if (!destroyed && Bullet.enableLogging)
-			Gdx.app.error("Bullet", "The "+className+" class does not override the finalize method.");
+			logger.error("The "+className+" class does not override the finalize method.");
+		
 		super.finalize();
 	}
 }
