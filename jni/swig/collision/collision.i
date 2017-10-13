@@ -333,6 +333,12 @@ void btMultiSapBroadphase::quicksort(btBroadphasePairArray& a, int lo, int hi)
 %include "BulletCollision/CollisionDispatch/btCompoundCompoundCollisionAlgorithm.h"
 
 %{
+#include <BulletCollision/CollisionDispatch/btVoxelCollisionAlgorithm.h>
+%}
+%include "BulletCollision/CollisionDispatch/btVoxelCollisionAlgorithm.h"
+
+
+%{
 #include <BulletCollision/CollisionDispatch/btCollisionConfiguration.h>
 %}
 %include "BulletCollision/CollisionDispatch/btCollisionConfiguration.h"
