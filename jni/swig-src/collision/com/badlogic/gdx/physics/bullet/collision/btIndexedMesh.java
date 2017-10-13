@@ -10,12 +10,11 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.graphics.VertexAttribute;
-import com.badlogic.gdx.graphics.VertexAttributes.Usage;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.BulletRuntimeException;
+import com.google.common.collect.Lists;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
+import java.util.List;
 
 public class btIndexedMesh extends BulletBase {
 	private long swigCPtr;
@@ -60,10 +59,10 @@ public class btIndexedMesh extends BulletBase {
 		super.delete();
 	}
 
-	protected final static List<btTriangleIndexVertexArray> instances =  Lists.newArrayList();
+	protected final static List<btIndexedMesh> instances =  Lists.newArrayList();
 
 	protected static btIndexedMesh getInstance(final Object tag) {
-		final int n = instances.size;
+		final int n = instances.size();
 		for (int i = 0; i < n; i++) {
 			final btIndexedMesh mesh = instances.get(i);
 			if (tag.equals(mesh.tag))
@@ -71,21 +70,7 @@ public class btIndexedMesh extends BulletBase {
 		}
 		return null;
 	}
-	
-	/** Create or reuse a btIndexedMesh instance based on the specified {@link MeshPart}.
-	 * Use {@link #release()} to release the mesh when it's no longer needed. */
-	public static btIndexedMesh obtain(final MeshPart meshPart) {
-		if (meshPart == null)
-			throw new BulletRuntimeException("meshPart cannot be null");
-		
-		btIndexedMesh result = getInstance(meshPart);
-		if (result == null) {
-			result = new btIndexedMesh(meshPart);
-			instances.add(result);
-		}
-		result.obtain();
-		return result;
-	}
+
 	
 	/** Create or reuse a btIndexedMesh instance based on the specified tag.
 	 * Use {@link #release()} to release the mesh when it's no longer needed. */

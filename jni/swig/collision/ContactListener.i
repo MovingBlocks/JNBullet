@@ -20,7 +20,7 @@ bool custom_ContactListener_setEvents(ContactListener *listener);
 	public ContactListener() {
 		this(false);
 		if (!setEvents())
-			throw new com.badlogic.gdx.utils.GdxRuntimeException("Only one method per callback event can be overridden.");
+			throw new com.badlogic.gdx.utils.BulletRuntimeException("Only one method per callback event can be overridden.");
 		enable();
 	}
 %}

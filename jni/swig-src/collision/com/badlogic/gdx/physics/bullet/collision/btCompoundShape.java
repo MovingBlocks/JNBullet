@@ -8,11 +8,13 @@
 
 package com.badlogic.gdx.physics.bullet.collision;
 
-import com.badlogic.gdx.utils.Array;
+import com.google.common.collect.Lists;
 import org.terasology.math.geom.Vector3f;
 import org.terasology.math.geom.Quat4f;
 import org.terasology.math.geom.Matrix3f;
 import org.terasology.math.geom.Matrix4f;
+import java.util.List;
+import com.google.common.collect.Lists;
 
 public class btCompoundShape extends btCollisionShape {
 	private long swigCPtr;
@@ -57,25 +59,19 @@ public class btCompoundShape extends btCollisionShape {
 		super.delete();
 	}
 
-	protected Array<btCollisionShape> children = new Array<btCollisionShape>();
-	
+	protected List<btCollisionShape> children = Lists.newArrayList();
+
 	public void addChildShape(Matrix4f localTransform, btCollisionShape shape) {
 		internalAddChildShape(localTransform, shape);
 		children.add(shape);
 		shape.obtain();
 	}
 	
-	public void removeChildShape(btCollisionShape shape) {
-		internalRemoveChildShape(shape);
-		final int idx = children.indexOf(shape, false);
-		if (idx >= 0)
-			children.removeIndex(idx).release();
-	}
-	
-	public void removeChildShapeByIndex(int index) {
-		internalRemoveChildShapeByIndex(index);
-		children.removeIndex(index).release();
-	}
+    public void removeChildShape(btCollisionShape shape) {
+        internalRemoveChildShape(shape);
+        if(children.remove(shape))
+            shape.release();
+    }
 	
 	public btCollisionShape getChildShape(int index) {
 		return children.get(index);

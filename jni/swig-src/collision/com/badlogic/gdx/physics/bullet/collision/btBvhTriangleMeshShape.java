@@ -61,6 +61,7 @@ public class btBvhTriangleMeshShape extends btTriangleMeshShape {
 		return meshInterface;
 	}
 
+
 	
 	public btBvhTriangleMeshShape(btStridingMeshInterface meshInterface, boolean useQuantizedAabbCompression) {
 		this(0, meshInterface, useQuantizedAabbCompression);
