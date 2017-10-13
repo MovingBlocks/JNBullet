@@ -29,18 +29,17 @@
 %typemap(javaimports) btIndexedMesh %{
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
-import com.badlogic.gdx.graphics.g3d.model.MeshPart;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.BulletRuntimeException;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 %}
 
 %typemap(javacode) btIndexedMesh %{
-	protected final static Array<btIndexedMesh> instances = new Array<btIndexedMesh>();
+	protected final static List<btTriangleIndexVertexArray> instances =  Lists.newArrayList();
+
 	protected static btIndexedMesh getInstance(final Object tag) {
 		final int n = instances.size;
 		for (int i = 0; i < n; i++) {
@@ -55,7 +54,7 @@ import java.nio.ShortBuffer;
 	 * Use {@link #release()} to release the mesh when it's no longer needed. */
 	public static btIndexedMesh obtain(final MeshPart meshPart) {
 		if (meshPart == null)
-			throw new GdxRuntimeException("meshPart cannot be null");
+			throw new BulletRuntimeException("meshPart cannot be null");
 		
 		btIndexedMesh result = getInstance(meshPart);
 		if (result == null) {
@@ -72,7 +71,7 @@ import java.nio.ShortBuffer;
 			final FloatBuffer vertices, int sizeInBytesOfEachVertex, int vertexCount, int positionOffsetInBytes,
 			final ShortBuffer indices, int indexOffset, int indexCount) {
 		if (tag == null)
-			throw new GdxRuntimeException("tag cannot be null");
+			throw new BulletRuntimeException("tag cannot be null");
 		
 		btIndexedMesh result = getInstance(tag);
 		if (result == null) {
@@ -88,30 +87,7 @@ import java.nio.ShortBuffer;
 	 * this btIndexedMesh. Use by the static obtain(...) methods to avoid creating duplicate instances. */
 	public Object tag;
 	
-	/** Construct a new btIndexedMesh based on the supplied {@link Mesh}
-	 * The specified mesh must be indexed and triangulated and must outlive this btIndexedMesh.
-	 * The buffers for the vertices and indices are shared amonst both. */
-	public btIndexedMesh(final Mesh mesh) {
-		this();
-		set(mesh);
-	}
-	
-	/** Construct a new btIndexedMesh based on the supplied {@link MeshPart}
-	 * The specified mesh must be indexed and triangulated and must outlive this btIndexedMesh.
-	 * The buffers for the vertices and indices are shared amonst both. */
-	public btIndexedMesh(final MeshPart meshPart) {
-		this();
-		set(meshPart);
-	}
-	
-	/** Construct a new btIndexedMesh based on the supplied {@link Mesh}
-	 * The specified mesh must be indexed and triangulated and must outlive this btIndexedMesh.
-	 * The buffers for the vertices and indices are shared amonst both. */
-	public btIndexedMesh(final Mesh mesh, int offset, int count) {
-		this();
-		set(mesh, offset, count);
-	}
-	
+
 	/** Construct a new btIndexedMesh based on the supplied vertex and index data.
 	 * The specified data must be indexed and triangulated and must outlive this btIndexedMesh.
 	 * The buffers for the vertices and indices are shared amonst both. */	
@@ -120,51 +96,7 @@ import java.nio.ShortBuffer;
 		this();
 		set(vertices, sizeInBytesOfEachVertex, vertexCount, positionOffsetInBytes, indices, indexOffset, indexCount);
 	}
-	
-	/** Convenience method to set this btIndexedMesh to the specified {@link Mesh} 
-	 * The specified mesh must be indexed and triangulated and must outlive this btIndexedMesh.
-	 * The buffers for the vertices and indices are shared amonst both. */
-	public void set(final Mesh mesh) {
-		set(mesh, mesh, 0, mesh.getNumIndices());
-	}
-	
-	/** Convenience method to set this btIndexedMesh to the specified {@link Mesh} 
-	 * The specified mesh must be indexed and triangulated and must outlive this btIndexedMesh.
-	 * The buffers for the vertices and indices are shared amonst both. */
-	public void set(final Object tag, final Mesh mesh) {
-		set(tag, mesh, 0, mesh.getNumIndices());
-	}
 
-	/** Convenience method to set this btIndexedMesh to the specified {@link MeshPart} 
-	 * The specified mesh must be indexed and triangulated and must outlive this btIndexedMesh.
-	 * The buffers for the vertices and indices are shared amonst both. */
-	public void set(final MeshPart meshPart) {
-		if (meshPart.primitiveType != com.badlogic.gdx.graphics.GL20.GL_TRIANGLES)
-			throw new com.badlogic.gdx.utils.GdxRuntimeException("Mesh must be indexed and triangulated");
-		set(meshPart, meshPart.mesh, meshPart.offset, meshPart.size);
-	}
-	
-	/** Convenience method to set this btIndexedMesh to the specified {@link Mesh} 
-	 * The specified mesh must be indexed and triangulated and must outlive this btIndexedMesh.
-	 * The buffers for the vertices and indices are shared amonst both. */
-	public void set(final Mesh mesh, int offset, int count) {
-		set(null, mesh, offset, count);
-	}
-
-	/** Convenience method to set this btIndexedMesh to the specified {@link Mesh} 
-	 * The specified mesh must be indexed and triangulated and must outlive this btIndexedMesh.
-	 * The buffers for the vertices and indices are shared amonst both. */
-	public void set(final Object tag, final Mesh mesh, int offset, int count) {
-		if ((count <= 0) || ((count % 3) != 0))
-			throw new com.badlogic.gdx.utils.GdxRuntimeException("Mesh must be indexed and triangulated");
-
-		VertexAttribute posAttr = mesh.getVertexAttribute(Usage.Position);
-		
-		if (posAttr == null)
-			throw new com.badlogic.gdx.utils.GdxRuntimeException("Mesh doesn't have a position attribute");
-		
-		set(tag, mesh.getVerticesBuffer(), mesh.getVertexSize(), mesh.getNumVertices(), posAttr.offset, mesh.getIndicesBuffer(), offset, count);
-	}
 
 	/** Convenience method to set this btIndexedMesh to the specified vertex and index data. 
 	 * The specified data must be indexed and triangulated and must outlive this btIndexedMesh. */
@@ -201,7 +133,7 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.model.MeshPart;
 import com.badlogic.gdx.graphics.g3d.model.NodePart;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.BulletRuntimeException;
 %}
 
 %typemap(javacode) btTriangleIndexVertexArray %{
@@ -228,7 +160,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 		return true;
 	}
 
-	protected static <T extends Object> btTriangleIndexVertexArray getInstance(final Array<T> tags) {
+	protected static <T extends Object> btTriangleIndexVertexArray getInstance(final Collection<T> tags) {
 		for (final btTriangleIndexVertexArray instance : instances) {
 			if (compare(instance, tags))
 				return instance;
@@ -238,7 +170,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 	
 	/** Create or reuse a btTriangleIndexVertexArray instance based on the specified {@link MeshPart} array.
 	 * Use {@link #release()} to release the mesh when it's no longer needed. */
-	public static <T extends MeshPart> btTriangleIndexVertexArray obtain(final Array<T> meshParts) {
+	public static <T extends MeshPart> btTriangleIndexVertexArray obtain(final Collection<T> meshParts) {
 		btTriangleIndexVertexArray result = getInstance(meshParts);
 		if (result == null) {
 			result = new btTriangleIndexVertexArray(meshParts);

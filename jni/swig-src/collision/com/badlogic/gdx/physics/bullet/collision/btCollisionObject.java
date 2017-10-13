@@ -61,8 +61,8 @@ public class btCollisionObject extends BulletBase implements
 	}
 
 	/** Provides direct access to the instances this wrapper managed. */
-	public final static com.badlogic.gdx.utils.LongMap<btCollisionObject> instances = new com.badlogic.gdx.utils.LongMap<btCollisionObject>();
-	
+	public final static gnu.trove.map.TLongObjectMap<btCollisionObject> instances = new gnu.trove.map.hash.TLongObjectHashMap<>();
+
 	/** @return The existing instance for the specified pointer, or null if the instance doesn't exist */
 	public static btCollisionObject getInstance(final long swigCPtr) {
 		return swigCPtr == 0 ? null : instances.get(swigCPtr);

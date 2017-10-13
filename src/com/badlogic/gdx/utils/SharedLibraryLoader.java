@@ -121,7 +121,7 @@ public class SharedLibraryLoader {
                     loadFile(platformName);
                 setLoaded(libraryName);
             } catch (Throwable ex) {
-                throw new GdxRuntimeException("Couldn't load shared library '" + platformName + "' for target: "
+                throw new BulletRuntimeException("Couldn't load shared library '" + platformName + "' for target: "
                         + System.getProperty("os.name") + (is64Bit ? ", 64-bit" : ", 32-bit"), ex);
             }
         }
@@ -130,7 +130,7 @@ public class SharedLibraryLoader {
     private InputStream readFile (String path) {
         if (nativesJar == null) {
             InputStream input = SharedLibraryLoader.class.getResourceAsStream("/" + path);
-            if (input == null) throw new GdxRuntimeException("Unable to read file for extraction: " + path);
+            if (input == null) throw new BulletRuntimeException("Unable to read file for extraction: " + path);
             return input;
         }
         
@@ -138,10 +138,10 @@ public class SharedLibraryLoader {
         try {
             ZipFile file = new ZipFile(nativesJar);
             ZipEntry entry = file.getEntry(path);
-            if (entry == null) throw new GdxRuntimeException("Couldn't find '" + path + "' in JAR: " + nativesJar);
+            if (entry == null) throw new BulletRuntimeException("Couldn't find '" + path + "' in JAR: " + nativesJar);
             return file.getInputStream(entry);
         } catch (IOException ex) {
-            throw new GdxRuntimeException("Error reading '" + path + "' in JAR: " + nativesJar, ex);
+            throw new BulletRuntimeException("Error reading '" + path + "' in JAR: " + nativesJar, ex);
         }
     }
     
@@ -158,7 +158,7 @@ public class SharedLibraryLoader {
             File extractedFile = getExtractedFile(dirName, new File(sourcePath).getName());
             if (extractedFile == null) {
                 extractedFile = getExtractedFile(UUID.randomUUID().toString(), new File(sourcePath).getName());
-                if (extractedFile == null) throw new GdxRuntimeException(
+                if (extractedFile == null) throw new BulletRuntimeException(
                         "Unable to find writable path to extract file. Is the user home directory writable?");
             }
             return extractFile(sourcePath, sourceCrc, extractedFile);
@@ -272,7 +272,7 @@ public class SharedLibraryLoader {
                     output.write(buffer, 0, length);
                 }
             } catch (IOException ex) {
-                throw new GdxRuntimeException("Error extracting file: " + sourcePath + "\nTo: " + extractedFile.getAbsolutePath(),
+                throw new BulletRuntimeException("Error extracting file: " + sourcePath + "\nTo: " + extractedFile.getAbsolutePath(),
                         ex);
             } finally {
                 StreamUtils.closeQuietly(input);
@@ -318,7 +318,7 @@ public class SharedLibraryLoader {
             return;
         }
         
-        throw new GdxRuntimeException(ex);
+        throw new BulletRuntimeException(ex);
     }
     
     /** @return null if the file was extracted and loaded. */

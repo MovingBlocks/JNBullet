@@ -19,7 +19,7 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.model.MeshPart;
 import com.badlogic.gdx.graphics.g3d.model.NodePart;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.BulletRuntimeException;
 
 public class btTriangleIndexVertexArray extends btStridingMeshInterface {
 	private long swigCPtr;
@@ -87,7 +87,7 @@ public class btTriangleIndexVertexArray extends btStridingMeshInterface {
 		return true;
 	}
 
-	protected static <T extends Object> btTriangleIndexVertexArray getInstance(final Array<T> tags) {
+	protected static <T extends Object> btTriangleIndexVertexArray getInstance(final Collection<T> tags) {
 		for (final btTriangleIndexVertexArray instance : instances) {
 			if (compare(instance, tags))
 				return instance;
@@ -97,7 +97,7 @@ public class btTriangleIndexVertexArray extends btStridingMeshInterface {
 	
 	/** Create or reuse a btTriangleIndexVertexArray instance based on the specified {@link MeshPart} array.
 	 * Use {@link #release()} to release the mesh when it's no longer needed. */
-	public static <T extends MeshPart> btTriangleIndexVertexArray obtain(final Array<T> meshParts) {
+	public static <T extends MeshPart> btTriangleIndexVertexArray obtain(final Collection<T> meshParts) {
 		btTriangleIndexVertexArray result = getInstance(meshParts);
 		if (result == null) {
 			result = new btTriangleIndexVertexArray(meshParts);

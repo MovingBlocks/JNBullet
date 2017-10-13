@@ -16,8 +16,6 @@ import org.terasology.math.geom.Vector3f;
 import org.terasology.math.geom.Quat4f;
 import org.terasology.math.geom.Matrix3f;
 import org.terasology.math.geom.Matrix4f;
-import com.badlogic.gdx.graphics.Mesh;
-import com.badlogic.gdx.graphics.g3d.model.MeshPart;
 
 public class btSoftBody extends btCollisionObject {
 	private long swigCPtr;

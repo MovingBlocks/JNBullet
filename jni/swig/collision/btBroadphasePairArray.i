@@ -9,7 +9,7 @@
 	 * @param other The collision object the pair must contain (which itself is excluded from the result)
 	 * @param tempArray A temporary array used by the method, not more object than the length of this array are added 
 	 * @return The array specified by out */
-	public com.badlogic.gdx.utils.Array<btCollisionObject> getCollisionObjects(final com.badlogic.gdx.utils.Array<btCollisionObject> out, final btCollisionObject other, final int[] tempArray) {
+	public java.util.Collection<btCollisionObject> getCollisionObjects(final java.util.Collection<btCollisionObject> out, final btCollisionObject other, final int[] tempArray) {
 		final int c = getCollisionObjects(tempArray, tempArray.length, (int)btCollisionObject.getCPtr(other));
 		for (int i = 0; i < c; i++)
 			out.add(btCollisionObject.getInstance(tempArray[i], false));
