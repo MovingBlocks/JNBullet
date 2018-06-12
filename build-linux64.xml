@@ -19,7 +19,8 @@
 	<property name="gcc-opts" value="-c -Wall -O2 -mfpmath=sse -msse -fmessage-length=0 -m64 -fPIC"/>
 	<fileset id="gcc-files" dir=".">
 		<include name="natives/**/*.c"/>
-		<!--<include name="build/swig-src/**/*.c"/>-->
+		<include name="natives/memcpy_wrap.c"/>
+		<include name="build/swig-src/**/*.c"/>
 		<exclude name="natives/bullet/BulletMultiThreaded/GpuSoftBodySolvers/**"/>
 	</fileset>
 	
@@ -28,7 +29,7 @@
 	<property name="g++-opts" value="-c -Wall -O2 -mfpmath=sse -msse -fmessage-length=0 -m64 -fPIC -fno-strict-aliasing -fno-rtti -DBT_NO_PROFILE"/>
 	<fileset id="g++-files" dir=".">
 		<include name="natives/**/*.cpp"/>
-		<!--<include name="build/swig-src/**/*.cpp"/>-->
+		<include name="build/swig-src/**/*.cpp"/>
 		<exclude name="natives/bullet/BulletMultiThreaded/GpuSoftBodySolvers/**"/>
 	</fileset>
 
@@ -40,7 +41,7 @@
 	<!-- cleans the build directory, removes all object files and shared libs -->
 	<target name="clean">
 		<delete includeemptydirs="true" quiet="true">
-			<fileset dir="build/target/linux64"/>
+			<fileset dir="${buildDir}"/>
 			<fileset dir="${libsDir}" includes="**/*" excludes="**/.svn"/>
 		</delete>
 	</target>
@@ -73,7 +74,7 @@
 			<fileset refid="gcc-files"/>
 		</copy>
 		<delete>
-			<fileset dir="build/target/linux64">
+			<fileset dir="${buildDir}">
 				<include name="*"/>
 				<exclude name="*.o"/>
 			</fileset>
@@ -82,12 +83,13 @@
 
 	<!-- compiles all C and C++ files to object files in the build directory -->
 	<target name="compile" depends="create-build-dir" if="has-compiler">
-		<mkdir dir="build/target/linux64"/>
+		<mkdir dir="${buildDir}"/>
 		<apply failonerror="true" executable="${g++}" dest="${buildDir}" verbose="true">
 			<arg line="${g++-opts}"/>
-			<arg value="-Inaitves/jni-headers"/>
-			<arg value="-Inaitves/jni-headers/${jniPlatform}"/>
-			<!--<arg value="-Ibuild/swig-src"/>-->
+			<arg value="-Inatives/jni-headers"/>
+			<arg value="-Inatives/jni-headers/${jniPlatform}"/>
+			<arg value="-Inatives/."/>
+			<arg value="-Ibuild/swig-src/."/>
 			<arg value="-Inatives/bullet/"/>
 			<arg value="-Inatives/custom/"/>
 			<arg value="-Inatives/extras/Serialize/"/>
@@ -103,9 +105,10 @@
 		</apply>
 		<apply failonerror="true" executable="${gcc}" dest="${buildDir}" verbose="true">
 			<arg line="${gcc-opts}"/>
-			<arg value="-Inaitves/jni-headers"/>
-			<arg value="-Inaitves/jni-headers/${jniPlatform}"/>
-			<!--<arg value="-Ibuild/swig-src"/>-->
+			<arg value="-Inatives/jni-headers"/>
+			<arg value="-Inatives/jni-headers/${jniPlatform}"/>
+			<arg value="-Inatives/."/>
+			<arg value="-Ibuild/swig-src/."/>
 			<arg value="-Inatives/bullet/"/>
 			<arg value="-Inatives/custom/"/>
 			<arg value="-Inatives/extras/Serialize/"/>

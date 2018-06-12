@@ -18,23 +18,19 @@
 	<property name="gcc" value="${compilerPrefix}gcc${compilerSuffix}"/>	
 	<property name="gcc-opts" value="-c -Wall -O2 -arch i386 -DFIXED_POINT -fmessage-length=0 -fPIC -mmacosx-version-min=10.5"/>
 	<fileset id="gcc-files" dir="jni/">
-		<exclude name="target/"/>		
-				<include name="memcpy_wrap.c"/>
-		<include name="**/*.c"/>
-
-				<exclude name="natives/bullet/BulletMultiThreaded/GpuSoftBodySolvers/**"/>
-
+		<include name="natives/**/*.c"/>
+		<include name="natives/memcpy_wrap.c"/>
+		<include name="build/swig-src/**/*.c"/>
+		<exclude name="natives/bullet/BulletMultiThreaded/GpuSoftBodySolvers/**"/>
 	</fileset>
 	
 	<!-- define g++ compiler, options and files to compile -->
 	<property name="g++" value="${compilerPrefix}g++${compilerSuffix}"/>
 	<property name="g++-opts" value="-c -Wall -O2 -arch i386 -DFIXED_POINT -fmessage-length=0 -fPIC -mmacosx-version-min=10.5 -fno-strict-aliasing -fno-rtti -DBT_NO_PROFILE"/>
 	<fileset id="g++-files" dir="jni/">
-		<exclude name="target/"/>
-				<include name="**/*.cpp"/>
-
-				<exclude name="natives/bullet/BulletMultiThreaded/GpuSoftBodySolvers/**"/>
-
+		<include name="natives/**/*.cpp"/>
+		<include name="build/swig-src/**/*.cpp"/>
+		<exclude name="natives/bullet/BulletMultiThreaded/GpuSoftBodySolvers/**"/>
 	</fileset>
 
 	<!-- define linker and options -->
@@ -90,10 +86,11 @@
 		<mkdir dir="${buildDir}"/>
 		<apply failonerror="true" executable="${g++}" dest="${buildDir}" verbose="true">
 			<arg line="${g++-opts}"/>
-			<arg value="-Ijni-headers"/>
-			<arg value="-Ijni-headers/${jniPlatform}"/>
-			<arg value="-I."/>
-						<arg value="-Inatives/bullet/"/>
+			<arg value="-Inatives/jni-headers"/>
+			<arg value="-Inatives/jni-headers/${jniPlatform}"/>
+			<arg value="-Inatives/."/>
+			<arg value="-Ibuild/swig-src/."/>
+			<arg value="-Inatives/bullet/"/>
 			<arg value="-Inatives/custom/"/>
 			<arg value="-Inatives/extras/Serialize/"/>
 
@@ -108,10 +105,11 @@
 		</apply>
 		<apply failonerror="true" executable="${gcc}" dest="${buildDir}" verbose="true">
 			<arg line="${gcc-opts}"/>
-			<arg value="-Ijni-headers"/>
-			<arg value="-Ijni-headers/${jniPlatform}"/>
-			<arg value="-I."/>
-						<arg value="-Inatives/bullet/"/>
+			<arg value="-Inatives/jni-headers"/>
+			<arg value="-Inatives/jni-headers/${jniPlatform}"/>
+			<arg value="-Inatives/."/>
+			<arg value="-Ibuild/swig-src/."/>
+			<arg value="-Inatives/bullet/"/>
 			<arg value="-Inatives/custom/"/>
 			<arg value="-Inatives/extras/Serialize/"/>
 

@@ -4,7 +4,7 @@
 	<!-- output directory for temporary object files -->
 	<property name="buildDir" value="build/target/linux32" />
 	<!-- output directory for the shared library -->
-	<property name="libsDir" value="../libs" />
+	<property name="libsDir" value="build/libs" />
 	<!-- the name of the shared library -->
 	<property name="libName" value="libgdx-bullet.so"/>
 	<!-- the jni header jniPlatform to use -->
@@ -18,23 +18,19 @@
 	<property name="gcc" value="${compilerPrefix}gcc${compilerSuffix}"/>
 	<property name="gcc-opts" value="-c -Wall -O2 -mfpmath=sse -msse -fmessage-length=0 -m32 -fPIC"/>
 	<fileset id="gcc-files" dir="./">
-		<exclude name="target/"/>
-		<include name="natives/memcpy_wrap.c"/>
 		<include name="natives/**/*.c"/>
-
+		<include name="natives/memcpy_wrap.c"/>
+		<include name="build/swig-src/**/*.c"/>
 		<exclude name="natives/bullet/BulletMultiThreaded/GpuSoftBodySolvers/**"/>
-
 	</fileset>
 
 	<!-- define g++ compiler, options and files to compile -->
 	<property name="g++" value="${compilerPrefix}g++${compilerSuffix}"/>
 	<property name="g++-opts" value="-c -Wall -O2 -mfpmath=sse -msse -fmessage-length=0 -m32 -fPIC -fno-strict-aliasing -fno-rtti -DBT_NO_PROFILE"/>
 	<fileset id="g++-files" dir="./">
-		<exclude name="target/"/>
-		<include name="**/*.cpp"/>
-
+		<include name="natives/**/*.cpp"/>
+		<include name="build/swig-src/**/*.cpp"/>
 		<exclude name="natives/bullet/BulletMultiThreaded/GpuSoftBodySolvers/**"/>
-
 	</fileset>
 
 	<!-- define linker and options -->
@@ -92,7 +88,8 @@
 			<arg line="${g++-opts}"/>
 			<arg value="-Inatives/jni-headers"/>
 			<arg value="-Inatives/jni-headers/${jniPlatform}"/>
-			<arg value="-I"/>
+			<arg value="-Inatives/."/>
+			<arg value="-Ibuild/swig-src/."/>
 			<arg value="-Inatives/bullet/"/>
 			<arg value="-Inatives/custom/"/>
 			<arg value="-Inatives/extras/Serialize/"/>
@@ -110,7 +107,8 @@
 			<arg line="${gcc-opts}"/>
 			<arg value="-Inatives/jni-headers"/>
 			<arg value="-Inatives/jni-headers/${jniPlatform}"/>
-			<arg value="-I."/>
+			<arg value="-Inatives/."/>
+			<arg value="-Ibuild/swig-src/."/>
 			<arg value="-Inatives/bullet/"/>
 			<arg value="-Inatives/custom/"/>
 			<arg value="-Inatives/extras/Serialize/"/>
