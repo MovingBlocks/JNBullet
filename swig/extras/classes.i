@@ -1,0 +1,7 @@
+SPECIFY_CLASS(Extras, org.terasology.bullet.extras)
+SPECIFY_CLASS(ExtrasJNI, org.terasology.bullet.extras)
+SPECIFY_CLASS(SWIGTYPE_p_bParse__btBulletFile, org.terasology.bullet.extras)
+SPECIFY_CLASS(SWIGTYPE_p_btGearConstraint, org.terasology.bullet.extras)
+SPECIFY_CLASS(btBulletWorldImporter, org.terasology.bullet.extras)
+SPECIFY_CLASS(btStringArray, org.terasology.bullet.extras)
+SPECIFY_CLASS(btWorldImporter, org.terasology.bullet.extras)

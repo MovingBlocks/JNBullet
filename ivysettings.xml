@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-settings>
+    <settings defaultResolver="main" />
+    <resolvers>
+        <chain name="main">
+            <ibiblio name="central" m2compatible="true"/>
+            <ibiblio name="public" m2compatible="true" root="http://artifactory.terasology.org/artifactory/virtual-repo-live" />
+        </chain>
+    </resolvers>
+</ivy-settings>
