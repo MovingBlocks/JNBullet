@@ -14,16 +14,16 @@
  * limitations under the License.
  ******************************************************************************/
 
-package com.badlogic.gdx.physics.bullet;
+package org.terasology.bullet;
 
-import com.badlogic.gdx.physics.bullet.linearmath.LinearMath;
-import com.badlogic.gdx.physics.bullet.linearmath.LinearMathConstants;
-import com.badlogic.gdx.utils.BulletRuntimeException;
-import com.badlogic.gdx.utils.SharedLibraryLoader;
+import org.terasology.bullet.utils.BulletRuntimeException;
+import org.terasology.bullet.utils.SharedLibraryLoader;
+import org.terasology.bullet.BulletConstants;
+import org.terasology.bullet.linearmath.LinearMath;
 
 public class Bullet {
 	/** The version of the Bullet library used by this wrapper. */
-	public final static int VERSION = LinearMathConstants.BT_BULLET_VERSION;
+	public final static int VERSION = BulletConstants.BT_BULLET_VERSION;
 
 	protected static boolean useRefCounting = false;
 	protected static boolean enableLogging = true;
@@ -50,7 +50,7 @@ public class Bullet {
 	public static void init (boolean useRefCounting, boolean logging) {
 		Bullet.useRefCounting = useRefCounting;
 		Bullet.enableLogging = logging;
-		new SharedLibraryLoader().load("gdx-bullet");
+		new SharedLibraryLoader().load("libgdx-bullet");
 		final int version = LinearMath.btGetVersion();
 		if (version != VERSION)
 			throw new BulletRuntimeException("Bullet binaries version (" + version + ") does not match source version (" + VERSION

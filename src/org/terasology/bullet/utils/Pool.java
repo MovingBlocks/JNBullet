@@ -14,7 +14,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-package com.badlogic.gdx.utils;
+package org.terasology.bullet.utils;
 
 import com.google.common.collect.Queues;
 

@@ -14,10 +14,10 @@
  * limitations under the License.
  ******************************************************************************/
 
-package com.badlogic.gdx.physics.bullet;
+package org.terasology.bullet;
 
 
-import com.badlogic.gdx.utils.Disposable;
+import org.terasology.bullet.utils.Disposable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

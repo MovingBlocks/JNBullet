@@ -1,4 +1,4 @@
-package com.badlogic.gdx.utils;
+package org.terasology.bullet.utils;
 
 public class BulletRuntimeException extends RuntimeException{
     public BulletRuntimeException (String message) {

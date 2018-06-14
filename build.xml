@@ -1,5 +1,5 @@
 <project xmlns:ivy="antlib:org.apache.ivy.ant" name="TerraBullet" default="run">
-    <target name="run" description="--> retrieve dependencies with ivy">
+    <target name="lib" description="--> retrieve dependencies with ivy">
         <ivy:retrieve />
     </target>
 
@@ -28,15 +28,6 @@
             </ant>
     </target>
 
-    <target name="clean">
-        <ant antfile="build-windows32.xml" target="clean"/>
-        <ant antfile="build-windows64.xml" target="clean"/>
-        <ant antfile="build-linux32.xml" target="clean"/>
-        <ant antfile="build-linux64.xml" target="clean"/>
-        <ant antfile="build-android32.xml" target="clean"/>
-
-    </target>
-
     <target name="compile_natives">
         <ant antfile="build-windows32.xml"/>
         <ant antfile="build-windows64.xml"/>
@@ -46,15 +37,40 @@
 
     </target>
 
-    <!--<target name="pack_natives">-->
-        <!--&lt;!&ndash;<jar destfile="../libs/gdx-bullet-natives.jar">&ndash;&gt;-->
-        <!--<fileset dir="../libs" includes="gdx-bullet.dll" erroronmissingdir="false"/>-->
-        <!--<fileset dir="../libs" includes="gdx-bullet64.dll" erroronmissingdir="false"/>-->
-        <!--<fileset dir="../libs" includes="libgdx-bullet.so" erroronmissingdir="false"/>-->
-        <!--<fileset dir="../libs" includes="libgdx-bullet64.so" erroronmissingdir="false"/>-->
-        <!--<fileset dir="../libs" includes="libgdx-bullet.dylib" erroronmissingdir="false"/>-->
-        <!--<fileset dir="../libs" includes="libgdx-bullet64.dylib" erroronmissingdir="false"/>-->
 
-        <!--&lt;!&ndash;</jar>&ndash;&gt;-->
-    <!--</target>-->
+    <target name="compile_classes">
+        <mkdir dir="build/classes"/>
+
+        <javac destdir="build/classes" >
+            <src path="build/swig-src/collision"></src>
+            <src path="build/swig-src/dynamics"></src>
+            <src path="build/swig-src/extras"></src>
+            <src path="build/swig-src/linearmath"></src>
+            <src path="build/swig-src/softbody"></src>
+            <src path="src"></src>
+            <classpath>
+                <pathelement path="lib/TeraMath-1.4.0.jar"></pathelement>
+                <pathelement path="lib/trove4j-3.0.3.jar"></pathelement>
+                <pathelement path="lib/guava-25.1-jre.jar"></pathelement>
+                <pathelement path="lib/slf4j-api-1.7.12.jar"></pathelement>
+            </classpath>
+        </javac>
+        <copy todir="build/classes/org/terasology/bullet/utils" flatten="true">
+            <fileset dir="build/libs" includes="*/**"></fileset>
+        </copy>
+    </target>
+    <target name="compile_jar">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/TeraBullet.jar" basedir="build/classes"></jar>
+    </target>
+
+    <target name="clean">
+        <delete includeemptydirs="true" quiet="true">
+            <fileset dir="build"/>
+        </delete>
+    </target>
+
+    <target name="run" depends="clean,lib,swig,compile_natives,compile_classes,compile_jar">
+
+    </target>
 </project>
