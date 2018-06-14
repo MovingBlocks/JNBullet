@@ -34,7 +34,6 @@
         <ant antfile="build-linux32.xml"/>
         <ant antfile="build-linux64.xml"/>
         <!--<ant antfile="build-android32.xml"/>-->
-
     </target>
 
 
@@ -55,7 +54,7 @@
                 <pathelement path="lib/slf4j-api-1.7.12.jar"></pathelement>
             </classpath>
         </javac>
-        <copy todir="build/classes/org/terasology/bullet/utils" flatten="true">
+        <copy todir="build/classes" flatten="true">
             <fileset dir="build/libs" includes="*/**"></fileset>
         </copy>
     </target>
