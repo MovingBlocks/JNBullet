@@ -34,7 +34,7 @@
 	  
 	  static jfieldID poolField = NULL;
 	  if (poolField == NULL) {
-		poolField = jenv->GetStaticFieldID(tempClass, poolName, "Lcom/badlogic/gdx/utils/Pool;");
+		poolField = jenv->GetStaticFieldID(tempClass, poolName, "Lorg/terasology/bullet/utils/Pool;");
 	  }
 	  
 	  jobject poolObject = jenv->GetStaticObjectField(tempClass, poolField);
@@ -58,7 +58,7 @@
 	  
 	  static jfieldID poolField = NULL;
 	  if (poolField == NULL) {
-		poolField = jenv->GetStaticFieldID(tempClass, poolName, "Lcom/badlogic/gdx/utils/Pool;");
+		poolField = jenv->GetStaticFieldID(tempClass, poolName, "Lorg/terasology/bullet/utils/Pool;");
 	  }
 	  
 	  jobject poolObject = jenv->GetStaticObjectField(tempClass, poolField);

@@ -36,6 +36,24 @@
         <!--<ant antfile="build-android32.xml"/>-->
     </target>
 
+    <target name="update_classes">
+        <ant antfile="build-swig.xml" target="update_class_list">
+            <property name="module.name" value="linearmath" />
+        </ant>
+        <ant antfile="build-swig.xml" target="update_class_list">
+            <property name="module.name" value="collision" />
+        </ant>
+        <ant antfile="build-swig.xml" target="update_class_list">
+            <property name="module.name" value="dynamics" />
+        </ant>
+        <ant antfile="build-swig.xml" target="update_class_list">
+            <property name="module.name" value="softbody" />
+        </ant>
+        <ant antfile="build-swig.xml" target="update_class_list">
+            <property name="module.name" value="extras" />
+        </ant>
+    </target>
+
 
     <target name="compile_classes">
         <mkdir dir="build/classes"/>
@@ -62,6 +80,8 @@
         <mkdir dir="build/jar"/>
         <jar destfile="build/jar/TeraBullet.jar" basedir="build/classes"></jar>
     </target>
+
+
 
     <target name="clean">
         <delete includeemptydirs="true" quiet="true">

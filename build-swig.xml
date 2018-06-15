@@ -6,9 +6,7 @@
 
 	<target name="clean">
 		<echo message="Deleting previously generated files in build/swig-src/${module.name}" level="info" />
-
 		<mkdir dir="build/swig-src/${module.name}" />
-
 		<delete>
 			<fileset dir="build/swig-src/${module.name}" includes="**/*" />
 		</delete>
@@ -58,19 +56,22 @@
 		    token="weak_global_ = weak_global || !mem_own;"
 		    value="weak_global_ = !mem_own;" />
 	</target>
-	<!---->
-	<!--<target name="list_classes">-->
-		<!--<fileset id="classes" dir="${dir.out}" includes="**/*.java" />-->
-		<!--<pathconvert property="classlist" refid="classes" pathsep="${line.separator}" />-->
-		<!--<echo file="${dir.out}/classes.i" message="${classlist}" />-->
-		<!--<replace file="${dir.out}/classes.i" token="${dir.out}" value="" />-->
-		<!--<replace file="${dir.out}/classes.i" token="/" value="." />-->
-		<!--<replace file="${dir.out}/classes.i" token="\" value="." />-->
-		<!--<replaceregexp file="${dir.out}/classes.i" flags="g">-->
-			<!--<regexp pattern="\.([a-z0-9]+([\.][a-z0-9]+)+)\.([^\.]+)\.java" />-->
-			<!--<substitution expression="SPECIFY_CLASS(\3, \1)" />-->
-		<!--</replaceregexp>-->
-	<!--</target>-->
+
+
+
+	<target name="update_class_list">
+		<fileset id="classes" dir="build/swig-src/${module.name}" includes="**/*.java" />
+		<pathconvert property="classlist" refid="classes" pathsep="${line.separator}" />
+		<echo file="swig/${module.name}/classes.i" message="${classlist}" />
+		<replace file="swig/${module.name}/classes.i" token="${basedir}/build/swig-src/${module.name}" value="" />
+		<replace file="swig/${module.name}/classes.i" token="swig/${module.name}" value="" />
+		<replace file="swig/${module.name}/classes.i" token="/" value="." />
+		<replace file="swig/${module.name}/classes.i" token="\" value="." />
+		<replaceregexp file="swig/${module.name}/classes.i" flags="g">
+			<regexp pattern="\.([a-z0-9]+([\.][a-z0-9]+)+)\.([^\.]+)\.java" />
+			<substitution expression="SPECIFY_CLASS(\3, \1)" />
+		</replaceregexp>
+	</target>
 
 	<target name="all" depends="clean,gen,fix_casts,remove_weak_global">
 		<echo message="Wrapper files generated for collision." level="info" />
