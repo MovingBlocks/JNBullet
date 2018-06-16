@@ -92,7 +92,7 @@ nuiEditorAutosave.json
 /unittesthome/
 
 # Ignore stuff we extract for use with Terasology
-/natives/
+
 config/metrics/
 
 
