@@ -20,6 +20,7 @@ import org.terasology.bullet.utils.BulletRuntimeException;
 import org.terasology.bullet.utils.SharedLibraryLoader;
 import org.terasology.bullet.BulletConstants;
 import org.terasology.bullet.linearmath.LinearMath;
+import org.terasology.bullet.NativeLoader;
 
 public class Bullet {
 	/** The version of the Bullet library used by this wrapper. */
@@ -50,7 +51,7 @@ public class Bullet {
 	public static void init (boolean useRefCounting, boolean logging) {
 		Bullet.useRefCounting = useRefCounting;
 		Bullet.enableLogging = logging;
-		new SharedLibraryLoader().load("gdx-bullet");
+		NativeLoader.getInstance().load();
 		final int version = LinearMath.btGetVersion();
 		if (version != VERSION)
 			throw new BulletRuntimeException("Bullet binaries version (" + version + ") does not match source version (" + VERSION

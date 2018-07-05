@@ -6,7 +6,7 @@
 	<!-- output directory for the shared library -->
 	<property name="libsDir" value="build/libs" />
 	<!-- the name of the shared library -->
-	<property name="libName" value="gdx-bullet64.dll"/>
+	<property name="libName" value="bullet-windows-amd64.dll"/>
 	<!-- the jni header jniPlatform to use -->
 	<property name="jniPlatform" value="win32"/>
 	<!-- the compilerPrefix for the C & C++ compilers -->
