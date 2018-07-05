@@ -63,12 +63,12 @@ public final class NativeLoader {
 	 * Loads the library.
 	 */
 	public interface Loader {
-		public void load(Class src);
+		public void load();
 	}
 
 	private class DefaultLoader implements Loader {
 		@Override
-		public void load(Class src) {
+		public void load() {
 			// Generate library name.
 			StringBuilder builder = new StringBuilder("bullet-");
 
