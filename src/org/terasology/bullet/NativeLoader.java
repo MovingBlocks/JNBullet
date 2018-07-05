@@ -14,7 +14,7 @@ package org.terasology.bullet;
  */
 public final class NativeLoader {
 	// -- Static
-	private static final NativeSupport INSTANCE = new NativeSupport();
+	private static final NativeLoader INSTANCE = new NativeLoader();
 
 	// -- State
 	private Loader loader = new DefaultLoader();
@@ -24,7 +24,7 @@ public final class NativeLoader {
 	 * 
 	 * @return the instance
 	 */
-	public static NativeSupport getInstance() {
+	public static NativeLoader getInstance() {
 		return INSTANCE;
 	}
 
@@ -32,7 +32,7 @@ public final class NativeLoader {
 	/**
 	 * Private constructor to prevent external instantiation.
 	 */
-	private NativeSupport() {
+	private NativeLoader() {
 	}
 
 	// -- Properties
