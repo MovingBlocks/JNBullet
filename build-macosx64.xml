@@ -4,9 +4,9 @@
 	<!-- output directory for temporary object files -->
 	<property name="buildDir" value="build/target/macosx64" />
 	<!-- output directory for the shared library -->
-	<property name="libsDir" value="build/libs" />
+	<property name="libsDir" value="native-build" />
 	<!-- the name of the shared library -->
-	<property name="libName" value="bullet-osx-amd64.so"/>
+	<property name="libName" value="libbullet-osx-amd64.so"/>
 	<!-- the jni header jniPlatform to use -->
 	<property name="jniPlatform" value="mac"/>
 	<!-- the compilerPrefix for the C & C++ compilers -->
@@ -20,7 +20,7 @@
 	<fileset id="gcc-files" dir="jni/">
 		<include name="natives/**/*.c"/>
 		<include name="natives/memcpy_wrap.c"/>
-		<include name="build/swig-src/**/*.c"/>
+		<include name="build/swig/**/*.c"/>
 		<exclude name="natives/bullet/BulletMultiThreaded/GpuSoftBodySolvers/**"/>
 	</fileset>
 	
@@ -29,7 +29,7 @@
 	<property name="g++-opts" value="-c -Wall -O2 -arch x86_64 -DFIXED_POINT -fmessage-length=0 -fPIC -mmacosx-version-min=10.5 -fno-strict-aliasing -fno-rtti -DBT_NO_PROFILE"/>
 	<fileset id="g++-files" dir="jni/">
 		<include name="natives/**/*.cpp"/>
-		<include name="build/swig-src/**/*.cpp"/>
+		<include name="build/swig/**/*.cpp"/>
 		<exclude name="natives/bullet/BulletMultiThreaded/GpuSoftBodySolvers/**"/>
 	</fileset>
 
@@ -89,7 +89,7 @@
 			<arg value="-Inatives/jni-headers"/>
 			<arg value="-Inatives/jni-headers/${jniPlatform}"/>
 			<arg value="-Inatives/."/>
-			<arg value="-Ibuild/swig-src/."/>
+			<arg value="-Ibuild/swig/."/>
 			<arg value="-Inatives/bullet/"/>
 			<arg value="-Inatives/custom/"/>
 			<arg value="-Inatives/extras/Serialize/"/>
@@ -108,7 +108,7 @@
 			<arg value="-Inatives/jni-headers"/>
 			<arg value="-Inatives/jni-headers/${jniPlatform}"/>
 			<arg value="-Inatives/."/>
-			<arg value="-Ibuild/swig-src/."/>
+			<arg value="-Ibuild/swig/."/>
 			<arg value="-Inatives/bullet/"/>
 			<arg value="-Inatives/custom/"/>
 			<arg value="-Inatives/extras/Serialize/"/>

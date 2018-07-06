@@ -1,0 +1,39 @@
+
+plugins {
+    id 'java'
+    id 'idea'
+//    id 'net.minecrell.licenser' version '0.3'
+}
+
+ext{
+    generatedSrcDir = 'src/generated/java'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir generatedSrcDir
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+//license {
+//    header = project.file('LICENSE.txt')
+//}
+
+
+
+dependencies {
+    compile group: 'org.terasology', name: 'TeraMath', version: '1.4.0'
+//    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.12'
+    compile group: 'com.google.guava', name: 'guava', version: '23.0'
+    compile group: 'net.sf.trove4j', name: 'trove4j', version: '3.0.3'
+//    compile "com.badlogicgames.gdx:gdx:1.9.7-SNAPSHOT"
+}

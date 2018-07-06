@@ -55,33 +55,9 @@
     </target>
 
 
-    <target name="compile_classes">
-        <mkdir dir="build/classes"/>
-
-        <javac destdir="build/classes" >
-            <src path="build/swig-src/collision"></src>
-            <src path="build/swig-src/dynamics"></src>
-            <src path="build/swig-src/extras"></src>
-            <src path="build/swig-src/linearmath"></src>
-            <src path="build/swig-src/softbody"></src>
-            <src path="src"></src>
-            <classpath>
-                <pathelement path="lib/TeraMath-1.4.0.jar"></pathelement>
-                <pathelement path="lib/trove4j-3.0.3.jar"></pathelement>
-                <pathelement path="lib/guava-25.1-jre.jar"></pathelement>
-                <pathelement path="lib/slf4j-api-1.7.12.jar"></pathelement>
-            </classpath>
-        </javac>
-        <copy todir="build/classes" flatten="true">
-            <fileset dir="build/libs" includes="*/**"></fileset>
-        </copy>
+    <target name="setup">
+        <mkdir dir="native-build" />
     </target>
-    <target name="compile_jar">
-        <mkdir dir="build/jar"/>
-        <jar destfile="build/jar/TeraBullet.jar" basedir="build/classes"></jar>
-    </target>
-
-
 
     <target name="clean">
         <delete includeemptydirs="true" quiet="true">
@@ -89,7 +65,7 @@
         </delete>
     </target>
 
-    <target name="run" depends="clean,lib,swig,compile_natives,compile_classes,compile_jar">
+    <target name="run" depends="clean,setup,swig,compile_natives">
 
     </target>
 </project>
