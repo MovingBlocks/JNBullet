@@ -55,7 +55,19 @@ struct btVoxelInfo
 	btScalar			m_rollingFriction;
 
 	/**@brief No initialization constructor */
-	SIMD_FORCE_INLINE btVoxelInfo() {}
+	SIMD_FORCE_INLINE btVoxelInfo():
+	m_tracable(0),
+	m_blocking(0),
+    m_voxelTypeId(0),
+    m_x(0),
+    m_y(0),
+    m_z(0),
+    m_collisionShape(0),
+    m_collisionOffset(btVector3(0,0,0)),
+    m_friction(0),
+    m_restitution(0),
+    m_rollingFriction(0)
+	{}
 
 	/**@brief Copy constructor */
 	SIMD_FORCE_INLINE btVoxelInfo (const btVoxelInfo& other)
@@ -88,7 +100,7 @@ struct btVoxelInfo
 /// Provider of voxel information for a given voxel position
 struct btVoxelContentProvider
 {
-	virtual void getVoxel(int x, int y, int z, const btVoxelInfo& voxelInfo) const = 0;
+	virtual btVoxelInfo getVoxel(int x, int y, int z) const = 0;
 	virtual ~btVoxelContentProvider() {}
 };
 

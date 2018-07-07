@@ -138,8 +138,7 @@ void btVoxelCollisionAlgorithm::processCollision (const btCollisionObjectWrapper
 	btVoxelContentProvider*  contentProvider = voxelShape->getContentProvider();
 	for (i = 0; i < numChildren; ++i) {
 		btVoxelCollisionInfo& collisionInfo = m_voxelCollisionInfo[i];
-		btVoxelInfo info;
-		contentProvider->getVoxel(collisionInfo.position.x, collisionInfo.position.y, collisionInfo.position.z, info);
+		btVoxelInfo info = contentProvider->getVoxel(collisionInfo.position.x, collisionInfo.position.y, collisionInfo.position.z);
 		if (collisionInfo.algorithm) {
 			// Remove old algorithm if necessary
 			if (!info.m_blocking || info.m_voxelTypeId != collisionInfo.voxelTypeId || info.m_collisionShape->getShapeType() != collisionInfo.shapeType) {

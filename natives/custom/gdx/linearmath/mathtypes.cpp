@@ -187,15 +187,13 @@ inline void matrix4_ensurefields(JNIEnv * const &jenv, jobject &m4) {
 void Matrix4f_to_btTransform(JNIEnv * const &jenv, btTransform &target, jobject &source)
 {
 	matrix4_ensurefields(jenv, source);
-	jfloat * elements = new jfloat[16] {
+	jfloat elements[16]= {
 	    jenv->GetFloatField(source, matrix4_m00), jenv->GetFloatField(source, matrix4_m01), jenv->GetFloatField(source, matrix4_m02), jenv->GetFloatField(source, matrix4_m03),
     	jenv->GetFloatField(source, matrix4_m10), jenv->GetFloatField(source, matrix4_m11), jenv->GetFloatField(source, matrix4_m12), jenv->GetFloatField(source, matrix4_m13),
     	jenv->GetFloatField(source, matrix4_m20), jenv->GetFloatField(source, matrix4_m21), jenv->GetFloatField(source, matrix4_m22), jenv->GetFloatField(source, matrix4_m23),
 	    jenv->GetFloatField(source, matrix4_m30), jenv->GetFloatField(source, matrix4_m31), jenv->GetFloatField(source, matrix4_m32), jenv->GetFloatField(source, matrix4_m33)
     };
 	target.setFromOpenGLMatrix(elements);
-
-	delete [] elements;
 
 }
 

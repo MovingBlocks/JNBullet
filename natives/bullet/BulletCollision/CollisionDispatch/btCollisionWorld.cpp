@@ -651,8 +651,7 @@ void	btCollisionWorld::rayTestSingleInternal(const btTransform& rayFromTrans,con
                 }
 
                 for(; number > 0; --number) {
-                    btVoxelInfo childInfo;
-                    contentProvider->getVoxel(currentVoxX, currentVoxY, currentVoxZ, childInfo);
+                    btVoxelInfo childInfo = contentProvider->getVoxel(currentVoxX, currentVoxY, currentVoxZ);
                     if (childInfo.m_tracable) {
                         btVector3 pos = btVector3(currentVoxX, currentVoxY, currentVoxZ);
                         pos += childInfo.m_collisionOffset;
@@ -947,8 +946,7 @@ void	btCollisionWorld::objectQuerySingleInternal(const btConvexShape* castShape,
             for (int x = minX; x <= maxX; ++x) {
                 for (int y = minY; y <= maxY; ++y) {
                     for (int z = minZ; z <= maxZ; ++z) {
-                        btVoxelInfo childInfo;
-                        contentProvider->getVoxel(x, y, z, childInfo);
+                        btVoxelInfo childInfo = contentProvider->getVoxel(x, y, z);
                         if(!childInfo.m_blocking){
                             continue;
                         }

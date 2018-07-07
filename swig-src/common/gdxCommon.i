@@ -5,6 +5,7 @@
 %typemap("javapackage") TYPE, TYPE *, TYPE & gdxToString(PACKAGE);
 %enddef
 
+
 %{
 #include <gdx/common/jniHelpers.h>
 %}

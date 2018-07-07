@@ -22,7 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class BulletBase implements Disposable {
-	private static final Logger logger = LoggerFactory.getLogger(BulletBase.class);
+	//private static final Logger logger = LoggerFactory.getLogger(BulletBase.class);
 
 	private long cPointer;
 	protected boolean swigCMemOwn;
@@ -102,8 +102,8 @@ public class BulletBase implements Disposable {
 
 	@Override
 	public void dispose () {
-		if (refCount > 0 && Bullet.useRefCounting && Bullet.enableLogging)
-			logger.error("Bullet", "Disposing "+toString()+" while it still has "+refCount+" references.");
+		//if (refCount > 0 && Bullet.useRefCounting && Bullet.enableLogging)
+		//	logger.error("Bullet", "Disposing "+toString()+" while it still has "+refCount+" references.");
 		disposed = true;
 		delete();
 	}
@@ -120,24 +120,24 @@ public class BulletBase implements Disposable {
 	
 	protected void destroy() {
 		try {
-			if (destroyed && Bullet.enableLogging)
-				logger.error("Bullet", "Already destroyed "+toString());
+			//if (destroyed && Bullet.enableLogging)
+			//	logger.error("Bullet", "Already destroyed "+toString());
 			destroyed = true;
 			
 			if (swigCMemOwn && !disposed) {
-				if (Bullet.enableLogging)
-					logger.error("Bullet", "Disposing "+toString()+" due to garbage collection.");
+				//if (Bullet.enableLogging)
+				//	logger.error("Bullet", "Disposing "+toString()+" due to garbage collection.");
 				dispose();
 			}
 		} catch(Throwable e) {
-			logger.error("Bullet", "Exception while destroying "+toString(), e);
+			//logger.error("Bullet", "Exception while destroying "+toString(), e);
 		}
 	}
 	
 	@Override
 	protected void finalize() throws Throwable {
-		if (!destroyed && Bullet.enableLogging)
-			logger.error("Bullet", "The "+className+" class does not override the finalize method.");
+		//if (!destroyed && Bullet.enableLogging)
+		//	logger.error("Bullet", "The "+className+" class does not override the finalize method.");
 		super.finalize();
 	}
 }
