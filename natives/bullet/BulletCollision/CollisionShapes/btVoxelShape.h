@@ -55,10 +55,7 @@ struct btVoxelInfo
 	btScalar			m_rollingFriction;
 
 	/**@brief No initialization constructor */
-	SIMD_FORCE_INLINE btVoxelInfo(): m_collisionOffset(btVector3(btScalar(0.),btScalar(0.),btScalar(0.)))
-	{
-
-	}
+	SIMD_FORCE_INLINE btVoxelInfo() {}
 
 	/**@brief Copy constructor */
 	SIMD_FORCE_INLINE btVoxelInfo (const btVoxelInfo& other)
@@ -75,7 +72,6 @@ struct btVoxelInfo
               m_collisionOffset(other.m_collisionOffset)
 	{
 	}
-
 
 	/**@brief Constructor from scalars
 	* @param x X value

@@ -26,12 +26,18 @@
             <ant antfile="build-swig.xml">
                 <property name="module.name" value="extras" />
             </ant>
+
+            <echo message="Generating extras wrapper" level="info" />
+            <ant antfile="build-swig.xml">
+                <property name="module.name" value="inversedynamics" />
+            </ant>
+
     </target>
 
     <target name="compile_natives">
-        <ant antfile="build-windows32.xml"/>
-        <ant antfile="build-windows64.xml"/>
-        <ant antfile="build-linux32.xml"/>
+        <!--<ant antfile="build-windows32.xml"/>-->
+        <!--<ant antfile="build-windows64.xml"/>-->
+        <!--<ant antfile="build-linux32.xml"/>-->
         <ant antfile="build-linux64.xml"/>
         <!--<ant antfile="build-android32.xml"/>-->
     </target>
@@ -52,6 +58,11 @@
         <ant antfile="build-swig.xml" target="update_class_list">
             <property name="module.name" value="extras" />
         </ant>
+
+        <echo message="Generating extras wrapper" level="info" />
+        <ant antfile="build-swig.xml" target="update_class_list">
+            <property name="module.name" value="inversedynamics" />
+        </ant>
     </target>
 
 
@@ -62,6 +73,7 @@
     <target name="clean">
         <delete includeemptydirs="true" quiet="true">
             <fileset dir="build"/>
+            <fileset dir="native-build"/>
         </delete>
     </target>
 

@@ -156,7 +156,7 @@ void btVoxelCollisionAlgorithm::processCollision (const btCollisionObjectWrapper
 
 			// Add new algorithm if necessary
 			if (!collisionInfo.algorithm) {
-				collisionInfo.algorithm = m_dispatcher->findAlgorithm(&voxelWrap, otherObjWrap, m_sharedManifold);
+				collisionInfo.algorithm = m_dispatcher->findAlgorithm(&voxelWrap, otherObjWrap, m_sharedManifold,BT_CONTACT_POINT_ALGORITHMS);
 				collisionInfo.shapeType = info.m_collisionShape->getShapeType();
 				collisionInfo.voxelTypeId = info.m_voxelTypeId;
 			}

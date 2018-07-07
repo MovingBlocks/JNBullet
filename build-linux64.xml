@@ -12,7 +12,7 @@
 	<!-- the compilerPrefix for the C & C++ compilers -->
 	<property name="compilerPrefix" value=""/>
 	<!--  the compilerSuffix for the C & C++ compilers -->	
-	<property name="compilerSuffix" value="" />	
+	<property name="compilerSuffix" value="" />
 	
 	<!-- define gcc compiler, options and files to compile -->
 	<property name="gcc" value="${compilerPrefix}gcc${compilerSuffix}"/>	
@@ -26,10 +26,10 @@
 	
 	<!-- define g++ compiler, options and files to compile -->
 	<property name="g++" value="${compilerPrefix}g++${compilerSuffix}"/>
-	<property name="g++-opts" value="-c -Wall -O2 -mfpmath=sse -msse -fmessage-length=0 -m64 -fPIC -fno-strict-aliasing -fno-rtti -DBT_NO_PROFILE"/>
+	<property name="g++-opts" value="-c -Wall -O2 -mfpmath=sse -msse -fmessage-length=0 -m64 -fPIC -fno-strict-aliasing -fno-rtti -DBT_NO_PROFILE -DBT_USE_INVERSE_DYNAMICS_WITH_BULLET2"/>
 	<fileset id="g++-files" dir=".">
 		<include name="natives/**/*.cpp"/>
-		<include name="build/swig/**/*.cpp"/>
+		<include name="build/swig/*.cpp"/>
 		<exclude name="natives/bullet/BulletMultiThreaded/GpuSoftBodySolvers/**"/>
 	</fileset>
 
@@ -93,6 +93,7 @@
 			<arg value="-Inatives/bullet/"/>
 			<arg value="-Inatives/custom/"/>
 			<arg value="-Inatives/extras/Serialize/"/>
+			<arg value="-Inatives/extras/"/>
 
 			<srcfile/>
 			<arg value="-o"/>
@@ -112,7 +113,7 @@
 			<arg value="-Inatives/bullet/"/>
 			<arg value="-Inatives/custom/"/>
 			<arg value="-Inatives/extras/Serialize/"/>
-
+			<arg value="-Inatives/extras/"/>
 			<srcfile/>
 			<arg value="-o"/>
 			<targetfile/>

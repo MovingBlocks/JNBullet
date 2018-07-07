@@ -4,17 +4,10 @@
 
 	<property name="module.wrapper" value="build/swig-src/${module.name}/${module.name}_wrap.cpp"/>
 
-	<!--<target name="clean">-->
-		<!--<echo message="Deleting previously generated files in build/swig-src/${module.name}" level="info" />-->
-		<!--<mkdir dir="build/swig-src/${module.name}" />-->
-		<!--<delete>-->
-			<!--<fileset dir="build/swig-src/${module.name}" includes="**/*" />-->
-		<!--</delete>-->
-	<!--</target>-->
 
 	<target name="gen">
 
-		<mkdir dir="src/generated/java/org/terasology/bullet/${module.name}" />
+		<mkdir dir="src/generated/java/com/badlogic/gdx/physics/bullet/${module.name}" />
 		<mkdir dir="build/swig" />
 
 		<echo message="Swigging" level="info" />
@@ -22,19 +15,24 @@
 		<exec executable="swig">
 			<arg value="-java" />
 			<arg value="-c++" />
+			<arg value="-Wall" />
+			<arg value="-Wextra" />
 			<arg value="-fvirtual" />
+			<arg value="-fastdispatch" />
+			<arg value="-macroerrors" />
 			<arg value="-package" />
-			<arg value="org.terasology.bullet.${module.name}" />
+			<arg value="com.badlogic.gdx.physics.bullet.${module.name}" />
 			<arg value="-Inatives/bullet" />
 			<arg value="-Inatives/custom" />
 			<arg value="-Inatives/extras/Serialize" />
+			<arg value="-Inatives/extras/" />
 			<!-- Disable Bullet profiling -->
 			<arg value="-DBT_NO_PROFILE" />
 			<arg value="-outdir" />
-			<arg value="src/generated/java/org/terasology/bullet/${module.name}" />
+			<arg value="src/generated/java/com/badlogic/gdx/physics/bullet/${module.name}" />
 			<arg value="-o" />
 			<arg value="build/swig/${module.name}_wrap.cpp" />
-			<arg value="swig/${module.name}/${module.name}.i" />
+			<arg value="swig-src/${module.name}/${module.name}.i" />
 
 		</exec>
 	</target>
@@ -61,21 +59,21 @@
 
 
 	<target name="update_class_list">
-		<fileset id="classes" dir="src/generated/java/org/terasology/bullet/${module.name}" includes="**/*.java" />
+		<fileset id="classes" dir="src/generated/java/com/badlogic/gdx/physics/bullet/${module.name}" includes="**/*.java" />
 		<pathconvert property="classlist" refid="classes" pathsep="${line.separator}" />
-		<echo file="swig/${module.name}/classes.i" message="${classlist}" />
-		<replace file="swig/${module.name}/classes.i" token="${basedir}" value="" />
-		<replace file="swig/${module.name}/classes.i" token="src/generated/java/" value="" />
-		<replace file="swig/${module.name}/classes.i" token="swig/${module.name}" value="" />
-		<replace file="swig/${module.name}/classes.i" token="/" value="." />
-		<replace file="swig/${module.name}/classes.i" token="\" value="." />
-		<replaceregexp file="swig/${module.name}/classes.i" flags="g">
+		<echo file="swig-src/${module.name}/classes.i" message="${classlist}" />
+		<replace file="swig-src/${module.name}/classes.i" token="${basedir}" value="" />
+		<replace file="swig-src/${module.name}/classes.i" token="src/generated/java/" value="" />
+		<replace file="swig-src/${module.name}/classes.i" token="swig/${module.name}" value="" />
+		<replace file="swig-src/${module.name}/classes.i" token="/" value="." />
+		<replace file="swig-src/${module.name}/classes.i" token="\" value="." />
+		<replaceregexp file="swig-src/${module.name}/classes.i" flags="g">
 			<regexp pattern="\.([a-z0-9]+([\.][a-z0-9]+)+)\.([^\.]+)\.java" />
 			<substitution expression="SPECIFY_CLASS(\3, \1)" />
 		</replaceregexp>
 	</target>
 
-	<target name="all" depends="update_class_list,gen,fix_casts,remove_weak_global">
+	<target name="all" depends="gen,fix_casts,remove_weak_global">
 		<echo message="Wrapper files generated for collision." level="info" />
 	</target>
 </project>

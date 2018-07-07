@@ -19,13 +19,13 @@ inline void vector3_ensurefields(JNIEnv * const &jenv, jobject &v3) {
 	if (!vector3_x) vector3_getFields(jenv, v3);
 }
 
-void Vector3_to_btVector3(JNIEnv * const &jenv, btVector3 &target, jobject &source)
+void Vector3f_to_btVector3(JNIEnv * const &jenv, btVector3 &target, jobject &source)
 {
 	vector3_ensurefields(jenv, source);
 	target.setValue(jenv->GetFloatField(source, vector3_x), jenv->GetFloatField(source, vector3_y), jenv->GetFloatField(source, vector3_z));
 }
 	
-void btVector3_to_Vector3(JNIEnv * const &jenv, jobject &target, const btVector3 &source)
+void btVector3_to_Vector3f(JNIEnv * const &jenv, jobject &target, const btVector3 &source)
 {
 	vector3_ensurefields(jenv, target);
 	jenv->SetFloatField(target, vector3_x, source.getX());
@@ -53,7 +53,7 @@ inline void quaternion_ensurefields(JNIEnv * const &jenv, jobject &q) {
 	if (!quaternion_x) quaternion_getFields(jenv, q);
 }
 
-void Quaternion_to_btQuaternion(JNIEnv * const &jenv, btQuaternion &target, jobject &source)
+void Quat4f_to_btQuaternion(JNIEnv * const &jenv, btQuaternion &target, jobject &source)
 {
 	quaternion_ensurefields(jenv, source);
 	target.setValue(
@@ -63,7 +63,7 @@ void Quaternion_to_btQuaternion(JNIEnv * const &jenv, btQuaternion &target, jobj
 			jenv->GetFloatField(source, quaternion_w));
 }
 
-void btQuaternion_to_Quaternion(JNIEnv * const &jenv, jobject &target, const btQuaternion & source)
+void btQuaternion_to_Quat4f(JNIEnv * const &jenv, jobject &target, const btQuaternion & source)
 {
 	quaternion_ensurefields(jenv, target);
 	jenv->SetFloatField(target, quaternion_x, source.getX());
@@ -105,8 +105,8 @@ inline void matrix3_ensurefields(JNIEnv * const &jenv, jobject &m3) {
 	if (!matrix3_m00) matrix3_getFields(jenv, m3);
 }
 
-void Matrix3_to_btMatrix3(JNIEnv * const &jenv, btMatrix3x3 &target, jobject &source)
-{	  
+void Matrix3f_to_btMatrix3(JNIEnv * const &jenv, btMatrix3x3 &target, jobject &source)
+{
 	matrix3_ensurefields(jenv, source);
 
 	// Convert to column-major
@@ -117,7 +117,7 @@ void Matrix3_to_btMatrix3(JNIEnv * const &jenv, btMatrix3x3 &target, jobject &so
 
 }
 
-void btMatrix3_to_Matrix3(JNIEnv * const &jenv, jobject &target, const btMatrix3x3 &source)
+void btMatrix3_to_Matrix3f(JNIEnv * const &jenv, jobject &target, const btMatrix3x3 &source)
 {
 	matrix3_ensurefields(jenv, target);
 
@@ -184,7 +184,7 @@ inline void matrix4_ensurefields(JNIEnv * const &jenv, jobject &m4) {
 	if (!matrix4_m00) matrix4_getFields(jenv, m4);
 }
 
-void Matrix4_to_btTransform(JNIEnv * const &jenv, btTransform &target, jobject &source)
+void Matrix4f_to_btTransform(JNIEnv * const &jenv, btTransform &target, jobject &source)
 {
 	matrix4_ensurefields(jenv, source);
 	jfloat * elements = new jfloat[16] {
@@ -198,8 +198,8 @@ void Matrix4_to_btTransform(JNIEnv * const &jenv, btTransform &target, jobject &
 	delete [] elements;
 
 }
-	
-void btTransform_to_Matrix4(JNIEnv * const &jenv, jobject &target, const btTransform &source)
+
+void btTransform_to_Matrix4f(JNIEnv * const &jenv, jobject &target, const btTransform &source)
 {
 	matrix4_ensurefields(jenv, target);
 
