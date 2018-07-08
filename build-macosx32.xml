@@ -26,10 +26,10 @@
 	
 	<!-- define g++ compiler, options and files to compile -->
 	<property name="g++" value="${compilerPrefix}g++${compilerSuffix}"/>
-	<property name="g++-opts" value="-c -Wall -O2 -arch i386 -DFIXED_POINT -fmessage-length=0 -fPIC -mmacosx-version-min=10.5 -fno-strict-aliasing -fno-rtti -DBT_NO_PROFILE"/>
+	<property name="g++-opts" value="-c -Wall -O2 -arch i386 -DFIXED_POINT -fmessage-length=0 -fPIC -mmacosx-version-min=10.5 -fno-strict-aliasing -fno-rtti -DBT_NO_PROFILE -DBT_USE_INVERSE_DYNAMICS_WITH_BULLET2"/>
 	<fileset id="g++-files" dir="jni/">
 		<include name="natives/**/*.cpp"/>
-		<include name="build/swig/**/*.cpp"/>
+		<include name="build/swig/*.cpp"/>
 		<exclude name="natives/bullet/BulletMultiThreaded/GpuSoftBodySolvers/**"/>
 	</fileset>
 
@@ -89,10 +89,11 @@
 			<arg value="-Inatives/jni-headers"/>
 			<arg value="-Inatives/jni-headers/${jniPlatform}"/>
 			<arg value="-Inatives/."/>
-			<arg value="-Ibuild/swig-src/."/>
+			<arg value="-Ibuild/swig/."/>
 			<arg value="-Inatives/bullet/"/>
 			<arg value="-Inatives/custom/"/>
 			<arg value="-Inatives/extras/Serialize/"/>
+			<arg value="-Inatives/extras/"/>
 
 			<srcfile/>
 			<arg value="-o"/>
@@ -112,6 +113,7 @@
 			<arg value="-Inatives/bullet/"/>
 			<arg value="-Inatives/custom/"/>
 			<arg value="-Inatives/extras/Serialize/"/>
+			<arg value="-Inatives/extras/"/>
 
 			<srcfile/>
 			<arg value="-o"/>

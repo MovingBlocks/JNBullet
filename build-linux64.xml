@@ -16,7 +16,7 @@
 	
 	<!-- define gcc compiler, options and files to compile -->
 	<property name="gcc" value="${compilerPrefix}gcc${compilerSuffix}"/>	
-	<property name="gcc-opts" value="-c -g -Wall -O2 -mfpmath=sse -msse -fmessage-length=0 -m64 -fPIC"/>
+	<property name="gcc-opts" value="-c -Wall -O2 -mfpmath=sse -msse -fmessage-length=0 -m64 -fPIC"/>
 	<fileset id="gcc-files" dir=".">
 		<include name="natives/**/*.c"/>
 		<include name="natives/memcpy_wrap.c"/>
@@ -26,7 +26,7 @@
 	
 	<!-- define g++ compiler, options and files to compile -->
 	<property name="g++" value="${compilerPrefix}g++${compilerSuffix}"/>
-	<property name="g++-opts" value="-c -g -Wall -O2 -mfpmath=sse -msse -fmessage-length=0 -m64 -fPIC -fno-strict-aliasing -fno-rtti -DBT_NO_PROFILE -DBT_USE_INVERSE_DYNAMICS_WITH_BULLET2"/>
+	<property name="g++-opts" value="-c  -Wall -O2 -mfpmath=sse -msse -fmessage-length=0 -m64 -fPIC -fno-strict-aliasing -fno-rtti -DBT_NO_PROFILE -DBT_USE_INVERSE_DYNAMICS_WITH_BULLET2"/>
 	<fileset id="g++-files" dir=".">
 		<include name="natives/**/*.cpp"/>
 		<include name="build/swig/*.cpp"/>
