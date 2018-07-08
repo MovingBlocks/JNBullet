@@ -100,7 +100,7 @@ struct btVoxelInfo
 /// Provider of voxel information for a given voxel position
 struct btVoxelContentProvider
 {
-	virtual btVoxelInfo getVoxel(int x, int y, int z) const = 0;
+	virtual void getVoxel(int x, int y, int z,btVoxelInfo&) const = 0;
 	virtual ~btVoxelContentProvider() {}
 };
 

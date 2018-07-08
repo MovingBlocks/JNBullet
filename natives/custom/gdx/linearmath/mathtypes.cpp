@@ -1,6 +1,7 @@
 #include "mathtypes.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdio.h>
 
 ////////////////////////////////
 //////// btVector3      ////////
@@ -187,13 +188,13 @@ inline void matrix4_ensurefields(JNIEnv * const &jenv, jobject &m4) {
 void Matrix4f_to_btTransform(JNIEnv * const &jenv, btTransform &target, jobject &source)
 {
 	matrix4_ensurefields(jenv, source);
-	jfloat elements[16]= {
-	    jenv->GetFloatField(source, matrix4_m00), jenv->GetFloatField(source, matrix4_m01), jenv->GetFloatField(source, matrix4_m02), jenv->GetFloatField(source, matrix4_m03),
-    	jenv->GetFloatField(source, matrix4_m10), jenv->GetFloatField(source, matrix4_m11), jenv->GetFloatField(source, matrix4_m12), jenv->GetFloatField(source, matrix4_m13),
-    	jenv->GetFloatField(source, matrix4_m20), jenv->GetFloatField(source, matrix4_m21), jenv->GetFloatField(source, matrix4_m22), jenv->GetFloatField(source, matrix4_m23),
-	    jenv->GetFloatField(source, matrix4_m30), jenv->GetFloatField(source, matrix4_m31), jenv->GetFloatField(source, matrix4_m32), jenv->GetFloatField(source, matrix4_m33)
+	jfloat elements[16] = {
+	    jenv->GetFloatField(source, matrix4_m00), jenv->GetFloatField(source, matrix4_m10), jenv->GetFloatField(source, matrix4_m20), jenv->GetFloatField(source, matrix4_m30),
+    	jenv->GetFloatField(source, matrix4_m01), jenv->GetFloatField(source, matrix4_m11), jenv->GetFloatField(source, matrix4_m21), jenv->GetFloatField(source, matrix4_m31),
+    	jenv->GetFloatField(source, matrix4_m02), jenv->GetFloatField(source, matrix4_m12), jenv->GetFloatField(source, matrix4_m22), jenv->GetFloatField(source, matrix4_m32),
+	    jenv->GetFloatField(source, matrix4_m03), jenv->GetFloatField(source, matrix4_m13), jenv->GetFloatField(source, matrix4_m23), jenv->GetFloatField(source, matrix4_m33)
     };
-	target.setFromOpenGLMatrix(elements);
+    target.setFromOpenGLMatrix(elements);
 
 }
 
@@ -205,22 +206,22 @@ void btTransform_to_Matrix4f(JNIEnv * const &jenv, jobject &target, const btTran
 	source.getOpenGLMatrix(dst);
 
 	jenv->SetFloatField(target, matrix4_m00, dst[0]);
-	jenv->SetFloatField(target, matrix4_m01, dst[1]);
-	jenv->SetFloatField(target, matrix4_m02, dst[2]);
-	jenv->SetFloatField(target, matrix4_m03, dst[3]);
+	jenv->SetFloatField(target, matrix4_m10, dst[1]);
+	jenv->SetFloatField(target, matrix4_m20, dst[2]);
+	jenv->SetFloatField(target, matrix4_m30, dst[3]);
 
-	jenv->SetFloatField(target, matrix4_m10, dst[4]);
+	jenv->SetFloatField(target, matrix4_m01, dst[4]);
 	jenv->SetFloatField(target, matrix4_m11, dst[5]);
-	jenv->SetFloatField(target, matrix4_m12, dst[6]);
-	jenv->SetFloatField(target, matrix4_m13, dst[7]);
+	jenv->SetFloatField(target, matrix4_m21, dst[6]);
+	jenv->SetFloatField(target, matrix4_m31, dst[7]);
 
-	jenv->SetFloatField(target, matrix4_m20, dst[8]);
-	jenv->SetFloatField(target, matrix4_m21, dst[9]);
+	jenv->SetFloatField(target, matrix4_m02, dst[8]);
+	jenv->SetFloatField(target, matrix4_m12, dst[9]);
 	jenv->SetFloatField(target, matrix4_m22, dst[10]);
-	jenv->SetFloatField(target, matrix4_m23, dst[11]);
+	jenv->SetFloatField(target, matrix4_m32, dst[11]);
 
-	jenv->SetFloatField(target, matrix4_m30, dst[12]);
-	jenv->SetFloatField(target, matrix4_m31, dst[13]);
-	jenv->SetFloatField(target, matrix4_m32, dst[14]);
+	jenv->SetFloatField(target, matrix4_m03, dst[12]);
+	jenv->SetFloatField(target, matrix4_m13, dst[13]);
+	jenv->SetFloatField(target, matrix4_m23, dst[14]);
 	jenv->SetFloatField(target, matrix4_m33, dst[15]);
 }

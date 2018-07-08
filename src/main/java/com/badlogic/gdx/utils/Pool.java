@@ -54,7 +54,7 @@ abstract public class Pool<T> {
     /** Returns an object from this pool. The object may be new (from {@link #newObject()}) or reused (previously
      * {@link #free(Object) freed}). */
     public T obtain () {
-        return freeObjects.size() == 0 ? newObject() : freeObjects.poll();
+        return freeObjects.peek() == null ? newObject() : freeObjects.poll();
     }
 
     /** Puts the specified object in the pool, making it eligible to be returned by {@link #obtain()}. If the pool already contains

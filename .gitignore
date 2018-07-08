@@ -5,7 +5,7 @@
 /.*
 
 target/
-natives-build/
+native-build/
 
 # Except this stuff
 !.gitattributes

@@ -69,7 +69,7 @@ typedef btVoronoiSimplexSolver btSimplexSolverInterface;
 %include "./btCollisionShape.i"
 
 CREATE_POOLED_OBJECT(btBroadphaseProxy, com/badlogic/gdx/physics/bullet/collision/btBroadphaseProxy);
-CREATE_POOLED_OBJECT(btBroadphasePair, com/badlogic/gdx/physics/bullet/collision/btBroadphasePair);
+CREATE_POOLED_OBJECT(btBroadphaseProxy, com/badlogic/gdx/physics/bullet/collision/btBroadphaseProxy);
 %{
 #include <BulletCollision/BroadphaseCollision/btBroadphaseProxy.h>
 %}
