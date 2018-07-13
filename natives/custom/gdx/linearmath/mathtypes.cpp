@@ -112,9 +112,9 @@ void Matrix3f_to_btMatrix3(JNIEnv * const &jenv, btMatrix3x3 &target, jobject &s
 
 	// Convert to column-major
 	target.setValue(
-	jenv->GetFloatField(source, matrix3_m00), jenv->GetFloatField(source, matrix3_m01), jenv->GetFloatField(source, matrix3_m02),
-	jenv->GetFloatField(source, matrix3_m10), jenv->GetFloatField(source, matrix3_m11), jenv->GetFloatField(source, matrix3_m12),
-	jenv->GetFloatField(source, matrix3_m20), jenv->GetFloatField(source, matrix3_m21), jenv->GetFloatField(source, matrix3_m22));
+	jenv->GetFloatField(source, matrix3_m00), jenv->GetFloatField(source, matrix3_m10), jenv->GetFloatField(source, matrix3_m20),
+	jenv->GetFloatField(source, matrix3_m01), jenv->GetFloatField(source, matrix3_m11), jenv->GetFloatField(source, matrix3_m21),
+	jenv->GetFloatField(source, matrix3_m02), jenv->GetFloatField(source, matrix3_m12), jenv->GetFloatField(source, matrix3_m22));
 
 }
 
