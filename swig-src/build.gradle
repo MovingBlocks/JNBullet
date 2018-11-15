@@ -1,17 +1,29 @@
 
 
 ext {
-    swigParameters = "-java -c++ -Wall -Wextra -fvirtual -fastdispatch -macroerrors -I$rootDir/natives/bullet -I$rootDir/natives/custom -I$rootDir/natives/extras -I$rootDir/natives/extras/Serialize"
-    basePackage = "com.badlogic.gdx.physics.bullet"
+    swigTarget = ["linearmath","collision","dynamics","softbody","extras","inversedynamics"]
 }
 
-task CollisionSwig(type: Exec){
-    description = 'Swigging collision'
-    commandLine "swig $swigParameters -package $basePackage.collision -DBT_NO_PROFILE -outdir $rootDir/generated/java/com/badlogic/gdx/physics/bullet/collision -o $rootDir/build/swig-src/collision_wrap.cpp $rootDir/swig-src/collision/collision.i"
+swigTarget.each { module ->
+    tasks.create(name: "swig_"+"${module}", type: Exec) {
+        description = 'Swigging collision'
+        executable "swig"
+        args "-java","-c++","-Wall","-Wextra","-fvirtual","-fastdispatch","-macroerrors","-package","com.badlogic.gdx.physics.bullet.${module}","-I$rootDir/natives/bullet","-I$rootDir/natives/custom","-I$rootDir/natives/extras","-I$rootDir/natives/extras/Serialize","-o", "$rootDir/build/swig/${module}_wrap.cpp","-outdir","$rootDir/src/generated/java/com/badlogic/gdx/physics/bullet/${module}","$rootDir/swig-src/${module}/${module}.i"
+        doFirst {
+            mkdir "$rootDir/src/generated/java/com/badlogic/gdx/physics/bullet/${module}"
+            mkdir "$rootDir/build/swig"
+        }
+    }
 }
+
 
 task Swig{
     description = "Builds C++ bindings from java to Bullet3"
-    dependsOn CollisionSwig
+    dependsOn swig_collision
+    dependsOn swig_dynamics
+    dependsOn swig_softbody
+    dependsOn swig_extras
+    dependsOn swig_inversedynamics
 }
+
 
