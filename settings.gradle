@@ -1,1 +1,5 @@
-rootProject.name = 'TeraBullet'
+import groovy.io.FileType
+
+rootProject.name = 'TeraBullet-2'
+
+include 'swig'

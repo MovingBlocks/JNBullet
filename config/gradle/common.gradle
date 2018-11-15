@@ -1,0 +1,51 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+apply plugin: 'findbugs'
+
+repositories {
+    // Main Maven repo
+    mavenCentral()
+
+    // MovingBlocks Artifactory instance for libs not readily available elsewhere plus our own libs
+    maven {
+        url "http://artifactory.terasology.org/artifactory/virtual-repo-live"
+    }
+}
+
+dependencies {
+    checkstyle ('com.puppycrawl.tools:checkstyle:6.14.1')
+    pmd ('net.sourceforge.pmd:pmd-core:5.4.1')
+    pmd ('net.sourceforge.pmd:pmd-java:5.4.1')
+    // the FindBugs version is set in the configuration
+}
+
+task sourceJar(type: Jar) {
+    description = "Create a JAR with all sources"
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    description = "Create a JAR with the JavaDoc for the java sources"
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+checkstyle {
+    ignoreFailures = true
+    configFile = new File(rootDir, 'config/metrics/checkstyle/checkstyle.xml')
+    configProperties.samedir = checkstyle.configFile.parentFile
+}
+
+pmd {
+    ignoreFailures = true
+    ruleSetFiles = files("$rootDir/config/metrics/pmd/pmd.xml")
+}
+
+findbugs {
+    ignoreFailures = true
+    excludeFilter = new File(rootDir, "config/metrics/findbugs/findbugs-exclude.xml")
+}

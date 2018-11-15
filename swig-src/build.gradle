@@ -1,0 +1,17 @@
+
+
+ext {
+    swigParameters = "-java -c++ -Wall -Wextra -fvirtual -fastdispatch -macroerrors -I$rootDir/natives/bullet -I$rootDir/natives/custom -I$rootDir/natives/extras -I$rootDir/natives/extras/Serialize"
+    basePackage = "com.badlogic.gdx.physics.bullet"
+}
+
+task CollisionSwig(type: Exec){
+    description = 'Swigging collision'
+    commandLine "swig $swigParameters -package $basePackage.collision -DBT_NO_PROFILE -outdir $rootDir/generated/java/com/badlogic/gdx/physics/bullet/collision -o $rootDir/build/swig-src/collision_wrap.cpp $rootDir/swig-src/collision/collision.i"
+}
+
+task Swig{
+    description = "Builds C++ bindings from java to Bullet3"
+    dependsOn CollisionSwig
+}
+
