@@ -24,6 +24,8 @@ task Swig{
     dependsOn swig_softbody
     dependsOn swig_extras
     dependsOn swig_inversedynamics
+    dependsOn swig_linearmath
+
 }
 
 
