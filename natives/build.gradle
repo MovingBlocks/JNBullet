@@ -1,0 +1,53 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
+apply plugin: 'cpp'
+
+model {
+
+	platforms {
+		linux_x86 {
+		  architecture "x86"
+		  operatingSystem "linux"
+		}
+		linux_x64 {
+		  architecture "x86_64"
+		  operatingSystem "linux"
+		}
+		windows_x86 {
+		  architecture "x86"
+		  operatingSystem "windows"
+		}
+		windows_x64 {
+		  architecture "x86_64"
+		  operatingSystem "windows"
+		}
+	}
+
+	components {
+	    nativePlatformBullet(NativeLibrarySpec){
+	    	sources {
+            	cpp {
+            		source{
+            			srcDirs "$rootDir/natives", "$rootDir/build/swig"
+                     	include "**/*.cpp"
+            		}
+					exportedHeaders {
+						 srcDirs "jni-headers", "$rootDir/build/swig", "bullet", "custom", "extras/Serialize", "extras"
+					}
+            	}
+            }
+	    }
+	    all {
+			binaries.all {
+				cppCompiler.args '-DBT_NO_PROFILE', '-DBT_USE_INVERSE_DYNAMICS_WITH_BULLET2', "-Wall", "-O2", "-mfpmath=sse", "-msse", "-fmessage-length=0", "-m64", "-fPIC"
+				 if (Os.isFamily(Os.FAMILY_MAC)) {
+				 	cppCompiler.args '-I', "$rootDir/natives/jni-headers/mac/"
+				 } else if(Os.isFamily(Os.FAMILY_UNIX)){
+				 	cppCompiler.args '-I', "$rootDir/natives/jni-headers/linux/"
+				 } else if(Os.isFamily(Os.FAMILY_WINDOWS)){
+				 	cppCompiler.args '-I', "$rootDir/natives/jni-headers/win32/"
+				 }
+			}
+		}
+	}
+}
