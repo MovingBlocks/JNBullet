@@ -16,7 +16,6 @@ swigTarget.each { module ->
     }
 }
 
-
 task Swig{
     description = "Builds C++ bindings from java to Bullet3"
     dependsOn swig_collision
@@ -27,5 +26,7 @@ task Swig{
     dependsOn swig_linearmath
 
 }
+
+
 
 

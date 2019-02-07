@@ -1,3 +1,10 @@
+apply from: "$rootDir/config/gradle/artifactory.gradle"
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'eclipse'
+
 // Dependencies needed for what our Gradle scripts themselves use. It cannot be included via an external Gradle file :-(
 buildscript {
     repositories {
@@ -12,18 +19,19 @@ buildscript {
     }
 }
 
-
-plugins {
-    id "net.tribe-seven.swig" version "0.1.1"
-}
-
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'eclipse'
-
 ext{
+    dirConfigMetrics = 'config/metrics'
     generatedSrcDir = 'src/generated/java'
 }
+
+
+dependencies {
+    compile group: 'org.terasology', name: 'TeraMath', version: '1.4.0'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
+    compile group: 'net.sf.trove4j', name: 'trove4j', version: '3.0.3'
+}
+
+
 
 sourceSets {
     main {
@@ -31,6 +39,23 @@ sourceSets {
             srcDir generatedSrcDir
         }
     }
+}
+
+task generateSources{
+    dependsOn ":swig-src:Swig"
+}
+
+compileJava.dependsOn generateSources
+
+clean {
+    // the clean task should delete the folder, because it is the
+    // output folder of generateSources, but it doesn't do it.
+    delete generatedSrcDir
+}
+
+
+configurations {
+    codeMetrics
 }
 
 repositories {
@@ -47,8 +72,3 @@ repositories {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-dependencies {
-    compile group: 'org.terasology', name: 'TeraMath', version: '1.4.0'
-    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
-    compile group: 'net.sf.trove4j', name: 'trove4j', version: '3.0.3'
-}

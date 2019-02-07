@@ -2,7 +2,11 @@ import org.apache.tools.ant.taskdefs.condition.Os
 
 apply plugin: 'cpp'
 
+
 model {
+	tasks.assembleDependentsBullet {
+		dependsOn ':swig-src:Swig'
+	}
 
 	platforms {
 		linux_x86 {
@@ -24,7 +28,7 @@ model {
 	}
 
 	components {
-	    nativePlatformBullet(NativeLibrarySpec){
+	    Bullet(NativeLibrarySpec){
 	    	sources {
             	cpp {
             		source{
@@ -36,9 +40,7 @@ model {
 					}
             	}
             }
-	    }
-	    all {
-			binaries.all {
+            binaries.all {
 				cppCompiler.args '-DBT_NO_PROFILE', '-DBT_USE_INVERSE_DYNAMICS_WITH_BULLET2', "-Wall", "-O2", "-mfpmath=sse", "-msse", "-fmessage-length=0", "-m64", "-fPIC"
 				 if (Os.isFamily(Os.FAMILY_MAC)) {
 				 	cppCompiler.args '-I', "$rootDir/natives/jni-headers/mac/"
@@ -48,6 +50,9 @@ model {
 				 	cppCompiler.args '-I', "$rootDir/natives/jni-headers/win32/"
 				 }
 			}
-		}
+	    }
 	}
 }
+
+// BulletSharedLibrary dependsOn ':swig-src:Swig'
+
