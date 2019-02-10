@@ -1,58 +1,33 @@
-import org.apache.tools.ant.taskdefs.condition.Os
+apply plugin: 'cpp-library'
 
-apply plugin: 'cpp'
+library {
+	baseName = "bullet"
+	targetMachines = [
+			machines.windows,
+			machines.linux,
+			machines.macOS
+	]
 
+	binaries.configureEach {
+		def compileTask = compileTask.get()
+		compileTask.compilerArgs.add("-DBT_NO_PROFILE")
+		compileTask.compilerArgs.add("-DBT_USE_INVERSE_DYNAMICS_WITH_BULLET2")
 
-model {
-	tasks.assembleDependentsBullet {
-		dependsOn ':swig-src:Swig'
-	}
-
-	platforms {
-		linux_x86 {
-		  architecture "x86"
-		  operatingSystem "linux"
-		}
-		linux_x64 {
-		  architecture "x86_64"
-		  operatingSystem "linux"
-		}
-		windows_x86 {
-		  architecture "x86"
-		  operatingSystem "windows"
-		}
-		windows_x64 {
-		  architecture "x86_64"
-		  operatingSystem "windows"
+		if (targetPlatform.targetMachine.operatingSystemFamily.isMacOs()) {
+			lcompileTask.compilerArgs.add("-I$rootDir/natives/jni-headers/mac/")
+		} else if (targetPlatform.targetMachine.operatingSystemFamily.isLinux()) {
+			compileTask.compilerArgs.add("-I$rootDir/natives/jni-headers/linux/")
+		} else if (targetPlatform.targetMachine.operatingSystemFamily.isWindows()) {
+			compileTask.compilerArgs.add("-I$rootDir/natives/jni-headers/win32/")
 		}
 	}
-
-	components {
-	    Bullet(NativeLibrarySpec){
-	    	sources {
-            	cpp {
-            		source{
-            			srcDirs "$rootDir/natives", "$rootDir/build/swig"
-                     	include "**/*.cpp"
-            		}
-					exportedHeaders {
-						 srcDirs "jni-headers", "$rootDir/build/swig", "bullet", "custom", "extras/Serialize", "extras"
-					}
-            	}
-            }
-            binaries.all {
-				cppCompiler.args '-DBT_NO_PROFILE', '-DBT_USE_INVERSE_DYNAMICS_WITH_BULLET2', "-Wall", "-O2", "-mfpmath=sse", "-msse", "-fmessage-length=0", "-m64", "-fPIC"
-				 if (Os.isFamily(Os.FAMILY_MAC)) {
-				 	cppCompiler.args '-I', "$rootDir/natives/jni-headers/mac/"
-				 } else if(Os.isFamily(Os.FAMILY_UNIX)){
-				 	cppCompiler.args '-I', "$rootDir/natives/jni-headers/linux/"
-				 } else if(Os.isFamily(Os.FAMILY_WINDOWS)){
-				 	cppCompiler.args '-I', "$rootDir/natives/jni-headers/win32/"
-				 }
-			}
-	    }
-	}
+	publicHeaders.from = ["jni-headers", "$rootDir/build/swig", "bullet", "custom", "extras/Serialize", "extras"]
+	source.from = ["$rootDir/natives", "$rootDir/build/swig"]
+	buildDir = "$rootDir/build/natives"
 }
+
+
+
 
 // BulletSharedLibrary dependsOn ':swig-src:Swig'
 
