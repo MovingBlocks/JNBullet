@@ -24,6 +24,13 @@ task Swig{
     dependsOn swig_extras
     dependsOn swig_inversedynamics
     dependsOn swig_linearmath
+    doLast {
+        FileTree swig_tree  = fileTree(dir: "$rootDir/build/swig", include: '*.cpp')
+        swig_tree.visit {element ->
+            println "$element.relativePath => $element.file"
+            String fileContents = element.file.text
+        }
+    }
 
 }
 

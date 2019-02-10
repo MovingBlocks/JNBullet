@@ -1,11 +1,13 @@
 apply plugin: 'cpp-library'
-
 library {
 	baseName = "bullet"
 	targetMachines = [
-			machines.windows,
-			machines.linux,
-			machines.macOS
+			machines.windows.x86_64,
+			machines.windows.x86,
+			machines.linux.x86_64,
+			machines.linux.x86,
+			machines.macOS.x86_64,
+			machines.macOS.x86
 	]
 
 	binaries.configureEach {
@@ -14,21 +16,18 @@ library {
 		compileTask.compilerArgs.add("-DBT_USE_INVERSE_DYNAMICS_WITH_BULLET2")
 
 		if (targetPlatform.targetMachine.operatingSystemFamily.isMacOs()) {
-			lcompileTask.compilerArgs.add("-I$rootDir/natives/jni-headers/mac/")
+			compileTask.compilerArgs.add("-I$rootDir/natives/jni-headers/mac/")
 		} else if (targetPlatform.targetMachine.operatingSystemFamily.isLinux()) {
 			compileTask.compilerArgs.add("-I$rootDir/natives/jni-headers/linux/")
 		} else if (targetPlatform.targetMachine.operatingSystemFamily.isWindows()) {
 			compileTask.compilerArgs.add("-I$rootDir/natives/jni-headers/win32/")
 		}
 	}
-	publicHeaders.from = ["jni-headers", "$rootDir/build/swig", "bullet", "custom", "extras/Serialize", "extras"]
+	publicHeaders.from = ["$rootDir/build/swig"]
+	privateHeaders.from = ["jni-headers", "bullet", "custom", "extras/Serialize", "extras"]
 	source.from = ["$rootDir/natives", "$rootDir/build/swig"]
 	buildDir = "$rootDir/build/natives"
 }
-
-
-
-
 
 // BulletSharedLibrary dependsOn ':swig-src:Swig'
 

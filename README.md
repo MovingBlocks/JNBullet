@@ -10,4 +10,4 @@ The java and native side of this process is entirely done through gradle. "./gra
 To build the natives on linux you need:
 
 * swig installed on the system to produce both the generated code for the native and java bindings
-* gcc compiler
+* gcc compiler (gcc-multilib g++-multilib for x86)
