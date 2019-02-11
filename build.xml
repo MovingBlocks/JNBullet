@@ -1,8 +1,4 @@
-<project xmlns:ivy="antlib:org.apache.ivy.ant" name="TerraBullet" default="run">
-    <target name="lib" description="--> retrieve dependencies with ivy">
-        <ivy:retrieve />
-    </target>
-
+<project name="TerraBullet" default="run">
     <target name="swig">
             <echo message="Generating linearmath wrapper" level="info" />
             <ant antfile="build-swig.xml">
