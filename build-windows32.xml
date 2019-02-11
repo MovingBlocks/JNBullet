@@ -93,6 +93,7 @@
 			<arg value="-Inatives/bullet/"/>
 			<arg value="-Inatives/custom/"/>
 			<arg value="-Inatives/extras/Serialize/"/>
+			<arg value="-Inatives/extras/"/>
 
 			<srcfile/>
 			<arg value="-o"/>
@@ -112,7 +113,8 @@
 			<arg value="-Inatives/bullet/"/>
 			<arg value="-Inatives/custom/"/>
 			<arg value="-Inatives/extras/Serialize/"/>
-
+			<arg value="-Inatives/extras/"/>
+			
 			<srcfile/>
 			<arg value="-o"/>
 			<targetfile/>
