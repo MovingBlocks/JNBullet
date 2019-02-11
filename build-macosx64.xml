@@ -1,4 +1,4 @@
-<project name="gdx-bullet-MacOsX-64" basedir="jni" default="postcompile">
+<project name="gdx-bullet-MacOsX-64" basedir="." default="postcompile">
 	<!-- include the environment -->
 	<property environment="env"/>	
 	<!-- output directory for temporary object files -->
