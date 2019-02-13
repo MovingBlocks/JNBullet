@@ -12,14 +12,16 @@ To build the natives on linux you need:
 - swig - installed on the system to produce both the generated code for the native and java bindings
 
 * linux
-  1. gcc
-  2. gcc-c++
   - i686
-     2. libstdc++.i686
-     3. glibc-devel.i686
+    1. gcc
+    2. gcc-c++ 
+    3. libstdc++.i686
+    4. glibc-devel.i686
   - amd64
-    1. glibc-devel
-    2. libstdc++
+    1. gcc
+    2. gcc-c++ 
+    3. glibc-devel
+    4. libstdc++
 * windows
   - i686
     1. mingw32-winpthreads
