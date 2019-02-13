@@ -1,11 +1,8 @@
 # TeraBullet (Terasology Version)
 
-TeraBullet is a version of bullet with extensions for direct interactions for voxel worlds. Written for use with Terasology. this is an implementation of bullet that wraps around native bullet using SWIG.
+TeraBullet is a version of bullet with extensions for direct interactions for voxel worlds. Written for use with Terasology. this is an implementation of bullet wraps around native bullet using SWIG.
 
 # Building
-
-the native output: 
-```libbullet-[linux,windows]-[i686,amd64].[dll,so]```
 
 ## linux - linux and windows
 
@@ -37,6 +34,12 @@ To build the natives on linux you need:
 
 Then simple run ```ant``` to generated the binding code between java along with compiling the necessary libraries. 
 
+
+the output is produced under the ```native-build``` folder and is formatted in this fashion:
+```libbullet-[linux,windows]-[i686,amd64].[dll,so]```
+
+
+
 To build the java portion of bullet, simply run ```./gralew build```
 
 ## OSX
@@ -48,5 +51,5 @@ To build the java portion of bullet, simply run ```./gralew build```
 
 # License
 
-This library is Licensed under the [Apache 2 License](http://www.apache.org/licenses/LICENSE-2.0.html) this is a rework of bullet
-based off of [libgdx](https://github.com/libgdx/libgdx) along with a voxel extension.
+This library is Licensed under the [Apache 2 License](http://www.apache.org/licenses/LICENSE-2.0.html) and is a rework of bullet wrapper
+from [libgdx](https://github.com/libgdx/libgdx) along with a voxel extension.
