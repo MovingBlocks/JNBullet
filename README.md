@@ -15,8 +15,8 @@ To build the natives on linux you need:
   1. gcc
   2. gcc-c++
   - i686
-    2. libstdc++.i686
-    3. glibc-devel.i686
+     2. libstdc++.i686
+     3. glibc-devel.i686
   - amd64
     1. glibc-devel
     2. libstdc++
@@ -52,4 +52,4 @@ To build the java portion of bullet, simply run ```./gralew build```
 # License
 
 This library is Licensed under the [Apache 2 License](http://www.apache.org/licenses/LICENSE-2.0.html) and is a rework of bullet wrapper
-from [libgdx](https://github.com/libgdx/libgdx) along with a voxel extension.
+from [libgdx](https://github.com/libgdx/libgdx)
