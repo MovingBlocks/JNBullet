@@ -4,7 +4,11 @@ TeraBullet is a version of bullet with extensions for direct interactions for vo
 
 # Building
 
+the native output: 
+```libbullet-[linux,windows]-[i686,amd64].[dll,so]```
+
 ## linux - linux and windows
+
 To build the natives on linux you need:
 
 - ant - installed on the system to build the natives for the generated wrapper code
@@ -30,8 +34,6 @@ To build the natives on linux you need:
     2. mingw64-winpthreads-static
     3. mingw64-gcc
     4. mingw64-gcc-c++
-
-libbullet-[linux,windows]-[i686,amd64].[dll,so]
 
 Then simple run ```ant``` to generated the binding code between java along with compiling the necessary libraries. 
 
