@@ -3,7 +3,6 @@ apply from: "$rootDir/config/gradle/artifactory.gradle"
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
-apply plugin: 'eclipse'
 
 // Dependencies needed for what our Gradle scripts themselves use. It cannot be included via an external Gradle file :-(
 buildscript {
@@ -11,13 +10,21 @@ buildscript {
         // External libs - jcenter is Bintray and is supposed to be a superset of Maven Central, but do both just in case
         jcenter()
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+
     }
 
     dependencies {
         // Artifactory plugin
         classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '4.0.0')
+        classpath 'net.freudasoft:gradle-cmake-plugin:0.0.2'
     }
 }
+
+apply plugin: "net.freudasoft.gradle-cmake-plugin"
+
 
 ext{
     dirConfigMetrics = 'config/metrics'
@@ -32,6 +39,10 @@ dependencies {
 }
 
 
+
+cmake {
+
+}
 
 sourceSets {
     main {
