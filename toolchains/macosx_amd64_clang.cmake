@@ -18,5 +18,7 @@ cmake_minimum_required ( VERSION 2.8.12 )
 set ( CMAKE_BUILD_TYPE "Debug" CACHE STRING "Default build type" )
 
 set ( CMAKE_SYSTEM_NAME Darwin )
+set ( CMAKE_SYSTEM_ARCH amd64)
+
 set ( CMAKE_C_COMPILER clang )
 set ( CMAKE_CXX_COMPILER clang++ )
