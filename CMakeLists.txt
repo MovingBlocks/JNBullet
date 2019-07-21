@@ -35,4 +35,4 @@ if(APPLE)
     target_include_directories(bullet PRIVATE "${CMAKE_SOURCE_DIR}/natives/jni-headers/mac")
 endif()
 
-set_target_properties(bullet PROPERTIES OUTPUT_NAME "bullet-${CMAKE_HOST_SYSTEM_NAME}-${CMAKE_LIBRARY_ARCHITECTURE}")
+set_target_properties(bullet PROPERTIES OUTPUT_NAME "bullet-${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_ARCH}")

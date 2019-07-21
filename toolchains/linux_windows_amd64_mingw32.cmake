@@ -1,5 +1,6 @@
 # the name of the target operating system
 SET(CMAKE_SYSTEM_NAME Windows)
+set ( CMAKE_SYSTEM_ARCH amd64)
 
 # Choose an appropriate compiler prefix
 
