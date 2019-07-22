@@ -23,9 +23,6 @@ buildscript {
     }
 }
 
-apply plugin: "net.freudasoft.gradle-cmake-plugin"
-
-
 ext{
     dirConfigMetrics = 'config/metrics'
     generatedSrcDir = 'src/generated/java'
