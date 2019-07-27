@@ -109,13 +109,9 @@ publishing {
             // Without this we get a .pom with no dependencies
             from components.java
 
-            artifact jar
-            artifact sourceJar {
-                classifier "sources"
-            }
-            artifact javadocJar {
-                classifier "javadoc"
-            }
+//            artifact jar
+            artifact sourceJar
+            artifact javadocJar
         }
     }
 
