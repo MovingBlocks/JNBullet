@@ -1,6 +1,7 @@
 // This include file applies our Artifactory related settings to places that need them (root project + modules)
 // It is a superset of the the stuff common to Java sub projects so we include the common.gradle here
 apply from: "$rootDir/config/gradle/common.gradle"
+apply from: "$rootDir/config/gradle/artifactoryNatives.gradle"
 
 // Artifactory publishing requires these (without maven we'd get no .pom with dependency info published)
 apply plugin: 'maven'
