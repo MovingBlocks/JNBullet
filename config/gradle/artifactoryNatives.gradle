@@ -8,17 +8,17 @@ task zipNatives(type: Zip) {
     description 'Creates a zip archive that contains all TeraBullet native files'
 
     from ('natives') {
-        include '*linux*'
+        include '*Linux*'
         into 'linux'
     }
 
     from ('natives') {
-        include '*windows*'
+        include '*Windows*'
         into 'windows'
     }
 
     from ('natives') {
-        include '*darwin*'
+        include '*Darwin*'
         into 'macosx'
     }
 
