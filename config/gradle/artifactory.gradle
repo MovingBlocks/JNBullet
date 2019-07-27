@@ -88,7 +88,7 @@ publishing {
 
 // Technically the plain "jar" both here and above is included automatically, but leaving it explicit for clarity
 artifactoryPublish {
-    dependsOn jar, sourceJar, javadocJar
+    dependsOn jar, sourceJar, javadocJar, zipNatives
     // TODO: After Gradle 2.3 to 2.10 upgrade have to use `gradlew generatePomFileForMavenJavaPublication artifactoryPublish`
     // The generation task doesn't happen on its own yet can't be set as a dependsOn as it isn't available yet?
 }
