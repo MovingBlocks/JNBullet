@@ -7,20 +7,30 @@ group = 'org.terasology.terabullet_2'
 task zipNatives(type: Zip) {
     description 'Creates a zip archive that contains all TeraBullet native files'
 
-    from ('natives') {
+    from ('linux_amd64_gcc') {
+        include '*Linux*'
+        into 'linux'
+    }
+    
+    from ('linux_i386_gcc') {
         include '*Linux*'
         into 'linux'
     }
 
-    from ('natives') {
+    from ('linux_windows_amd64_mingw32') {
+        include '*Windows*'
+        into 'windows'
+    }
+    
+    from ('linux_windows_i686_mingw32') {
         include '*Windows*'
         into 'windows'
     }
 
-    from ('natives') {
-        include '*Darwin*'
-        into 'macosx'
-    }
+  //  from ('natives') {
+   //     include '*Darwin*'
+   //     into 'macosx'
+   // }
 
     destinationDir = file(buildDir)
     baseName = 'terabullet_natives'
