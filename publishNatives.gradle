@@ -2,7 +2,7 @@ apply plugin: 'base'
 apply plugin: 'maven-publish'
 
 version = '0.1.0-SNAPSHOT'
-group = 'com.badlogic.gdx'
+group = 'org.terasology.terabullet_2'
 
 task zipNatives(type: Zip) {
     description 'Creates a zip archive that contains all TeraBullet native files'

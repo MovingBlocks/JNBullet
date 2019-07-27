@@ -1,9 +1,3 @@
-apply from: "$rootDir/config/gradle/artifactory.gradle"
-
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'eclipse'
-
 // Dependencies needed for what our Gradle scripts themselves use. It cannot be included via an external Gradle file :-(
 buildscript {
     repositories {
@@ -19,9 +13,16 @@ buildscript {
     dependencies {
         // Artifactory plugin
         classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '4.0.0')
-        classpath 'net.freudasoft:gradle-cmake-plugin:0.0.2'
     }
 }
+
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.artifactory'
 
 ext{
     dirConfigMetrics = 'config/metrics'
@@ -74,3 +75,102 @@ repositories {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+version = '0.1.0-SNAPSHOT'
+group = 'org.terasology.terabullet_2'
+
+
+task sourceJar(type: Jar) {
+    description = "Create a JAR with all sources"
+    from sourceSets.main.allSource
+    from sourceSets.test.allSource
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    description = "Create a JAR with the JavaDoc for the java sources"
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+artifactory {
+    contextUrl = 'http://artifactory.terasology.org/artifactory'
+
+    // This is the target for publishing artifacts. Unless testing locally usually the setting in Jenkins is used
+    publish {
+        repository {
+            // The repoKey can be overridden in Jenkins and via local gradle.properties if desired for testing
+            if (rootProject.hasProperty("artifactoryPublishRepo")) {
+                repoKey = artifactoryPublishRepo
+                println "Changing PUBLISH repoKey to $artifactoryPublishRepo"
+            } else {
+                repoKey = 'terasology-snapshot-local'
+                println "PUBLISH repoKey is terasology-snapshot-local (default value)"
+            }
+
+            // User and pass are overridden in Jenkins. You can supply your own for manual use in a local prop file, such as gradle.properties
+            // This way we make it so you can run locally without having the user/pass set - but if the artifactoryPublish task is called it'll fail
+            if (rootProject.hasProperty("artifactoryUser") && rootProject.hasProperty("artifactoryPass")) {
+                username = "$artifactoryUser"
+                password = "$artifactoryPass"
+            }
+            // Note that republishing artifacts under the same name (without an incremented SNAPSHOT for instance) may fail with "Forbidden"
+        }
+
+        defaults {
+            publications ('mavenJava')
+        }
+    }
+
+    // This is the source where we get dependencies. Or it would be but it does not appear to work
+    // Only the main repositories {} seems to matter, and if commented out this still doesn't help
+    // After a Jenkins upgrade in March 2015 the setting in Jenkins started working. Needs retesting here
+    resolve {
+        repository {
+            // The repoKey can be overridden in Jenkins and via local gradle.properties if desired for testing
+            if (rootProject.hasProperty("artifactoryResolveRepo")) {
+                repoKey = artifactoryResolveRepo
+                println "Changing RESOLVE repoKey to $artifactoryResolveRepo"
+            } else {
+                repoKey = 'virtual-repo-live'
+                println "RESOLVE repoKey is virtual-repo-live (default value)"
+            }
+        }
+    }
+}
+
+// A configuration for publishing artifacts
+configurations {
+    published
+}
+
+// Define the artifacts we want to publish (the .pom will also be included since the Maven plugin is active)
+artifacts {
+    published jar
+    published sourceJar
+    published javadocJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            // Without this we get a .pom with no dependencies
+            from components.java
+
+            artifact jar
+            artifact sourceJar {
+                classifier "sources"
+            }
+            artifact javadocJar {
+                classifier "javadoc"
+            }
+        }
+    }
+}
+
+artifactoryPublish {
+    dependsOn jar, sourceJar, javadocJar
+}
+
+javadoc {
+    failOnError = false
+}
