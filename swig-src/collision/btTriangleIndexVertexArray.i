@@ -47,8 +47,8 @@ import java.util.ArrayList;
 		return null;
 	}
 	
-	/** Create or reuse a btIndexedMesh instance based on the specified {@link MeshPart}.
-	 * Use {@link #release()} to release the mesh when it's no longer needed. */
+	///** Create or reuse a btIndexedMesh instance based on the specified {@link MeshPart}.
+	// * Use {@link #release()} to release the mesh when it's no longer needed. */
 	//public static btIndexedMesh obtain(final MeshPart meshPart) {
 	//	if (meshPart == null)
 	//		throw new BulletRuntimeException("meshPart cannot be null");
@@ -80,8 +80,8 @@ import java.util.ArrayList;
 		return result;
 	}
 	
-	/** The tag to identify this btIndexedMesh, may be null. Typically this is the {@link Mesh} or {@link MeshPart} used to create or set
-	 * this btIndexedMesh. Use by the static obtain(...) methods to avoid creating duplicate instances. */
+	///** The tag to identify this btIndexedMesh, may be null. Typically this is the {@link Mesh} or {@link MeshPart} used to create or set
+	// * this btIndexedMesh. Use by the static obtain(...) methods to avoid creating duplicate instances. */
 	public Object tag;
 	
 	/** Construct a new btIndexedMesh based on the supplied {@link Mesh}
@@ -92,9 +92,9 @@ import java.util.ArrayList;
 	//	set(mesh);
 	//}
 	
-	/** Construct a new btIndexedMesh based on the supplied {@link MeshPart}
-	 * The specified mesh must be indexed and triangulated and must outlive this btIndexedMesh.
-	 * The buffers for the vertices and indices are shared amonst both. */
+	///** Construct a new btIndexedMesh based on the supplied {@link MeshPart}
+	 //* The specified mesh must be indexed and triangulated and must outlive this btIndexedMesh.
+	 //* The buffers for the vertices and indices are shared amonst both. */
 	//public btIndexedMesh(final MeshPart meshPart) {
 	//	this();
 	//	set(meshPart);
@@ -124,16 +124,16 @@ import java.util.ArrayList;
 	//	set(mesh, mesh, 0, mesh.getNumIndices());
 	//}
 	
-	/** Convenience method to set this btIndexedMesh to the specified {@link Mesh} 
-	 * The specified mesh must be indexed and triangulated and must outlive this btIndexedMesh.
-	 * The buffers for the vertices and indices are shared amonst both. */
+	///** Convenience method to set this btIndexedMesh to the specified {@link Mesh}
+	// * The specified mesh must be indexed and triangulated and must outlive this btIndexedMesh.
+	// * The buffers for the vertices and indices are shared amonst both. */
 	//public void set(final Object tag, final Mesh mesh) {
 	//	set(tag, mesh, 0, mesh.getNumIndices());
 	//}
 
-	/** Convenience method to set this btIndexedMesh to the specified {@link MeshPart} 
-	 * The specified mesh must be indexed and triangulated and must outlive this btIndexedMesh.
-	 * The buffers for the vertices and indices are shared amonst both. */
+	///** Convenience method to set this btIndexedMesh to the specified {@link MeshPart}
+	// * The specified mesh must be indexed and triangulated and must outlive this btIndexedMesh.
+	// * The buffers for the vertices and indices are shared amonst both. */
 	//public void set(final MeshPart meshPart) {
 	//	if (meshPart.primitiveType != com.badlogic.gdx.graphics.GL20.GL_TRIANGLES)
 	//		throw new com.badlogic.gdx.utils.BulletRuntimeException("Mesh must be indexed and triangulated");
@@ -228,8 +228,8 @@ import java.util.ArrayList;
 		return null;
 	}
 	
-	/** Create or reuse a btTriangleIndexVertexArray instance based on the specified {@link MeshPart} array.
-	 * Use {@link #release()} to release the mesh when it's no longer needed. */
+	///** Create or reuse a btTriangleIndexVertexArray instance based on the specified {@link MeshPart} array.
+	// * Use {@link #release()} to release the mesh when it's no longer needed. */
 	//public static <T extends MeshPart> btTriangleIndexVertexArray obtain(final ArrayList<T> meshParts) {
 	//	btTriangleIndexVertexArray result = getInstance(meshParts);
 	//	if (result == null) {
@@ -262,9 +262,9 @@ import java.util.ArrayList;
 		return meshes.get(index);
 	}
 
-	/** Add a {@link MeshPart} instance to this btTriangleIndexVertexArray. 
-	 * The specified mesh must be indexed and triangulated and must outlive this btTriangleIndexVertexArray.
-     * The buffers for the vertices and indices are shared amongst both. */
+	///** Add a {@link MeshPart} instance to this btTriangleIndexVertexArray.
+	// * The specified mesh must be indexed and triangulated and must outlive this btTriangleIndexVertexArray.
+    // * The buffers for the vertices and indices are shared amongst both. */
 	//public btTriangleIndexVertexArray addMeshPart(final MeshPart meshPart) {
 	//	btIndexedMesh mesh = btIndexedMesh.obtain(meshPart);
 	//	addIndexedMesh(mesh, PHY_ScalarType.PHY_SHORT);
@@ -272,27 +272,27 @@ import java.util.ArrayList;
 	//	return this;
 	//}
 
-	/** Add one or more {@link MeshPart} instances to this btTriangleIndexVertexArray. 
-	 * The specified meshes must be indexed and triangulated and must outlive this btTriangleIndexVertexArray.
-     * The buffers for the vertices and indices are shared amongst both. */
+	///** Add one or more {@link MeshPart} instances to this btTriangleIndexVertexArray.
+	// * The specified meshes must be indexed and triangulated and must outlive this btTriangleIndexVertexArray.
+     //* The buffers for the vertices and indices are shared amongst both. */
 	//public btTriangleIndexVertexArray addMeshParts(final MeshPart... meshParts) {
 	//	for (int i = 0; i < meshParts.length; i++)
 	//		addMeshPart(meshParts[i]);
 	//	return this;
 	//}
 
-	/** Add one or more {@link MeshPart} instances to this btTriangleIndexVertexArray. 
-	 * The specified meshes must be indexed and triangulated and must outlive this btTriangleIndexVertexArray.
-     * The buffers for the vertices and indices are shared amongst both. */
+	///** Add one or more {@link MeshPart} instances to this btTriangleIndexVertexArray.
+	// * The specified meshes must be indexed and triangulated and must outlive this btTriangleIndexVertexArray.
+    // * The buffers for the vertices and indices are shared amongst both. */
 	//public <T extends MeshPart> btTriangleIndexVertexArray addMeshParts(final Iterable<T> meshParts) {
 	//	for (final MeshPart meshPart : meshParts)
 	//		addMeshPart(meshPart);
 	//	return this;
 	//}
 	
-	/** Add one or more {@link NodePart} instances to this btTriangleIndexVertexArray. 
-	 * The specified meshes must be indexed and triangulated and must outlive this btTriangleIndexVertexArray.
-     * The buffers for the vertices and indices are shared amongst both. */
+	///** Add one or more {@link NodePart} instances to this btTriangleIndexVertexArray.
+	// * The specified meshes must be indexed and triangulated and must outlive this btTriangleIndexVertexArray.
+    // * The buffers for the vertices and indices are shared amongst both. */
 	//public <T extends NodePart> btTriangleIndexVertexArray addNodeParts(final Iterable<T> nodeParts) {
 	//	for (final NodePart nodePart : nodeParts)
 	//		addMeshPart(nodePart.meshPart);

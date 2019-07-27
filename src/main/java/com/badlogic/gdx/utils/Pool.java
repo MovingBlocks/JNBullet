@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Queue;
 
 /** A pool of objects that can be reused to avoid allocation.
- * @see Pools
  * @author Nathan Sweet */
 abstract public class Pool<T> {
     /** The maximum number of objects that will be pooled. */
