@@ -7,16 +7,23 @@ buildscript {
         maven {
             url "https://plugins.gradle.org/m2/"
         }
+        dependencies {
+            classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '4.0.0')
+        }
     }
 }
 
+apply plugin: 'com.jfrog.artifactory'
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
+apply plugin: 'idea'
 
 ext{
     generatedSrcDir = 'src/generated/java'
 }
+
+group = 'org.terasology'
 
 
 dependencies {
@@ -59,9 +66,6 @@ repositories {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-version = '0.1.0-SNAPSHOT'
-group = 'org.terasology.terabullet_2'
-
 
 task sourceJar(type: Jar) {
     description = "Create a JAR with all sources"
@@ -74,6 +78,32 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     description = "Create a JAR with the JavaDoc for the java sources"
     from javadoc.destinationDir
     classifier = 'javadoc'
+}
+
+
+artifactory {
+    contextUrl = 'http://artifactory.terasology.org/artifactory'
+    publish {
+        repository {
+            repoKey = 'terasology-snapshot-local' // The Artifactory repository key to publish to
+            ivy {
+                ivyLayout = '[organization]/[module]/ivy-[revision].xml'
+                artifactLayout = '[organization]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]'
+                mavenCompatible = true
+                //Convert any dots in an [organization] layout value to path separators, similar to Maven's groupId-to-path conversion. True if not specified
+            }
+        }
+        defaults {
+            // Reference to Gradle publications defined in the build script.
+            // This is how we tell the Artifactory Plugin which artifacts should be
+            // published to Artifactory.
+            publications('mavenJava')
+            publishArtifacts = true
+            // Publish generated POM files to Artifactory (true by default)
+            publishPom = true
+            publishIvy = true // Publish generated Ivy descriptor files to Artifactory (true by default)
+        }
+    }
 }
 
 // A configuration for publishing artifacts
@@ -97,8 +127,13 @@ publishing {
             artifact jar
             artifact sourceJar
             artifact javadocJar
+
         }
     }
+}
+
+artifactoryPublish {
+    dependsOn jar, sourceJar, javadocJar
 }
 
 javadoc {

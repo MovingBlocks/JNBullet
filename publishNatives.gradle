@@ -1,8 +1,24 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        dependencies {
+            classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '4.0.0')
+        }
+//        maven {
+//            url "http://localhost:8081/artifactory/jcenter" // The Artifactory (preferably virtual) repository to resolve from
+//        }
+    }
+}
+
 apply plugin: 'base'
 apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.artifactory'
 
-version = '0.1.0-SNAPSHOT'
-group = 'org.terasology.terabullet_2'
+group = 'org.terasology'
 
 task zipNatives(type: Zip) {
     description 'Creates a zip archive that contains all TeraBullet native files'
@@ -33,28 +49,51 @@ task zipNatives(type: Zip) {
    // }
 
     destinationDir = file(buildDir)
-    baseName = 'terabullet_natives'
+    baseName = 'native-bullet'
 }
+
+artifactoryPublish {
+    dependsOn zipNatives
+}
+
+
+// A configuration for publishing artifacts
+configurations {
+    published
+}
+
 
 publishing {
     publications {
         zippedNatives(MavenPublication) {
             artifact zipNatives
-
-            artifactId 'terabullet_natives'
+            artifactId 'native-bullet'
         }
     }
+}
 
-    repositories {
-        maven {
-            // First see if we have properties with creds (gradle.properties)
-            if (project.hasProperty('artifactoryUser') && project.hasProperty('artifactoryPass')) {
-                credentials {
-                    username artifactoryUser
-                    password artifactoryPass
-                }
+
+artifactory {
+    contextUrl = 'http://artifactory.terasology.org/artifactory'
+    publish {
+        repository {
+            repoKey = 'terasology-snapshot-local' // The Artifactory repository key to publish to
+            ivy {
+                ivyLayout = '[organization]/[module]/ivy-[revision].xml'
+                artifactLayout = '[organization]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]'
+                mavenCompatible = true
+                //Convert any dots in an [organization] layout value to path separators, similar to Maven's groupId-to-path conversion. True if not specified
             }
-            url "http://artifactory.terasology.org/artifactory/libs-snapshot-local"
+        }
+        defaults {
+            publishConfigs('archives', 'published')
+            // Reference to Gradle publications defined in the build script.
+            // This is how we tell the Artifactory Plugin which artifacts should be
+            // published to Artifactory.
+            publications('zippedNatives')
+            publishArtifacts = true
+            // Publish generated POM files to Artifactory (true by default)
+            publishPom = true
         }
     }
 }
