@@ -15,7 +15,7 @@
 cmake_minimum_required ( VERSION 2.8.12 )
 
 set ( CMAKE_SYSTEM_NAME Linux )
-set ( CMAKE_SYSTEM_ARCH i386)
+set ( CMAKE_SYSTEM_ARCH i686)
 
 set ( CMAKE_C_COMPILER gcc )
 set ( CMAKE_CXX_COMPILER g++ )

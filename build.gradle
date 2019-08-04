@@ -1,8 +1,9 @@
 import org.apache.tools.ant.taskdefs.condition.Os
 ext {
     if (Os.isFamily(Os.FAMILY_UNIX)) {
-        natives = ["linux_amd64_gcc","linux_i386_gcc","linux_windows_amd64_mingw32","linux_windows_i686_mingw32"]
+        natives = ["linux_amd64_gcc","linux_i686_gcc","linux_windows_amd64_mingw32","linux_windows_i686_mingw32"]
     }
+    generatedSrcDir = 'src/generated/java'
 }
 
 // Dependencies needed for what our Gradle scripts themselves use. It cannot be included via an external Gradle file :-(
@@ -25,10 +26,6 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'idea'
-
-ext{
-    generatedSrcDir = 'src/generated/java'
-}
 
 group = 'org.terasology'
 
@@ -117,12 +114,12 @@ task zipNatives(type: Zip){
     description 'Creates a zip archive that contains all TeraBullet native files'
     natives.each { module ->
         from ("$rootDir/build/natives/${module}") {
-            include '*Linux*'
+            include '*linux*'
             into 'linux'
         }
 
         from ("$rootDir/build/natives/${module}") {
-            include '*Windows*'
+            include '*windows*'
             into 'windows'
         }
     }
@@ -131,10 +128,28 @@ task zipNatives(type: Zip){
     baseName = 'native-bullet'
 }
 
-NativeBuild.dependsOn ':swig-src:Swig'
+NativeBuild.dependsOn generateSources
 zipNatives.dependsOn NativeBuild
 
+// A configuration for publishing artifacts
+configurations {
+    published
+}
+
 //artifactoryPublish.skip = true
+
+// Define the artifacts we want to publish (the .pom will also be included since the Maven plugin is active)
+artifacts {
+//    published jar
+    published sourceJar
+    published javadocJar
+    published zipNatives
+}
+
+artifactoryPublish {
+    dependsOn  sourceJar, javadocJar, zipNatives
+}
+
 
 artifactory {
     contextUrl = 'http://artifactory.terasology.org/artifactory'
@@ -152,10 +167,10 @@ artifactory {
             // Reference to Gradle publications defined in the build script.
             // This is how we tell the Artifactory Plugin which artifacts should be
             // published to Artifactory.
-            publications('mavenJava')
-            publications('zippedNatives')
+//            publications('mavenJava')
+//            publications('zippedNatives')
 
-//            publishBuildInfo = true   //Publish build-info to Artifactory (true by default)
+//          publishBuildInfo = true   //Publish build-info to Artifactory (true by default)
             publishArtifacts = true   //Publish artifacts to Artifactory (true by default)
             publishPom = true   //Publish generated POM files to Artifactory (true by default).
             publishIvy = true   //Publish generated Ivy descriptor files to Artifactory (true by default).
@@ -165,40 +180,27 @@ artifactory {
 
 
 
-// A configuration for publishing artifacts
-configurations {
-    published
-}
 
-// Define the artifacts we want to publish (the .pom will also be included since the Maven plugin is active)
-artifacts {
-    published jar
-    published sourceJar
-    published javadocJar
-}
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            // Without this we get a .pom with no dependencies
-            from components.java
-            artifact jar
-            artifact sourceJar
-            artifact javadocJar
-            artifact(file("$rootDir/gradle.properties"))
+//publishing {
+//    publications {
+//        mavenJava(MavenPublication) {
+//            // Without this we get a .pom with no dependencies
+//            from components.java
+//            artifact jar
+//            artifact sourceJar
+//            artifact javadocJar
+//            artifact(file("$rootDir/gradle.properties"))
+//
+//        }
+//
+//        zippedNatives(MavenPublication) {
+//            artifact zipNatives
+//            artifactId 'native-bullet'
+//        }
+//    }
+//}
 
-        }
-
-        zippedNatives(MavenPublication) {
-            artifact zipNatives
-            artifactId 'native-bullet'
-        }
-    }
-}
-
-artifactoryPublish {
-    dependsOn jar, sourceJar, javadocJar, zipNatives
-}
 
 javadoc {
     failOnError = false

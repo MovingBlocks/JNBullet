@@ -18,7 +18,7 @@ cmake_minimum_required ( VERSION 2.8.12 )
 set ( CMAKE_BUILD_TYPE "Debug" CACHE STRING "Default build type" )
 
 set ( CMAKE_SYSTEM_NAME Windows )
-set ( CMAKE_SYSTEM_ARCH i386)
+set ( CMAKE_SYSTEM_ARCH i686)
 
 set ( CMAKE_C_COMPILER cl.exe )
 set ( CMAKE_CXX_COMPILER cl.exe )

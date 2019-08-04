@@ -90,14 +90,21 @@ public final class NativeSupport {
     private class DefaultLoader implements Loader {
         @Override
         public void load() {
+            boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+            boolean isMacOS = System.getProperty("os.name").toLowerCase().contains("mac");
+
             // Generate library name.
-            StringBuilder builder = new StringBuilder("bullet-");
+            StringBuilder builder = new StringBuilder(isWindows ? "libbullet-" : "bullet-");
 
-
-            if (System.getProperty("os.name").toLowerCase().contains("win")) {
+            if (isWindows) {
                 // Windows
                 builder.append("windows-");
-            } else {
+            }
+            else if(isMacOS){
+                // osx
+                builder.append("darwin-");
+            }
+            else {
                 // Assume Linux
                 builder.append("linux-");
             }
