@@ -32,6 +32,18 @@ task Swig{
 
 }
 
+task BuildClasses {
+    swigTarget.each { module ->
+        FileTree swig_visit  = fileTree(dir: "$rootDir/src/generated/java/com/badlogic/gdx/physics/bullet/${module}", include: '*.java')
+        File outputFile = new File("$rootDir/swig-src/${module}", "classes.i");
+        BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile,false));
 
+        swig_visit.visit { element ->
+            String classTarget = "$element.file.name".split("\\.")[0]
+            writer.write("SPECIFY_CLASS($classTarget, com.badlogic.gdx.physics.bullet.${module})\n")
+        }
+        writer.close()
+    }
+}
 
 
