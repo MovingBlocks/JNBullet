@@ -132,21 +132,6 @@ artifactoryPublish {
 NativeBuild.dependsOn generateSources
 zipNatives.dependsOn NativeBuild
 
-// A configuration for publishing artifacts
-//configurations {
-//    published
-//}
-//
-////artifactoryPublish.skip = true
-//
-//// Define the artifacts we want to publish (the .pom will also be included since the Maven plugin is active)
-//artifacts {
-////    published jar
-//    published sourceJar
-//    published javadocJar
-//    published zipNatives
-//}
-
 publishing {
     publications {
         NativeBullet(MavenPublication) {
@@ -215,11 +200,6 @@ artifactory {
     }
 }
 
-afterEvaluate {
-    artifactoryPublish.dependsOn 'install' // Make sure pom file is (re)generated!
-    artifactoryPublish.dependsOn 'sourceJar'
-    artifactoryPublish.dependsOn 'javadocJar'
-}
 
 
 javadoc {
