@@ -215,6 +215,12 @@ artifactory {
     }
 }
 
+afterEvaluate {
+    artifactoryPublish.dependsOn 'install' // Make sure pom file is (re)generated!
+    artifactoryPublish.dependsOn 'sourceJar'
+    artifactoryPublish.dependsOn 'javadocJar'
+}
+
 
 javadoc {
     failOnError = false
