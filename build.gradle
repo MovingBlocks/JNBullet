@@ -157,6 +157,30 @@ publishing {
             artifact sourceJar
             artifact javadocJar
             artifact zipNatives
+
+            pom {
+                name = "NativeBullet"
+                description = "A Native Bullet Wrapper"
+                url = "http://www.example.com/project"
+                licenses {
+                    license {
+                        name = "The Apache License, Version 2.0"
+                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                    }
+                }
+                developers {
+                    developer {
+                        id = "michaelpollind"
+                        name = "Michael Pollind"
+                        email = "polli104@mail.chapman.edu"
+                    }
+                }
+                scm {
+                    connection = "https://github.com/MovingBlocks/NativeBullet.git"
+                    developerConnection = "git@github.com:MovingBlocks/NativeBullet.git"
+                    url = "https://github.com/MovingBlocks/NativeBullet"
+                }
+            }
         }
     }
 }
