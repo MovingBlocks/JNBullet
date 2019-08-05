@@ -16,7 +16,7 @@ buildscript {
             url "https://plugins.gradle.org/m2/"
         }
         dependencies {
-            classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '4.0.0')
+            classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '4.7.3')
         }
     }
 }
@@ -83,8 +83,6 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc.destinationDir
     classifier = 'javadoc'
 }
-
-
 natives.each { module ->
     tasks.create(name: "native_${module}", type: Exec) {
         description = "cmake ${module}"
@@ -102,14 +100,12 @@ natives.each { module ->
         }
     }
 }
-
 task NativeBuild{
     description = "Builds Natives"
     natives.each { module ->
         dependsOn "native_${module}"
     }
 }
-
 task zipNatives(type: Zip){
     description 'Creates a zip archive that contains all TeraBullet native files'
     natives.each { module ->
@@ -128,26 +124,41 @@ task zipNatives(type: Zip){
     baseName = 'native-bullet'
 }
 
+artifactoryPublish {
+    dependsOn  sourceJar, javadocJar, zipNatives
+}
+
+
 NativeBuild.dependsOn generateSources
 zipNatives.dependsOn NativeBuild
 
 // A configuration for publishing artifacts
-configurations {
-    published
-}
+//configurations {
+//    published
+//}
+//
+////artifactoryPublish.skip = true
+//
+//// Define the artifacts we want to publish (the .pom will also be included since the Maven plugin is active)
+//artifacts {
+////    published jar
+//    published sourceJar
+//    published javadocJar
+//    published zipNatives
+//}
 
-//artifactoryPublish.skip = true
+publishing {
+    publications {
+        NativeBullet(MavenPublication) {
+            // Without this we get a .pom with no dependencies
+            artifactId='native-bullet'
 
-// Define the artifacts we want to publish (the .pom will also be included since the Maven plugin is active)
-artifacts {
-//    published jar
-    published sourceJar
-    published javadocJar
-    published zipNatives
-}
-
-artifactoryPublish {
-    dependsOn  sourceJar, javadocJar, zipNatives
+            from components.java
+            artifact sourceJar
+            artifact javadocJar
+            artifact zipNatives
+        }
+    }
 }
 
 
@@ -164,11 +175,13 @@ artifactory {
             }
         }
         defaults {
+
             // Reference to Gradle publications defined in the build script.
             // This is how we tell the Artifactory Plugin which artifacts should be
             // published to Artifactory.
 //            publications('mavenJava')
 //            publications('zippedNatives')
+            publications('NativeBullet')
 
 //          publishBuildInfo = true   //Publish build-info to Artifactory (true by default)
             publishArtifacts = true   //Publish artifacts to Artifactory (true by default)
@@ -177,29 +190,6 @@ artifactory {
         }
     }
 }
-
-
-
-
-
-//publishing {
-//    publications {
-//        mavenJava(MavenPublication) {
-//            // Without this we get a .pom with no dependencies
-//            from components.java
-//            artifact jar
-//            artifact sourceJar
-//            artifact javadocJar
-//            artifact(file("$rootDir/gradle.properties"))
-//
-//        }
-//
-//        zippedNatives(MavenPublication) {
-//            artifact zipNatives
-//            artifactId 'native-bullet'
-//        }
-//    }
-//}
 
 
 javadoc {
