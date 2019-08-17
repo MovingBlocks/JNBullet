@@ -6,7 +6,25 @@ swigTarget.each { module ->
     tasks.create(name: "swig_"+"${module}", type: Exec) {
         description = 'Swigging collision'
         executable "swig"
-        args "-java","-c++","-Wall","-Wextra","-fvirtual","-DBT_NO_PROFILE","-fastdispatch","-macroerrors","-package","com.badlogic.gdx.physics.bullet.${module}","-I$rootDir/natives/bullet","-I$rootDir/natives/custom","-I$rootDir/natives/extras","-I$rootDir/natives/extras/Serialize","-o", "$rootDir/build/swig/${module}_wrap.cpp","-outdir","$rootDir/src/generated/java/com/badlogic/gdx/physics/bullet/${module}","$rootDir/swig-src/${module}/${module}.i"
+        args ("-java",
+                "-c++",
+                "-Wall",
+                "-Wextra",
+                "-fvirtual",
+                "-DBT_NO_PROFILE",
+                "-fastdispatch",
+                "-macroerrors",
+                "-package",
+                "com.badlogic.gdx.physics.bullet.${module}",
+                "-I$rootDir/natives/bullet3/src",
+                "-I$rootDir/natives/custom",
+                "-I$rootDir/natives/extras",
+                "-I$rootDir/natives/extras/Serialize",
+                "-o", "$rootDir/build/swig/${module}_wrap.cpp",
+                "-outdir",
+                "$rootDir/src/generated/java/com/badlogic/gdx/physics/bullet/${module}",
+                "$rootDir/swig-src/${module}/${module}.i")
+
         doFirst {
             mkdir "$rootDir/src/generated/java/com/badlogic/gdx/physics/bullet/${module}"
             mkdir "$rootDir/build/swig"

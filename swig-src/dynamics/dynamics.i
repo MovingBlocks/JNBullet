@@ -221,25 +221,25 @@ import org.terasology.math.geom.Matrix4f;
 %}
 %include "gdx/dynamics/FilterableVehicleRaycaster.h"
 
-%{
-#include <BulletDynamics/ConstraintSolver/btGearConstraint.h>
-%}
-%include "BulletDynamics/ConstraintSolver/btGearConstraint.h"
+// %{
+// #include <BulletDynamics/ConstraintSolver/btGearConstraint.h>
+// %}
+// %include "BulletDynamics/ConstraintSolver/btGearConstraint.h"
 
 %{
 #include <BulletDynamics/ConstraintSolver/btNNCGConstraintSolver.h>
 %}
 %include "BulletDynamics/ConstraintSolver/btNNCGConstraintSolver.h"
 
-%{
-#include <BulletDynamics/Dynamics/btDiscreteDynamicsWorldMt.h>
-%}
-%include "BulletDynamics/Dynamics/btDiscreteDynamicsWorldMt.h"
+// %{
+// #include <BulletDynamics/Dynamics/btDiscreteDynamicsWorldMt.h>
+// %}
+// %include "BulletDynamics/Dynamics/btDiscreteDynamicsWorldMt.h"
 
-%{
-#include <BulletDynamics/Dynamics/btSimulationIslandManagerMt.h>
-%}
-%include "BulletDynamics/Dynamics/btSimulationIslandManagerMt.h"
+// %{
+// #include <BulletDynamics/Dynamics/btSimulationIslandManagerMt.h>
+// %}
+// %include "BulletDynamics/Dynamics/btSimulationIslandManagerMt.h"
 
 %rename(getLinkConst) btMultiBody::getLink(int) const;
 %rename(getBaseColliderConst) btMultiBody::getBaseCollider() const;
@@ -257,10 +257,10 @@ import org.terasology.math.geom.Matrix4f;
 %}
 %include "BulletDynamics/Featherstone/btMultiBodyConstraint.h"
 
-%{
-#include <BulletDynamics/Featherstone/btMultiBodyGearConstraint.h>
-%}
-%include "BulletDynamics/Featherstone/btMultiBodyGearConstraint.h"
+// %{
+// #include <BulletDynamics/Featherstone/btMultiBodyGearConstraint.h>
+// %}
+// %include "BulletDynamics/Featherstone/btMultiBodyGearConstraint.h"
 
 %{
 #include <BulletDynamics/Featherstone/btMultiBodyConstraintSolver.h>
@@ -274,10 +274,10 @@ import org.terasology.math.geom.Matrix4f;
 %}
 %include "BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h"
 
-%{
-#include <BulletDynamics/Featherstone/btMultiBodyFixedConstraint.h>
-%}
-%include "BulletDynamics/Featherstone/btMultiBodyFixedConstraint.h"
+// %{
+// #include <BulletDynamics/Featherstone/btMultiBodyFixedConstraint.h>
+// %}
+// %include "BulletDynamics/Featherstone/btMultiBodyFixedConstraint.h"
 
 %{
 #include <BulletDynamics/Featherstone/btMultiBodyJointFeedback.h>
@@ -312,10 +312,10 @@ import org.terasology.math.geom.Matrix4f;
 %}
 %include "BulletDynamics/Featherstone/btMultiBodyPoint2Point.h"
 
-%{
-#include <BulletDynamics/Featherstone/btMultiBodySliderConstraint.h>
-%}
-%include "BulletDynamics/Featherstone/btMultiBodySliderConstraint.h"
+// %{
+// #include <BulletDynamics/Featherstone/btMultiBodySliderConstraint.h>
+// %}
+// %include "BulletDynamics/Featherstone/btMultiBodySliderConstraint.h"
 
 %{
 #include <BulletDynamics/Featherstone/btMultiBodySolverConstraint.h>

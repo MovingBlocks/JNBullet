@@ -35,6 +35,8 @@
 %ignore btManifoldPoint::m_lateralFrictionDir2;
 %ignore btManifoldPoint::getPositionWorldOnA() const;
 %ignore btManifoldPoint::getPositionWorldOnB() const;
+%ignore btManifoldPoint::getPositionWorldOnB() const;
+%ignore btManifoldPoint::getCombinedRestitution();
 //%rename(internalGetPositionWorldOnA) btManifoldPoint::getPositionWorldOnA() const;
 //%rename(internalGetPositionWorldOnB) btManifoldPoint::getPositionWorldOnB() const;
 

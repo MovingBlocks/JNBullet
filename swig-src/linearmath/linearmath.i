@@ -176,10 +176,10 @@ bool btGeometryUtil::isInside(btAlignedObjectArray<btVector3> const&, btVector3 
 %}
 %include "LinearMath/btStackAlloc.h"
 
-%{
-#include <LinearMath/btThreads.h>
-%}
-%include "LinearMath/btThreads.h"
+// %{
+// #include <LinearMath/btThreads.h>
+// %}
+// %include "LinearMath/btThreads.h"
 
 %include "./btMotionState.i"
 

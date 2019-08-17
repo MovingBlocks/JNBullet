@@ -12,7 +12,7 @@ set_target_properties(bullet PROPERTIES COMPILE_FLAGS  "-DBT_NO_PROFILE -DBT_USE
 
 target_include_directories(bullet PRIVATE
     "${CMAKE_SOURCE_DIR}/natives/jni-headers",
-    "${CMAKE_SOURCE_DIR}/natives/bullet",
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/bullet",
     "${CMAKE_SOURCE_DIR}/natives/custom",
     "${CMAKE_SOURCE_DIR}/natives/extras/Serialize",
     "${CMAKE_SOURCE_DIR}/natives/extras"
