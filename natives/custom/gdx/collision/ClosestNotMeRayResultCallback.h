@@ -1,8 +1,8 @@
 #ifndef ClosestNotMeRayResultCallback_H
 #define ClosestNotMeRayResultCallback_H
 
-#include "../../../bullet/BulletCollision/CollisionDispatch/btCollisionObject.h"
-#include "../../../bullet/BulletCollision/CollisionDispatch/btCollisionWorld.h"
+#include <BulletCollision/CollisionDispatch/btCollisionObject.h>
+#include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
 
 class ClosestNotMeRayResultCallback : public btCollisionWorld::ClosestRayResultCallback
 {

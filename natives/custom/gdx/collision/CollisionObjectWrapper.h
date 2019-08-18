@@ -17,9 +17,9 @@
 #ifndef CollisionObjectWrapper_H
 #define CollisionObjectWrapper_H
 
-#include "../../../bullet/BulletCollision/CollisionDispatch/btCollisionObject.h"
-#include "../../../bullet/BulletCollision/CollisionShapes/btVoxelShape.h"
-#include "../../../bullet/BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
+#include <BulletCollision/CollisionDispatch/btCollisionObject.h>
+#include <BulletCollision/CollisionShapes/btVoxelShape.h>
+#include <BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h>
 
 /** @author Xoppa */
 class CollisionObjectWrapper {
