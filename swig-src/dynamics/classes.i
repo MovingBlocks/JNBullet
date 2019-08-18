@@ -65,7 +65,6 @@ SPECIFY_CLASS(btGeneric6DofSpringConstraintData, com.badlogic.gdx.physics.bullet
 SPECIFY_CLASS(SWIGTYPE_p_float, com.badlogic.gdx.physics.bullet.dynamics)
 SPECIFY_CLASS(SWIGTYPE_p_f_p_btDynamicsWorld_float__void, com.badlogic.gdx.physics.bullet.dynamics)
 SPECIFY_CLASS(btDiscreteDynamicsWorld, com.badlogic.gdx.physics.bullet.dynamics)
-SPECIFY_CLASS(SWIGTYPE_p_int, com.badlogic.gdx.physics.bullet.dynamics)
 SPECIFY_CLASS(Dynamics, com.badlogic.gdx.physics.bullet.dynamics)
 SPECIFY_CLASS(btDantzigSolver, com.badlogic.gdx.physics.bullet.dynamics)
 SPECIFY_CLASS(btActionInterface, com.badlogic.gdx.physics.bullet.dynamics)

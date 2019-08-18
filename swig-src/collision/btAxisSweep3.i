@@ -4,6 +4,7 @@
 #include <BulletCollision/BroadphaseCollision/btAxisSweep3.h>
 %}
 %include "BulletCollision/BroadphaseCollision/btAxisSweep3.h"
+%include "BulletCollision/BroadphaseCollision/btAxisSweep3Internal.h"
 
 %ignore btAxisSweep3Internal<unsigned short>::processAllOverlappingPairs;
 %ignore btAxisSweep3Internal<unsigned int>::processAllOverlappingPairs;

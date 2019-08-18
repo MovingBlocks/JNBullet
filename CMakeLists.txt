@@ -6,6 +6,8 @@ file(GLOB_RECURSE SRC_NATIVES
     "${CMAKE_SOURCE_DIR}/natives/bullet3/src/BulletCollision/**/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/bullet3/src/BulletSoftBody/**/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/bullet3/src/LinearMath/**/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/src/Extras/Serialize/**/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/src/Extras/InverseDynamics/**/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/custom/**/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/extras/**/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/jni-headers/**/*.cpp"
@@ -22,8 +24,8 @@ target_include_directories(bullet PRIVATE
     "${CMAKE_SOURCE_DIR}/natives/jni-headers",
     "${CMAKE_SOURCE_DIR}/natives/bullet3/src",
     "${CMAKE_SOURCE_DIR}/natives/custom",
-    "${CMAKE_SOURCE_DIR}/natives/extras/Serialize",
-    "${CMAKE_SOURCE_DIR}/natives/extras"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/Extras/Serialize",
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/Extras"
 )
 
 target_include_directories(bullet PUBLIC

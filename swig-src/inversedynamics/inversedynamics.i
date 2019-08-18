@@ -43,28 +43,29 @@ import org.terasology.math.geom.Matrix3f;
 import org.terasology.math.geom.Matrix4f;
 %}
 
-// %{
-// #include <BulletInverseDynamics/IDConfig.hpp>
-// %}
-// %include "BulletInverseDynamics/IDConfig.hpp"
-
-// %{
-// #include <BulletInverseDynamics/IDErrorMessages.hpp>
-// %}
-// %include "BulletInverseDynamics/IDErrorMessages.hpp"
-
-// %{
-// #include <BulletInverseDynamics/IDMath.hpp>
-// %}
-// %include "BulletInverseDynamics/IDMath.hpp"
-
-// %rename(finalizeInternal) btInverseDynamicsBullet3::MultiBodyTree::finalize();
-// %{
-// #include <BulletInverseDynamics/MultiBodyTree.hpp>
-// %}
-// %include "BulletInverseDynamics/MultiBodyTree.hpp"
-
 /*
+%{
+    #include <BulletInverseDynamics/IDConfig.hpp>
+%}
+%include "BulletInverseDynamics/IDConfig.hpp"
+
+%{
+    #include <BulletInverseDynamics/IDErrorMessages.hpp>
+%}
+%include "BulletInverseDynamics/IDErrorMessages.hpp"
+
+%{
+ #include <BulletInverseDynamics/IDMath.hpp>
+%}
+%include "BulletInverseDynamics/IDMath.hpp"
+
+%rename(finalizeInternal) btInverseDynamicsBullet3::MultiBodyTree::finalize();
+%{
+#include <BulletInverseDynamics/MultiBodyTree.hpp>
+%}
+%include "BulletInverseDynamics/MultiBodyTree.hpp"
+
+
 %rename(operatorSubscriptConst) btVectorX< idScalar >::operator [](int) const;
 %template(btVectorXIdScalar) btVectorX< idScalar >;
 %template(btMatrixXIdScalar) btMatrixX< idScalar >;
@@ -85,7 +86,9 @@ import org.terasology.math.geom.Matrix4f;
 #include <BulletInverseDynamics/details/MultiBodyTreeInitCache.hpp>
 %}
 %include "BulletInverseDynamics/details/MultiBodyTreeInitCache.hpp"
-*/
+
 %{
 using namespace btInverseDynamicsBullet3;
 %}
+*/
+
