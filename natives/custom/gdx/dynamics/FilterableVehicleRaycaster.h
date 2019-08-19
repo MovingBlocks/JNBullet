@@ -1,10 +1,10 @@
 #ifndef FilterableVehicleRaycaster_H
 #define FilterableVehicleRaycaster_H
 
-#include "../../../bullet/LinearMath/btVector3.h"
-#include "../../../bullet/BulletDynamics/Vehicle/btRaycastVehicle.h"
-#include "../../../bullet/BulletDynamics/Vehicle/btVehicleRaycaster.h"
-#include "../../../bullet/BulletDynamics/Dynamics/btDynamicsWorld.h"
+#include <LinearMath/btVector3.h>
+#include <BulletDynamics/Vehicle/btRaycastVehicle.h>
+#include <BulletDynamics/Vehicle/btVehicleRaycaster.h>
+#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
 
 class FilterableVehicleRaycaster : public btDefaultVehicleRaycaster {
 protected:

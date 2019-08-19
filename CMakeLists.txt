@@ -1,7 +1,17 @@
 cmake_minimum_required(VERSION 3.5)
 project(bullet)
 
-file(GLOB_RECURSE SRC_NATIVES "${CMAKE_SOURCE_DIR}/natives/**/*.cpp" "${CMAKE_SOURCE_DIR}/natives/**/*.c")
+file(GLOB_RECURSE SRC_NATIVES
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/src/BulletDynamics/**/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/src/BulletCollision/**/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/src/BulletSoftBody/**/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/src/LinearMath/**/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/src/Extras/Serialize/**/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/src/Extras/InverseDynamics/**/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/custom/**/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/extras/**/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/jni-headers/**/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/memcpy_wrap.c")
 file(GLOB SRC_SWIG "${CMAKE_SOURCE_DIR}/build/swig/*.cpp")
 
 #find_package(JNI REQUIRED)
@@ -12,10 +22,10 @@ set_target_properties(bullet PROPERTIES COMPILE_FLAGS  "-DBT_NO_PROFILE -DBT_USE
 
 target_include_directories(bullet PRIVATE
     "${CMAKE_SOURCE_DIR}/natives/jni-headers",
-    "${CMAKE_SOURCE_DIR}/natives/bullet",
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/src",
     "${CMAKE_SOURCE_DIR}/natives/custom",
-    "${CMAKE_SOURCE_DIR}/natives/extras/Serialize",
-    "${CMAKE_SOURCE_DIR}/natives/extras"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/Extras/Serialize",
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/Extras"
 )
 
 target_include_directories(bullet PUBLIC

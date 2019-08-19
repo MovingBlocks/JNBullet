@@ -22,7 +22,7 @@
 #define ContactCache_H
 
 #include "ContactListener.h"
-#include "../../../bullet/LinearMath/btAlignedObjectArray.h"
+#include <LinearMath/btAlignedObjectArray.h>
 
 #ifndef SWIG
 struct ContactPair;

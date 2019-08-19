@@ -28,10 +28,10 @@
 
 //////////////////////////////////////////////////////////////
 
-%{
-#include <BulletCollision/Gimpact/btGImpactBvhStructs.h>
-%}
-%include "BulletCollision/Gimpact/btGImpactBvhStructs.h"
+// %{
+// #include <BulletCollision/Gimpact/btGImpactBvhStructs.h>
+// %}
+// %include "BulletCollision/Gimpact/btGImpactBvhStructs.h"
 
 %ignore btAlignedObjectArray<GIM_PAIR>::less::operator();
 %ignore btAlignedObjectArray<GIM_BVH_DATA>::less::operator();
@@ -72,10 +72,10 @@
 
 //////////////////////////////////////////////////////////////
 
-%{
-#include <BulletCollision/Gimpact/btGImpactQuantizedBvhStructs.h>
-%}
-%include "BulletCollision/Gimpact/btGImpactQuantizedBvhStructs.h"
+// %{
+// #include <BulletCollision/Gimpact/btGImpactQuantizedBvhStructs.h>
+// %}
+// %include "BulletCollision/Gimpact/btGImpactQuantizedBvhStructs.h"
 
 %ignore btAlignedObjectArray<BT_QUANTIZED_BVH_NODE>::less::operator();
 %ignore btAlignedObjectArray<BT_QUANTIZED_BVH_NODE>::findLinearSearch;
@@ -107,10 +107,10 @@
 
 //////////////////////////////////////////////////////////////
 
-%{
-#include <BulletCollision/Gimpact/btContactProcessingStructs.h>
-%}
-%include "BulletCollision/Gimpact/btContactProcessingStructs.h"
+// %{
+// #include <BulletCollision/Gimpact/btContactProcessingStructs.h>
+// %}
+// %include "BulletCollision/Gimpact/btContactProcessingStructs.h"
 
 %ignore btAlignedObjectArray<GIM_CONTACT>::less::operator();
 %ignore btAlignedObjectArray<GIM_CONTACT>::findLinearSearch;

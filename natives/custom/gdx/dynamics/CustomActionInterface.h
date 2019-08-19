@@ -1,7 +1,7 @@
 #ifndef CustomActionInterface_H
 #define CustomActionInterface_H
 
-#include "../../../bullet/BulletCollision/CollisionDispatch/btCollisionWorld.h"
+#include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
 
 class CustomActionInterface : public btActionInterface {
 public:

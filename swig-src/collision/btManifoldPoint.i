@@ -14,7 +14,7 @@
 		temp.reset(cPtr, own);
 		return temp;
 	}
-	
+
 	private static btManifoldPoint[] argumentInstances = new btManifoldPoint[] {new btManifoldPoint(0, false),
 		new btManifoldPoint(0, false), new btManifoldPoint(0, false), new btManifoldPoint(0, false)};
 	private static int argumentIndex = -1;
@@ -35,6 +35,8 @@
 %ignore btManifoldPoint::m_lateralFrictionDir2;
 %ignore btManifoldPoint::getPositionWorldOnA() const;
 %ignore btManifoldPoint::getPositionWorldOnB() const;
+%ignore btManifoldPoint::getPositionWorldOnB() const;
+%ignore btManifoldPoint::getCombinedRestitution() const;
 //%rename(internalGetPositionWorldOnA) btManifoldPoint::getPositionWorldOnA() const;
 //%rename(internalGetPositionWorldOnB) btManifoldPoint::getPositionWorldOnB() const;
 
@@ -49,63 +51,63 @@
 		*(const void **)&result = $self->m_userPersistentData;
 		return result;
 	}
-	
+
 	void setUserValue(int value) {
 		$self->m_userPersistentData = (void*)value;
 	}
-	
+
 	void getLocalPointA(btVector3 &out) {
 		out = $self->m_localPointA;
 	}
-	
+
 	void setLocalPointA(const btVector3 &value) {
 		$self->m_localPointA = value;
 	}
-	
+
 	void getLocalPointB(btVector3 &out) {
 		out = $self->m_localPointB;
 	}
-	
+
 	void setLocalPointB(const btVector3 &value) {
 		$self->m_localPointB = value;
 	}
-	
+
 	void getPositionWorldOnA(btVector3 &out) {
 		out = $self->m_positionWorldOnA;
 	}
-	
+
 	void setPositionWorldOnA(const btVector3 &value) {
 		$self->m_positionWorldOnA = value;
 	}
-	
+
 	void getPositionWorldOnB(btVector3 &out) {
 		out = $self->m_positionWorldOnB;
 	}
-	
+
 	void setPositionWorldOnB(const btVector3 &value) {
 		$self->m_positionWorldOnB = value;
 	}
-	
+
 	void getNormalWorldOnB(btVector3 &out) {
 		out = $self->m_normalWorldOnB;
 	}
-	
+
 	void setNormalWorldOnB(const btVector3 &value) {
 		$self->m_normalWorldOnB = value;
 	}
-	
+
 	void getLateralFrictionDir1(btVector3 &out) {
 		out = $self->m_lateralFrictionDir1;
 	}
-	
+
 	void setLateralFrictionDir1(const btVector3 &value) {
 		$self->m_lateralFrictionDir1 = value;
 	}
-	
+
 	void getLateralFrictionDir2(btVector3 &out) {
 		out = $self->m_lateralFrictionDir2;
 	}
-	
+
 	void setLateralFrictionDir2(const btVector3 &value) {
 		$self->m_lateralFrictionDir2 = value;
 	}

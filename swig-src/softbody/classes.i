@@ -42,7 +42,6 @@ SPECIFY_CLASS(SWIGTYPE_p_btAlignedObjectArrayT_bool_t, com.badlogic.gdx.physics.
 SPECIFY_CLASS(btSoftRigidDynamicsWorld, com.badlogic.gdx.physics.bullet.softbody)
 SPECIFY_CLASS(btSoftClusterCollisionShape, com.badlogic.gdx.physics.bullet.softbody)
 SPECIFY_CLASS(btSoftBodyFloatData, com.badlogic.gdx.physics.bullet.softbody)
-SPECIFY_CLASS(btSoftMultiBodyDynamicsWorld, com.badlogic.gdx.physics.bullet.softbody)
 SPECIFY_CLASS(SWIGTYPE_p_btAlignedObjectArrayT_btSoftBody__eVSolver____t, com.badlogic.gdx.physics.bullet.softbody)
 SPECIFY_CLASS(btSoftBody, com.badlogic.gdx.physics.bullet.softbody)
 SPECIFY_CLASS(SoftRigidAnchorData, com.badlogic.gdx.physics.bullet.softbody)

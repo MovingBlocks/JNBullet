@@ -39,7 +39,7 @@
 
 %typemap(javacode) CollisionObjectWrapper %{
 	public btCollisionObjectWrapper wrapper;
-	
+
 	@Override
 	protected void construct() {
 		super.construct();
@@ -64,6 +64,12 @@
 %ignore btCollisionObjectWrapper::getWorldTransform;
 %ignore btCollisionObjectWrapper::getCollisionObject;
 %ignore btCollisionObjectWrapper::getVoxelInfo;
+
+%ignore btCollisionObjectWrapper::getFriction;
+%ignore btCollisionObjectWrapper::getRestitution;
+%ignore btCollisionObjectWrapper::getRollingFriction;
+%ignore btCollisionObjectWrapper::getUserPointer;
+
 
 %include "BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
 %include "gdx/collision/CollisionObjectWrapper.h"

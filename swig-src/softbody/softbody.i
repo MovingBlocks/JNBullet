@@ -112,9 +112,9 @@ typedef btCollisionWorld::RayResultCallback RayResultCallback;
 %}
 %include "BulletSoftBody/btSoftSoftCollisionAlgorithm.h"
 
-%rename(getWorldInfoConst) btSoftMultiBodyDynamicsWorld::getWorldInfo() const;
-%rename(getSoftBodyArrayConst) btSoftMultiBodyDynamicsWorld::getSoftBodyArray() const;
-%{
-#include <BulletSoftBody/btSoftMultiBodyDynamicsWorld.h>
-%}
-%include "BulletSoftBody/btSoftMultiBodyDynamicsWorld.h"
+// %rename(getWorldInfoConst) btSoftMultiBodyDynamicsWorld::getWorldInfo() const;
+// %rename(getSoftBodyArrayConst) btSoftMultiBodyDynamicsWorld::getSoftBodyArray() const;
+// %{
+// #include <BulletSoftBody/btSoftMultiBodyDynamicsWorld.h>
+// %}
+// %include "BulletSoftBody/btSoftMultiBodyDynamicsWorld.h"

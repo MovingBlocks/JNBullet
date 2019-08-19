@@ -1,9 +1,9 @@
 #ifndef ClosestNotMeConvexResultCallback_H
 #define ClosestNotMeConvexResultCallback_H
 
-#include "../../../bullet/LinearMath/btVector3.h"
-#include "../../../bullet/BulletCollision/CollisionDispatch/btCollisionObject.h"
-#include "../../../bullet/BulletCollision/CollisionDispatch/btCollisionWorld.h"
+#include <LinearMath/btVector3.h>
+#include <BulletCollision/CollisionDispatch/btCollisionObject.h>
+#include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
 
 class ClosestNotMeConvexResultCallback : public btCollisionWorld::ClosestConvexResultCallback
 {
