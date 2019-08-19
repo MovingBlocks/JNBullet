@@ -41,6 +41,7 @@ import org.terasology.math.geom.Matrix4f;
 %ignore btSoftBody::getWindVelocity;
 %ignore btSoftBody::setSoftBodySolver;
 %ignore btSoftBody::getSoftBodySolver;
+%ignore btSoftBody::setDampingCoefficient;
 
 %include "BulletSoftBody/btSoftBody.h"
 
@@ -52,19 +53,19 @@ import org.terasology.math.geom.Matrix4f;
 	 * normalOffset: the offset within a vertex to the normal or negative if none
 	 * triangleCount: the amount of triangle (size per triangle = 3 * sizeof(short))
 	 */
-	btSoftBody(btSoftBodyWorldInfo *worldInfo, float *vertices, int vertexSize, int posOffset, int normalOffset, short *indices, int indexOffset, int numVertices, short *indexMap, int indexMapOffset) {		
+	btSoftBody(btSoftBodyWorldInfo *worldInfo, float *vertices, int vertexSize, int posOffset, int normalOffset, short *indices, int indexOffset, int numVertices, short *indexMap, int indexMapOffset) {
 		int poffset = posOffset / sizeof(btScalar);
 		int noffset = normalOffset / sizeof(btScalar);
 		int size = vertexSize / sizeof(btScalar);
 		btAlignedObjectArray<btVector3>	points;
-		
+
 		btSoftBody *result = new btSoftBody(worldInfo);
 		btSoftBody::Material* pm = result->appendMaterial();
 		pm->m_kLST = 1;
 		pm->m_kAST = 1;
 		pm->m_kVST = 1;
 		pm->m_flags = btSoftBody::fMaterial::Default;
-		
+
 		const btScalar margin = result->getCollisionShape()->getMargin();
 		int nodeCount = 0;
 		result->m_nodes.resize(numVertices);
@@ -95,13 +96,13 @@ import org.terasology.math.geom.Matrix4f;
 				idx = nodeCount;
 				nodeCount++;
 			}
-			indexMap[indexMapOffset+i] = (short)idx; 
+			indexMap[indexMapOffset+i] = (short)idx;
 		}
 		result->m_nodes.resize(nodeCount);
-		
+
 		//const int vertexCount = points.size();
 		//btSoftBody *result = new btSoftBody(worldInfo, vertexCount, &points[0], 0);
-		
+
 		btAlignedObjectArray<bool> chks;
 		chks.resize(nodeCount * nodeCount, false);
 		for(int i=0; i<numVertices; i+=3)
@@ -120,27 +121,27 @@ import org.terasology.math.geom.Matrix4f;
 #undef IDX
 			result->appendFace(idx[0],idx[1],idx[2]);
 		}
-		
+
 		result->updateBounds();
 		return result;
 	}
-	
+
 	int getNodeCount() {
 		return $self->m_nodes.size();
 	}
-	
+
 	btSoftBody::Node *getNode(int idx) {
 		return &($self->m_nodes[idx]);
 	}
-	
+
 	int getLinkCount() {
 		return $self->m_links.size();
 	}
-	
+
 	btSoftBody::Link *getLink(int idx) {
 		return &($self->m_links[idx]);
 	}
-	
+
 	/*
 	 * buffer: must be at least vertexCount*vertexSize big
 	 * vertexCount: the amount of vertices to copy (must be equal to or less than getNodeCount())
@@ -158,7 +159,7 @@ import org.terasology.math.geom.Matrix4f;
 			buffer[o+2] = src[2];
 		}
 	}
-	
+
 	void getVertices(float *vertices, int vertexSize, int posOffset, short *indices, int indexOffset, int numVertices, short *indexMap, int indexMapOffset) {
 		int poffset = posOffset / (sizeof(btScalar));
 		int size = vertexSize / (sizeof(btScalar));
@@ -171,7 +172,7 @@ import org.terasology.math.geom.Matrix4f;
 			vertices[vidx+2] = point[2];
 		}
 	}
-	
+
 	void getVertices(float *vertices, int vertexSize, int posOffset, int normalOffset, short *indices, int indexOffset, int numVertices, short *indexMap, int indexMapOffset) {
 		int poffset = posOffset / (sizeof(btScalar));
 		int noffset = normalOffset / (sizeof(btScalar));
@@ -190,15 +191,15 @@ import org.terasology.math.geom.Matrix4f;
 			vertices[nidx+2] = normal[2];
 		}
 	}
-	
+
 	int getFaceCount() {
 		return $self->m_faces.size();
 	}
-	
+
 	btSoftBody::Face *getFace(int idx) {
 		return &($self->m_faces[idx]);
 	}
-	
+
 	void getIndices(short *buffer, int triangleCount) {
 		const size_t nodeSize = sizeof(btSoftBody::Node);
 		const intptr_t nodeOffset = (intptr_t)(&self->m_nodes[0]);
