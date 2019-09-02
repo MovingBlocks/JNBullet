@@ -2,7 +2,17 @@
 
 TeraBullet is a version of bullet with extensions for direct interactions for voxel worlds. Written for use with Terasology. this is an implementation of bullet wraps around native bullet using SWIG.
 
+# Gradle
+
+## Build Natives
+- `./gradlew native_linux_amd64_gcc`
+- `./gradlew native_linux_i686_gcc`
+- `./gradlew native_linux_windows_amd64_mingw32`
+- `./gradlew native_linux_windows_i686_mingw32`
+
 # Building
+
+
 
 ## CMAKE
 * \<toolchain\>

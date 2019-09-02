@@ -85,7 +85,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 }
 natives.each { module ->
     tasks.create(name: "native_${module}", type: Exec) {
-        description = "cmake ${module}"
+        description = "cmake ${module} "
         executable "cmake"
         workingDir "$rootDir/build/natives/${module}"
         args "$rootDir", "-DCMAKE_TOOLCHAIN_FILE=$rootDir/toolchains/${module}.cmake"

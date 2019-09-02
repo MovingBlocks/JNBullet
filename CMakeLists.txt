@@ -6,22 +6,28 @@ file(GLOB_RECURSE SRC_NATIVES
     "${CMAKE_SOURCE_DIR}/natives/bullet3/src/BulletCollision/**/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/bullet3/src/BulletSoftBody/**/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/bullet3/src/LinearMath/**/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/src/Bullet3Common/**/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/src/BulletInverseDynamics/**/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/bullet3/src/Extras/Serialize/**/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/bullet3/src/Extras/InverseDynamics/**/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/custom/**/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/extras/**/*.cpp"
-    "${CMAKE_SOURCE_DIR}/natives/jni-headers/**/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/memcpy_wrap.c")
 file(GLOB SRC_SWIG "${CMAKE_SOURCE_DIR}/build/swig/*.cpp")
 
-#find_package(JNI REQUIRED)
-#include_directories(${JNI_INCLUDE_DIRS})
+if(WIN32)
+    SET(JAVA_JVM_LIBRARY /usr/lib/jvm/java-8-openjdk-amd64/include)
+    SET(JAVA_AWT_LIBRARY /usr/lib/jvm/java-8-openjdk-amd64/include)
+endif(WIN32)
+
+find_package(JNI REQUIRED)
+include_directories(${JNI_INCLUDE_DIRS})
+
 
 add_library(bullet SHARED ${SRC_SWIG} ${SRC_NATIVES})
 set_target_properties(bullet PROPERTIES COMPILE_FLAGS  "-DBT_NO_PROFILE -DBT_USE_INVERSE_DYNAMICS_WITH_BULLET2 ")
 
 target_include_directories(bullet PRIVATE
-    "${CMAKE_SOURCE_DIR}/natives/jni-headers",
     "${CMAKE_SOURCE_DIR}/natives/bullet3/src",
     "${CMAKE_SOURCE_DIR}/natives/custom",
     "${CMAKE_SOURCE_DIR}/natives/bullet3/Extras/Serialize",
@@ -31,19 +37,6 @@ target_include_directories(bullet PRIVATE
 target_include_directories(bullet PUBLIC
     build/swig
 )
-
-if(MSVC OR MSYS OR MINGW OR win32)
-    target_include_directories(bullet PRIVATE "${CMAKE_SOURCE_DIR}/natives/jni-headers/win32")
-    set(PLATFORM "win32")
-endif()
-
-if(UNIX AND NOT APPLE)
-    target_include_directories(bullet PRIVATE "${CMAKE_SOURCE_DIR}/natives/jni-headers/linux")
-endif()
-
-if(APPLE)
-    target_include_directories(bullet PRIVATE "${CMAKE_SOURCE_DIR}/natives/jni-headers/mac")
-endif()
 
 string(TOLOWER ${CMAKE_SYSTEM_NAME} LOWER_CMAKE_SYSTEM_NAME)
 set_target_properties(bullet PROPERTIES OUTPUT_NAME "bullet-${LOWER_CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_ARCH}")
