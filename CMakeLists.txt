@@ -1,17 +1,26 @@
 cmake_minimum_required(VERSION 3.5)
 project(bullet)
 
+
+
 file(GLOB_RECURSE SRC_NATIVES
     "${CMAKE_SOURCE_DIR}/natives/bullet3/src/BulletDynamics/**/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/src/BulletDynamics/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/bullet3/src/BulletCollision/**/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/src/BulletCollision/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/bullet3/src/BulletSoftBody/**/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/src/BulletSoftBody/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/bullet3/src/LinearMath/**/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/src/LinearMath/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/bullet3/src/Bullet3Common/**/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/src/Bullet3Common/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/bullet3/src/BulletInverseDynamics/**/*.cpp"
-    "${CMAKE_SOURCE_DIR}/natives/bullet3/src/Extras/Serialize/**/*.cpp"
-    "${CMAKE_SOURCE_DIR}/natives/bullet3/src/Extras/InverseDynamics/**/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/src/BulletInverseDynamics/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/src/Extras/Serialize/BulletFileLoader/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/Extras/Serialize/BulletWorldImporter/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/Extras/Serialize/BulletFileLoader/*.cpp"
+    "${CMAKE_SOURCE_DIR}/natives/bullet3/Extras/InverseDynamics/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/custom/**/*.cpp"
-    "${CMAKE_SOURCE_DIR}/natives/extras/**/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/memcpy_wrap.c")
 file(GLOB SRC_SWIG "${CMAKE_SOURCE_DIR}/build/swig/*.cpp")
 
