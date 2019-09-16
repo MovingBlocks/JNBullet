@@ -23,6 +23,7 @@ SPECIFY_CLASS(GIM_BVH_TREE_NODE_ARRAY, com.badlogic.gdx.physics.bullet.collision
 SPECIFY_CLASS(SWIGTYPE_p_p_btDbvtNode, com.badlogic.gdx.physics.bullet.collision)
 SPECIFY_CLASS(btNodeOverlapCallback, com.badlogic.gdx.physics.bullet.collision)
 SPECIFY_CLASS(btAxisSweep3InternalShort, com.badlogic.gdx.physics.bullet.collision)
+SPECIFY_CLASS(SWIGTYPE_p_voxelInfo, com.badlogic.gdx.physics.bullet.collision)
 SPECIFY_CLASS(btSubsimplexConvexCast, com.badlogic.gdx.physics.bullet.collision)
 SPECIFY_CLASS(SWIGTYPE_p_btAlignedObjectArrayT_btDbvt__sStkNPS_t, com.badlogic.gdx.physics.bullet.collision)
 SPECIFY_CLASS(btSphereTriangleCollisionAlgorithm, com.badlogic.gdx.physics.bullet.collision)
