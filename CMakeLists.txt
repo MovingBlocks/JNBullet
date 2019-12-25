@@ -27,6 +27,13 @@ file(GLOB SRC_SWIG "${CMAKE_SOURCE_DIR}/build/swig/*.cpp")
 if(WIN32)
     SET(JAVA_JVM_LIBRARY /usr/lib/jvm/java-8-openjdk-amd64/include)
     SET(JAVA_AWT_LIBRARY /usr/lib/jvm/java-8-openjdk-amd64/include)
+
+     if (MINGW)
+         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -static-libgcc")
+         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++")
+         set(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "${CMAKE_SHARED_LIBRARY_LINK_C_FLAGS} -static-libgcc -s")
+         set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "${CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS} -static-libgcc -static-libstdc++ -s")
+     endif()
 endif(WIN32)
 
 find_package(JNI REQUIRED)

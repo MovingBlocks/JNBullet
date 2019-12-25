@@ -1,7 +1,11 @@
 
 %module btSoftBody
 
+%ignore btSparseSdf::setDefaultVoxelsz;
+%ignore btSparseSdf<3>::setDefaultVoxelsz;
+
 %template(btSparseSdf3) btSparseSdf<3>;
+
 
 %typemap(javaimports) btSoftBody %{
 import com.badlogic.gdx.physics.bullet.BulletBase;
@@ -31,6 +35,8 @@ import org.terasology.math.geom.Matrix4f;
 %rename(EnumFlagType) btSoftBody::fCollision::_;
 %rename(EnumFlagType) btSoftBody::fMaterial::_;
 %rename(EnumFlagType) btSoftBody::Joint::eType::_;
+
+%ignore btSoftBody::setUseFaceContact(bool useFaceContact);
 
 %rename(getSolverV) btSoftBody::getSolver(btSoftBody::eVSolver::_);
 %rename(getSolverP) btSoftBody::getSolver(btSoftBody::ePSolver::_);
