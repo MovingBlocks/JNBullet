@@ -132,42 +132,53 @@ artifactoryPublish {
 NativeBuild.dependsOn generateSources
 zipNatives.dependsOn NativeBuild
 
+// Define the artifacts we want to publish (the .pom will also be included since the Maven plugin is active)
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
             // Without this we get a .pom with no dependencies
             artifactId='native-bullet'
+            groupId = 'org.terasology'
 
             from components.java
             artifact sourceJar
             artifact javadocJar
             artifact zipNatives
 
-            pom {
-                name = "NativeBullet"
-                description = "A Native Bullet Wrapper"
-                url = "http://www.example.com/project"
-                licenses {
-                    license {
-                        name = "The Apache License, Version 2.0"
-                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            pom.withXml {
+                asNode().with {
+                    appendNode('name', "NativeBullet")
+                    appendNode('description', "A Native Bullet Wrapper")
+                    appendNode('url', "http://www.example.com/project")
+                    appendNode('licenses').with {
+                        appendNode('license').with {
+                            appendNode('name', "The Apache License, Version 2.0")
+                            appendNode('url', "http://www.apache.org/licenses/LICENSE-2.0.txt")
+                        }
                     }
-                }
-                developers {
-                    developer {
-                        id = "michaelpollind"
-                        name = "Michael Pollind"
-                        email = "polli104@mail.chapman.edu"
+                    appendNode('developers').with {
+                        appendNode('developer').with {
+                             appendNode('id', "michaelpollind")
+                             appendNode('name', "Michael Pollind")
+                             appendNode('email', "polli104@mail.chapman.edu")
+                        }
                     }
-                }
-                scm {
-                    connection = "https://github.com/MovingBlocks/NativeBullet.git"
-                    developerConnection = "git@github.com:MovingBlocks/NativeBullet.git"
-                    url = "https://github.com/MovingBlocks/NativeBullet"
+                    appendNode('scm').with {
+                        appendNode('connection', "https://github.com/MovingBlocks/NativeBullet.git")
+                        appendNode('developerConnection', "git@github.com:MovingBlocks/NativeBullet.git")
+                        appendNode('url', "https://github.com/MovingBlocks/NativeBullet")
+                    }
                 }
             }
         }
     }
+}
+
+artifacts {
+    archives sourceJar
+    archives javadocJar
+    archives zipNatives
 }
 
 
@@ -175,21 +186,9 @@ artifactory {
     contextUrl = 'http://artifactory.terasology.org/artifactory'
     publish {
         repository {
-            repoKey = 'terasology-snapshot-local' // The Artifactory repository key to publish to
-//            ivy {
-//                ivyLayout = '[organization]/[module]/ivy-[revision].xml'
-//                artifactLayout = '[organization]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]'
-//                mavenCompatible = true
-//                //Convert any dots in an [organization] layout value to path separators, similar to Maven's groupId-to-path conversion. True if not specified
-//            }
+            repoKey = 'terasology-snapshot-local'
         }
         defaults {
-
-            // Reference to Gradle publications defined in the build script.
-            // This is how we tell the Artifactory Plugin which artifacts should be
-            // published to Artifactory.
-//            publications('mavenJava')
-//            publications('zippedNatives')
             publications('mavenJava')
 
 //          publishBuildInfo = true   //Publish build-info to Artifactory (true by default)
