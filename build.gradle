@@ -134,7 +134,7 @@ zipNatives.dependsOn NativeBuild
 
 publishing {
     publications {
-        NativeBullet(MavenPublication) {
+        mavenJava(MavenPublication) {
             // Without this we get a .pom with no dependencies
             artifactId='native-bullet'
 
@@ -176,12 +176,12 @@ artifactory {
     publish {
         repository {
             repoKey = 'terasology-snapshot-local' // The Artifactory repository key to publish to
-            ivy {
-                ivyLayout = '[organization]/[module]/ivy-[revision].xml'
-                artifactLayout = '[organization]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]'
-                mavenCompatible = true
-                //Convert any dots in an [organization] layout value to path separators, similar to Maven's groupId-to-path conversion. True if not specified
-            }
+//            ivy {
+//                ivyLayout = '[organization]/[module]/ivy-[revision].xml'
+//                artifactLayout = '[organization]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]'
+//                mavenCompatible = true
+//                //Convert any dots in an [organization] layout value to path separators, similar to Maven's groupId-to-path conversion. True if not specified
+//            }
         }
         defaults {
 
@@ -190,12 +190,12 @@ artifactory {
             // published to Artifactory.
 //            publications('mavenJava')
 //            publications('zippedNatives')
-            publications('NativeBullet')
+            publications('mavenJava')
 
 //          publishBuildInfo = true   //Publish build-info to Artifactory (true by default)
             publishArtifacts = true   //Publish artifacts to Artifactory (true by default)
             publishPom = true   //Publish generated POM files to Artifactory (true by default).
-            publishIvy = true   //Publish generated Ivy descriptor files to Artifactory (true by default).
+//            publishIvy = true   //Publish generated Ivy descriptor files to Artifactory (true by default).
         }
     }
 }
