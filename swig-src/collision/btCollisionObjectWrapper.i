@@ -63,7 +63,6 @@
 
 %ignore btCollisionObjectWrapper::getWorldTransform;
 %ignore btCollisionObjectWrapper::getCollisionObject;
-%ignore btCollisionObjectWrapper::getVoxelInfo;
 
 %ignore btCollisionObjectWrapper::getFriction;
 %ignore btCollisionObjectWrapper::getRestitution;
