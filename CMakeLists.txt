@@ -41,7 +41,11 @@ include_directories(${JNI_INCLUDE_DIRS})
 
 
 add_library(bullet SHARED ${SRC_SWIG} ${SRC_NATIVES})
-set_target_properties(bullet PROPERTIES COMPILE_FLAGS  "-DBT_NO_PROFILE -DBT_USE_INVERSE_DYNAMICS_WITH_BULLET2 ")
+set_target_properties(bullet PROPERTIES COMPILE_FLAGS  "-DBT_NO_PROFILE -DBT_USE_INVERSE_DYNAMICS_WITH_BULLET2 -DBT_THREADSAFE=1")
+
+IF (NOT WIN32)
+    LINK_LIBRARIES( pthread )
+ENDIF (NOT WIN32)
 
 target_include_directories(bullet PRIVATE
     "${CMAKE_SOURCE_DIR}/natives/bullet3/src",
