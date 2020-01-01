@@ -327,6 +327,12 @@ CREATE_POOLED_OBJECT(btBroadphasePair, com/badlogic/gdx/physics/bullet/collision
 %include "./btCollisionObjectWrapper.i"
 
 %{
+#include <gdx/collision/VoxelCollisionAlgorithmWrapper.h>
+%}
+%include "gdx/collision/VoxelCollisionAlgorithmWrapper.h"
+
+
+%{
 #include <BulletCollision/CollisionDispatch/btCollisionCreateFunc.h>
 %}
 %include "BulletCollision/CollisionDispatch/btCollisionCreateFunc.h"
