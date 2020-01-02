@@ -177,21 +177,26 @@ artifacts {
     archives zipNatives
 }
 
-artifactory {
-    contextUrl = 'http://artifactory.terasology.org/artifactory'
-    publish {
-        repository {
-            repoKey = 'terasology-snapshot-local'
-        }
-        defaults {
-            publications('mavenJava')
+//artifactory {
+//    contextUrl = 'http://artifactory.terasology.org/artifactory'
+//    publish {
+//        repository {
+//            repoKey = 'terasology-snapshot-local'
+//        }
+//        defaults {
+//            publications('mavenJava')
+//
+////          publishBuildInfo = true   //Publish build-info to Artifactory (true by default)
+//            publishArtifacts = true   //Publish artifacts to Artifactory (true by default)
+//            publishPom = true   //Publish generated POM files to Artifactory (true by default).
+////            publishIvy = true   //Publish generated Ivy descriptor files to Artifactory (true by default).
+//        }
+//    }
+//}
 
-//          publishBuildInfo = true   //Publish build-info to Artifactory (true by default)
-            publishArtifacts = true   //Publish artifacts to Artifactory (true by default)
-            publishPom = true   //Publish generated POM files to Artifactory (true by default).
-//            publishIvy = true   //Publish generated Ivy descriptor files to Artifactory (true by default).
-        }
-    }
+// publishing the maven publication for each project
+artifactoryPublish {
+    publications(publishing.publications.mavenJava)
 }
 
 javadoc {
