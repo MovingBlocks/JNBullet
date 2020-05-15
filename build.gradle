@@ -118,8 +118,8 @@ task zipNatives(type: Zip){
         }
     }
 
-    destinationDir = file(buildDir)
-    baseName = 'native-bullet'
+    destinationDirectory = file(buildDir)
+    archiveBaseName = 'native-bullet'
 }
 
 artifactoryPublish {
