@@ -20,7 +20,6 @@ buildscript {
         }
     }
 }
-apply plugin: 'com.jfrog.artifactory'
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
@@ -122,12 +121,12 @@ task zipNatives(type: Zip){
     archiveBaseName = 'native-bullet'
 }
 
-artifactoryPublish {
-    dependsOn  sourceJar, javadocJar, zipNatives
-}
-
 NativeBuild.dependsOn generateSources
 zipNatives.dependsOn NativeBuild
+
+publish {
+    dependsOn  sourceJar, javadocJar, zipNatives
+}
 
 // Define the artifacts we want to publish (the .pom will also be included since the Maven plugin is active)
 publishing {
@@ -155,9 +154,9 @@ publishing {
                     }
                     appendNode('developers').with {
                         appendNode('developer').with {
-                             appendNode('id', "michaelpollind")
-                             appendNode('name', "Michael Pollind")
-                             appendNode('email', "polli104@mail.chapman.edu")
+                            appendNode('id', "michaelpollind")
+                            appendNode('name', "Michael Pollind")
+                            appendNode('email', "polli104@mail.chapman.edu")
                         }
                     }
                     appendNode('scm').with {
@@ -167,36 +166,26 @@ publishing {
                     }
                 }
             }
+
+            repositories {
+                maven {
+                    name = 'TerasologyOrg'
+                    url = "http://artifactory.terasology.org/artifactory/$publishRepo"
+                    println "Changing PUBLISH repoKey set via Gradle property to $publishRepo"
+
+                    if (rootProject.hasProperty("mavenUser") && rootProject.hasProperty("mavenPass")) {
+                        credentials {
+                            username = "$mavenUser"
+                            password = "$mavenPass"
+                        }
+                        authentication {
+                            basic(BasicAuthentication)
+                        }
+                    }
+                }
+            }
         }
     }
-}
-
-artifacts {
-    archives sourceJar
-    archives javadocJar
-    archives zipNatives
-}
-
-//artifactory {
-//    contextUrl = 'http://artifactory.terasology.org/artifactory'
-//    publish {
-//        repository {
-//            repoKey = 'terasology-snapshot-local'
-//        }
-//        defaults {
-//            publications('mavenJava')
-//
-////          publishBuildInfo = true   //Publish build-info to Artifactory (true by default)
-//            publishArtifacts = true   //Publish artifacts to Artifactory (true by default)
-//            publishPom = true   //Publish generated POM files to Artifactory (true by default).
-////            publishIvy = true   //Publish generated Ivy descriptor files to Artifactory (true by default).
-//        }
-//    }
-//}
-
-// publishing the maven publication for each project
-artifactoryPublish {
-    publications(publishing.publications.mavenJava)
 }
 
 javadoc {

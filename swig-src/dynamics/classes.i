@@ -19,7 +19,6 @@ SPECIFY_CLASS(SWIGTYPE_p_btAlignedObjectArrayT_float_p_t, com.badlogic.gdx.physi
 SPECIFY_CLASS(btMLCPSolver, com.badlogic.gdx.physics.bullet.dynamics)
 SPECIFY_CLASS(SWIGTYPE_p_f_p_btAlignedObjectArray__p_btSimulationIslandManagerMt__Island___r_q_const__btSimulationIslandManagerMt__SolverParams__void, com.badlogic.gdx.physics.bullet.dynamics)
 SPECIFY_CLASS(btSliderConstraintData, com.badlogic.gdx.physics.bullet.dynamics)
-SPECIFY_CLASS(SWIGTYPE_p_btConstraintSolverPoolMt, com.badlogic.gdx.physics.bullet.dynamics)
 SPECIFY_CLASS(btRigidBody, com.badlogic.gdx.physics.bullet.dynamics)
 SPECIFY_CLASS(btGearConstraint, com.badlogic.gdx.physics.bullet.dynamics)
 SPECIFY_CLASS(btVehicleRaycaster, com.badlogic.gdx.physics.bullet.dynamics)
