@@ -8,7 +8,7 @@ pipeline {
           steps {
             git(
                 branch: 'master',
-                url: 'https://github.com/MovingBlocks/NativeBullet.git'
+                url: 'https://github.com/MovingBlocks/JNBullet.git'
             )
             sh 'git submodule update --init --recursive'
             sh 'cmake --version'

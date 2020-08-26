@@ -118,7 +118,7 @@ task zipNatives(type: Zip){
     }
 
     destinationDirectory = file(buildDir)
-    archiveBaseName = 'native-bullet'
+    archiveBaseName = 'JNBullet'
 }
 
 NativeBuild.dependsOn generateSources
@@ -133,7 +133,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             // Without this we get a .pom with no dependencies
-            artifactId='native-bullet'
+            artifactId='JNBullet'
             groupId = 'org.terasology'
 
             from components.java
@@ -143,7 +143,7 @@ publishing {
 
             pom.withXml {
                 asNode().with {
-                    appendNode('name', "NativeBullet")
+                    appendNode('name', "JNBullet")
                     appendNode('description', "A Native Bullet Wrapper")
                     appendNode('url', "http://www.example.com/project")
                     appendNode('licenses').with {
@@ -156,13 +156,13 @@ publishing {
                         appendNode('developer').with {
                             appendNode('id', "michaelpollind")
                             appendNode('name', "Michael Pollind")
-                            appendNode('email', "polli104@mail.chapman.edu")
+                            appendNode('email', "mpollind@gmail.com")
                         }
                     }
                     appendNode('scm').with {
-                        appendNode('connection', "https://github.com/MovingBlocks/NativeBullet.git")
-                        appendNode('developerConnection', "git@github.com:MovingBlocks/NativeBullet.git")
-                        appendNode('url', "https://github.com/MovingBlocks/NativeBullet")
+                        appendNode('connection', "https://github.com/MovingBlocks/JNBullet")
+                        appendNode('developerConnection', "git@github.com:MovingBlocks/JNBullet.git")
+                        appendNode('url', "https://github.com/MovingBlocks/JNBullet")
                     }
                 }
             }
