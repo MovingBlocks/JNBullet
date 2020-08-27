@@ -16,9 +16,7 @@
 
 package com.badlogic.gdx.utils;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Queues;
-
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Queue;
 
@@ -44,7 +42,7 @@ abstract public class Pool<T> {
 
     /** @param max The maximum number of free objects to store in this pool. */
     public Pool (int initialCapacity, int max) {
-        freeObjects = Queues.newArrayDeque();
+        freeObjects = new ArrayDeque<T>();
         this.max = max;
     }
 

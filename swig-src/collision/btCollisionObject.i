@@ -4,8 +4,8 @@
 import gnu.trove.map.TObjectLongMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import com.badlogic.gdx.physics.bullet.BulletBase;
-import org.terasology.math.geom.Vector3f;
-import org.terasology.math.geom.Matrix4f;
+import org.joml.Vector3f;
+import org.joml.Matrix4f;
 import com.badlogic.gdx.physics.bullet.linearmath.btSerializer;
 %}
 
@@ -31,12 +31,12 @@ import com.badlogic.gdx.physics.bullet.linearmath.btSerializer;
 %typemap(javacode) btCollisionObject %{
 	/** Provides direct access to the instances this wrapper managed. */
 	public final static TLongObjectHashMap<btCollisionObject> instances = new TLongObjectHashMap<>();
-	
+
 	/** @return The existing instance for the specified pointer, or null if the instance doesn't exist */
 	public static btCollisionObject getInstance(final long swigCPtr) {
 		return swigCPtr == 0 ? null : instances.get(swigCPtr);
 	}
-	
+
 	/** @return The existing instance for the specified pointer, or a newly created instance if the instance didn't exist */
 	public static btCollisionObject getInstance(final long swigCPtr, boolean owner) {
 		if (swigCPtr == 0)
@@ -46,28 +46,28 @@ import com.badlogic.gdx.physics.bullet.linearmath.btSerializer;
 			result = new btCollisionObject(swigCPtr, owner);
 		return result;
 	}
-	
+
 	/** Add the instance to the managed instances.
 	 * You should avoid using this method. This method is intended for internal purposes only. */
 	public static void addInstance(final btCollisionObject obj) {
 		instances.put(getCPtr(obj), obj);
 	}
-	
+
 	/** Remove the instance to the managed instances.
-	 * Be careful using this method. This method is intended for internal purposes only. */	
+	 * Be careful using this method. This method is intended for internal purposes only. */
 	public static void removeInstance(final btCollisionObject obj) {
 		instances.remove(getCPtr(obj));
 	}
-	
+
 	protected GdxCollisionObjectBridge gdxBridge;
 	protected int userValue;
 	protected int contactCallbackFlag = 1;
 	protected int contactCallbackFilter;
 	protected btCollisionShape collisionShape;
-	
+
 	/** User definable data, not used by Bullet itself. */
 	public Object userData;
-	
+
 	@Override
 	protected void construct() {
 		super.construct();
@@ -89,42 +89,42 @@ import com.badlogic.gdx.physics.bullet.linearmath.btSerializer;
 		super.dispose();
 	}
 
-	/** @return A user definable value set using {@link #setUserValue(int)}, intended to quickly identify the collision object */ 
+	/** @return A user definable value set using {@link #setUserValue(int)}, intended to quickly identify the collision object */
 	public int getUserValue() {
 		return userValue;
 	}
-	
+
 	/** @param value A user definable value which allows you to quickly identify this collision object. Some frequently called
 	 * methods rather return this value than the collision object itself to minimize JNI overhead. */
 	public void setUserValue(int value) {
 		gdxBridge.setUserValue(userValue = value);
 	}
-	
+
 	/** @return The flag (defaults to 1) used to filter contact callbacks with this object */
 	public int getContactCallbackFlag() {
 		return contactCallbackFlag;
 	}
-	
+
 	/** @param flag The new flag used to filter contact callbacks with this object */
 	public void setContactCallbackFlag(int flag) {
 		gdxBridge.setContactCallbackFlag(contactCallbackFlag = flag);
 	}
-	
+
 	/** @return The filter (default to 0) that is used to match the flag of the other object for a contact callback to be triggered */
 	public int getContactCallbackFilter() {
 		return contactCallbackFilter;
 	}
-	
+
 	/** @param filter The new filter that is used to match the flag of the other object for a contact callback to be triggered */
 	public void setContactCallbackFilter(int filter) {
 		gdxBridge.setContactCallbackFilter(contactCallbackFilter = filter);
 	}
-	
+
 	public void setCollisionShape(btCollisionShape shape) {
 		refCollisionShape(shape);
 		internalSetCollisionShape(shape);
 	}
-	
+
 	protected void refCollisionShape(btCollisionShape shape) {
 		if (collisionShape == shape)
 			return;
@@ -133,9 +133,9 @@ import com.badlogic.gdx.physics.bullet.linearmath.btSerializer;
 		collisionShape = shape;
 		collisionShape.obtain();
 	}
-	
+
 	public btCollisionShape getCollisionShape() {
-		return collisionShape; 
+		return collisionShape;
 	}
 %}
 
@@ -153,7 +153,7 @@ import com.badlogic.gdx.physics.bullet.linearmath.btSerializer;
 	void internalSetGdxBridge(GdxCollisionObjectBridge *bridge) {
 		$self->setUserPointer(bridge);
 	}
-	
+
 	GdxCollisionObjectBridge *internalGetGdxBridge() {
 		return (GdxCollisionObjectBridge *)($self->getUserPointer());
 	}
@@ -165,15 +165,15 @@ import com.badlogic.gdx.physics.bullet.linearmath.btSerializer;
     void getWorldTransform(btTransform & out) {
 		out = $self->getWorldTransform();
 	}
-	
+
     void getInterpolationWorldTransform(btTransform & out) {
 		out = $self->getInterpolationWorldTransform();
 	}
-	
+
 	void getInterpolationLinearVelocity(btVector3 & out) {
 		out = $self->getInterpolationLinearVelocity();
 	}
-		
+
 	void getInterpolationAngularVelocity(btVector3 & out) {
 		out = $self->getInterpolationAngularVelocity();
 	}
