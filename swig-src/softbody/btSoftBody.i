@@ -12,10 +12,10 @@ import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
 import com.badlogic.gdx.physics.bullet.dynamics.*;
-import org.terasology.math.geom.Vector3f;
-import org.terasology.math.geom.Quat4f;
-import org.terasology.math.geom.Matrix3f;
-import org.terasology.math.geom.Matrix4f;
+import org.joml.Vector3f;
+import org.joml.Quaternionf;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
 
 %}
 
