@@ -85,7 +85,7 @@ natives.each { module ->
         description = "cmake ${module} "
         executable "cmake"
         workingDir "$rootDir/build/natives/${module}"
-        args "$rootDir", "-DCMAKE_TOOLCHAIN_FILE=$rootDir/toolchains/${module}.cmake"
+        args "$rootDir", "-DCMAKE_TOOLCHAIN_FILE=$rootDir/toolchains/${module}.cmake", "-DCMAKE_BUILD_TYPE=Release"
         doFirst {
             mkdir "$rootDir/build/natives/${module}"
         }

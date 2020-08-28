@@ -15,6 +15,7 @@ set(COMPILER_PREFIX "x86_64-w64-mingw32")
 SET(CMAKE_C_COMPILER ${COMPILER_PREFIX}-gcc)
 SET(CMAKE_CXX_COMPILER ${COMPILER_PREFIX}-g++)
 
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 # here is the target environment located
 #SET(USER_ROOT_PATH /home/erk/erk-win32-dev)

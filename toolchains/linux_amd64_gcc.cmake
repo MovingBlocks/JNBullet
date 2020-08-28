@@ -23,4 +23,6 @@ set ( CMAKE_SYSTEM_ARCH amd64)
 set ( CMAKE_C_COMPILER gcc )
 set ( CMAKE_CXX_COMPILER g++ )
 
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
 
