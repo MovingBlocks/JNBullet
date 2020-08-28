@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 project(bullet)
 
-
-
 file(GLOB_RECURSE SRC_NATIVES
     "${CMAKE_SOURCE_DIR}/natives/bullet3/src/BulletDynamics/**/*.cpp"
     "${CMAKE_SOURCE_DIR}/natives/bullet3/src/BulletDynamics/*.cpp"
@@ -38,7 +36,6 @@ endif(WIN32)
 
 find_package(JNI REQUIRED)
 include_directories(${JNI_INCLUDE_DIRS})
-
 
 add_library(bullet SHARED ${SRC_SWIG} ${SRC_NATIVES})
 set_target_properties(bullet PROPERTIES COMPILE_FLAGS  "-DBT_NO_PROFILE -DBT_USE_INVERSE_DYNAMICS_WITH_BULLET2 -DBT_THREADSAFE=1")

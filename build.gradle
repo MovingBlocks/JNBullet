@@ -92,7 +92,7 @@ natives.each { module ->
         doLast {
             exec {
                 workingDir "$rootDir/build/natives/${module}"
-                commandLine 'make'
+                commandLine 'make', "-j${Runtime.runtime.availableProcessors()}"
             }
         }
     }

@@ -22,6 +22,17 @@
 
 package com.badlogic.gdx.physics.bullet;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.security.auth.login.Configuration;
+import java.io.File;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.regex.Pattern;
+
 /**
  * Loads the JNLua native library.
  *
@@ -34,90 +45,119 @@ package com.badlogic.gdx.physics.bullet;
  * LuaState is accessed.
  */
 public final class NativeSupport {
-    // -- Static
-    private static final NativeSupport INSTANCE = new NativeSupport();
+    private static final Logger logger = LoggerFactory.getLogger(NativeSupport.class);
 
-    // -- State
-    private Loader loader = new DefaultLoader();
+    static final String JAVA_LIBRARY_PATH = "java.library.path";
+    static final String CONFIG_PATH = "org.terasology.librarypath";
 
-    /**
-     * Returns the instance.
-     *
-     * @return the instance
-     */
-    public static NativeSupport getInstance() {
-        return INSTANCE;
-    }
+    static boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+    static boolean isMacOS =  System.getProperty("os.name").toLowerCase().contains("mac");
+    static boolean is64 = System.getProperty("os.arch").endsWith("64");
+
+    private static final Pattern PATH_SEPARATOR = Pattern.compile(File.pathSeparator);
+
 
     // -- Construction
+
     /**
      * Private constructor to prevent external instantiation.
      */
     private NativeSupport() {
     }
 
-    // -- Properties
-    /**
-     * Return the native library loader.
-     *
-     * @return the loader
-     */
-    public Loader getLoader() {
-        return loader;
-    }
+    public static void load(String name) {
+        logger.info("Loading JNBullet Library:" + name);
 
-    /**
-     * Sets the native library loader.
-     *
-     * @param loader
-     *            the loader
-     */
-    public void setLoader(Loader loader) {
-        if (loader == null) {
-            throw new NullPointerException("loader must not be null");
+        String target = name + "-";
+        if (isWindows) {
+            // Windows
+            target += "windows-";
+        } else if (isMacOS) {
+            // osx
+            target += "darwin-";
+        } else {
+            // Assume Linux
+            target += "linux-";
         }
-        this.loader = loader;
-    }
 
-    // -- Member types
-    /**
-     * Loads the library.
-     */
-    public interface Loader {
-        public void load();
-    }
+        if (is64) {
+            // Assume x86_64
+            target += "amd64";
+        } else {
+            // Assume x86_32
+            target += "i686";
+        }
 
-    private class DefaultLoader implements Loader {
-        @Override
-        public void load() {
-            boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
-            boolean isMacOS = System.getProperty("os.name").toLowerCase().contains("mac");
+        String file = "";
+        if (isWindows) {
+            file = "lib" + target + ".dll";
+        } else if (isMacOS) {
+            file = "lib" + target + ".dynlib";
+        } else {
+            file = "lib" + target + ".so";
+        }
 
-            // Generate library name.
-            StringBuilder builder = new StringBuilder(isWindows ? "libbullet-" : "bullet-");
+        String assembly = isWindows ? "lib" + target : target;
 
-            if (isWindows) {
-                // Windows
-                builder.append("windows-");
-            }
-            else if(isMacOS){
-                // osx
-                builder.append("darwin-");
-            }
-            else {
-                // Assume Linux
-                builder.append("linux-");
-            }
+        if (Paths.get(name).isAbsolute()) {
+            System.load(name);
+            logger.info("Success");
+            return;
+        }
 
-            if (System.getProperty("os.arch").endsWith("64")) {
-                // Assume x86_64
-                builder.append("amd64");
+        // METHOD 2: org.terasology.librarypath
+
+
+        String configPath = System.getProperty(CONFIG_PATH);
+        if (configPath != null && !configPath.isEmpty()) {
+            Path libFile = findFile(configPath, file);
+            if (libFile == null) {
+                logger.info(assembly + " not found in " + configPath + "=" + file);
             } else {
-                // Assume x86_32
-                builder.append("i686");
+                System.load(libFile.toAbsolutePath().toString());
+                logger.info(String.format("\tLoaded from %s: %s", JAVA_LIBRARY_PATH, libFile));
+                return;
             }
+        }
 
-            System.loadLibrary(builder.toString());
+        String javaLibraryPath = System.getProperty(JAVA_LIBRARY_PATH);
+        if(javaLibraryPath != null) {
+            Path libFile = findFile(javaLibraryPath, file);
+            if (libFile == null) {
+                logger.info(assembly + " not found in " + javaLibraryPath + "=" + file);
+            } else {
+                System.load(libFile.toAbsolutePath().toString());
+                logger.info(String.format("\tLoaded from %s: %s", JAVA_LIBRARY_PATH, libFile));
+                return;
+            }
+        }
+
+
+        // load from java.library.path
+        try {
+            System.loadLibrary(assembly);
+            Path p = javaLibraryPath == null ? null : findFile(javaLibraryPath, file);
+            if (p != null) {
+                logger.info("Loaded from " + JAVA_LIBRARY_PATH + " : " + p);
+                return;
+            } else {
+                logger.info("Loaded from a ClassLoader provided path.");
+            }
+        } catch (Throwable t){
+            logger.error("Failed to locate library: " + assembly);
         }
     }
+
+    private static Path findFile(String path, String file) {
+        for(String directory: PATH_SEPARATOR.split(path)) {
+            Path p = Paths.get(directory,file);
+            if(Files.isReadable(p)){
+                return p;
+            }
+        }
+        return null;
+    }
+
+
+
 }

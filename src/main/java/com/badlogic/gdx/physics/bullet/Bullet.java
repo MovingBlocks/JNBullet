@@ -24,6 +24,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Bullet {
+    static {
+        NativeSupport.load("bullet");
+    }
+
 	private static final Logger logger = LoggerFactory.getLogger(Bullet.class);
 
 	/** The version of the Bullet library used by this wrapper. */
@@ -53,7 +57,6 @@ public class Bullet {
 	public static void init (boolean useRefCounting, boolean logging) {
 		Bullet.useRefCounting = useRefCounting;
 		Bullet.enableLogging = logging;
-		NativeSupport.getInstance().getLoader().load();
 		final int version = LinearMath.btGetVersion();
 		if (version != VERSION)
 			throw new BulletRuntimeException("Bullet binaries version (" + version + ") does not match source version (" + VERSION
