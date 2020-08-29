@@ -1,6 +1,8 @@
 import org.apache.tools.ant.taskdefs.condition.Os
 ext {
-    if (Os.isFamily(Os.FAMILY_UNIX)) {
+    if(Os.isFamily(Os.FAMILY_MAC)) {
+        natives = ["macosx_amd64_clang"]
+    } else if (Os.isFamily(Os.FAMILY_UNIX)) {
         natives = ["linux_amd64_gcc","linux_i686_gcc","linux_windows_amd64_mingw32","linux_windows_i686_mingw32"]
     }
     generatedSrcDir = 'src/generated/java'
@@ -80,6 +82,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc.destinationDir
     classifier = 'javadoc'
 }
+
 natives.each { module ->
     tasks.create(name: "native_${module}", type: Exec) {
         description = "cmake ${module} "
@@ -97,6 +100,7 @@ natives.each { module ->
         }
     }
 }
+
 task NativeBuild{
     description = "Builds Natives"
     natives.each { module ->
@@ -114,6 +118,11 @@ task zipNatives(type: Zip){
         from ("$rootDir/build/natives/${module}") {
             include '*windows*'
             into 'windows'
+        }
+
+        from ("$rootDir/build/natives/${module}") {
+            include '*macosx*'
+            into 'darwin'
         }
     }
 
