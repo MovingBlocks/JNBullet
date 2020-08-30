@@ -1,3 +1,7 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
 
 import org.apache.tools.ant.taskdefs.condition.Os
 ext {
@@ -10,11 +14,6 @@ ext {
     }
 
     generatedSrcDir = 'src/generated/java'
-}
-
-plugins {
-    id 'java-library'
-    id 'maven-publish'
 }
 
 java {
