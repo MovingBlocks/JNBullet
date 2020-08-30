@@ -121,8 +121,8 @@ task zipNatives(type: Zip){
         }
 
         from ("$rootDir/build/natives/${module}") {
-            include '*macosx*'
-            into 'darwin'
+            include '*darwin*'
+            into 'macosx'
         }
     }
 

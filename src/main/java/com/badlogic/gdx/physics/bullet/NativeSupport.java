@@ -92,7 +92,7 @@ public final class NativeSupport {
         if (isWindows) {
             file = "lib" + target + ".dll";
         } else if (isMacOS) {
-            file = "lib" + target + ".dynlib";
+            file = "lib" + target + ".dylib";
         } else {
             file = "lib" + target + ".so";
         }
@@ -112,7 +112,7 @@ public final class NativeSupport {
         if (configPath != null && !configPath.isEmpty()) {
             Path libFile = findFile(configPath, file);
             if (libFile == null) {
-                logger.info(assembly + " not found in " + configPath + "=" + file);
+                logger.info(assembly + " not found in " + configPath + "/" + file);
             } else {
                 System.load(libFile.toAbsolutePath().toString());
                 logger.info(String.format("\tLoaded from %s: %s", JAVA_LIBRARY_PATH, libFile));

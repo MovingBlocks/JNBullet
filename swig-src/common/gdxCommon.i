@@ -6,10 +6,6 @@
 %enddef
 
 
-%{
-#include <gdx/common/jniHelpers.h>
-%}
-
 %rename(operatorNew) operator new;
 %rename(operatorDelete) operator delete;
 %rename(operatorNewArray) operator new[];
