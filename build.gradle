@@ -1,33 +1,59 @@
+
 import org.apache.tools.ant.taskdefs.condition.Os
 ext {
     if(Os.isFamily(Os.FAMILY_MAC)) {
         natives = ["macosx_amd64_clang"]
     } else if (Os.isFamily(Os.FAMILY_UNIX)) {
         natives = ["linux_amd64_gcc","linux_i686_gcc","linux_windows_amd64_mingw32","linux_windows_i686_mingw32"]
+    } else {
+        throw new GradleException("This script only works on Linux or Mac")
     }
+
     generatedSrcDir = 'src/generated/java'
 }
 
-// Dependencies needed for what our Gradle scripts themselves use. It cannot be included via an external Gradle file :-(
-buildscript {
-    repositories {
-        // External libs - jcenter is Bintray and is supposed to be a superset of Maven Central, but do both just in case
-        jcenter()
-        mavenCentral()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-        dependencies {
-            classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '4.12.0')
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+
+    sourceCompatibility(JavaVersion.VERSION_1_8)
+    targetCompatibility(JavaVersion.VERSION_1_8)
+}
+
+// We use both Maven Central and our own Artifactory instance, which contains module builds, extra libs, and so on
+repositories {
+    // For development so you can publish binaries locally and have them grabbed from there
+    mavenLocal()
+
+    // External libs - jcenter is Bintray and is supposed to be a superset of Maven Central, but do both just in case
+    jcenter()
+    mavenCentral()
+
+    // Terasology Artifactory instance for libs not readily available elsewhere plus our own libs
+    maven {
+        def repoViaEnv = System.getenv()["RESOLUTION_REPO"]
+        if (rootProject.hasProperty("alternativeResolutionRepo")) {
+            // If the user supplies an alternative repo via gradle.properties then use that
+            name "from alternativeResolutionRepo property"
+            url alternativeResolutionRepo
+        } else if (repoViaEnv != null && repoViaEnv != "") {
+            name "from \$RESOLUTION_REPO"
+            url = repoViaEnv
+        } else {
+            // Our default is the main virtual repo containing everything except repos for testing Artifactory itself
+            name "Terasology Artifactory"
+            url "http://artifactory.terasology.org/artifactory/virtual-repo-live"
+            allowInsecureProtocol true  // 😱
         }
     }
 }
-apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
-apply plugin: 'idea'
 
-group = 'org.terasology'
+group = 'org.terasology.jnbullet'
 
 dependencies {
     compile group: 'org.joml', name: 'joml', version: '1.9.25'
@@ -54,21 +80,6 @@ clean {
     // output folder of generateSources, but it doesn't do it.
     delete generatedSrcDir
 }
-
-repositories {
-    mavenCentral()
-    maven {
-        url "https://plugins.gradle.org/m2/"
-    }
-    // MovingBlocks Artifactory instance for libs not readily available elsewhere plus our own libs
-    maven {
-        url "http://artifactory.terasology.org/artifactory/virtual-repo-live"
-    }
-}
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
 
 task sourceJar(type: Jar) {
     description = "Create a JAR with all sources"
@@ -133,6 +144,10 @@ task zipNatives(type: Zip){
 buildNatives.dependsOn generateSources
 zipNatives.dependsOn buildNatives
 
+javadoc {
+    failOnError = false
+}
+
 publish {
     dependsOn  sourceJar, javadocJar, zipNatives
 }
@@ -141,9 +156,8 @@ publish {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            // Without this we get a .pom with no dependencies
             artifactId='JNBullet'
-            groupId = 'org.terasology'
+            groupId = group
 
             from components.java
             artifact sourceJar
@@ -220,6 +234,3 @@ publishing {
     }
 }
 
-javadoc {
-    failOnError = false
-}
