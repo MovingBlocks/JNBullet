@@ -52,6 +52,10 @@ pipeline {
                 // Unstash the one Mac artifact we need to cram into the zip full of natives
                 unstash 'macNative'
 
+                sh 'ls build'
+                sh 'ls build/natives'
+                sh 'ls build/natives/macosx_amd64_clang'
+
                 withCredentials([usernamePassword(credentialsId: 'artifactory-gooey', usernameVariable: 'artifactoryUser', passwordVariable: 'artifactoryPass')]) {
                     sh './gradlew --info --console=plain -Dorg.gradle.internal.publish.checksums.insecure=true zipNatives publish -PmavenUser=${artifactoryUser} -PmavenPass=${artifactoryPass}'
                 }

@@ -138,7 +138,7 @@ task zipNatives(type: Zip){
 }
 
 buildNatives.dependsOn generateSources
-zipNatives.dependsOn buildNatives
+//zipNatives.dependsOn buildNatives // TODO: outputs are not defined well enough yet for Gradle to skip this if already done
 
 javadoc {
     failOnError = false
