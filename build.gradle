@@ -13,6 +13,8 @@ ext {
         throw new GradleException("This script only works on Linux or Mac")
     }
 
+    allNatives = ["linux_amd64_gcc","linux_i686_gcc","linux_windows_amd64_mingw32","linux_windows_i686_mingw32","macosx_amd64_clang"]
+
     generatedSrcDir = 'src/generated/java'
 }
 
@@ -114,9 +116,11 @@ task buildNatives{
         dependsOn "native_${module}"
     }
 }
+
+// TODO: outputs are not defined well enough yet for Gradle to skip this if already done (maybe more the natives task?)
 task zipNatives(type: Zip){
     description 'Creates a zip archive that contains all TeraBullet native files'
-    natives.each { module ->
+    allNatives.each { module ->
         from ("$rootDir/build/natives/${module}") {
             include '*linux*'
             into 'linux'
@@ -138,7 +142,7 @@ task zipNatives(type: Zip){
 }
 
 buildNatives.dependsOn generateSources
-//zipNatives.dependsOn buildNatives // TODO: outputs are not defined well enough yet for Gradle to skip this if already done
+zipNatives.dependsOn buildNatives
 
 javadoc {
     failOnError = false
@@ -229,4 +233,3 @@ publishing {
         }
     }
 }
-
