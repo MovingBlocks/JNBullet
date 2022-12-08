@@ -53,6 +53,7 @@ public final class NativeSupport {
     static boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
     static boolean isMacOS =  System.getProperty("os.name").toLowerCase().contains("mac");
     static boolean is64 = System.getProperty("os.arch").endsWith("64");
+    static boolean isArm = System.getProperty("os.arch").endsWith("aarch64");
 
     private static final Pattern PATH_SEPARATOR = Pattern.compile(File.pathSeparator);
 
@@ -80,7 +81,9 @@ public final class NativeSupport {
             target += "linux-";
         }
 
-        if (is64) {
+        if (isArm) {
+            target += "aarch64";
+        } else if (is64) {
             // Assume x86_64
             target += "amd64";
         } else {

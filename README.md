@@ -22,6 +22,7 @@ TeraBullet is a version of bullet with extensions for direct interactions for vo
   -  linux_windows_amd64_mingw32.cmake
   -  linux_windows_i686_mingw32.cmake
   -  macosx_amd64_clang.cmake
+  -  macosx_aarch64_clang.cmake
   -  windows_amd64_msvc.cmake
   -  windows_i386_msvc.cmake
 
@@ -77,6 +78,7 @@ To build the java portion of bullet, simply run `./gradlew build`
 * mac
   - i686
   - amd64
+  - aarch64
 
 ### System prerequisites
 
