@@ -49,9 +49,9 @@ repositories {
 group = 'org.terasology.jnbullet'
 
 dependencies {
-    compile group: 'org.joml', name: 'joml', version: '1.9.25'
-    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
-    compile group: 'net.sf.trove4j', name: 'trove4j', version: '3.0.3'
+    api group: 'org.joml', name: 'joml', version: '1.9.25'
+    api group: 'net.sf.trove4j', name: 'trove4j', version: '3.0.3'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
 }
 
 sourceSets {
@@ -78,13 +78,13 @@ task sourceJar(type: Jar) {
     description = "Create a JAR with all sources"
     from sourceSets.main.allSource
     from sourceSets.test.allSource
-    classifier = 'sources'
+    archiveClassifier = 'sources'
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
     description = "Create a JAR with the JavaDoc for the java sources"
     from javadoc.destinationDir
-    classifier = 'javadoc'
+    archiveClassifier = 'javadoc'
 }
 
 natives.each { module ->
