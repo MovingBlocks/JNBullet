@@ -1,0 +1,24 @@
+name: Linux amd64
+
+on: [push]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Install SWIG
+              run: sudo apt-get install swig
+            - uses: actions/checkout@v3
+              with:
+                submodules: true
+            - name: Set up JDK
+              uses: actions/setup-java@v3
+              with:
+                java-version: '11'
+                distribution: 'adopt'
+            - name: Validate Gradle Wrapper
+              uses: gradle/wrapper-validation-action@v1
+            - name: Setup Gradle
+              uses: gradle/gradle-build-action@v2
+            - name: Build
+              run: ./gradlew native_linux_amd64_gcc
