@@ -1,13 +1,15 @@
-name: Linux amd64
+name: MacOS amd64 (Intel)
 
 on: [push]
 
 jobs:
     build:
-        runs-on: ubuntu-latest
+        runs-on: macos-12
         steps:
-            - name: Install SWIG
-              run: sudo apt-get install swig
+            - name: Install SWIG and CMake
+              run: |
+                brew install swig
+                brew install cmake
             - uses: actions/checkout@v3
               with:
                 submodules: true
@@ -21,6 +23,6 @@ jobs:
             - name: Setup Gradle
               uses: gradle/gradle-build-action@v2
             - name: Build
-              run: ./gradlew native_linux_amd64_gcc
+              run: ./gradlew native_macosx_amd64_clang
             - name: Check results
-              run: ls -l build/natives/linux_amd64_gcc
+              run: ls -l build/natives/macosx_amd64_clang
