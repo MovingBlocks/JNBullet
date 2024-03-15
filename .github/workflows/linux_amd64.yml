@@ -1,13 +1,17 @@
 name: Linux amd64
 
-on: [push]
+on:
+  workflow_run:
+    workflows: ["MacOS amd64", "MacOS aarch64"]
+    types:
+      - completed
 
 jobs:
     build:
         runs-on: ubuntu-latest
         steps:
             - name: Install SWIG
-              run: sudo apt-get install swig
+              run: sudo apt-get install swig mingw-w64
             - uses: actions/checkout@v3
               with:
                 submodules: true
@@ -20,7 +24,11 @@ jobs:
               uses: gradle/wrapper-validation-action@v1
             - name: Setup Gradle
               uses: gradle/gradle-build-action@v2
+            - name: Download all artifacts
+              uses: actions/download-artifact@v2
+              with:
+                path: .
             - name: Build
-              run: ./gradlew native_linux_amd64_gcc
+              run: ./gradlew buildNatives
             - name: Check results
-              run: ls -l build/natives/linux_amd64_gcc
+              run: ls -l build/natives/

@@ -1,4 +1,5 @@
-name: MacOS amd64 (Intel)
+# This workflow builds and tests the project on a MacOS amd64 machine (Intel Mac).
+name: MacOS amd64
 
 on: [push]
 
@@ -24,5 +25,8 @@ jobs:
               uses: gradle/gradle-build-action@v2
             - name: Build
               run: ./gradlew native_macosx_amd64_clang
-            - name: Check results
-              run: ls -l build/natives/macosx_amd64_clang
+            - name: Upload artifacts
+              uses: actions/upload-artifact@v2
+              with:
+                name: macosx-amd64-artifacts
+                path: build/natives/macosx_amd64_clang
