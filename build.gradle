@@ -117,6 +117,21 @@ task buildNatives{
     }
 }
 
+task listNatives{
+    description = "List all supported platforms."
+    doLast {
+        println "All known natives (*supported):"
+        allNatives.each { module -> 
+            // check whether module is contained in natives
+            if (natives.contains(module)) {
+                println "  *native_${module}"
+            } else {
+                println "   native_${module}" 
+            }
+        }
+    }
+}
+
 // TODO: outputs are not defined well enough yet for Gradle to skip this if already done (maybe more the natives task?)
 task zipNatives(type: Zip){
     description 'Creates a zip archive that contains all TeraBullet native files'

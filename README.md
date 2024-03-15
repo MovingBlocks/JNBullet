@@ -2,98 +2,55 @@
 
 TeraBullet is a version of bullet with extensions for direct interactions for voxel worlds. Written for use with Terasology. this is an implementation of bullet wraps around native bullet using SWIG.
 
-# Gradle
+## Prerequisites
 
-## Build Natives
-- `./gradlew native_linux_amd64_gcc`
-- `./gradlew native_linux_i686_gcc`
-- `./gradlew native_linux_windows_amd64_mingw32`
-- `./gradlew native_linux_windows_i686_mingw32`
+Clone this repository and initialize all git submodules:
 
-# Building
-
-
-
-## CMAKE
-* \<toolchain\>
-  -  android_armeabi_gcc.cmake
-  -  linux_amd64_gcc.cmake
-  -  linux_i386_gcc.cmake
-  -  linux_windows_amd64_mingw32.cmake
-  -  linux_windows_i686_mingw32.cmake
-  -  macosx_amd64_clang.cmake
-  -  macosx_aarch64_clang.cmake
-  -  windows_amd64_msvc.cmake
-  -  windows_i386_msvc.cmake
-
-
-```
-cd build
-cmake ../ -DCMAKE_TOOLCHAIN_FILE=../toolchains/<toolchain>.cmake
-make
+```sh
+git submodule update --init --recursive
 ```
 
-## linux - linux and windows
+Install Java 11 or later.
 
-To build the natives on linux you need:
+## Linux (for Linux and Windows artifacts)
 
-- ant - installed on the system to build the natives for the generated wrapper code
-- swig - installed on the system to produce both the generated code for the native and java bindings
+Install `swig`, `cmake` and `mingw-w64`.
 
-* linux
-  - i686
-    1. gcc
-    2. gcc-c++
-    3. libstdc++.i686
-    4. glibc-devel.i686
-  - amd64
-    1. gcc
-    2. gcc-c++
-    3. glibc-devel
-    4. libstdc++
-* windows
-  - i686
-    1. mingw32-winpthreads
-    2. mingw32-winpthreads-static
-    3. mingw32-gcc
-    4. mingw32-gcc-c++
-  - amd64
-    1. mingw64-winpthreads
-    2. mingw64-winpthreads-static
-    3. mingw64-gcc
-    4. mingw64-gcc-c++
+## MacOS
 
-Then simply run `ant` to generated the binding code between java along with compiling the necessary libraries.
+Install `swig` and `cmake`.
 
+## Build
 
-the output is produced under the `native-build` folder and is formatted in this fashion:
-`libbullet-[linux,windows]-[i686,amd64].[dll,so]``
+To build all natives for the current platform run
 
+```sh
+./gradlew buildNatives
+```
 
+The native libraries are written to `build/natives/*` and are `.so`, `dll`, or `.dylib` files.
 
-To build the java portion of bullet, simply run `./gradlew build`
+To see a list of all known natives (platforms and operating systems), run
 
-## OSX
+```
+./gradlew listNatives
+```
 
-* mac
-  - i686
-  - amd64
-  - aarch64
+To build the Java library part of bullet, simply run 
 
-### System prerequisites
+```
+./gradlew build
+```
 
-To allow the build to succeed on Macs install the following (potentially in addition to the prep for [JNLua](https://github.com/MovingBlocks/JNLua/blob/master/README.md))
+## Publishing
 
-* `brew install swig`
-* `brew install cmake`
+...
 
-Be sure to have retrieved the submodule in the repo: `git submodule update --init --recursive`
-
-**Note:** On Mac the `jniHelpers.h` file triggered a compile error. It was then _removed_ along with its sibling `jniHelpers.cpp` and two includes in `mathtypes.h` and `gdxCommon.i` - it did not seem like that was in use, but noting it here for future reference just in case.
+## Testing
 
 To test be sure to make the version in `gradle.properties` unique so you can ensure you use it by updating the corresponding version in Terasology's root `build.gradle` (natives) as well as its `engine/build.gradle` (Java wrapper). Use `./gradlew build zipNatives publishToMavenLocal` to get binaries created locally for JNBullet that Terasology can then read, and make sure to refresh its natives (delete the `natives` directory and rerun `gradlew extractNatives`)
 
-# License
+## License
 
 This library is Licensed under the [Apache 2 License](http://www.apache.org/licenses/LICENSE-2.0.html) and is a rework of bullet wrapper
 from [libgdx](https://github.com/libgdx/libgdx)
