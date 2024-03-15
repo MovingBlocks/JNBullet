@@ -30,4 +30,7 @@ jobs:
               uses: actions/upload-artifact@v2
               with:
                 name: linux-windows-amd64-artifacts
-                path: build/natives/*/*.{so,dylib,dll}
+                path: |
+                  build/natives/*/*.so
+                  build/natives/*/*.dll
+                  build/natives/*/*.dylib
