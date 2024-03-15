@@ -29,4 +29,4 @@ jobs:
               uses: actions/upload-artifact@v2
               with:
                 name: macosx-amd64-artifacts
-                path: build/natives/macosx_amd64_clang
+                path: build/natives/*/*.{so,dylib,dll}

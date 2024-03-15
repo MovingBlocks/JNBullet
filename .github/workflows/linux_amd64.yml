@@ -1,10 +1,6 @@
 name: Linux amd64
 
-on:
-  workflow_run:
-    workflows: ["MacOS amd64", "MacOS aarch64"]
-    types:
-      - completed
+on: [push]
 
 jobs:
     build:
@@ -30,5 +26,8 @@ jobs:
                 path: .
             - name: Build
               run: ./gradlew buildNatives
-            - name: Check results
-              run: ls -l build/natives/
+            - name: Upload artifacts
+              uses: actions/upload-artifact@v2
+              with:
+                name: linux-windows-amd64-artifacts
+                path: build/natives/*/*.{so,dylib,dll}
