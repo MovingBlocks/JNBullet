@@ -20,14 +20,10 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
-      - name: Download all artifacts
-        uses: actions/download-artifact@v2
-        with:
-          path: .
       - name: Build
         run: ./gradlew buildNatives
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: linux-windows-amd64-artifacts
           path: |
@@ -56,7 +52,7 @@ jobs:
       - name: Build
         run: ./gradlew native_macosx_amd64_clang
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: macosx-amd64-artifacts
           path: |
@@ -85,7 +81,7 @@ jobs:
       - name: Build
         run: ./gradlew native_macosx_aarch64_clang
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: macosx-aarch64-artifacts
           path: |
@@ -98,15 +94,15 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - name: Download all artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: linux-windows-amd64-artifacts
       - name: Download all artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: macosx-amd64-artifacts
       - name: Download all artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: macosx-aarch64-artifacts
       - name: Publish Release
