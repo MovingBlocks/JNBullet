@@ -96,15 +96,8 @@ jobs:
       - name: Download all artifacts
         uses: actions/download-artifact@v4
         with:
-          name: linux-windows-amd64-artifacts
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: macosx-amd64-artifacts
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: macosx-aarch64-artifacts
+          path: build/natives
+          merge-multiple: true
       - name: Publish Release
         run: |
-          ls -l build/natives/
+          ls -R build/natives/
