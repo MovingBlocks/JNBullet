@@ -1,14 +1,15 @@
-# This workflow builds the project on Linux, cross-compiling for Windows.
-name: Linux amd64
+name: Publish Artifacts
 
-on: [push]
+on: 
+  workflow_run:
+    workflows: ["MacOS amd64", "MacOS aarch64", "Linux amd64"]
+    types: [completed]
+    branches: [master]
 
 jobs:
     build:
         runs-on: ubuntu-latest
-        steps:
-            - name: Install SWIG
-              run: sudo apt-get install swig mingw-w64
+        steps:            
             - uses: actions/checkout@v3
               with:
                 submodules: true
@@ -25,13 +26,9 @@ jobs:
               uses: actions/download-artifact@v2
               with:
                 path: .
-            - name: Build
-              run: ./gradlew buildNatives
-            - name: Upload artifacts
-              uses: actions/upload-artifact@v2
-              with:
-                name: linux-windows-amd64-artifacts
-                path: |
-                  build/natives/*/*.so
-                  build/natives/*/*.dll
-                  build/natives/*/*.dylib
+            - name: Build Java
+              run: ./gradlew build
+            - name: Check Results
+              run: |
+                ls -l build/libs/
+                ls -l build/natives/

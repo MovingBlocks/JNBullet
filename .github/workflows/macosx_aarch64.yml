@@ -1,4 +1,5 @@
-name: MacOS aarch64 (M1)
+# This workflow builds and tests the project on a MacOS aarch64 machine (Apple Silicon).
+name: MacOS aarch64
 
 on: [push]
 
