@@ -15,6 +15,7 @@ jobs:
     steps:
       - name: Install SWIG
         run: sudo apt-get install swig mingw-w64
+      - run: swig -version
       - uses: actions/checkout@v4
         with:
           submodules: true
@@ -34,15 +35,15 @@ jobs:
           path: |
             build/natives/*/*.so
             build/natives/*/*.dll
-            build/natives/*/*.dylib
   build-macos-amd64:
     runs-on: macos-12
     needs: validate-gradle-wrapper
     steps:
-      - name: Install SWIG and CMake
+      - name: Install SWIG
         run: |
+          brew update
           brew install swig
-          brew install cmake
+      - run: swig -version
       - uses: actions/checkout@v4
         with:
           submodules: true
@@ -55,22 +56,24 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
       - name: Build
         run: ./gradlew native_macosx_amd64_clang
+      - run: |
+          file build/natives/*/*.dylib
+          md5 build/natives/*/*.dylib
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: macosx-amd64-artifacts
           path: |
-            build/natives/*/*.so
-            build/natives/*/*.dll
             build/natives/*/*.dylib
   build-macos-aarch64:
     runs-on: macos-14
     needs: validate-gradle-wrapper
     steps:
-      - name: Install SWIG and CMake
+      - name: Install SWIG
         run: |
+          brew update
           brew install swig
-          brew install cmake
+      - run: swig -version
       - uses: actions/checkout@v4
         with:
           submodules: true
@@ -83,13 +86,14 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
       - name: Build
         run: ./gradlew native_macosx_aarch64_clang
+      - run: |
+          file build/natives/*/*.dylib
+          md5 build/natives/*/*.dylib
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: macosx-aarch64-artifacts
           path: |
-              build/natives/*/*.so
-              build/natives/*/*.dll
               build/natives/*/*.dylib
   publish:
     runs-on: ubuntu-latest
