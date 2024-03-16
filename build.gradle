@@ -6,14 +6,19 @@ plugins {
 import org.apache.tools.ant.taskdefs.condition.Os
 ext {
     if(Os.isFamily(Os.FAMILY_MAC)) {
-        natives = ["macosx_amd64_clang"]
+        natives = ["macosx_amd64_clang","macosx_aarch64_clang"]
     } else if (Os.isFamily(Os.FAMILY_UNIX)) {
-        natives = ["linux_amd64_gcc","linux_i686_gcc","linux_windows_amd64_mingw32","linux_windows_i686_mingw32"]
+        natives = ["linux_amd64_gcc","linux_windows_amd64_mingw32"]
     } else {
         throw new GradleException("This script only works on Linux or Mac")
     }
 
-    allNatives = ["linux_amd64_gcc","linux_i686_gcc","linux_windows_amd64_mingw32","linux_windows_i686_mingw32","macosx_amd64_clang"]
+    allNatives = [
+        "linux_amd64_gcc",
+        "linux_windows_amd64_mingw32",
+        "macosx_aarch64_clang",
+        "macosx_amd64_clang"
+    ]
 
     generatedSrcDir = 'src/generated/java'
 }
@@ -109,6 +114,21 @@ task buildNatives{
     description = "Builds Natives"
     natives.each { module ->
         dependsOn "native_${module}"
+    }
+}
+
+task listNatives{
+    description = "List all supported platforms."
+    doLast {
+        println "All known natives (*supported):"
+        allNatives.each { module -> 
+            // check whether module is contained in natives
+            if (natives.contains(module)) {
+                println "  *native_${module}"
+            } else {
+                println "   native_${module}" 
+            }
+        }
     }
 }
 

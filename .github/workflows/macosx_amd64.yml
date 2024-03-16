@@ -1,13 +1,16 @@
-name: Linux amd64
+# This workflow builds and tests the project on a MacOS amd64 machine (Intel Mac).
+name: MacOS amd64
 
 on: [push]
 
 jobs:
     build:
-        runs-on: ubuntu-latest
+        runs-on: macos-12
         steps:
-            - name: Install SWIG
-              run: sudo apt-get install swig mingw-w64
+            - name: Install SWIG and CMake
+              run: |
+                brew install swig
+                brew install cmake
             - uses: actions/checkout@v3
               with:
                 submodules: true
@@ -20,16 +23,12 @@ jobs:
               uses: gradle/wrapper-validation-action@v1
             - name: Setup Gradle
               uses: gradle/gradle-build-action@v2
-            - name: Download all artifacts
-              uses: actions/download-artifact@v2
-              with:
-                path: .
             - name: Build
-              run: ./gradlew buildNatives
+              run: ./gradlew native_macosx_amd64_clang
             - name: Upload artifacts
               uses: actions/upload-artifact@v2
               with:
-                name: linux-windows-amd64-artifacts
+                name: macosx-amd64-artifacts
                 path: |
                   build/natives/*/*.so
                   build/natives/*/*.dll
