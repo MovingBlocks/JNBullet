@@ -1,0 +1,114 @@
+name: Build and Publish for all Platforms
+
+on: [push]
+
+jobs:
+  build-linux-windows-amd64:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SWIG
+        run: sudo apt-get install swig mingw-w64
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Download all artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: .
+      - name: Build
+        run: ./gradlew buildNatives
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux-windows-amd64-artifacts
+          path: |
+            build/natives/*/*.so
+            build/natives/*/*.dll
+            build/natives/*/*.dylib
+  build-macos-amd64:
+    runs-on: macos-12
+    steps:
+      - name: Install SWIG and CMake
+        run: |
+          brew install swig
+          brew install cmake
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Build
+        run: ./gradlew native_macosx_amd64_clang
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: macosx-amd64-artifacts
+          path: |
+            build/natives/*/*.so
+            build/natives/*/*.dll
+            build/natives/*/*.dylib
+  build-macos-aarch64:
+    runs-on: macos-14
+    steps:
+      - name: Install SWIG and CMake
+        run: |
+          brew install swig
+          brew install cmake
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Build
+        run: ./gradlew native_macosx_aarch64_clang
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: macosx-aarch64-artifacts
+          path: |
+              build/natives/*/*.so
+              build/natives/*/*.dll
+              build/natives/*/*.dylib
+  publish:
+    runs-on: ubuntu-latest
+    needs: [build-linux-windows-amd64, build-macos-amd64, build-macos-aarch64]
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: linux-windows-amd64-artifacts
+      - name: Download all artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: macosx-amd64-artifacts
+      - name: Download all artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: macosx-aarch64-artifacts
+      - name: Publish Release
+        run: |
+          ls -l build/natives/
