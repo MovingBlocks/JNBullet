@@ -20,7 +20,7 @@ jobs:
         id: cache-swig
         uses: actions/cache@v4
         with:
-          path: ~/swig
+          path: $GITHUB_WORKSPACE/swig
           key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}
       - name: Build and Install SWIG v${{ env.SWIG_VERSION }}
         if: steps.cache-swig.outputs.cache-hit != 'true'
@@ -30,12 +30,12 @@ jobs:
           tar xzf v${{ env.SWIG_VERSION }}.tar.gz
           cd swig-${{ env.SWIG_VERSION }}
           ./autogen.sh
-          ./configure --prefix=$HOME/swig
+          ./configure --prefix=$GITHUB_WORKSPACE/swig
           make
           make install
       - name: Add SWIG to $PATH
         run: |
-          echo $HOME/swig/bin >> $GITHUB_PATH
+          echo $GITHUB_WORKSPACE/swig/bin >> $GITHUB_PATH
           swig -version
       - name: Install Ming
         run: sudo apt-get install -y mingw-w64
@@ -66,7 +66,7 @@ jobs:
         id: cache-swig
         uses: actions/cache@v4
         with:
-          path: ~/swig
+          path: $GITHUB_WORKSPACE/swig
           key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}
       - name: Build and Install SWIG v${{ env.SWIG_VERSION }}
         if: steps.cache-swig.outputs.cache-hit != 'true'
@@ -76,12 +76,12 @@ jobs:
           tar xzf v${{ env.SWIG_VERSION }}.tar.gz
           cd swig-${{ env.SWIG_VERSION }}
           ./autogen.sh
-          ./configure --prefix=$HOME/swig
+          ./configure --prefix=$GITHUB_WORKSPACE/swig
           make
           make install
       - name: Add SWIG to $PATH
         run: |
-          echo $HOME/swig/bin >> $GITHUB_PATH
+          echo $GITHUB_WORKSPACE/swig/bin >> $GITHUB_PATH
           swig -version
       - uses: actions/checkout@v4
         with:
@@ -112,7 +112,7 @@ jobs:
         id: cache-swig
         uses: actions/cache@v4
         with:
-          path: ~/swig
+          path: $GITHUB_WORKSPACE/swig
           key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}
       - name: Build and Install SWIG v${{ env.SWIG_VERSION }}
         if: steps.cache-swig.outputs.cache-hit != 'true'
@@ -122,12 +122,12 @@ jobs:
           tar xzf v${{ env.SWIG_VERSION }}.tar.gz
           cd swig-${{ env.SWIG_VERSION }}
           ./autogen.sh
-          ./configure --prefix=$HOME/swig
+          ./configure --prefix=$GITHUB_WORKSPACE/swig
           make
           make install
       - name: Add SWIG to $PATH
         run: |
-          echo $HOME/swig/bin >> $GITHUB_PATH
+          echo $GITHUB_WORKSPACE/swig/bin >> $GITHUB_PATH
           swig -version
       - uses: actions/checkout@v4
         with:
