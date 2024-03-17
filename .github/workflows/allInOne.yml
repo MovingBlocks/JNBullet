@@ -62,8 +62,10 @@ jobs:
           key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}
           fail-on-cache-miss: true
       - name: Add SWIG to $PATH
+        run: echo "${{ github.workspace }}/swig/bin" >> $GITHUB_PATH
+      - name: Check SWIG version
         run: |
-          echo "${{ github.workspace }}/swig/bin/" >> $GITHUB_PATH
+          which swig
           swig -version
       - name: Install Ming
         run: sudo apt-get install -y mingw-w64
@@ -97,9 +99,11 @@ jobs:
           key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}
           fail-on-cache-miss: true
       - name: Add SWIG to $PATH
+        run: echo "${{ github.workspace }}/swig/bin" >> $GITHUB_PATH
+      - name: Check SWIG version
         run: |
-          echo "${{ github.workspace }}/swig/bin" >> $GITHUB_PATH
-          brew install pcre
+          brew install prce
+          which swig
           swig -version
       - uses: actions/checkout@v4
         with:
@@ -133,10 +137,11 @@ jobs:
           key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}
           fail-on-cache-miss: true
       - name: Add SWIG to $PATH
+        run: echo "${{ github.workspace }}/swig/bin" >> $GITHUB_PATH
+      - name: Check SWIG version
         run: |
-          echo "${{ github.workspace }}/swig/bin/" >> $GITHUB_PATH
-          brew install pcre
-          ${{ github.workspace }}/swig/bin/swig -version
+          brew install prce
+          which swig
           swig -version
       - uses: actions/checkout@v4
         with:
