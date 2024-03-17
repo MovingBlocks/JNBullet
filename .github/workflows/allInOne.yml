@@ -94,126 +94,14 @@ jobs:
             build/natives/*/*.so
             build/natives/*/*.dll
             build/natives/*/*.dylib
-    
-  # build-linux-windows-amd64:
-  #   runs-on: ubuntu-latest
-  #   needs: [validate-gradle-wrapper, build-swig]
-  #   steps:
-  #     - name: Restore SWIG from cache
-  #       uses: actions/cache@v4
-  #       with:
-  #         path: ${{ github.workspace }}/swig
-  #         key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}
-  #         fail-on-cache-miss: true
-  #     - name: Add SWIG to $PATH
-  #       run: echo "${{ github.workspace }}/swig/bin" >> $GITHUB_PATH
-  #     - name: Check SWIG version
-  #       run: |
-  #         which swig
-  #         swig -version
-  #     - name: Install Ming
-  #       run: sudo apt-get install -y mingw-w64
-  #     - uses: actions/checkout@v4
-  #       with:
-  #         submodules: true
-  #     - name: Set up JDK
-  #       uses: actions/setup-java@v4
-  #       with:
-  #         java-version: '11'
-  #         distribution: 'adopt'
-  #     - name: Setup Gradle
-  #       uses: gradle/actions/setup-gradle@v3
-  #     - name: Build
-  #       run: ./gradlew build buildNatives
-  #     - name: Upload artifacts
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: linux-windows-amd64-artifacts
-  #         path: |
-  #           build/natives/*/*.so
-  #           build/natives/*/*.dll
-  # build-macos-amd64:
-  #   runs-on: macos-12
-  #   needs: [validate-gradle-wrapper, build-swig]
-  #   steps:
-  #     - name: Restore SWIG from cache
-  #       uses: actions/cache@v4
-  #       with:
-  #         path: ${{ github.workspace }}/swig
-  #         key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}
-  #         fail-on-cache-miss: true
-  #     - name: Add SWIG to $PATH
-  #       run: echo "${{ github.workspace }}/swig/bin" >> $GITHUB_PATH
-  #     - name: Check SWIG version
-  #       run: |
-  #         brew install pcre
-  #         which swig
-  #         swig -version
-  #     - uses: actions/checkout@v4
-  #       with:
-  #         submodules: true
-  #     - name: Set up JDK
-  #       uses: actions/setup-java@v4
-  #       with:
-  #         java-version: '11'
-  #         distribution: 'adopt'
-  #     - name: Setup Gradle
-  #       uses: gradle/actions/setup-gradle@v3
-  #     - name: Build
-  #       run: ./gradlew build native_macosx_amd64_clang
-  #     - run: |
-  #         file build/natives/*/*.dylib
-  #         md5 build/natives/*/*.dylib
-  #     - name: Upload artifacts
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: macosx-amd64-artifacts
-  #         path: |
-  #           build/natives/*/*.dylib
-  # build-macos-aarch64:
-  #   runs-on: macos-14
-  #   needs: [validate-gradle-wrapper, build-swig]
-  #   steps:
-  #     - name: Restore SWIG from cache
-  #       uses: actions/cache@v4
-  #       with:
-  #         path: ${{ github.workspace }}/swig
-  #         key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}
-  #         fail-on-cache-miss: true
-  #     - name: Add SWIG to $PATH
-  #       run: echo "${{ github.workspace }}/swig/bin" >> $GITHUB_PATH
-  #     - name: Check SWIG version
-  #       run: |
-  #         brew install pcre
-  #         which swig
-  #         swig -version
-  #     - uses: actions/checkout@v4
-  #       with:
-  #         submodules: true
-  #     - name: Set up JDK
-  #       uses: actions/setup-java@v4
-  #       with:
-  #         java-version: '11'
-  #         distribution: 'adopt'
-  #     - name: Setup Gradle
-  #       uses: gradle/actions/setup-gradle@v3
-  #     - name: Build
-  #       run: ./gradlew build native_macosx_aarch64_clang
-  #     - run: |
-  #         file build/natives/*/*.dylib
-  #         md5 build/natives/*/*.dylib
-  #     - name: Upload artifacts
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: macosx-aarch64-artifacts
-  #         path: |
-  #             build/natives/*/*.dylib
   publish:
     runs-on: ubuntu-latest
-    # needs: [validate-gradle-wrapper,build-linux-windows-amd64, build-macos-amd64, build-macos-aarch64]
     needs: [validate-gradle-wrapper, swig, build]
     if: github.ref == 'refs/heads/master'
     steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
       - name: Restore SWIG from cache
         uses: actions/cache@v4
         with:
@@ -229,9 +117,6 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-      - uses: actions/checkout@v4
-        with:
-          submodules: true
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
       - name: Download all artifacts
