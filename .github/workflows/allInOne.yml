@@ -18,13 +18,13 @@ jobs:
         os: [ubuntu-latest, macos-12, macos-14]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Restore SWIG from cache
+      - name: SWIG from cache
         id: cache-swig
         uses: actions/cache@v4
         with:
           path: ${{ github.workspace }}/swig
           key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}
-      - name: Install SWIG dependencies
+      - name: Install SWIG build dependencies
         if: steps.cache-swig.outputs.cache-hit != 'true'
         run: |
           if [ "${{ runner.os }}" == 'Linux' ]; then
@@ -45,6 +45,10 @@ jobs:
           ./configure --prefix=$GITHUB_WORKSPACE/swig
           make
           make install
+      - name: Install SWIG runtime dependencies
+        if: runner.os == 'macOs'
+        run: |
+          brew install pcre
       - name: Check SWIG version
         run: $GITHUB_WORKSPACE/swig/bin/swig -version
   build-linux-windows-amd64:
@@ -56,20 +60,10 @@ jobs:
         with:
           path: ${{ github.workspace }}/swig
           key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}
-      # - name: Build and Install SWIG v${{ env.SWIG_VERSION }}
-      #   if: steps.cache-swig.outputs.cache-hit != 'true'
-      #   run: |
-      #     sudo apt-get install -y autoconf automake libtool
-      #     wget https://github.com/swig/swig/archive/refs/tags/v${{ env.SWIG_VERSION }}.tar.gz
-      #     tar xzf v${{ env.SWIG_VERSION }}.tar.gz
-      #     cd swig-${{ env.SWIG_VERSION }}
-      #     ./autogen.sh
-      #     ./configure --prefix=$GITHUB_WORKSPACE/swig
-      #     make
-      #     make install
+          fail-on-cache-miss: true
       - name: Add SWIG to $PATH
         run: |
-          echo $GITHUB_WORKSPACE/swig/bin >> $GITHUB_PATH
+          echo "${{ github.workspace }}/swig/bin/" >> $GITHUB_PATH
           swig -version
       - name: Install Ming
         run: sudo apt-get install -y mingw-w64
@@ -101,20 +95,11 @@ jobs:
         with:
           path: ${{ github.workspace }}/swig
           key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}
-      # - name: Build and Install SWIG v${{ env.SWIG_VERSION }}
-      #   if: steps.cache-swig.outputs.cache-hit != 'true'
-      #   run: |
-      #     brew install autoconf automake libtool pcre
-      #     wget https://github.com/swig/swig/archive/refs/tags/v${{ env.SWIG_VERSION }}.tar.gz
-      #     tar xzf v${{ env.SWIG_VERSION }}.tar.gz
-      #     cd swig-${{ env.SWIG_VERSION }}
-      #     ./autogen.sh
-      #     ./configure --prefix=$GITHUB_WORKSPACE/swig
-      #     make
-      #     make install
+          fail-on-cache-miss: true
       - name: Add SWIG to $PATH
         run: |
-          echo $GITHUB_WORKSPACE/swig/bin >> $GITHUB_PATH
+          echo "${{ github.workspace }}/swig/bin" >> $GITHUB_PATH
+          brew install pcre
           swig -version
       - uses: actions/checkout@v4
         with:
@@ -146,20 +131,12 @@ jobs:
         with:
           path: ${{ github.workspace }}/swig
           key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}
-      # - name: Build and Install SWIG v${{ env.SWIG_VERSION }}
-      #   if: steps.cache-swig.outputs.cache-hit != 'true'
-      #   run: |
-      #     brew install autoconf automake libtool pcre
-      #     wget https://github.com/swig/swig/archive/refs/tags/v${{ env.SWIG_VERSION }}.tar.gz
-      #     tar xzf v${{ env.SWIG_VERSION }}.tar.gz
-      #     cd swig-${{ env.SWIG_VERSION }}
-      #     ./autogen.sh
-      #     ./configure --prefix=$GITHUB_WORKSPACE/swig
-      #     make
-      #     make install
+          fail-on-cache-miss: true
       - name: Add SWIG to $PATH
         run: |
-          echo $GITHUB_WORKSPACE/swig/bin >> $GITHUB_PATH
+          echo "${{ github.workspace }}/swig/bin/" >> $GITHUB_PATH
+          brew install pcre
+          ${{ github.workspace }}/swig/bin/swig -version
           swig -version
       - uses: actions/checkout@v4
         with:
