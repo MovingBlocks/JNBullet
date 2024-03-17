@@ -85,7 +85,9 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
       - name: Build
-        run: ./gradlew build buildNatives --info --stacktrace
+        run: |
+          ./gradlew --stop
+          ./gradlew build buildNatives --info --stacktrace --no-daemon
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
