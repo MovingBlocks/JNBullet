@@ -2,16 +2,10 @@ ext {
     swigTarget = ["linearmath","collision","dynamics","softbody","extras","inversedynamics"]
 }
 
-def swigBinary = System.getenv()["SWIG"] != null ? System.getenv()["SWIG"] : "swig"
-
-project.exec {
-    commandLine 'env'
-}
-
 swigTarget.each { module ->
     tasks.create(name: "swig_"+"${module}", type: Exec) {
         description = 'Swigging collision'
-        executable swigBinary
+        executable "swig"
         args ("-java",
                 "-c++",
                 "-Wall",
