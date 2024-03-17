@@ -6,8 +6,15 @@ plugins {
 import org.apache.tools.ant.taskdefs.condition.Os
 ext {
     if(Os.isFamily(Os.FAMILY_MAC)) {
-        natives = ["macosx_amd64_clang","macosx_aarch64_clang"]
+        // Compilation succeeds for both targets on either Mac platform, but in both cases the output is for the platform we're on
+        // Therefore, we only include our own platform as target here.
+        if (Os.isArch("aarch64")) {
+            natives = ["macosx_aarch64_clang"]
+        } else {
+            natives = ["macosx_amd64_clang"]
+        }        
     } else if (Os.isFamily(Os.FAMILY_UNIX)) {
+        // Cross-compilation with MinGW-w64 allows us to also build the Windows target on Linux
         natives = ["linux_amd64_gcc","linux_windows_amd64_mingw32"]
     } else {
         throw new GradleException("This script only works on Linux or Mac")
