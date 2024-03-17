@@ -33,9 +33,10 @@ jobs:
           ./configure --prefix=$HOME/swig
           make
           make install
+      - name: Add SWIG to $PATH
+        run: |
           echo $HOME/swig/bin >> $GITHUB_PATH
-      - name: Check SWIG
-        run: swig -version
+          swig -version
       - name: Install Ming
         run: sudo apt-get install -y mingw-w64
       - uses: actions/checkout@v4
@@ -78,9 +79,10 @@ jobs:
           ./configure --prefix=$HOME/swig
           make
           make install
+      - name: Add SWIG to $PATH
+        run: |
           echo $HOME/swig/bin >> $GITHUB_PATH
-      - name: Check SWIG
-        run: swig -version
+          swig -version
       - uses: actions/checkout@v4
         with:
           submodules: true
@@ -123,9 +125,10 @@ jobs:
           ./configure --prefix=$HOME/swig
           make
           make install
+      - name: Add SWIG to $PATH
+        run: |
           echo $HOME/swig/bin >> $GITHUB_PATH
-      - name: Check SWIG
-        run: swig -version
+          swig -version
       - uses: actions/checkout@v4
         with:
           submodules: true
