@@ -4,28 +4,25 @@ TeraBullet is a version of bullet with extensions for direct interactions for vo
 
 ## Prerequisites
 
+Make sure the following applications are installed:
+
+- Java 11 or later
+- [CMake](https://cmake.org/)
+- [SWIG](https://www.swig.org/) v4.0.2
+- [MinGW-w64](https://www.mingw-w64.org/) (cross-compilation for Windows on Linux)
+
 Clone this repository and initialize all git submodules:
 
 ```sh
 git submodule update --init --recursive
 ```
 
-Install Java 11 or later.
-
-## Linux (for Linux and Windows artifacts)
-
-Install `swig`, `cmake` and `mingw-w64`.
-
-## MacOS
-
-Install `swig` and `cmake`.
-
 ## Build
 
-To build all natives for the current platform run
+To build the Java library and all supported natives for the current platform run
 
 ```sh
-./gradlew buildNatives
+./gradlew build buildNatives
 ```
 
 The native libraries are written to `build/natives/*` and are `.so`, `dll`, or `.dylib` files.
@@ -36,7 +33,7 @@ To see a list of all known natives (platforms and operating systems), run
 ./gradlew listNatives
 ```
 
-To build the Java library part of bullet, simply run 
+To build only the Java library part of bullet, simply run 
 
 ```
 ./gradlew build
