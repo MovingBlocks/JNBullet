@@ -2,8 +2,8 @@
 
 _JNBullet is a version of [bullet](https://github.com/bulletphysics/bullet3) with extensions for direct interactions for voxel worlds, written for use with Terasology.
 Bullet is a real-time collision detection and multi-physics simulation, for instance intended for use in games.
-In Terasology, we use it, for instance, for simulating gravity for player and object movements as well as for collisions between players and/or objects.
-This is an implementation of bullet wraps around native bullet using SWIG._
+In Terasology we use it for simulating gravity for player and object movements as well as for collisions between players and/or objects.
+This is an implementation of bullet wrapped around native bullet using SWIG._
 
 ## Prerequisites
 
