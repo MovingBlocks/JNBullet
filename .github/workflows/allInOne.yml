@@ -4,6 +4,7 @@ on: [push]
 
 env:
   SWIG_VERSION: 4.0.2
+  LLVM_MINGW_VERSION: 20260616
 
 jobs:
   validate-gradle-wrapper:
@@ -73,6 +74,14 @@ jobs:
       - name: Install MinGW-w64
         if: runner.os == 'Linux'
         run: sudo apt-get install -y mingw-w64
+      - name: Install llvm-mingw (Windows arm64 cross-compiler)
+        # Classic mingw-w64 (GCC) has no Windows/ARM64 target; only needed on the job
+        # that actually builds linux_windows_arm64_llvm_mingw32, see build.gradle.
+        if: runner.os == 'Linux' && runner.arch == 'X64'
+        run: |
+          curl -fL -o llvm-mingw.tar.xz "https://github.com/mstorsjo/llvm-mingw/releases/download/${{ env.LLVM_MINGW_VERSION }}/llvm-mingw-${{ env.LLVM_MINGW_VERSION }}-ucrt-ubuntu-22.04-x86_64.tar.xz"
+          tar xf llvm-mingw.tar.xz
+          echo "$PWD/llvm-mingw-${{ env.LLVM_MINGW_VERSION }}-ucrt-ubuntu-22.04-x86_64/bin" >> $GITHUB_PATH
       - name: Install pcre
         if: runner.os == 'macOS'
         run: brew install pcre

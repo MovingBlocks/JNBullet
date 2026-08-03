@@ -19,8 +19,10 @@ ext {
             // not reliably available when cross-compiling from an aarch64 host.
             natives = ["linux_aarch64_gcc"]
         } else {
-            // Cross-compilation with MinGW-w64 allows us to also build the Windows target on Linux
-            natives = ["linux_amd64_gcc","linux_windows_amd64_mingw32"]
+            // Cross-compilation with MinGW-w64 allows us to also build the Windows amd64 target
+            // on Linux, and with llvm-mingw (must be on PATH, see toolchains/linux_windows_arm64_llvm_mingw32.cmake)
+            // the Windows arm64 target too.
+            natives = ["linux_amd64_gcc","linux_windows_amd64_mingw32","linux_windows_arm64_llvm_mingw32"]
         }
     } else {
         throw new GradleException("This script only works on Linux or Mac")
@@ -30,6 +32,7 @@ ext {
         "linux_amd64_gcc",
         "linux_aarch64_gcc",
         "linux_windows_amd64_mingw32",
+        "linux_windows_arm64_llvm_mingw32",
         "macosx_aarch64_clang",
         "macosx_amd64_clang"
     ]
