@@ -17,8 +17,10 @@ cmake_minimum_required ( VERSION 3.5 )
 # default to Debug
 set ( CMAKE_BUILD_TYPE "Debug" CACHE STRING "Default build type" )
 
-set ( CMAKE_SYSTEM_NAME Darwin )
-set ( CMAKE_SYSTEM_ARCH aarch64)
+set ( CMAKE_SYSTEM_NAME Linux )
+set ( CMAKE_SYSTEM_ARCH aarch64 )
 
-set ( CMAKE_C_COMPILER clang )
-set ( CMAKE_CXX_COMPILER clang++ )
+set ( CMAKE_C_COMPILER gcc )
+set ( CMAKE_CXX_COMPILER g++ )
+
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
