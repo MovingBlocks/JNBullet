@@ -18,6 +18,13 @@ name: Build and Publish for all Platforms
 
 on: [push]
 
+# Container jobs default to `sh`, not `bash` -- GitHub cannot assume bash exists in an
+# arbitrary image. The steps below use `==` and other bashisms, so pin the shell rather
+# than rewrite them to be POSIX-portable.
+defaults:
+  run:
+    shell: bash
+
 env:
   SWIG_VERSION: 4.0.2
   LLVM_MINGW_VERSION: 20260616
