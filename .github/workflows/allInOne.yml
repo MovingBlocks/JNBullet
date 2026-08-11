@@ -130,7 +130,11 @@ jobs:
           key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}-v${{ env.SWIG_CACHE_VERSION }}
           fail-on-cache-miss: true
       - name: Add SWIG to $PATH
-        run: echo "${{ github.workspace }}/swig/bin" >> $GITHUB_PATH
+        # $GITHUB_WORKSPACE, not ${{ github.workspace }}: the expression resolves to the
+        # host path, which does not exist inside a container. The env var is set per
+        # environment. actions/cache maps the two itself, so its `path:` input is fine
+        # either way -- a plain run step is not.
+        run: echo "$GITHUB_WORKSPACE/swig/bin" >> $GITHUB_PATH
       - name: Install libpcre3
         if: runner.os == 'Linux'
         run: sudo apt-get install -y libpcre3-dev
@@ -193,7 +197,11 @@ jobs:
           key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}-v${{ env.SWIG_CACHE_VERSION }}
           fail-on-cache-miss: true
       - name: Add SWIG to $PATH
-        run: echo "${{ github.workspace }}/swig/bin" >> $GITHUB_PATH
+        # $GITHUB_WORKSPACE, not ${{ github.workspace }}: the expression resolves to the
+        # host path, which does not exist inside a container. The env var is set per
+        # environment. actions/cache maps the two itself, so its `path:` input is fine
+        # either way -- a plain run step is not.
+        run: echo "$GITHUB_WORKSPACE/swig/bin" >> $GITHUB_PATH
       - name: Install libpcre3
         run: sudo apt-get install -y libpcre3-dev
       - name: Check SWIG version
