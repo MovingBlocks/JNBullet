@@ -163,6 +163,24 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
       - name: Build
         run: ./gradlew build buildNatives
+      - name: Check the glibc floor of the Linux natives
+        # Turns the container choice into something enforced rather than assumed. If a
+        # future change builds these on a newer base, this fails here instead of as an
+        # UnsatisfiedLinkError on a user's machine. Only glibc is checked because
+        # CMakeLists.txt links libgcc and libstdc++ statically.
+        if: matrix.container != ''
+        env:
+          GLIBC_FLOOR: '2.35'
+        run: |
+          required=$(objdump -T build/natives/linux_*_gcc/*.so | grep -o 'GLIBC_[0-9]\+\.[0-9]\+' | sed 's/GLIBC_//' | sort -uV)
+          echo "glibc symbol versions required by the built natives:"
+          echo "$required" | sed 's/^/  /'
+          highest=$(echo "$required" | tail -1)
+          if [ "$(printf '%s\n%s\n' "$GLIBC_FLOOR" "$highest" | sort -V | tail -1)" != "$GLIBC_FLOOR" ]; then
+            echo "::error::Natives require glibc $highest, above the declared floor of $GLIBC_FLOOR. See the note at the top of this workflow."
+            exit 1
+          fi
+          echo "OK: highest requirement $highest is within the declared floor $GLIBC_FLOOR."
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
