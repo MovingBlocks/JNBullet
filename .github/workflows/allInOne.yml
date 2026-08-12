@@ -1,10 +1,46 @@
 name: Build and Publish for all Platforms
 
+# The Linux natives are compiled inside a container (`container: ubuntu:22.04` in the
+# swig and build jobs below), not directly on the runner. That is deliberate.
+#
+# CMakeLists.txt already links libgcc and libstdc++ statically, so glibc is the only
+# remaining dynamic dependency of the published .so -- which makes the build host's
+# glibc the *minimum supported Linux* for everything that consumes JNBullet, and
+# Terasology ships these natives to players. Building on the runner directly leaves
+# that floor to drift upward silently every time GitHub retires a runner image.
+#
+# Two different numbers are involved and it is worth keeping them apart. The build
+# image supplies glibc 2.35, but that is only a ceiling -- what actually constrains
+# consumers is the highest GLIBC_* symbol version the linker ends up referencing,
+# which today is 2.34 (the release that folded libpthread and libdl into libc).
+# GLIBC_FLOOR in the build job asserts that measured value, not the image's, so a
+# change that started pulling in 2.35 symbols fails rather than quietly narrowing
+# who can run the result.
+#
+# At 2.34 the natives load on Debian 12, Ubuntu 22.04, and RHEL 9. Raising either
+# number drops distros for downstream users; do it on purpose, not as a side effect
+# of a runner bump.
+#
+# The image also has to stay at or above 22.04 while LLVM_MINGW_VERSION is pinned to
+# an ubuntu-22.04 build, since that cross-compiler runs in the same job.
+
 on: [push]
+
+# Container jobs default to `sh`, not `bash` -- GitHub cannot assume bash exists in an
+# arbitrary image. The steps below use `==` and other bashisms, so pin the shell rather
+# than rewrite them to be POSIX-portable.
+defaults:
+  run:
+    shell: bash
 
 env:
   SWIG_VERSION: 4.0.2
   LLVM_MINGW_VERSION: 20260616
+  # Part of every SWIG cache key. Bump it whenever the environment SWIG is built
+  # in changes: the cached binary is linked against that environment's glibc and
+  # pcre, so a stale entry restores a binary that cannot run. Bumped to 2 when the
+  # Linux jobs moved into a container.
+  SWIG_CACHE_VERSION: 2
 
 jobs:
   validate-gradle-wrapper:
@@ -16,15 +52,35 @@ jobs:
   swig:
     strategy:
       matrix:
-        os: [ubuntu-24.04, ubuntu-24.04-arm, macos-26-intel, macos-26]
+        include:
+          # Built inside the same image the natives are, so the cached binary runs in
+          # every Linux job that consumes it -- both build and publish are containers.
+          - os: ubuntu-24.04
+            container: ubuntu:22.04
+          - os: ubuntu-24.04-arm
+            container: ubuntu:22.04
+          - os: macos-26-intel
+          - os: macos-26
     runs-on: ${{ matrix.os }}
+    container: ${{ matrix.container }}
     steps:
+      - name: Prepare container
+        if: matrix.container != ''
+        # The image is bare: no git for checkout, no sudo for the apt steps below,
+        # no toolchain. Runs before every other step for that reason. bison is
+        # needed because we build SWIG from a git tag archive rather than a release
+        # tarball, so its parser is not pre-generated; the hosted runners happen to
+        # ship it preinstalled and this image does not.
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            bison build-essential ca-certificates curl git sudo wget xz-utils
       - name: SWIG from cache
         id: cache-swig
         uses: actions/cache@v4
         with:
           path: ${{ github.workspace }}/swig
-          key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}
+          key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}-v${{ env.SWIG_CACHE_VERSION }}
       - name: Install SWIG dependencies
         # Always install, even on a cache hit: this also provides the pcre runtime
         # library the cached swig binary is linked against, which isn't persisted
@@ -53,10 +109,25 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-24.04, ubuntu-24.04-arm, macos-26-intel, macos-26]
+        include:
+          # Linux natives build in the container, not on the runner -- see the
+          # glibc-floor note at the top of this file before changing the image.
+          - os: ubuntu-24.04
+            container: ubuntu:22.04
+          - os: ubuntu-24.04-arm
+            container: ubuntu:22.04
+          - os: macos-26-intel
+          - os: macos-26
     runs-on: ${{ matrix.os }}
+    container: ${{ matrix.container }}
     needs: [validate-gradle-wrapper, swig]
     steps:
+      - name: Prepare container
+        if: matrix.container != ''
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            build-essential ca-certificates cmake curl git sudo unzip wget xz-utils
       - uses: actions/checkout@v4
         with:
           submodules: true
@@ -64,10 +135,14 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ github.workspace }}/swig
-          key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}
+          key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}-v${{ env.SWIG_CACHE_VERSION }}
           fail-on-cache-miss: true
       - name: Add SWIG to $PATH
-        run: echo "${{ github.workspace }}/swig/bin" >> $GITHUB_PATH
+        # $GITHUB_WORKSPACE, not ${{ github.workspace }}: the expression resolves to the
+        # host path, which does not exist inside a container. The env var is set per
+        # environment. actions/cache maps the two itself, so its `path:` input is fine
+        # either way -- a plain run step is not.
+        run: echo "$GITHUB_WORKSPACE/swig/bin" >> $GITHUB_PATH
       - name: Install libpcre3
         if: runner.os == 'Linux'
         run: sudo apt-get install -y libpcre3-dev
@@ -96,6 +171,39 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
       - name: Build
         run: ./gradlew build buildNatives
+      - name: Check the glibc floor of the Linux natives
+        # Turns the container choice into something enforced rather than assumed. If a
+        # future change builds these on a newer base, this fails here instead of as an
+        # UnsatisfiedLinkError on a user's machine. Only glibc is checked because
+        # CMakeLists.txt links libgcc and libstdc++ statically.
+        if: matrix.container != ''
+        env:
+          # The measured requirement of the built natives, not the build image's glibc.
+          # See the note at the top of this file for why those differ.
+          GLIBC_FLOOR: '2.34'
+        run: |
+          natives=$(ls build/natives/linux_*_gcc/*.so 2>/dev/null || true)
+          if [ -z "$natives" ]; then
+            echo "::error::No Linux natives found under build/natives/linux_*_gcc/ — nothing to check."
+            exit 1
+          fi
+          if ! symbols=$(objdump -T $natives); then
+            echo "::error::objdump could not read the built natives."
+            exit 1
+          fi
+          required=$(printf '%s\n' "$symbols" | grep -o 'GLIBC_[0-9]\+\.[0-9]\+' | sed 's/GLIBC_//' | sort -uV || true)
+          if [ -z "$required" ]; then
+            echo "::error::No GLIBC_* symbol versions found — the floor is unverified, which is not the same as satisfied."
+            exit 1
+          fi
+          echo "glibc symbol versions required by the built natives:"
+          printf '%s\n' "$required" | sed 's/^/  /'
+          highest=$(printf '%s\n' "$required" | tail -1)
+          if [ "$(printf '%s\n%s\n' "$GLIBC_FLOOR" "$highest" | sort -V | tail -1)" != "$GLIBC_FLOOR" ]; then
+            echo "::error::Natives require glibc $highest, above the declared floor of $GLIBC_FLOOR. See the note at the top of this workflow."
+            exit 1
+          fi
+          echo "OK: highest requirement $highest is within the declared floor $GLIBC_FLOOR."
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -106,9 +214,20 @@ jobs:
             build/natives/*/*.dylib
   publish:
     runs-on: ubuntu-24.04
+    # Same container as the Linux build jobs. Not for the ABI floor -- this job only
+    # repackages natives built elsewhere -- but because SWIG bakes its --prefix in at
+    # configure time. The cached binary looks for its runtime library under the
+    # workspace path it was configured with, and that path differs between a
+    # container job and a host job.
+    container: ubuntu:22.04
     needs: [validate-gradle-wrapper, swig, build]
     if: github.ref == 'refs/heads/master'
     steps:
+      - name: Prepare container
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            build-essential ca-certificates curl git sudo unzip wget xz-utils
       - uses: actions/checkout@v4
         with:
           submodules: true
@@ -116,10 +235,14 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ github.workspace }}/swig
-          key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}
+          key: ${{ runner.os }}-${{ runner.arch }}-swig-${{ env.SWIG_VERSION }}-v${{ env.SWIG_CACHE_VERSION }}
           fail-on-cache-miss: true
       - name: Add SWIG to $PATH
-        run: echo "${{ github.workspace }}/swig/bin" >> $GITHUB_PATH
+        # $GITHUB_WORKSPACE, not ${{ github.workspace }}: the expression resolves to the
+        # host path, which does not exist inside a container. The env var is set per
+        # environment. actions/cache maps the two itself, so its `path:` input is fine
+        # either way -- a plain run step is not.
+        run: echo "$GITHUB_WORKSPACE/swig/bin" >> $GITHUB_PATH
       - name: Install libpcre3
         run: sudo apt-get install -y libpcre3-dev
       - name: Check SWIG version
