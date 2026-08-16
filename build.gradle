@@ -41,8 +41,8 @@ ext {
 }
 
 java {
-    sourceCompatibility(JavaVersion.VERSION_17)
-    targetCompatibility(JavaVersion.VERSION_17)
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 // We use both Maven Central and our own Artifactory instance, which contains module builds, extra libs, and so on
@@ -54,15 +54,15 @@ repositories {
         def repoViaEnv = System.getenv()["RESOLUTION_REPO"]
         if (rootProject.hasProperty("alternativeResolutionRepo")) {
             // If the user supplies an alternative repo via gradle.properties then use that
-            name "from alternativeResolutionRepo property"
-            url alternativeResolutionRepo
+            name = "from alternativeResolutionRepo property"
+            url = alternativeResolutionRepo
         } else if (repoViaEnv != null && repoViaEnv != "") {
-            name "from \$RESOLUTION_REPO"
+            name = "from \$RESOLUTION_REPO"
             url = repoViaEnv
         } else {
             // Our default is the main virtual repo containing everything except repos for testing Artifactory itself
-            name "Terasology Artifactory"
-            url "https://artifactory.terasology.io/artifactory/virtual-repo-live"
+            name = "Terasology Artifactory"
+            url = "https://artifactory.terasology.io/artifactory/virtual-repo-live"
         }
     }
 }
@@ -70,9 +70,9 @@ repositories {
 group = 'org.terasology.jnbullet'
 
 dependencies {
-    api group: 'org.joml', name: 'joml', version: '1.9.25'
-    api group: 'net.sf.trove4j', name: 'trove4j', version: '3.0.3'
-    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
+    api "org.joml:joml:1.9.25"
+    api "net.sf.trove4j:trove4j:3.0.3"
+    implementation "org.slf4j:slf4j-api:1.7.21"
 }
 
 sourceSets {
@@ -155,7 +155,7 @@ task listNatives{
 
 // TODO: outputs are not defined well enough yet for Gradle to skip this if already done (maybe more the natives task?)
 task zipNatives(type: Zip){
-    description 'Creates a zip archive that contains all TeraBullet native files'
+    description = 'Creates a zip archive that contains all TeraBullet native files'
     allNatives.each { module ->
         from ("$rootDir/build/natives/${module}") {
             include '*linux*'
