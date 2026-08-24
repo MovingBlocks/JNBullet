@@ -1,3 +1,0 @@
-import groovy.io.FileType
-rootProject.name = 'JNBullet'
-include 'swig-src'
